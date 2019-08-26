@@ -1,0 +1,64 @@
+\chapter{Relationships Between Datas}
+
+\section{Correlation}
+
+  \begin{tabu} to \linewidth{ X[l] | X[l] X[l] X[l] }
+    \hline
+    \textbf{Correlation} & $ \hat{x} $ & $ \hat{y} $ & $ \corr\left( \{ \left( x, y \right) \} \right) $ \\ \hline
+    \textbf{Positive} & Increase & Increase & $ \corr\left( \{ \left( x, y \right) \} \right) > 0 $ \\
+    \textbf{Positive} & Decrease & Decrease & $ \corr\left( \{ \left( x, y \right) \} \right) > 0 $ \\
+    \textbf{Negative} & Increase & Decrease & $ \corr\left( \{ \left( x, y \right) \} \right) < 0 $ \\
+    \textbf{Negative} & Decrease & Increase & $ \corr\left( \{ \left( x, y \right) \} \right) < 0 $ \\ \hline
+  \end{tabu}
+  
+  \begin{itemize}
+    \item We say there is \textbf{zero correlation} when there is \textbf{no relationship} between $ \hat{x} $ and $ \hat{y} $;
+  \end{itemize}
+  
+\section{Correlation Coefficient}
+
+  \begin{equation}
+    \corr\left( \{ \left( x, y \right) \} \right) = \frac{1}{N} \sum_{i = 1}^{N} \hat{x}_{i} \hat{y}_{i}
+  \end{equation}
+  
+  \subsection{Properties}
+  
+    \begin{enumerate}
+      \item The correlation coefficient is \textbf{symmetric}
+      \begin{equation}
+        \corr\left( \{ \left( x, y \right) \} \right) = \corr\left( \{ \left( y, x \right) \} \right)
+      \end{equation}
+      
+      \item Translating the data \textbf{does NOT influence the correlation coefficient};
+      \item Scaling the data \textbf{may change the sign of the correlation coefficient};
+      \item Correlation coefficients can only take values in $ \left[ -1, 1 \right] $;
+      \begin{itemize}
+        \item $ \corr\left( \{ \left( x, y \right) \} \right) = 1 $ if $ \hat{x}_{i} = \hat{y}_{i} $ for every $ i $ in $ N $;
+        \item $ \corr\left( \{ \left( x, y \right) \} \right) = -1 $ if $ \hat{x}_{i} = -\hat{y}_{i} $ for every $ i $ in $ N $;
+      \end{itemize}
+    \end{enumerate}
+    
+\section{Prediction}
+    
+  In \textbf{standard coordinates}:
+  \begin{equation}
+    \hat{y}^{p}_{0} = r \hat{x}_{0}
+  \end{equation}
+
+  In \textbf{regular coordinates}
+  \begin{equation}
+    \frac{ y^{p}_{0} - \mean\left( \{ y \} \right) }{ \std\left( \{ y \} \right) } = r \frac{ x_{0} - \mean\left( \{ x \} \right) }{ \std\left( \{ x \} \right) } 
+  \end{equation}
+  
+  \begin{itemize}
+    \item $ \hat{y}^{p}_{0} $ is the standardized $ y_{0} $ predicted from the standardized $ x_{0} $;
+    \item $ r $ is the \textbf{correlation coefficient};
+  \end{itemize}
+  
+  \subsection{RMS Error}
+  
+    Given a data set $ \{ x \} $, and the correlation coefficient $ r $.
+    \begin{align}
+      \text{RMS Error} &= \sqrt{ \mean\left( \{ x^{2} \} \right) } \\
+      &= \sqrt{1 - r^{2}}
+    \end{align}

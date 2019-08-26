@@ -1,0 +1,36 @@
+\chapter{Python}
+
+\section{Matrix}
+
+  \subsection{Creating Matrix}
+  
+    To create following matrix in Python
+    \begin{displaymath}
+      \begin{bmatrix}
+        1 & 2 & 3 \\
+        4 & 5 & 6
+      \end{bmatrix}
+    \end{displaymath}
+    
+    Use the following snippet
+    \pythonfile{resources/python/create_matrix.py}
+    
+  \subsection{Transpose}
+  
+    \begin{itemize}
+      \item To calculate the transpose of a matrix, use:
+      \begin{itemize}
+        \item \textbf{Method}: \inlinecode{array.transpose(self)};
+        \item \textbf{Member Variable}: \inlinecode{matrix.T};
+      \end{itemize}
+    \end{itemize}
+    
+  \subsection{Eigen Values and Eigen Vectors}
+  
+    \begin{itemize}
+      \item The function \inlinecode{numpy.linalg.eig(matrix)} returns a tuple:
+      \begin{itemize}
+        \item \inlinecode{np.array}: eigen values;
+        \item \inlinecode{np.array}: \textbf{normalized} eigen vectors;
+      \end{itemize}
+    \end{itemize}

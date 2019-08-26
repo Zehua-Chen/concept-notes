@@ -1,0 +1,91 @@
+\chapter{Clustering}
+
+\begin{itemize}
+  \item Clustering deals with unlabeled data and assign labels;
+  \item \textbf{Curse of Dimensionality}
+  \begin{itemize}
+    \item If a data set is uniformly distributed in a high dimensional cube, \textbf{the majority of data is far from the origin};
+    \item We can also prove that the \textbf{distance between data points grows with increasing dimensions};
+    \item A \textbf{d-dimensional historgram} of the data set \textbf{is not useful because}:
+    \begin{itemize}
+      \item Most bins will be empty;
+      \item Some bins will contain a single data point;
+      \item Very few bins will contain more than one piont;
+    \end{itemize}
+  \end{itemize}
+  
+  \item \textbf{Dealing with data in high dimensions}:
+  \begin{itemize}
+    \item Collect as much data as possible;
+    \item Cluster data into one ore more blobs;
+    \item Fit a simple probability model to each blob;
+    \begin{itemize}
+      \item Multivariate Normal Distribution
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\section{Multivariate Normal Distribution}
+
+  \begin{equation}
+    P\left( x \right) = \frac{1}{ \left( 2\pi \right)^{d} \left| \Sigma \right| } \exp\left( -\frac{1}{2} \left( x - \mu \right)^{T} \Sigma^{-1} \left( x - \mu \right) \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item Extensin of te normal distribution to multiple dimensions;
+    \item Normal distribution;
+    \item Variables:
+    \begin{itemize}
+      \item $ \mu = E[x] $: a d-dimensional vector known as the mean;
+      \item $ \left| \Sigma \right| $: determinant of a matrix $ \Sigma $
+      \item $ \left( \Sigma  \right)^{-1} $: inverse of a matrix $ \Sigma $
+    \end{itemize}
+  \end{itemize}
+  
+  \subsection{Multivariate MLE}
+  
+    \begin{itemize}
+      \item Fit the data set onto Multivariate Normal Distribution
+    \end{itemize}
+    
+\section{Clustering}
+  
+  \begin{itemize}
+    \item Given a data set $ \{ x \} $, separate the data ites into cluster so that: 
+    \begin{itemize}
+      \item Items within each cluster are \textbf{close to each other};
+      \item Items in different cluster are \textbf{far from each other};
+    \end{itemize}
+    
+    \item Problems:
+    \begin{itemize}
+      \item Determine the number of clusters;
+      \item Assign each item to a cluster;
+    \end{itemize}
+  \end{itemize}
+    
+\section{Clustering Approaches}
+  
+  \begin{itemize}
+    \item \textbf{Divisive clustering}:
+    \begin{enumerate}
+      \item Treat the whole data as one cluster;
+      \item Split the dataset recursively until you get a satisfactory clustering;
+    \end{enumerate}
+  \end{itemize}
+  
+  \subsection{Agllomerative Clustering}
+  
+    \begin{itemize}
+      \item 
+    \end{itemize}
+    
+  \subsection{K-Means Clustering}
+  
+    \begin{itemize}
+      \item 
+    \end{itemize}
+    
+    \subsubsection{Finding a Value for K}
+    
+      

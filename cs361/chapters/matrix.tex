@@ -1,0 +1,123 @@
+\chapter{Matrix}
+
+\section{Vectors}
+
+  \subsection{Orthognol Vectors}
+
+    Multiple vectors are said to be orthognol if
+    \begin{itemize}
+      \item \textbf{Mathmetically}: the vectors have a dot product of 0;
+      \item \textbf{Visually}: the vectors are perpendicular to each other;
+    \end{itemize}
+    
+  \subsection{Unit Vectors}
+  
+    \begin{itemize}
+      \item A unit vector is a vector \textbf{that can fit inside a unit sphere};
+    \end{itemize}
+
+\section{Identity Matrix}
+
+  \begin{equation}
+    I = 
+    \begin{bmatrix}
+      1 & 0 & 0 \\ 
+      0 & 1 & 0 \\
+      0 & 0 & 1
+    \end{bmatrix}
+  \end{equation}
+  
+\section{Row Reduction}
+  
+\section{Determinant}
+
+  Given a 2x2 matrix $ A $:
+  \begin{displaymath}
+    A = 
+    \begin{bmatrix}
+      a & b \\
+      c & d 
+    \end{bmatrix}
+  \end{displaymath}
+  the determinant of $ A $ is $ \left| A \right| $
+  \begin{equation}
+    \left| A \right| = ad - bc 
+  \end{equation}
+  
+\section{Eigen Valus and Eigen Vectors}
+
+  \begin{align}
+    Av &= \lambda v \\
+    \left| A - \lambda I \right| &= 0 \\
+    \left( A - I \right)v &= 0
+  \end{align}
+  
+  \begin{itemize}
+    \item $ \lambda $: \textbf{eigen value};
+    \item $ v $: \textbf{eigen vector} for $ \lambda $
+    \begin{itemize}
+      \item $ kv $ is also an \textbf{eigen vector} for $ \lambda $
+    \end{itemize}
+  \end{itemize}
+  
+  \subsection{Characteristic Equation}
+  
+    \begin{align*}
+      A &= 
+      \begin{bmatrix}
+        5 & 3 \\
+        3 & 5
+      \end{bmatrix} 
+      \\
+      \left| A - \lambda I \right| &= 0 \\
+      \begin{bmatrix}
+        5 - \lambda & 3 \\
+        3 & 5 - \lambda
+      \end{bmatrix} &= 0 
+      \\
+      \left( 5 - \lambda \right)^{2} - 3^{2} &= 9 \\
+      \lambda &= 8, 2
+    \end{align*}
+    
+\section{Transpose}
+
+  \begin{equation}
+    \begin{bmatrix}
+      1 & 2 & 3 \\
+      4 & 5 & 6 \\
+      7 & 8 & 9
+    \end{bmatrix}^{T}
+    = 
+    \begin{bmatrix}
+      1 & 4 & 7 \\
+      2 & 5 & 8 \\
+      3 & 6 & 9
+    \end{bmatrix}
+  \end{equation}
+
+  \begin{itemize}
+    \item A transpose of a matrix is a new matrix in which \textbf{original colums are now the rows} and \textbf{original rows are now the columns};
+  \end{itemize}
+  
+\section{Diagnolization}
+
+  \begin{itemize}
+    \item A diagnolized matrix is a matrix in which there are only non-zero values along the diagnol of the matrix, and the rest of the matrix are all zeros;
+    \item To diagnolize a matrix:
+    \begin{enumerate}
+      \item Find the \textbf{eigen values and eigen vectors};
+      \item Conver the \textbf{eigen vectors into unit vectors};
+      \item Sort the eigen values in descending order;
+      \item Compose a matrix $ U $ that is composed of eigen vectors arranged in a way where their column index in the matrix matches the index of their corresponding eigen value in the sorted array of eigen values;
+      \item $ \Lambda $ is the diagnolized matrix;
+      \begin{equation}
+        \Lambda = U^{T} A U
+      \end{equation}
+    \end{enumerate}
+  \end{itemize}
+  
+\section{Rotation}
+
+  \begin{itemize}
+    \item To rotate a matrix, multiply a matrix by a \textbf{orthognol matrix};
+  \end{itemize}

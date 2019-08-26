@@ -1,0 +1,72 @@
+\chapter{Significance of Evidence}
+
+\section{Null Hypothesis}
+
+  \begin{itemize}
+    \item \textbf{Null hypothesis} no phenomenon and the data are just random;
+    \item Scientists tries to reject the null hypothesis, but rejecting the null hypothesis does not mean the alternate hypothesis is true;
+  \end{itemize}
+
+\section{P-Value}
+
+  \begin{align}
+    g &= \frac{\text{sample mean} - \text{hypothesized value}}{\text{standard error}} \\
+    p &= 1 - f = 1 - \frac{1}{\sqrt{2\pi}} \int_{-\left| g \right|}^{\left| g \right|} \exp\left( -\frac{x^{2}}{2} \right) dx
+  \end{align}
+
+  \begin{itemize}
+    \item Assuming a hypothesis is true, the \textbf{p-value} is the fraction of the samples that would have had sample means more extreme (bigger) than what we have observed;
+    \item We should reject hypothesis if $ p < 0.05 $;
+  \end{itemize}
+  
+  \subsection{Two Tails}
+  
+    \begin{equation}
+      p = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{-\left| g \right|} \exp\left( -\frac{x^{2}}{2} \right) dx + \int_{\left| g \right|}^{\infty} \exp\left( -\frac{x^{2}}{2} \right) dx
+    \end{equation}
+
+\section{Normal Distribution}
+
+  \begin{equation}
+    X ~ N\left( \mu, \sigma \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item $ X $: random variable is normally distributed with the mean $ \mu $ and the standard deviation $ \sigma $;
+  \end{itemize}
+  
+  \subsection{Properties}
+    
+    \begin{align*}
+      kX &~ N\left( k \mu, \left| k \right| \sigma \right) \\
+      X + c &~ N\left( \mu + c, \sigma \right)
+    \end{align*}
+    
+    \paragraph{Independence}
+    \begin{itemize}
+      \item When the means and the standard deviations of $ X_{1}, X_{2} $ are different, the two random variables are \textbf{independent}
+    \end{itemize}
+    
+    \begin{align*}
+      X_{1} + X_{2} &~ N\left( \mu_{1} + \mu_{2}, \sigma_{1} + \sigma_{2} \right) \\
+      X_{1} - X_{2} &~ N\left( \mu_{1} - \mu_{2}, \sigma_{1} - \sigma_{2} \right)
+    \end{align*}
+    
+\section{Difference Between Two Samples}
+
+  \begin{align}
+    D &= X^{k^{x}} - Y^{k^{y}} \\
+    \E\left[ D \right] &= \E\left[ X^{k^{x}} \right] - \E\left[ Y^{k^{y}} \right] = 0 \\ 
+    \stderr\left( D \right) &= \sqrt{ \stderr\left( \{ x \} \right)^{2} + \stderr\left( \{ y \} \right)^{2} } \\
+    g &= \frac{ \mean\left( \{ x \} \right) - \mean\left( \{ y \} \right) }{\stderr\left( D \right)} \\
+  \end{align}
+
+  \begin{itemize}
+    \item There are two samples $ \{ x \} $ of size $ k^{x} $ and $ \{ y \} $ of size $ k^{y} $.
+    \item The sample means are $ X^{k^{x}} $ and $ Y^{k^{y}} $l
+    \item Define a random variable $ D $ as the difference between the sample means;
+    \item When $ k^{x} \ge 30 $ and $ k^{y} \ge 30 $:
+    \begin{equation}
+      p = 1 - f = 1 - \frac{1}{\sqrt{2\pi}} \int_{-\left| g \right|}^{\left| g \right|} \exp\left( -\frac{x^{2}}{2} \right) dx
+    \end{equation}
+  \end{itemize}

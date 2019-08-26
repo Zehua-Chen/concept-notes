@@ -1,0 +1,112 @@
+\chapter{Data in High Dimensions}
+
+\section{Notation}
+
+  \begin{itemize}
+    \item $ \{ x \} $: a data set that consists of $ N $ items;
+    \item Each $ x_{i} $ is a $ d $-dimensional vector of numbers;
+    \item $ j $th component of $ i $th item is $ \{ x \} $ is $ x_{i}^{\left( j \right)} $
+  \end{itemize}
+  
+  \subsection{Mean}
+  
+    \begin{align}
+      \rmtext{mean of jth component} &= \frac{ \sum_{i} x_{i}^{(j)} }{ N } \\
+      \mean\left( \{ x \} \right) &=  \frac{ \sum_{i} x_{i} }{ N }
+    \end{align}
+  
+    \begin{itemize}
+      \item Mean is computed by computing the mean of each component and stacking them into a vector;
+    \end{itemize} 
+    
+    \subsubsection{Properties}
+    
+      \begin{itemize}
+        \item Translating the data translates the mean;
+        \item \textbf{Linearly transforming the data} linearly transforms the mean;
+        \begin{equation}
+          \mean\left( \{ A x \} \right) = A \mean\left( \{ x \} \right)
+        \end{equation}
+      \end{itemize}
+
+  \subsection{Covariance}
+  
+    \begin{align}
+      \cov\left( \{ x^{(j)} \}, \{ x^{(k)} \} \right) &= \frac{ \sum_{i} \left( x_{i}^{(j)} - \mean\left( \{ x^{(j)} \} \right) \right) \times \left( x_{i}^{(k)} - \mean\left( \{ x^{(k)} \} \right) \right) }{ N }
+    \end{align}
+    
+    \subsubsection{Properties}
+    
+      \begin{itemize}
+        \item Covariance of a component with itself is its variance;
+        \begin{equation}
+          \cov\left( \{ x^{(j)}, x^{(j)} \} \right) = \var\left( \{ x^{(j)} \} \right) = \std\left( \{ x^{(j)} \} \right)
+        \end{equation}
+        
+        \item The \textbf{correlation coefficient} is the \textbf{covariance scaled by the standard deviation of each component};
+      \end{itemize}
+      
+  \subsection{Covariance Matrix}
+  
+    \begin{equation}
+      \covmat\left( \{ x \} \right) = \frac{ \sum_{i} \left( x_{i} - \mean\left( \{ x \} \right) \right) \times \left( x_{i} - \mean\left( \{ x \} \right) \right)^{T} }{ N }
+    \end{equation}
+    
+    \begin{itemize}
+      \item All the pair wise covariances can be captured using a $ d \times d $ matrix, $ \covmat\left( \{ x \} \right) $;
+      \begin{itemize}
+        \item Each cell in the matrix is a covariance;
+      \end{itemize}
+      
+      \item Eigen values of $ \covmat\left( \{ x \} \right) $ are the variances of the features in the data;
+    \end{itemize}
+    
+    \subsubsection{Properties}
+      
+      \begin{itemize}
+        \item The $ \left( j, k \right) $ entry of $ \covmat\left( \{ x \} \right) $ is $ \cov\left( \{ x^{(j)}, x^{(k)} \} \right) $;
+        \item The $ \left( j, j \right) $ entry of $ \covmat\left( \{ x \} \right) $ is $ \var\left( \{ x^{(j)} \} \right) $;
+        \begin{itemize}
+          \item Each variance in the diagnol is the variance of a features;
+        \end{itemize}
+        
+        \item $ \covmat\left( \{ x \} \right) $ is \textbf{symmetric};
+        \item Translating the data leaves $ \covmat\left( \{ x \} \right) $ \textbf{unchanged};
+        \item \textbf{Linearly transforming the data} changes the covariance matrix;
+        \begin{equation}\label{eq: ch10-effect-of-linear-transforming-matrix-on covariance-matrix}
+          \covmat\left( \{ Ax \} \right) = A \covmat\left( \{ x \} \right) \times A^{T}
+        \end{equation}
+      \end{itemize}
+    
+\section{Dimensionality Reduction}
+
+  \begin{enumerate}
+    \item \textbf{Subtract Mean}: move the center of the data set to $ \{ 0, 0 \} $; define $ \{ m \} $ such that
+    \begin{equation}
+      m_{i} = x_{i} - \mean\left( \{ x \} \right)
+    \end{equation}
+    
+    \item \textbf{Apply linear transformation}: rotate the data set in such a way that the blob of the dataset aligns with one of the axises; the rotation is done by applying a linear transformation $ U^{T} $, 
+    % Definition of U
+    where $ U $ is a matrix composed of the normalized eigen vectors of $ \covmat\left( \{ x \} \right) $ whose \textbf{corresponding eigen values are sorted in descending order};
+    
+    According to the equation (\ref{eq: ch10-effect-of-linear-transforming-matrix-on covariance-matrix}) on page \pageref{eq: ch10-effect-of-linear-transforming-matrix-on covariance-matrix}, by applying the linear transformation $ U^{T} $ on $ \{ x \} $, the covaraince matrix is transformed into 
+    
+    \begin{equation}
+      \Lambda = U^{T} \covmat\left( \{ x \} \right) U
+    \end{equation}
+    
+    where $ \Lambda $ happens to be the diagnolization of $ \covmat\left( \{ x \} \right) $, where $ \Lambda $ has eigen values on its diagnol, and the columns of $ \Lambda $ are eigen vectors;
+    
+    To calculate rotated individual vectors, define $ \{ r \} $ such that
+    
+    \begin{align}
+      \Lambda &= U^{T} \covmat\left( \{ x \} \right) U \\
+      r_{i} &= U^{T} m_{i}
+    \end{align}
+    
+    \item \textbf{Drop components}: remove $ y $ axis by compressing the data set; define $ \{ p \} $ such that each $ p_{i} $ is $ r_{i} $ with the last $ d - s $ components \textbf{zeroed out or discarded};
+    \begin{itemize}
+      \item Prefer components with smaller variance when it comes to dropping components, as there will be less loss in dropping components with less variance;
+    \end{itemize}
+  \end{enumerate}

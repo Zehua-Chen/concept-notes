@@ -1,0 +1,197 @@
+\chapter{Basic Ideas in Probability}
+
+\section{Outcomes and Events}
+
+  \begin{itemize}
+    \item \textbf{Sample Space}: the set of all outcomes, $ \Omega $ \\ 
+    \begin{itemize}
+      \item We always receive exactly one item in $ \Omega $;
+      \item Does not need to be finite;
+    \end{itemize}
+    
+    \item An \textbf{event} $ E $ is a set of outcomes.
+  \end{itemize}
+  
+\section{Counting}
+
+  \subsection{Addition Principal}
+  
+    Given two disjoint events $ E_{1} $ and $ E_{2} $, with $ n_{1} $ and $ n_{2} $ outcomes, the total number of outcomes of $ E_{1} $ or $ E_{2} $ is $ n_{1} + N{2} $
+
+  \subsection{Multiplication Principal}
+
+    Given $ m $ choices in one category and $ n $ choices in another category, there are $ m \times n $ choices of combining one choice each category.
+  
+  \subsection{Permutation vs Combination}
+    
+    \begin{equation}
+      x = \frac{N!}{\left( N - k \right)!}
+    \end{equation}
+  
+    \begin{itemize}
+      \item Given $ N $ items, permutation computes the number of ways, $ x $, to choose $ k $ items, \textbf{where sets with the same items, but in different order are considered to be different};
+      \item When it is needed to choose $ N $ items:
+      \begin{align*}
+        x &= \frac{N!}{\left( N - N \right)} \\
+        &= \frac{N!}{0!} \\
+        &= \frac{N!}{1} = N!
+      \end{align*}
+    \end{itemize}
+    
+  \subsection{Combination}
+  
+    \begin{align}
+      x &= {N \choose k} \\
+      &= {N \choose N - k} \\
+      &= \frac{ N! }{ k! \left( N - k \right)! }
+    \end{align}
+    
+    \begin{itemize}
+      \item Given $ N $ items, combination computes the number of ways, $ x $, to choose $ k $ items, \textbf{where sets with the same items, but in different order are considered to be the same};
+      
+    \end{itemize}
+      
+  \subsection{Difference from Multiplication Principal}
+    
+      \begin{itemize}
+        \item Permutation and Combination are derived based on the Multiplication Principal;
+        \item \textbf{Permutation and Combination handles the scenarios where items are not replaced after they are chosen};
+        \item The Multiplication Principal can still handle these scenarios, but $ m, n $ has to be adjusted to reflect the depleting choices.
+      \end{itemize}
+      
+\section{Probability}
+  
+  \subsection{Probability of an Outcome}
+
+    \begin{equation}
+      P \left( A \right) = \lim_{N \to \infty} \frac{\#\left( A \right)}{N}
+    \end{equation}
+    
+    \begin{itemize}
+      \item $ A $ is one outcome of the experiment;
+      \item $ \#\left( A \right) $ is the number of time $ A $ has occured;
+      \item $ N $ is the number of times the experiments has been conducted;
+    \end{itemize}
+    
+    \subsubsection{Properties}
+    
+      \begin{align}
+        0 \le P\left( A \right) &\le 1 \\
+        \sum_{A_{i} \in \Omega} P\left( A_{i} \right) &= 1 \\
+      \end{align}
+
+  \subsection{Probability of Events}
+  
+    \begin{align}
+      \label{eq: ch3-probability-from-outcomes}
+      P\left( E \right) &= \sum_{A_{i} \in E} P\left( A_{i} \right) \\
+      &= \frac{\text{Number of outcomes in } E}{\text{Total number of outcomes in } \Omega}
+    \end{align}
+  
+    \subsubsection{Properties}
+    
+      \begin{align}
+        P\left( \Omega \right) &= 1 \\
+      \end{align}
+      
+  \subsection{Properties of Events}
+  
+    \begin{align}
+      P\left( E^{c} \right) &= 1 - P\left( E \right) \\
+      P\left( E_{1} - E_{2} \right) &= P\left( E_{1} \right) - P\left( E_{1} \cap E_{2} \right) \\
+      P\left( E_{1} \cup E_{2} \right) &= P\left( E_{1} \right) + P\left( E_{2}   \right) - P\left( E_{1} \cap E_{2} \right) 
+    \end{align}
+    
+    \begin{align*}
+      P\left( E_{1} \cup E_{2} \cup E_{3} \right) &= P\left( E_{1} \right) + P\left( E_{2} \right) + P\left( E_{3} \right) \\ 
+      &- P\left( E_{1} \cap E_{2} \right) - P\left( E_{2} \cap E_{3} \right) - P\left( E_{1} \cap E_{3} \right) \\
+      &+ P\left( E_{1} \cap E_{2} \cap E_{3} \right)
+    \end{align*}
+    
+    The inclusion-exclusino principal:
+    \begin{equation}
+      \left| E_{1} \cup E_{2} \right| = \left| E_{1} \right| + \left| E_{2}   \right| - \left| E_{1} \cap E_{2} \right|
+    \end{equation}
+    
+  \subsection{Independence}
+  
+    \begin{itemize}
+      \item Given two events, $ E_{1} $ and $ E_{2} $, knowing that $ E_{1} $ has happened does not change $ P\left( E_{2} \right) $
+      \item \textbf{Mutually exclusive events} are not independent;
+      \item Given $ E_{1}, E_{2}, E_{3} $, if the events are pairwise independent, there is not guarantee that the three events are independent;
+    \end{itemize}
+    
+    \subsubsection{Testing for Independence}
+    
+      Two events are independent, if
+      \begin{equation}\label{eq: ch3-independence-test}
+        P\left( E_{1} \cap E_{2} \right) = P\left( E_{1} \right) P\left( E_{2} \right)
+      \end{equation}
+      
+      \begin{itemize}
+        \item When two events are independent, the \textbf{probability of both of the events} happending is the \textbf{product of the probabilities of the events};
+      \end{itemize}
+      
+\section{Conditional Probability}
+  There are two dependent events, $ E_{1}, E_{2} $. Given $ E_{1} $ has definitely has happened, the probability that $ E_{2} $ happens, $ P\left( E_{2} | E_{1} \right) $ is 
+  \begin{align}
+    P\left( E_{2} | E_{1} \right) &= \frac{ P\left( E_{1} \cup E_{2} \right) }{ P\left( E_{1} \right) } \\
+    &= \frac{ P\left( E_{1} | E_{2} \right) P\left( E_{2} \right) }{ P\left( E_{1} \right) } \\
+    &= \frac{ P\left( E_{1} | E_{2} \right) P\left( E_{2} \right) }{ P\left( E_{1} | E_{2} \right) P\left( E_{2} \right) + P\left( E_{1} | E_{2}^{c} \right) P\left( E_{2}^{c} \right) }
+  \end{align}
+  
+  \begin{itemize}
+    \item Choose any of the three equations based on the information given;
+  \end{itemize}
+  
+  \subsection{Total Probability}
+  
+    \begin{align}
+      P\left( E_{1} \right) &= P\left( E_{1} \cap E_{2} \right) + P\left( E_{1} \cap E_{2}^{c} \right) \\
+      &= P\left( E_{1} | E_{2} \right) P\left( E_{2} \right) + P\left( E_{1} | E_{2}^{c} \right) P\left( E_{2}^{c} \right)
+    \end{align}
+    
+    \begin{itemize}
+      \item $ P\left( E^{c} \right) $ is the probability that $ E $ does not happen;
+    \end{itemize}
+    
+    Given a disjoint events $ \{ E \} $ that cover an event $ A $, the probability of $ A $ is
+    \begin{equation}
+      P\left( A \right) = \sum_{i} P\left( A | E_{i} \right) P\left( E_{i} \right)
+    \end{equation}
+    
+    The probability of one set, $ E_{i} $ in $ E $ given that $ A $ has happended is 
+    \begin{equation}
+      P\left( E_{i} | A \right) = \frac{ P\left( A | E_{i} \right) P\left( E_{i} \right) }{ \sum_{E_{j} \in E} P\left( A | E_{j} \right) P\left( E_{j} \right) }
+    \end{equation}
+
+\section{Problems}
+
+  \subsection{Overbooking Problems}
+  
+    Given $ n $ items, each of which can be $ 1 $ or $ 0 $, and the probability of each item being $ 1 $ is $ p $, the probability that there are $ u $ item that are $ 1 $ is:
+    \begin{align}
+      P &= {n \choose u} p^{u} \left( 1 - p \right)^{n - u} \\
+      &= p^{u} \left( 1 - p \right)^{n - u} + p^{u} \left( 1 - p \right)^{n - u} + ...
+    \end{align}
+    
+    \begin{itemize}
+      \item $ p^{u} $: the probability of $ u $ items being $ 1 $;
+      \begin{itemize}
+        \item Each item being $ 1 $ is an outcome in the event; Refer to \ref{eq: ch3-probability-from-outcomes} on page \pageref{eq: ch3-probability-from-outcomes}
+      \end{itemize}
+
+      \item $ \left( 1 - p \right)^{n - u} $: the probability of $ n - u $ items being $ 0 $;
+      \begin{itemize}
+        \item Each item being $ 0 $ is an outcome in the event; Refer to \ref{eq: ch3-probability-from-outcomes} on page \pageref{eq: ch3-probability-from-outcomes}
+      \end{itemize}
+      
+      \item $ p^{u} \left( 1 - p \right)^{n - u} $: the probability that $ u $ items being $ 1 $ and $ n - u $ items being $ 0 $;
+      \begin{itemize}
+        \item $ p^{u} $ is the probability of an event;
+        \item $ \left( 1 - p \right)^{n - u} $ is the probability of another event;
+        \item The two events are independent, therefore their intersection is the product of the probabilities of the two events; Refer to equation \ref{eq: ch3-independence-test} on page \pageref{eq: ch3-independence-test};
+      \end{itemize}
+      
+      \item $ {n \choose u} $: the number of ways to choose $ u $ items, which is a \textbf{disjoint set};
+    \end{itemize}

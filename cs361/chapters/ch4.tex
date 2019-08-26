@@ -1,0 +1,257 @@
+\chapter{Random Variables and Expectations}
+
+\begin{itemize}
+  \item Given a sample space $ \Omega $, and a set of real numbers $ D $, a \textbf{discrete random variable is a function with domain $ \Omega $ and range $ D $};
+  \begin{itemize}
+    \item $ \{ w : X(w) = x \} $, where $ w \in \Omega $ is \textbf{set of events in the sample space that make the random variable, $ X $, output $ x $.};
+    \item $ P \left(\{ w : X(w) = x \}\right) $, $ P \left(\{ X = x \}\right) $, $ P \left( X = x \right) $, $ P \left( x \right) $ is \textbf{probability that the random variable outputs $ x $};
+  \end{itemize}
+\end{itemize}
+
+\section{Probability Distribution}
+
+  \begin{itemize}
+    \item The probability distribution of a discrete random variable is a set of numbers $ \{ P \left( i \right) \} $ for each $ i $ that $ X $ can output;
+    \begin{itemize}
+      \item $ P \left( x \right) $ is another way to write $ \{ P \left( i \right) \} $; it also refers to a set of posibilities.
+      \item In another word, the probability distribution is the probability of each output of the random variable;
+    \end{itemize}
+    
+    \item $ P(X = x) \geq 0 $ for all values that $ X $ can take and is 0 everywhere else;
+
+    \item \textbf{Sum of the probability distribution} is 1;
+    \begin{equation}
+      \sum_{x} P (x) = 1
+    \end{equation}
+  \end{itemize}
+  
+\section{Cumulative Distributions}
+
+  \begin{itemize}
+    \item The cumulative distribution of a discrete random variable is a set of numbers $ \{ P \left( X \leq x \right) \} $ for each $ x $ that $ X $ can output;
+    \item Also written as $ f \left( x \right) $;
+    \item A \textbf{non-decreasing} function of $ x $;
+  \end{itemize}
+
+\section{Joint Probability Distribution}
+
+  \begin{itemize}
+    \item Given two random variables $ X, Y $, the probability of $ X $ output $ x $ and $ Y $ outputs $ y $ is:
+    \begin{displaymath}
+      P(\{ X = x \} \cap \{ Y = y \})
+    \end{displaymath}
+
+    Also written as 
+    \begin{displaymath}
+      P(x, y)
+    \end{displaymath}
+    
+    This is also known as \textbf{the joint probability distribution of $ X $ and $ Y $};
+  \end{itemize}
+  
+  \subsection{Bayes' Rule}
+  
+    \begin{equation}
+      P \left( x|y \right) = \frac{ P \left( y|x \right) \times P \left( x \right) }{ P \left( y \right) }
+    \end{equation}
+    
+    \begin{itemize}
+      \item $ P \left( x|y \right) $ denotes \textbf{the probability of $ X $ outputs $ x $ given that $ Y $ has already output $ y $};
+    \end{itemize}
+  
+\section{Independence of Random Variables}
+
+  Random variables $ X, Y $ are independent if \textbf{the events} $ \{ X = x \}, \{ Y = y \} $ are independent:
+  
+  \begin{align}
+    P(\{ X = x \} \cap \{ Y = y \}) &= P(\{ X = x \}) P(\{ Y = y \}) \\
+    P(x,y) &= P(x) \times P(y)
+  \end{align}
+  
+\section{Conditional Probability Distribution}
+
+  \begin{itemize}
+    \item The \textbf{conditional probability distribution} of $ X $, given $ Y $ is:
+    \begin{equation}
+      P(x | y) = \frac{ P(x, y) }{ P(y) }
+    \end{equation}
+  
+    \item For any $ y $:
+    \begin{equation}
+      \sum_{x} P(x | y) = 1
+    \end{equation}
+  \end{itemize}
+  
+\section{Expected Value}
+
+  Given a discrete random variable $ X $, whose outputs fall in the set $ D $ and has probability distribution $ P $:  
+  \begin{equation}
+    E \left[ X \right] = \sum_{x \in D} x P \left( X = x \right)
+  \end{equation}
+  
+  When $ X, Y $ are independent
+  
+  \begin{equation}\label{eq-expected-values-of-independent-variables}
+    E \left[ X \times Y \right] = E \left[ X \right] \times E \left[ Y \right]
+  \end{equation}
+  
+  \subsection{Expected Value as a Mean}
+  
+    Given a data set $ x{i} $ of $ N $ inputs, and each data point has $ \frac{1}{N} $ probability:
+    
+    \begin{equation}\label{eq: ch4-expected-value-as-mean}
+      E \left[ X \right] = \sum_{i} x_{i} P\left( x_{i} \right) = \frac{1}{N} \sum_{i} x_{i} = \mean \left( \{ x_{i} \} \right)
+    \end{equation}
+  
+    \begin{itemize}
+      \item In this case, the expected value is also called the mean;
+    \end{itemize}
+    
+  \subsection{Linear Properties of Expected Value}
+    
+    Given the random variables $ X, Y $ and the constant $ k $.
+    
+    \begin{align}
+      E \left[ X + Y \right] &= E \left[ X \right] + E \left[ Y \right] \\ 
+      E \left[ k \times X \right] &= k \times E \left[ X \right]
+    \end{align}
+    
+    \begin{itemize}
+      \item These properties follow from interpreting expected values as means of data sets.
+    \end{itemize}
+    
+  \subsection{Expected Value of a Function of X}
+  
+    $ f $ is a function of a random variable $ X $, then $ Y = f(x) $ is a random variable too. \textbf{The expected value of $ Y $ is:}
+    
+    \begin{equation}
+      E \left[ Y \right] = E \left[ f (X) \right] = \sum_{x} f(x) P(x)
+    \end{equation}
+    
+\section{Variance and Standard Deviation}
+
+  \begin{align}
+    \var \left[ X \right] &= E \left[ \left( X - E \left[ X \right] \right)^{2} \right] \\
+    \var \left[ X \right] &= E \left[ \left( X - \mu \right)^{2} \right] & \mu &= E \left[ X \right] \\
+    \label{eq: ch4-std-is-sqrt-var}
+    \std \left[ X \right] &= \sqrt{ \var \left[ X \right] }
+  \end{align}
+  
+  \subsection{Properties of Variance}
+  
+    For random variables $ X, Y $ and constant $ k $:
+    
+    \begin{align}
+      \var \left[ k \right] &= 0 \\
+      \var \left[ X \right] &\geq 0 \\
+      \var \left[ k \times X \right] &= k^{2} \var \left[ X \right]
+    \end{align}
+    
+    \textbf{Given $ X $ and $ Y $ are independent}
+    
+    \begin{equation}
+      \var \left[ X + Y \right] = \var \left[ X \right] + \var \left[ Y \right]
+    \end{equation}
+    
+\section{Covariance}
+
+  Given random variables $ X, Y $, the covariance is:
+  
+  \begin{equation}
+    \cov \left( X, Y \right) = E \left[ \left( X - E[X] \right) \left( Y - E[Y] \right) \right]
+  \end{equation}
+  
+  \subsection{Properties of Covariance}
+  
+    \begin{align}
+      \cov \left( X, X \right) &= E \left[ \left( X - E[X] \right)^{2} \right] = \var \left[ X \right] \\ 
+      \cov \left( X, Y \right) &= E \left[ XY \right] - E \left[ X \right] E \left[ Y \right] \\ 
+    \end{align}
+    
+    Given the equation \ref{eq-expected-values-of-independent-variables} on page \pageref{eq-expected-values-of-independent-variables}, when $ X, Y $ are independent:
+    
+    \begin{equation}
+      \cov \left( X, Y \right) = 0
+    \end{equation}
+    
+\section{IID Samples}
+  
+  \begin{itemize}
+    \item Given a random variable $ X $ with probability distribution $ P (X) $;
+    \item $ \{ x_{i} \} $, a randomly generated independent samples, whose histogram resembles $ P(X) $ more closely as their number increases, is called \textbf{independent identically distributed (IID) samples} of $  P(X) $;
+    \item \textbf{Sample mean} of $ \{ x_{i} \} $ is a random variable:
+    \begin{displaymath}
+      X_{N} = \frac{1}{N} \sum_{i = 1}^{N} x_{i}
+    \end{displaymath}
+    
+    \item \textbf{Sample mean} $ X_{N} $ is a \textbf{random variable}, when given data from an experiment, evaluates to a number;
+  \end{itemize}
+  
+  \subsection{Expected Value of Sample Mean}
+  
+    By linearity of expected value: 
+    \begin{equation}
+      E \left[ X_{N} \right] = E \left| \frac{1}{N} \sum_{i = 1}^{N} x_{i} \right| = \frac{1}{N} \sum_{i = 1}^{N} E \left[ x_{i} \right]
+    \end{equation}
+    
+    Since each $ x_{i} $ is a sample drawn from $ P \left( X \right) $, we have $ E \left[ x_{i} \right] = E \left[ X \right] $
+    
+  \subsection{Variance of Sample Mean}
+  
+    \begin{equation}
+      \var \left[ X_{N} \right] = \var \left[ \frac{1}{N} \sum_{i = 1}^{N} x_{i} \right] = \frac{1}{ N^{2} } \var \left[ \sum_{i = 1}^{N} x_{i} \right] = \frac{1}{N^{2}} \sum_{i = 1}^{N} \var \left[ x_{i} \right]
+    \end{equation}
+    
+    Since each $ x_{i} $ is drawn from $ P(X) $, we have $ \var \left[ x_{i} \right] = \var \left[ X \right] $  
+
+\section{Weak Law of Large Numbers}
+
+  \begin{itemize}
+    \item When an experiment is repeated many times, the observation will converge the expectation made by math;
+    \item The weak law of large numbers \textbf{justifies the use of simulations to obtain the expected values of random variables};
+    \item Given a random variable $ X $, with \textbf{finite variance}, probability distribution $ P(X) $ and sample mean $ X_{N} $; The probability of the difference between expected value and sample mean is larger than a positive number $ e $ is 0:
+    \begin{equation}
+      \lim_{N \to \infty} ... = 0
+    \end{equation}
+  \end{itemize}
+  
+  \subsection{Markov's Inequality}
+  \subsection{Chebyshev's Inequality}
+  
+\section{Continuous Random Variable}
+
+  \begin{itemize}
+    \item Some random variables can take continuous values:
+    \begin{itemize}
+      \item Body temperature;
+    \end{itemize}
+  \end{itemize}
+  
+  \subsection{Probability Density Function}
+  
+    \begin{itemize}
+      \item For a continuous random variable $ X $, the probability of $ X = x $ is essentially $ 0 $ for all $ x $, so $ P(X = x) $
+      \begin{itemize}
+        \item No one is exactly 6 feet tall;
+      \end{itemize}
+      
+      \item \textbf{Probability density function (pdf)} over an infinitely small interval $ dx $:
+      \begin{equation}
+        p (x) dx = P \left( X \in \left[ x, x + dx \right] \right)
+      \end{equation}
+      When $ a < b $
+      \begin{equation}
+        \int_{a}^{b} p(x) dx = P \left( X \in \left[ a, b \right] \right)
+      \end{equation}
+      
+      \item Properties:
+      \begin{itemize}
+        \item $ p(x) \ge 0 $ for all $ x $;
+        \item %
+        \begin{displaymath}
+          \int_{- \infty}^{\infty} p(x) dx = 1
+        \end{displaymath}
+        
+        \item $ p(x) $ can exceed 1, but does not mean the probability is bigger than one;
+      \end{itemize}
+    \end{itemize}

@@ -1,0 +1,105 @@
+\chapter{Inferring Probability Models from Data}
+
+\section{Maximum Likelihood Esitmation (MLE)}
+
+  \begin{align}
+    L\left( \theta \right) &= P \left( D | \theta \right) \\
+    \hat{\theta} &= \argmax_{\theta} L \left( \theta \right)
+  \end{align}
+  
+  \begin{itemize}
+    \item $ D $: a data set that comes \textbf{from a known distribution in a certain family};
+    \item $ \theta $: the parameter of the distribution; the probability of something happening;
+    \begin{itemize}
+      \item \textbf{Binomial and Geometric Distribution}: $ \theta = p $;
+      \item \textbf{Poisson and Exponential Distribution}: $ \theta = \lambda $;
+      \item \textbf{Normal Distribution}: $ \theta = \mu, \theta = \sigma $, depending on context;
+    \end{itemize}
+
+    \item $ L\left( \theta \right) $ probability of seeing $ D $ given the parameter $ \theta $;
+    \begin{itemize}
+      \item Not a probability distribution;
+    \end{itemize}
+  \end{itemize}
+  
+  \subsection{Drawbacks of MLE}
+  
+    \begin{itemize}
+      \item If there is not much data, MLE is not reliable;
+    \end{itemize}
+    
+  \subsection{Confidence Interval}
+  
+    \begin{itemize}
+      \item Confidence interval for $ \hat{\theta} $ can be constructed using \textbf{paramteric bootstrap};
+      \begin{enumerate}
+        \item Use the distribution and the $ \theta $ to generate a large amount of datasets;
+        \item Re-estiamte the MLE from each synthetic data set;
+        \item Use the historgram of these datasets to construct the confidence interval;
+      \end{enumerate}
+    \end{itemize}
+    
+  \subsection{Log}
+  
+    Since log is a strictly increasing function:
+    \begin{equation}
+      \hat{\theta} = \argmax_{\theta} L\left(\theta\right) = \argmax_{\theta} \log \left( L\left(\theta\right) \right)
+    \end{equation}
+    
+\section{Bayesian Inference}
+
+  \begin{itemize}
+    \item Bayesian inference maximizes the posterior of $ P\left( D | \theta \right) $, $ P\left( \theta | D \right) $:
+    \begin{itemize}
+      \item $ P\left( \theta | D \right) $ is a probability distribution;
+      \item $ \hat{\theta} $ is called the \textbf{maximum a poterior estimate (MAP)};
+    \end{itemize}
+  \end{itemize}
+  
+  \subsection{Prior}
+  
+    \begin{align}
+      P\left( \theta | D \right) &= \frac{ P\left( D | \theta \right) P\left( \theta \right) }{ P\left( D \right) } \\
+      &= \frac{ P\left( D | \theta \right) P\left( \theta \right) }{ P\left( D | \theta \right) P\left( \theta \right) + P\left( D | \theta^{c} \right) P\left( \theta^{c} \right) } \\
+      &\propto P\left( D | \theta \right) P\left( \theta \right)
+    \end{align}
+    
+    \begin{itemize}
+      \item $ P\left( \theta \right) $: the prior, the prior belief about $ \theta $;
+      \item Bayesian inference allows us to incorporate prior belief about $ \theta $, which is useful when:
+      \begin{itemize}
+        \item We have some belief. For example $ P\left( \text{heads} \right) \ne 0 $;
+        \item There isn't much data;
+      \end{itemize}
+    \end{itemize}
+    
+  \subsection{Drawbacks of Bayesian Inference}
+  
+    \begin{itemize}
+      \item Maximizing some posteriors $ P\left( \theta | D \right) $ is intractable;
+      \item Some choices of $ P\left( \theta \right) $ can overwhelm the data;
+      \item It's hard o justify the choice of $ P\left( \theta \right) $;
+    \end{itemize}
+    
+\section{Conjugate Priors}
+
+  \begin{itemize}
+    \item Given a Likelihood function $ P\left( D | \theta \right) $, a \textbf{conjugate prior}, $ P\left( \theta \right) $ has the following properties:
+    \begin{enumerate}
+      \item $ P\left( \theta \right) $ belong to a family of distribution that is expressive;
+      \item The \textbf{posterior} $ P\left( \theta | D \right) \propto P\left( D | \theta \right) P\left( \theta \right) $ belongs to the same family as $ P\left( \theta \right) $;
+      \item The \textbf{posterior} $ P\left( \theta | D \right) $ is easy to maximize;
+    \end{enumerate}
+  \end{itemize}
+  
+  \subsection{Conjugate Priors for Likelihood Functions}
+  
+    \begin{tabu} to \linewidth{ X[l] | X[l] }
+      \thickhline
+      \textbf{Likelihood} & \textbf{Conjugate} \\ \thickhline
+      Bernouli & Beta \\ \hline
+      Geometric & Beta \\ \hline
+      Poisson & Gamma \\ \hline
+      Exponential & Gamma \\ \hline
+      Normal with known variance & Normal \\ \hline
+    \end{tabu}

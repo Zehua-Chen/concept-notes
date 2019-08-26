@@ -1,0 +1,449 @@
+\chapter{Classification}
+
+\section{Classifier}
+
+  \begin{itemize}
+    \item Given a set of feature vectors $ x_{i} $, each labeled as $ y_{i} $, we want to train a classifier that can map unlabeled vectors to labels;
+    \begin{itemize}
+      \item \textbf{Training Data}: the given set of vectors;
+    \end{itemize}
+    
+    \item The classifier perform \textbf{worse on runtime data} than on labeled data used for training;
+    \begin{itemize}
+      \item \textbf{Overfitting}: perform much worse on runtime data;
+    \end{itemize}
+    
+  \end{itemize}
+  
+  \subsection{Measure the Quality of the Classifier}
+  
+    A good classifier should avoid making classification mistakes on unlabeled data that are only seen at runtime
+    
+    \begin{itemize}
+      \item Measure different types of errors using \textbf{loss function};
+      \begin{itemize}
+        \item Some mistakes are costly;
+      \end{itemize}
+      
+      \item Split data into \textbf{training set and validation/test set}
+      \begin{itemize}
+        \item We never know the true labels of runtime data;
+        \item Protect against \textbf{overfitting};
+        \item \textbf{Training set} is for training the classifier;
+        \item \textbf{Validation/test set} is for evaluating the performance on unused data (reserve 10\% to 20\%);
+      \end{itemize}
+    \end{itemize}
+    
+    \subsubsection{Corss Validation}
+    
+      \begin{enumerate}
+        \item Split the labeled data into training and validatoin set randomly;
+        \item For each split (fold), train the classifier on the training data and evaluate its accuracy on the validation test;
+        \item Average the accuracy to evaluate the training methodology;
+      \end{enumerate}
+  
+\section{Types of Classifiers}
+
+  \subsection{Binary Classifiers}
+  
+    \begin{itemize}
+      \item \textbf{Binary classifiers} \textbf{map} feature vector to \textbf{one of two classes};
+    \end{itemize}
+    
+    \subsubsection{Performance}
+    
+      \begin{itemize}
+        \item Errors:
+        \begin{itemize}
+          \item \textbf{False positive}: the classifier assigns a positive label while the truth is negative;
+          \item \textbf{False negative}: the classifier assigns a negative label while the truth is positive;
+        \end{itemize}
+        
+        \item Tabulate the performance in a \textbf{class confusion matrix};
+        \begin{equation}
+          \begin{bmatrix}
+            \text{True Positives} & \text{False Negatives} \\
+            \text{False Positives} & \text{True Negatives}
+          \end{bmatrix}
+        \end{equation}
+        
+      \end{itemize}
+    
+  \subsection{Multiclass Classifiers}
+  
+    \begin{itemize}
+      \item \textbf{Multiclass classifiers} \textbf{map} feature vectors to \textbf{three or more classes};
+    \end{itemize}
+    
+    \subsubsection{Performance}
+    
+      \begin{itemize}
+        \item Given $ c $ classes, \textbf{class confusion matrix} is $ c \times c $;
+        \begin{itemize}
+          \item Vertical: \textbf{true labels};
+          \item Horizontal: \textbf{predicated label}
+        \end{itemize}
+      \end{itemize}
+    
+\section{Loss Functions}
+
+  \begin{equation}
+    \text{error} = 1 - \text{accuracy}
+  \end{equation}
+
+  \begin{itemize}
+    \item A \textbf{loss function} assigns costs to mistakes;
+  \end{itemize}
+
+  \subsection{0-1 Loss Function}
+  
+    \begin{itemize}
+      \item Assign loss 1 to every mistakes;
+      \item Assign loss 0 to every correct classification;
+    \end{itemize}
+    
+    \subsubsection{Binary Classifier}
+    
+      \begin{equation}
+        \text{accuracy} = \frac{ TP + TN }{ TP + TN + FP + FN }
+      \end{equation}
+      
+      \begin{itemize}
+        \item \textbf{Baseline accuracy} is $ 50 \% $;
+      \end{itemize}
+    
+    \subsubsection{Multiclass Classifier}
+    
+      \begin{equation}
+        \text{accuracy} = \frac{ \text{sum of diagonal terms} }{ \text{sum of all terms} }
+      \end{equation}
+      
+      \begin{itemize}
+        \item \textbf{Baseline accuracy} is $ \frac{1}{c} $
+      \end{itemize}
+    
+\section{Classifier Implementations}
+
+  \subsection{Nearest Neighbors Classifier}
+  
+    \begin{itemize}
+      \item Given a unlabeled feature vector $ x $:
+      \begin{enumerate}
+        \item Calculate the distance from $ x $ to each labeled feature vector $ x_{i} $;
+        \item Find the closest labeled $ x_{i} $;
+        \item Assign the same label to $ x $;
+      \end{enumerate}
+      
+      \item \textbf{Does not have a real training phase};
+      \item Issues:
+      \begin{itemize}
+        \item Need a distance metric (only possible when data are real values);
+        \item Needs to standardize the data;
+        \item Complexity grows linearly in number of labeled feature vectors;
+      \end{itemize}
+    \end{itemize}
+    
+    \subsubsection{Variants}
+    
+      \paragraph{K-Nearest Neighbor}
+      \begin{itemize}
+        \item Looks at $ k $ nearest neighbor feature vectors $ x_{i} $;
+        \item Assign a label to $ x $ based on a majority vote;
+      \end{itemize}
+      
+      \paragraph{(k, l) Nearest Neighbors}
+      \begin{itemize}
+        \item Looks at $ k $ nearest neighbor feature vectors $ x_{i} $;
+        \item Assigns a label to $ x $ only if at least $ l $ of them agree on the label;
+        \item Can output \say{don't know}
+      \end{itemize}
+      
+  \subsection{Naive Bayes Classifier}
+  
+    \begin{itemize}
+      \item \textbf{Training}:
+      \begin{itemize}
+        \item Use the training data $ \{ \left( x_{i}, y_{i} \right) \} $ to estimate a probability model $ P\left( y | x \right) $;
+        \item Assume the features (\textbf{components of a vector}) of $ \{ x \} $ are \textbf{conditionally independent} ($ \prod $) given the class label $ y $:
+        \begin{equation}
+          P\left( x| y \right) = \prod_{i = 1}^{d} P\left( x^{(i)} | y \right)
+        \end{equation}
+      \end{itemize}
+      
+      \item \textbf{Classification}:
+      \begin{itemize}
+        \item Assign the label $ \argmax_{y} P\left( y | x \right) $ to feature vector $ x $;
+        \begin{align}
+          \argmax_{y} P\left( y | x \right) &= \argmax_{y} \frac{ P\left( x | y \right) P\left( y \right) }{ P\left( x \right) } \\
+          &= \argmax_{y} P\left( x | y \right) P\left( y \right) \\
+          &= \argmax_{y} \left[ \prod_{i = 1}^{d} P\left( x^{(j)} | y \right) \right]  P\left( y \right) \\
+          &= \argmax_{y} \left[ \sum_{i = 1}^{d} \log P\left( x^{(j)} | y \right) \right] + \log P\left( y \right)
+        \end{align}
+        
+        \item $ P\left( y \right) $: prior distribution;
+        \begin{itemize}
+          \item Modeled on the frequency of $ y $ in the training set;
+          \item For a binary classifier, the model is a bernoulli random variable;
+        \end{itemize}
+        
+        \item $ P\left( x^{(j)} | y \right) $: each likelihood:
+        \begin{itemize}
+          \item Modeled by selecting an appropriate family of distributions:
+          \begin{enumerate}
+            \item Normal for real-valued numerical values;
+            \item Poisson for counts in fixed intervals;
+          \end{enumerate}
+          then fit the parameter using MLE;
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+    
+  \subsection{Support Vector Machine}
+  
+    \paragraph{Decision Boundary}
+    \begin{align}
+      a_{1} x^{(1)} + a_{2} x^{(2)} + ... + a_{d} x^{(d)} + b &= 0 \\
+      a^{T} x + b &= 0
+    \end{align}
+    where $ d $ is the dimension of the data, $ b $ is a constant and $ x $ is a feature vector;
+    
+    \begin{itemize}
+      \item An SVM uses a hyperplane as its \textbf{decision boundary}
+      \begin{itemize}
+        \item 2d: line;
+        \item 3d: plane;
+        \item 4d: 3d object;
+      \end{itemize}
+      
+      \item The dimension of the hyperplane is one less than that of the data;
+      \item $ b = 0 $: the hyperplane goes through the origin;
+      \item $ a $: \say{slope} in 2d thinking;
+      \item $ a, b $ describes the loss function
+    \end{itemize}
+    
+    \paragraph{Assign Labels}
+    \begin{itemize}
+      \item SVM assigns a label t oa featre vector $ x_{i} $ according to the rule;
+      \begin{equation}
+        \begin{cases}
+          a^{T} x_{i} + b \ge 0, \rmtext{label} = 1 \\
+          a^{T} x_{i} + b < 0, \rmtext{label} = -1 \\
+        \end{cases}
+      \end{equation}
+      
+      \item if $ \left| a^{T} x_{i} + b \right| $ is small, then $ x_{i} $ is close to the decision boundary (less confidence);
+      \item if $ \left| a^{T} x_{i} + b \right| $ is large, then $ x_{i} $ is far from the decision boundary (more confidence);
+    \end{itemize}
+    
+    \paragraph{No Clear Decision Boundary}
+    \begin{itemize}
+      \item Some boundaries are better than others in data with no clear boundaries;
+      \item Some boundaries are better at no-seen data;
+    \end{itemize}
+    
+    \subsubsection{Loss Functions}
+      
+      For given feature vector $ x_{i} $, with class label $ y_{i} \in \{ 1, -1 \} $, we want:
+      \begin{itemize}
+        \item zero loss if $ x_{i} $ is classified correctly;
+        \item positive loss if $ x_{i} $ is misclassified;
+        \item If $ x_{i} $ is misclassified, the more loss the further away it is from the boundary;
+      \end{itemize}
+      
+      \paragraph{Loss Function 1}
+      \begin{equation}
+        \max\left( 0, -y_{i} \left( a^{T} x_{i} + b \right) \right)
+      \end{equation}
+      
+      Let $ S $ is a \textbf{loss function of a decision boundary}
+      \begin{equation}
+        S\left( a, b \right) = \frac{1}{N} \sum_{i = 1}^{N} \max\left( 0, -y_{i} \left( a^{T} x_{i} + b \right) \right)
+      \end{equation}
+      
+      \subparagraph{Problems}
+      \begin{itemize}
+        \item Loss function 1 is not able to distinguish between certain decision boundaries;
+      \end{itemize}
+      
+      \paragraph{Loss Function 2: Hinge Loss}
+      Miss classified functino should have a loss, \textbf{correctly classified data that is close to the decisio boundary should also have a loss};
+      
+      \begin{equation}
+        \max\left( 0, 1 - y_{i} \left( a^{T} x_{i} + b \right) \right)
+      \end{equation}
+      
+      $ 1 $ raise the hinge a little bit so that points close to decision boundary still register as an error;
+      
+      \begin{equation}
+        S\left( a, b \right) = \frac{1}{N} \sum_{i = 1}^{N} \max\left( 0, 1 - y_{i} \left( a^{T} x_{i} + b \right) \right)
+      \end{equation}
+      
+      \subparagraph{Problems}
+      \begin{itemize}
+        \item Loss function 2 favors decision boundaries with large $ \left| a \right| $;
+        \begin{itemize}
+          \item $ \left| a \right| $ can zero out the loss for correctly classified $ x_{i} $ 
+        \end{itemize}
+        
+        \item Decision boundaries with $ \left| a \right| $ is very sensitive to small changes in $ x_{i} $, which is undesirable;
+      \end{itemize}
+      
+      \paragraph{Loss Function 2 With Penalty on Square Magnitude of a}
+      
+      Panely:
+      \begin{equation}
+        \left| a \right|^{2} = a^{T} a
+      \end{equation}
+      
+      \begin{equation}
+        S\left( a, b \right) = \left[ \frac{1}{N} \sum_{i = 1}^{N} \max\left( 0, 1 - y_{i} \left( a^{T} x_{i} + b \right) \right)  \right] + \lambda \left( \frac{ a^{T} a }{ 2 } \right)
+      \end{equation}
+      
+      \begin{itemize}
+        \item $ \left| a \right|^{2} $ and $ \frac{1}{2} $ are inserted to make differentiation simple;
+        \item \textbf{Regularization Parameter} $ \lambda $ trade off between the two objective;
+      \end{itemize}
+      
+    \subsubsection{Training Procedure}
+    
+      \begin{align}
+        S_{i}\left( a, b \right) &= \max\left( 0, 1 - y_{i} \left( a^{T} x_{i} + b \right) \right) \\
+        S_{0}\left( a, b \right) &= \lambda \left( \frac{ a^{T} a }{ 2 } \right)
+      \end{align}
+      
+      \begin{itemize}
+        \item Want to minimize $ S\left( a, b \right) $;
+        \item To do this, use gradient descent;
+        \item Simply by taking random steps;
+        \item Epoch is a certain number of steps;
+        \begin{equation}
+          \rmtext{epoch} = \frac{m}{e + n}
+        \end{equation}
+      \end{itemize}
+      
+    \subsubsection{Validation and Testing}
+    
+      \begin{itemize}
+        \item Split labeled data into training, validation and test sets;
+        \item For each choice of $ \lambda $, run stocastic gradient descent to find the best decision boundary parameters $ \left( a, b \right) $ using the training set;
+        \item Choose the best $ \lambda $ based on accuracy on the validation set;
+        \item Finally evaluate the SVM's accuracy on the test set;
+        \item The process avoids overfitting $ \left( a, b \right) $ and $ \lambda $
+      \end{itemize}
+      
+    \subsubsection{Extension to Multiclass Classification}
+    
+      \begin{itemize}
+        \item All vs all;
+        \item One vs all;
+      \end{itemize}
+      
+  \subsection{Decision Tree}
+  
+    \begin{itemize}
+      \item Forest classifier is implemented through \textbf{decision tree};
+      \begin{itemize}
+        \item Each node performs a binary decision between two features
+      \end{itemize}
+    \end{itemize}
+    
+    \subsubsection{Training}
+    
+      \begin{itemize}
+        \item Choose a dimension and split;
+        \item Split the training data $ D $ into left and right child subset: $ D_{l}, D_{r} $;
+        \item Repeat the two steps above recursively on each child;
+        \item Stop recursion based on some conditions;
+        \item Assign labels to leaf nodes;
+      \end{itemize}
+      
+    \subsubsection{Splitting}
+    
+      \begin{itemize}
+        \item An \textbf{informative} split:
+        \begin{itemize}
+          \item Makes the subset more concentrated;
+          \item Reduces uncertainty about class labels;
+        \end{itemize}
+      \end{itemize}
+      
+      \paragraph{Quantifying Uncertainty Using Entropy}
+      \begin{itemize}
+        \item \textbf{Uncertainty}: the number of bits of information needed to distinguish between classes in a dataset;
+        \item \textbf{Entropy}: the measure of uncertainty for a general distribution;
+        \begin{itemize}
+          \item If class $ i $ contains $ P\left( i \right) $ of the data, we need $ \log_{2} \frac{1}{ P\left( i \right) } $ bits for that class;
+          \item The entropy $ H\left( D \right) $ of a dataset $ D $ is the weighted mean across all $ c $ classes;
+          \begin{equation}
+            H\left( D \right) = \sum_{i = 1}^{c} P\left( i \right) \log_{2} \frac{1}{ P\left( i \right) }
+          \end{equation}
+        \end{itemize}
+      \end{itemize}
+      
+      \paragraph{Information Gain of A Split}
+      \begin{equation}
+        I = H\left( D \right) - \left( \frac{ N_{D_{l}} }{ N_{D} } H\left( D_{l} \right) + \frac{ N_{D_{r}} }{ N_{D} } H\left( D_{r} \right) \right)
+      \end{equation}
+      
+      \paragraph{Choose a Dimension To Split}
+      \begin{itemize}
+        \item Given $ d $ dimensions, choose $ \sqrt{d} $;
+        \item For each candidate, find hte split that maximizes the inforamtion gain;
+        \item Choose the best overall dimension and split;
+        \item Splitting can be generalized to categorical values;
+      \end{itemize}
+      
+      \paragraph{Stop Growing the Decision Tree}
+      \begin{itemize}
+        \item Grow the tree too deep cause overfitting;
+        \item Stops if:
+        \begin{enumerate}
+          \item All items in the data are in the same class;
+          \item The data subset becomes smaller than a predetermined size;
+          \item A predetermined maximum tree depth has been reached;
+        \end{enumerate}
+      \end{itemize}
+      
+      \paragraph{Labeling Leafs}
+      \begin{itemize}
+        \item A leaf can contain multiple class labels;
+        \item Choose the class that has the most items in the data;
+        \item \textbf{Or}, label the leaf with the number of items in contains in each class for a \textbf{probabilistic soft classification};
+      \end{itemize}
+      
+      \paragraph{Drawbacks}
+      \begin{itemize}
+        \item Poor performance on training data;
+        \item Poor performance oon test data because of overfitting;
+      \end{itemize}
+      
+  \subsection{Random Forest}
+  
+    \begin{itemize}
+      \item A random forest is a randomly generated \textbf{ensemble} of decision trees that avoids the drawbacks of a single decision tree by merging classification of the trees;
+      \item \textbf{Train} each decision tree on a new bootstrap replicate of the training data;
+      \item \textbf{Evaluate} the random forest by evaluating the decision of each on its \textbf{out-of-bag items};
+      \begin{itemize}
+        \item \textbf{out-of-bag items}: items not included in a bootstrap replicate;
+      \end{itemize}
+      
+      \item \textbf{Classify} by merging results of individual trees;
+      \begin{itemize}
+        \item By simple vote;
+        \item By adding soft classifications together and then take a vote;
+      \end{itemize}
+      
+      \item Very accurate;
+    \end{itemize}
+    
+\section{Choosing Classifiers}
+
+  \begin{tabu} to \linewidth{ X[1,l] | X[2,l] }
+    \thickhline
+    \textbf{Trait} & \textbf{Classifier} \\
+    \thickhline
+    Accuracy & SVM, random forests \\ \hline
+    Classification speed & naive bayes, SVM \\ \hline
+    Performance with small training set & naive Bayes \\ \hline
+    Interpretibility & nearest neighbor, naive bayes, SVM \\ \thickhline
+  \end{tabu}

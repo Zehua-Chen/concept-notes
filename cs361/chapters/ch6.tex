@@ -1,0 +1,135 @@
+\chapter{Samples and Population}
+
+\section{Population vs Sample}
+
+  \subsection{Population}
+  
+    \begin{itemize}
+      \item \textbf{Population} is the entire dataset $ \{ x \} $;
+      \begin{itemize}
+        \item Size of the population is $ N_{p} $;
+      \end{itemize}
+      
+      \item $ \popmean\left( \{ x \} \right) $: population mean;
+      \item $ \popstd\left( \{ x \} \right) $: population standard deviation;
+    \end{itemize}
+  
+  \subsection{Sample}
+
+    \begin{itemize}
+      \item \textbf{Sample} is a \textbf{random subset} of the entire population $ \{ x \} $, chosen \textbf{fairly, randomly and with replacement};
+      \begin{itemize}
+        \item Size of the sample is $ N $ where $ N < N_{p} $;
+      \end{itemize}
+      
+      \item Sample mean is a random variable, $ X^{\left( N \right)} $;
+      \begin{itemize}
+        \item Has to have $ \left( N \right) $ as different size of the sample yields different mean;
+      \end{itemize}
+    \end{itemize}
+  
+\section{Describe the Sample}
+
+  \subsection{Sample Mean}
+  
+    \begin{align}
+      X^{N} &= \frac{1}{N} \left( X_{1} + X{_2} + ... + X_{N} \right) \\
+      X^{1} &= X_{1} \\
+      \E\left[ X^{N} \right] &= \frac{1}{N} \left( \E\left[ X^{1} \right] + ... + \E\left[ X^{1} \right] \right)= \E\left[ X^{1} \right] \\
+    \end{align}
+  
+    \begin{itemize}
+      \item \textbf{Sample mean} is the \textbf{mean of the sample};
+      \item $ X^{N} $ is an unbiased estimator of $ \popmean $
+      \begin{itemize}
+        \item Sample mean is the unbiased estimate of $ \popmean $;
+      \end{itemize}
+    \end{itemize}
+    
+  \subsection{Variance of Sample Mean}
+  
+    \begin{equation}
+      \var\left[ X^{N} \right] = \frac{ \popvar\left( \{ x \} \right) }{N}
+    \end{equation}
+    
+  \subsection{Standard Error}
+  
+    \begin{itemize}
+      \item \textbf{Standard error} is the \textbf{standard devitaion of the sample mean};
+    \end{itemize}
+  
+    \begin{align}
+      \stderr\left( \{ x \} \right) &= \frac{ \popvar\left( \{ x \} \right) }{\sqrt{N}} \\
+      &= \frac{ \stdunbiased\left( \{ x \} \right) }{\sqrt{N}} \\
+      &\propto \frac{1}{\sqrt{N}}
+    \end{align}
+    
+\section{Predict the Population using the Sample}
+
+  \subsection{Population Mean}
+  
+    \begin{align}
+      \E\left[ X^{1} \right] &= \popmean\left( \{ x \} \right) \\
+      \E\left[ X^{N} \right] &= \popmean\left( \{ x \} \right)
+    \end{align}
+    
+    \begin{itemize}
+      \item Sample mean is the \textbf{unbiased esitmate of the population mean};
+    \end{itemize}
+
+  \subsection{Population Standard Deviation}
+  
+    \begin{equation}
+      \stdunbiased\left( \{ x \} \right) = \sqrt{ \frac{1}{N - 1} \sum_{x_{i} \in \text{sample}} \left( x_{i} - \mean\left( \text{sample} \right) \right)^{2} }
+    \end{equation}
+    
+    \begin{itemize}
+      \item \textbf{Standard unbiased esitmate} ($ \stdunbiased\left( \{ x \} \right) $) is the esitmate of \textbf{standard deviation of the population}
+      \item $ N $: sample size;
+    \end{itemize}
+
+\section{Confidence Interval}
+
+  \begin{itemize}
+    \item X\% confidence interval means for X\% of the samples constructed, the population mean lie within the predicted range;
+  \end{itemize}
+
+  \subsection{Sample Size Bigger Than or Equal to 30}
+  
+    \paragraph{68\% Confidence Interval}
+    \begin{equation}
+      \mean\left(\{ x \}\right) - \stderr\left(\{ x \}\right) \leq \popmean\left(\{ x \}\right) \leq \mean\left(\{ x \}\right) + \stderr\left(\{ x \}\right)
+    \end{equation}
+    
+    \paragraph{95\% Confidence Interval}
+    \begin{equation}
+      \mean\left(\{ x \}\right) - 2 \stderr\left(\{ x \}\right) \leq \popmean\left(\{ x \}\right) \leq \mean\left(\{ x \}\right) + 2 \stderr\left(\{ x \}\right)
+    \end{equation}
+    
+    \paragraph{99\% Confidence Interval}
+    \begin{equation}
+      \mean\left(\{ x \}\right) - 3 \stderr\left(\{ x \}\right) \leq \popmean\left(\{ x \}\right) \leq \mean\left(\{ x \}\right) + 3 \stderr\left(\{ x \}\right)
+    \end{equation}
+  
+  \subsection{Sample Size Smaller Than 30 (T-Distribution)}
+  
+    \begin{itemize}
+      \item \textbf{Student's t-distribution}: to calculate p-value for $ N < 30 $, use \textbf{student's t-distribution};
+      \begin{itemize}
+        \item Set \textbf{degrees of freedom} to $ N - 1 $;
+        \item T-distribution has heavier tials than standard normal distribution, giving bigger p-values;
+      \end{itemize}
+    \end{itemize}
+    
+  \subsection{Bootstrap}
+  
+    \begin{itemize}
+      \item Bootstrap is a method used to construct confidence interval for statistics beside sample mean;
+      \item Bootstrap a sample median given a sample of $ N $ items:
+      \begin{enumerate}
+        \item Create a bootstrap replicate by \textbf{sampling N items from the original sample uniformly and with replacement};
+        \item Calculate the \textbf{sample median of the bootstrap replicate};
+        \item Repeat the above steps a large number of times;
+        \item Plot the histograms of the sample medians and construct confidence interval;
+      \end{enumerate}
+    \end{itemize}
