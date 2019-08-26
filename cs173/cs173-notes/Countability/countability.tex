@@ -1,0 +1,154 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{dirtytalk}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+
+\subject{CS 173}
+\date{April 22 -- 24, 107}
+\id{CS17310704221}
+\title{State Diagram}
+
+\begin{document}
+\begin{note}{Exam 12}
+
+\section{Rationals and Reals}
+
+\begin{itemize}
+    \item Most real numbers are \textbf{irrational};
+    \item \textbf{Rationals} is only a subset of reals;
+\end{itemize}
+
+    \subsection{Completeness}
+    
+    \begin{itemize}
+        \item \textbf{Official Definition}: \say{It states that any subset of the reals with an upper bound has a smallest upper bound.}
+        
+        \item If a \hl{sequence of reals converges}, then the value the set converges to \hl{is also a real number};
+        \begin{itemize}
+            \item \hl{\textbf{Rationals} does not have this property};
+        \end{itemize}
+    \end{itemize}
+    
+\section{Cardinality}
+
+\begin{itemize}
+    \item \textbf{Definition of Same Cardinality}: two sets $ A $ and $ B $ have the same cardinality \textbf{if and only if}
+    there is a \textbf{bijection from $ A $ to $ B $}\footnote{\textbf{Bijection}: a function that is both \textbf{one to one} 
+    and \textbf{onto}};
+    
+    \item \textbf{Sets with the same cardinality as integers} are called \textbf{countably infinite}:
+    \begin{itemize}
+        \item A infinite set $ A $ is \hl{\textbf{countably infinite} if there is a \textbf{bijection} from 
+        $ \mathbb{N} $ (or, $ \mathbb{Z} $) onto $ A $};
+    \end{itemize} 
+    
+    \item \textbf{Countable}: both \hl{finite sets and sets that are countably infinite}; 
+    \begin{itemize}
+        \item All subsets of integers are countable;
+        \item \hl{All subsets of \textbf{rational} numbers are countable};
+    \end{itemize}
+\end{itemize}
+
+\section{Cantor Schroeder Bernstein Theorem}
+
+\begin{equation}
+    \left| A \right| \leq \left| B \right| \wedge \left| B \right| \leq \left| A \right| \to \left| A \right| = \left| B \right|
+\end{equation}
+
+\begin{itemize}
+    \item \hl{If you can build a one to one function from in both direction, a bijection exists};
+    \begin{itemize}
+        \item For a one to one function to exist from $ A $ to $ B $, $ \left| A \right| \leq \left| B \right| $
+    \end{itemize}
+    
+    \item If $ M $ is a collection of items, $ M * $ is the collection of \textbf{possible finite-length combinations of items} in $ M $;
+    
+    \item \textbf{Finite length strings of ASCII} characters are \textbf{countably infinite}:
+    \begin{itemize}
+        \item A one-to-one function that maps integers to strings can be constructed;
+        \item A one-to-one function that maps strings to integers can be constructed as well: $ f(\epsilon) = 0  $
+    \end{itemize}
+\end{itemize}
+
+\section{Countability}
+
+    \subsection{Countable}
+    
+    \begin{itemize}
+        \item Countable includes:
+        \begin{enumerate}
+            \item Sets that have \textbf{finite length};
+            \item Sets that are \textbf{countably infinite};
+        \end{enumerate}
+        
+        \item $ \varnothing $ is countable;
+    \end{itemize}
+    
+    \subsection{Countability Infinite}
+    
+    Given a set $ A $, $ A $ \hl{is countably infinite if there is a \textbf{bijection} from $ \mathbb{N} $ or $ \mathbb{Z} $
+    onto A};
+
+    \subsection{$ \mathbb{P} (\mathbb{N} ) $ is not Countable}
+    
+    \begin{itemize}
+        \item Use a technique named \textbf{diagonalization} developed by Georg Cantor; (\textbf{proof by contradiction});
+        
+        \item Given any set $ A $, $ \mathbb{P}(A) $ has a \textbf{strictly larger cardinality} than $ P $ does:
+        \begin{equation}
+            \forall A, \left| \mathbb{P}(A) \right| \geq \left| A \right| \wedge \left| A \right| \neq \left| \mathbb{P}(A) \right|
+        \end{equation} 
+        
+        \item $ \left| \mathbb{P}(R) \right| = \left| R \right| $
+    \end{itemize}
+
+\section{Halting Problem}
+
+\begin{itemize}
+    \item It is impossible to build a program that reads through any program and determine if the input program eventually halt or 
+    run forever;
+    
+\end{itemize}
+
+    \subsection{Behavior of Computer Programs}
+    
+    \begin{enumerate}
+        \item The program eventually halt, the trace is finite;
+        \item The program loops, (return to previous states);
+        \item The program keeps going, keeping consuming memory, \hl{rather than returning to a previous state};
+        \begin{itemize}
+            \item \hl{Even on a computer with no memory limitation, a program may not halt or return to a previous state eventually}.
+        \end{itemize}
+    \end{enumerate}
+
+\section{Real Life Application of Countability}
+
+\begin{itemize}
+    \item The set of formula is \textbf{countable};
+    \begin{itemize}
+        \item A math equation is a finite string of characters;
+    \end{itemize}
+    
+    \item The set of functions is \textbf{uncountable};
+    
+    \item The set of computer program is \textbf{countable};
+    \begin{itemize}
+        \item A computer program is just a finite state of ASCII characters;
+    \end{itemize}
+\end{itemize}
+
+\end{note}
+\end{document}

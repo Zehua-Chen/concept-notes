@@ -1,0 +1,404 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newcommand{\intersect}{\cap}
+\newcommand{\union}{\cup}
+
+\newtheorem{definition}{Definition}
+\newtheorem{claim}{Claim}
+\newtheorem{proof}{Proof}
+
+\newcommand{\ex}{\textbf{Ex.} }
+
+\subject{CS 173}
+\date{January 29 -- 30, 107}
+\id{CS17310701291}
+\title{Sets}
+
+\begin{document}
+    \begin{note}{Exam 3}
+
+        \section{Sets}
+
+        \begin{definition}
+            A \textbf{unordered} collection of objects.
+        \end{definition}
+
+        \begin{itemize}
+            \item \hl{$ \in $ cannot be used to describe sets};
+            \item \textbf{Elements, Members}: items in a set are called \textbf{elements or members};
+            \item $ x \in A $ means x \hl{is an elemetn} of A;
+            \item A set \hl{can contain one element}: $ \{ 1 \} $. But the set with one element is still different from the element itself:
+            $ \{ 1 \} \neq 1  $;
+            \item A set \hl{can contain \textbf{nothing}}, known as \textbf{empty set} or \textbf{null set} ($ \emptyset $ instead of $ \{ \} $);
+            \item A set \hl{can also contain \textbf{complex objects}}: $ \{ (1,2,3), (a,b), 2 \} $
+        \end{itemize}
+
+        \textbf{Examples of set}:
+        \begin{itemize}
+            \item Planets in the solar system;
+            \item Natural numbers;
+            \item Program written by CS 125 students over three years;
+        \end{itemize}
+
+        \subsection{Ways to Declare a Set}
+
+        \begin{enumerate}
+            \item Describing content \textbf{in mathmetical english}:
+            \begin{itemize}
+                \item \ex the integers between $ 3 $ and $ 7 $, inclusive;
+            \end{itemize}
+
+            \item \textbf{Listing all the members}:
+            \begin{displaymath}
+                \{3, 4, 5, 6, 7\}
+            \end{displaymath}
+            \begin{itemize}
+                \item \hl{Iff} the pattern is clear the reader, it may be a good idea to use $ ... $ to omit elements;
+            \end{itemize}
+
+            \item \textbf{Set-Builder Notation}
+            \begin{displaymath}
+                \{ x \in \mathbb{Z} \mid 3 \leq x \leq 7 \}
+            \end{displaymath}
+            \begin{itemize}
+                \item \textbf{Set-builder} notation contains two parts; one before the \textbf{such that}
+                seperator $ \mid $ or $ : $ and one after;
+
+                \item \textbf{Before}: Names a variable, and declare the type of the variable;
+                the \hl{this part can be put after the \textbf{seperator}};
+
+                \item \textbf{After}: Give one ore more \textbf{constraints} to the variable declared;
+
+                \item \textbf{Colon Variant}: in case of the need to write $ a $ is the multiple of $ b $ $ b \mid a $
+                \begin{displaymath}
+                    \{ a \in \mathbb{Z}: b \mid a \}
+                \end{displaymath}
+            \end{itemize}
+        \end{enumerate}
+
+        \subsection{Things to Be Careful About}
+
+        \begin{itemize}
+            \item \textbf{Sets are unordered lists}: $ \{ 1,2,3 \} $ and $ \{ 2,1,3 \} $ are the same set;
+
+            \item \textbf{Each element only occur once}, or it does not matter how many times an element occur in a set:
+            $ \{ 1,2,2,3 \} $ and $ \{ 1,2,3 \} $ are the same set;
+
+            \item
+        \end{itemize}
+
+        \subsection{Tuples}
+
+        \begin{itemize}
+            \item The general name for ordered sequence of $ k $ numbers is $ k-tuples $
+            \item \textbf{Placed in \lq () \rq};
+            \item \hl{Must contain \textbf{at least} two numbers}, \hl{not one, not zero, must have at least two}
+            \item Tuples are \hl{still a collection of objects};
+            \item Different from sets in ways:
+            \begin{itemize}
+                \item Order matters
+                \item \textbf{Duplicate} objects do not magically collapse;
+            \end{itemize}
+
+            \item \ex $ (1,2,2,3) \neq (1,2,3) $
+            \item \ex $ (1,2,3) \neq (1,3,2) $
+        \end{itemize}
+
+        \subsection{Cardinality}
+
+        \begin{definition}
+            \textbf{Cardinality of X}: If $ A $ is a finite set, then $ \left| A \right| $ is the number of different objects in $ A $,
+            known as cardinality of $ A $;
+        \end{definition}
+
+        \begin{displaymath}
+            \left| \{ a,b,c \} \right| = \left| \{ a,a,b,c \} \right| = 3
+        \end{displaymath}
+
+        \begin{itemize}
+            \item \hl{\textbf{Duplicate} items are counted only once};
+            \item Cardinality also \hl{extends to sets with infinite number of elements};
+            \item Do not confuse with \textbf{absolute values};
+        \end{itemize}
+
+
+        \subsection{Subset}
+
+        \begin{definition}
+            If $ A $ and $ B $ are sets, then $ A $ is a subset of $ B $ (written $ A \subseteq B $) if every element of
+            $ A $ is also in $ B $.
+        \end{definition}
+
+        Or, in mathmetical expressions
+
+        \begin{displaymath}
+            \forall x, x \in A \to x \in B
+        \end{displaymath}
+
+        \begin{itemize}
+            \item Subsets, $ \subseteq $ allow \hl{two sets to be \textbf{equal}};
+            \begin{displaymath}
+                A \subseteq A \equiv T
+            \end{displaymath}
+            \item To force two sets to be different, use \lq\lq A is a proper subset of B\rq\rq ($ A \subset B $);
+            \item \ex $ \mathbb{Q} \subseteq \mathbb{R} $;
+        \end{itemize}
+
+        \subsection{Set Operations}
+
+        \subsubsection{Intersection}
+        Given two sets $ A $ and $ B $, the intersection of two sets are the objects that \hl{exist in both $ A $ and $ B $}.
+        \begin{equation}\label{eq: intersection}
+            A \intersect B = \{ S \mid S \in A \wedge S \in B \}
+        \end{equation}
+
+        \begin{itemize}
+            \item If $ A \intersect B = \emptyset $, then $ A $ and $ B $ are \textbf{disjoint}.
+        \end{itemize}
+
+        \subsubsection{Union}
+        The union of $ A $ and $ B $ is the set containg all the \hl{objects that \textbf{appear at least once} in both sets}.
+        \begin{equation}\label{eq: union}
+            A \union B = \{ S \mid S \in A \vee S \in B \}
+        \end{equation}
+
+        \subsubsection{Difference}
+        The difference of $ A $ and $ B $ is the set containg all the \hl{objects that appear \textbf{in A} but\footnote{but here appears
+        to mean and $ \wedge $} \textbf{not in B}}.
+        \begin{equation}\label{eq: difference}
+            A - B = \{ S \mid S \in A \wedge S \not\in B \}
+        \end{equation}
+
+        \paragraph{Examples}
+
+        \begin{itemize}
+            \item \textbf{Reminder}: $ () $ is a tuple, $ \{\} $ is a set;
+        \end{itemize}
+
+        \begin{displaymath}
+            \{ A, B, C \} - \{ A, (B, C)  \} = \{ B, C \}
+        \end{displaymath}
+
+        \subsubsection{Complement}
+        The complement of $ A $ is the set containg all the \hl{objects that do not appear \textbf{in A} but \textbf{in B},
+        which is a universal set $ U $ declared to contain all elements of some sort}.
+        \begin{itemize}
+            \item \textbf{Complement of A is written} as $ \overline{A} $
+            \item $ U $ is \hl{different for every discussion};
+            \item $ U $ needs to be \textbf{explicitly} declared;
+        \end{itemize}
+
+        \subsubsection{Cartesian Product}
+        The cartesian product of $ A $ and $ B $ contains all ordered pairs $ \left(x, y \right) $ where $ x $ is in
+        $ A $ and $ y $ is in $ B $.
+        \begin{equation}\label{eq: cartesian product}
+            A \times B = \{ \left( x,y \right) \mid x \in A \wedge y \in B \}
+        \end{equation}
+        \ex
+        \begin{align*}
+            A &= \{a, b \}\\
+            B &= \{1, 2 \}\\
+            A \times B &= \{ (a,1), (a,2), (b,1), (b,2) \}\\
+            B \times A &= \{ (1,a), (2,a), (1,b), (2,b) \}
+        \end{align*}
+
+        \begin{itemize}
+            \item \hl{\textbf{Order of multiplication} matters in \textbf{cartesian product}};
+            \begin{itemize}
+                \item $ x $ must be from  $ A $ and $ y $ must be from $ B $.
+            \end{itemize}
+        \end{itemize}
+
+        \paragraph{Empty Set Example}
+
+        Watch for the $ \{ \} $ outside of $ \emptyset $
+        \begin{displaymath}
+            \{ \emptyset \} \cdot \{ \emptyset \}  = \{ \left(\emptyset, \emptyset \right) \}
+        \end{displaymath}
+
+        \begin{displaymath}
+            \{ A, B \} \cdot \emptyset = \emptyset
+        \end{displaymath}
+
+        \subsection{Set Identities}
+
+        \begin{displaymath}
+            \overline{A \union B} = \overline{A} \intersect \overline{B}
+        \end{displaymath}
+
+        \textbf{Similarities with Logic Identities}
+        \begin{itemize}
+            \item $ \union $ is like $ \vee $;
+            \item $ \intersect $ is like $ \wedge $;
+            \item $ \overline{A} $ is like $ \neg A $;
+            \item $ \emptyset $ is like $ F $;
+            \item $ U $ (universal set) is like $ T $;
+        \end{itemize}
+
+        \subsection{Size of Set Union}
+
+        \begin{itemize}
+            \item If two sets $ A $ and $ B $ \hl{do not overlap}, then
+            \begin{equation}\label{eq: size of union - no overlap}
+                \left| A \union B \right| = \left| A \right| + \left| B \right|
+            \end{equation}
+
+            \item If two sets $ A $ and $ B $ \hl{do overlap}, then
+            \begin{equation}\label{eq: size of union - overlap}
+                \left| A \union B \right| = \left( \left| A \right| + \left| B \right| \right) - \left| A \intersect B  \right|
+            \end{equation}
+            \hl{This is also known as \textbf{Inclusion-Exlusion Principal}}
+        \end{itemize}
+
+        \subsection{Product Rule}
+
+        \begin{definition}
+            \textbf{Product Rule}: if you have $ p $ option for one part of the task, and $ q $ choices for the second half
+            the taks, \textbf{and if the tasks does not depend on each other}, \hl{then there are $ q \cdot p $} options
+            for the whole task.
+        \end{definition}
+
+        \begin{align*}
+            \left| A \right| &= n\\
+            \left| B \right| &= q\\
+            \left| A \times B \right| &= n \cdot q\\
+        \end{align*}
+
+        \subsection{Proving Set Claims}
+
+        \textit{Refer to 5.10 in textbook}
+
+        \section{Vacuous Truth}
+
+        \begin{definition}
+            \textbf{Vacuous Truth}: something is true only because of the strange convention applied to conditionals:
+            \begin{displaymath}
+                F \to T \equiv T
+            \end{displaymath}
+        \end{definition}
+
+        \subsection{Empty Set, Example of Vacuous Truth, }
+
+        \begin{claim}
+            The empty set $ \emptyset $ is a subset of A.
+        \end{claim}
+        \begin{proof}
+            For $ \emptyset $ to be a subset of A, the definition of subset requires that for every object $ x $, if
+            $ x $ is an element of the empty set $ \emptyset $. then $ x $ is an element of A. (\hl{By the truth table of if/then
+            logic, the only case the statement evaluates to false is when the hypothesis is true and the conclusion is false. Since
+            the statement's hypothesis is true, the statement will always be true, regardless of the conclusion.})
+        \end{proof}
+
+        \begin{itemize}
+            \item Empty set is implicitly \textbf{a subset of any set};
+            \item $ \{ \emptyset \} $ is \hl{a set containing an empty set};
+            \item $ \emptyset = \{ \} $ is an empty set;
+        \end{itemize}
+
+        \section{Properties of Sets}
+
+        \subsection{Transitivity}
+
+        For any sets $ A $, $ B $, and $ C $,if $ A \subseteq B $ and $ B \subseteq C $,then $ A \subseteq C $.
+
+        \subsection{Another One Involving Cartesian Products}
+
+        For any sets $ A $, $ B $, and $ C $, if $ A \times B \subseteq A \times C $ and
+        $ A \neq \emptyset $, then $ B \subseteq C $.
+
+        \section{In Practice}
+
+        \subsection{Three Sets Problems}
+
+        \begin{equation}\label{eq: three set equation}
+            \left| A \union B \union C \right| = \left| A \right| + \left| B \right| + \left| C \right|
+            - \left| B \intersect C \right| - \left| A \intersect B \right| - \left| A \intersect C \right|
+            + \left| A \intersect B \intersect C \right|
+        \end{equation}
+
+        \paragraph{Example, from Homework 3, 2018} you are in a party of $ 53 $ people.
+        \begin{itemize}
+            \item $ 20 $ have been to New Zealand;
+            \item $ 28 $ have been to Iceland;
+            \item $ 33 $ have been to Estonia;
+            \item $ 3 $ have been to both New Zealand and Iceland;
+            \item $ 12 $ have been to both New Zealand and Estonia;
+            \item $ 1 $ one have been to all places;
+        \end{itemize}
+
+        \paragraph{Solution}
+        \begin{align*}
+            \left| A \right| &= 20\\
+            \left| B \right| &= 28\\
+            \left| C \right| &= 33\\
+            \left| A \intersect B \right| &= 3\\
+            \left| A \intersect C\right| &= 12\\
+            \left| A \intersect B \intersect C \right| &= 1\\
+            \left| A \union B \union C \right| &= 53\\
+            \left| B \intersect C \right| &= x\\
+        \end{align*}
+
+        Using the equation (\ref{eq: three set equation}) on page \pageref{eq: three set equation},
+        \begin{align*}
+            53 &= 20 + 28 + 33 - x - 3 - 12 + 1\\
+            x &= 14
+        \end{align*}
+
+        \subsection{Writing Sets Proofs}
+
+        \begin{itemize}
+            \item Tuples $ (x,y) $ in sets \hl{does not have to get its types declared explicitly}; being in the set already
+            declares its set;
+        \end{itemize}
+
+        \subsubsection{Unusual Set Builder Notations}
+
+        \begin{displaymath}
+            \{ a(1,2) - (1 - b)(2,3) \mid a, b \in \mathbb{R} \}
+        \end{displaymath}
+
+        is another form of tuples, and \hl{therefore can be converted into}
+
+        \begin{align*}
+            x &= a - 2(1 - b) \\
+            y &= 2a - 3 (1 - b)
+        \end{align*}
+
+        \subsubsection{Set Builders with Only One Variable}
+
+        \begin{displaymath}
+            B = \{ \left(p^{3}, p^{2} \right), p \in \mathbb{R} \}
+        \end{displaymath}
+
+        If there is another set $ A $ with two variables, and a tuple value $ (x,y) \in A $, \hl{then $ (x,y) $ can
+        be written as the following to fit the set $ B $}.
+        \begin{align*}
+            x &= p^{3} \\
+            y &= p^{2} \\
+        \end{align*}
+
+        \subsubsection{Handling Squares}
+
+        \begin{displaymath}
+            x^{2} < 4
+        \end{displaymath}
+        is equivalent to
+        \begin{displaymath}
+            -2 < x < 2
+        \end{displaymath}
+
+    \end{note}
+\end{document}

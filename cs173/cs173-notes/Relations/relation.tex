@@ -1,0 +1,192 @@
+\documentclass{note}
+    
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\subject{CS 173}
+\date{February 5 -- 10, 107}
+\id{CS17310702051}
+\title{Relations}
+
+\begin{document}
+    \begin{note}{Exam 5}
+
+        \section{Relations}
+
+        \subsection{Relation}
+
+        \begin{center}
+            \texttt{Relation \textbf{R} on a \textbf{set A}}
+        \end{center}
+        \begin{itemize}
+            \item $ R $ is a \hl{set of ordered pairs from the set $ A $};
+        \end{itemize}
+        \begin{itemize}
+            \item The \hl{base set $ A $ can be \textbf{infinite}};
+            \item The \hl{base set $ A $ \textbf{cannot} be \textbf{empty}};
+        \end{itemize}
+
+        \subsection{Related}
+
+        \begin{center}
+            \texttt{A relation R on set A, R contains the pair (x,y), condition...}
+        \end{center}
+        \begin{itemize}
+            \item \textbf{Shorthand}: $ x R y $
+            \item $ x \not \mathrel{R} y $ means x not related to y ({\texttt not mathrel});
+        \end{itemize}
+
+        \section{Properties of Relation}
+
+        \subsection{Reflexives vs Irreflesives}
+
+        \begin{description}
+            \item[Reflexives] whether or not all elements are \textbf{related to themselves} $ \leq $;
+            \begin{displaymath}
+                \forall x \in A, x R x \to R \text{ is reflexives}
+            \end{displaymath}
+
+            \item[Irreflesives] \textbf{no element} is \textbf{related to itself} $ < $;
+            \begin{displaymath}
+                \forall x \in A, x \not \mathrel{R} x \to R \text{ is irreflexives}
+            \end{displaymath}
+
+            \item[Neither] \textbf{some} are \textbf{related} to themselves, \textbf{some} are \textbf{not};
+        \end{description}
+
+        \begin{itemize}
+            \item \hl{The negation of \textbf{reflexives} is \textbf{NOT irreflesives}};
+            \begin{itemize}
+                \item The negation of $ R $ is reflexive, if $ x R x $ for all $ x \in A $ is
+                \begin{center}
+                    $ R $ is not reflexive, there is an $ x \in A $, $ x R x $;
+                \end{center}
+            \end{itemize}
+
+            \item \textbf{reflexives} and \textbf{irreflesives} are \textbf{mutually exclusive};
+        \end{itemize}
+
+	\subsubsection{Relations that are Neither Reflexive nor Irreflexive}
+
+	A relation is neither reflexive nor irrefelsvie is a relation where \hl{some elements are related to itself}, and \hl{some elements are 
+	not related to itself}.
+
+        \subsection{Symmetric vs Antisymmetric}\label{sec: symmetric and antisymmetric}
+
+        \begin{description}
+            \item[Symmetric] \hl{order does not matter} in a pair; $ x R y $ is the same as $ y R x $;
+            \begin{displaymath}
+                \forall x, y \in A, x R y \to y R x
+            \end{displaymath}
+            \begin{itemize}
+                \item Given two objects, even though they are not linked by arrows, it is still symmetric, according to the definition
+                of if
+                \item If only one arrow exists between two objects, then it is not symmetric, according to the definition of if;
+            \end{itemize}
+
+            \item[Antisymmetric] two \textbf{distinct} elements are \textbf{not related} in both directions; (first definition
+            is better for understanding, the second is better for writing proofs)
+            \begin{displaymath}
+                \forall x, y \in A, x \neq y \wedge x R y \to y \not \mathrel{R} x
+            \end{displaymath}
+            \begin{displaymath}
+                \forall x, y \in A, x R y \wedge y R x \to x = y
+            \end{displaymath}
+        \end{description}
+
+        \begin{itemize}
+            \item \textbf{Distinct}: not equal; to say \hl{two numbers are \textbf{distinct} means they are not equal}.
+            \item The two words \textbf{Symmetric} and \textbf{Antisymmetric} are used on \textbf{relations}, and \textbf{not values};
+            \item Symmetric and Antisymmetric are \textbf{not mutually exclusive};
+        \end{itemize}
+
+	\subsubsection{Relations that are Neither Symmetric Nor Antisymmetric}
+
+	A relation is neither symmetric nor antisymmetric if it \hl{there is on pair that does not satisfy $ a R b \to b R a $} and \hl{that does
+	not satisfy $ x \neq y \wedge x R y \to y \not \mathrel{R} x $}
+
+        \subsection{Transitive}
+
+        A relation $ R $ on set $ A $ is transitive if
+        \begin{displaymath}
+            \forall a,b,c \in A, \left( a R b \wedge b R c \right) \to a R c
+        \end{displaymath}
+
+        \textbf{Not transitive}
+        \begin{displaymath}
+            \exists a,b,c \in A, \left( a R b \wedge b R c \right) \wedge a \not \mathrel{R} c
+        \end{displaymath}
+
+        \begin{itemize}
+            \item \hl{To disprove transitive statements}, find \textbf{exceptional value} (disproof of universla quantifier
+            is existential quantifier);
+
+            \item In a relation where \hl{no elements are \textbf{related}}, the relation is \textbf{transitive,
+            symmetric, antisymmetric};
+            \item \hl{Vacuous truth does not apply to \textbf{reflexive} and \textbf{irreflesives}};
+            \item Relations where \hl{there is only one or two elements can still \textbf{be transitive}};
+        \end{itemize}
+
+	\section{Properties of a Graph with No Arrows}
+
+	\begin{itemize}
+	    \item \textbf{Transitive}: since no elements are related, it is \hl{not possible to satisfy the \textbf{hypothesis of transitive}},
+	    therefore by the definition of \textbf{transitive}, the relation is transitive;
+
+	    \item \textbf{Symmetric, Antisymmetric}: same reason as above, the hypothesis are never satisfied;
+
+	    \item \textbf{Irreflexive, if there is no self-pointing arrows}: since there are no arrows, a node cannot be related to oneself;
+
+	    \item Vacuous truth does not apply to \textbf{reflexive and irreflexive} as they are \textbf{unconditional} (with no if, then)
+
+	\end{itemize}
+
+
+        \section{Types of Relations}
+
+        \begin{itemize}
+            \item \textbf{Partial Order}: a relation that is \textbf{reflexive, antisymmetric, transitive};
+            \item \textbf{Linear Order / Total Order}: a \textbf{partial order} $ R $ where every pair elements are
+            \textbf{comparable}; For every two elements $ x $ and $ y $, either $ x R y $ or $ y R x$
+            (\hl{or both, as or is inclusive or});
+            \begin{itemize}
+                \item \textbf{Either or} is \textbf{inclusive or};
+            \end{itemize}
+            \item \textbf{Strict Partial Order}: a relation that is irreflesive, antisymmetric, and transitive;
+            \item \textbf{Equivalence Relation}: a relation that is \textbf{reflexive, symmetric, and transitive}. If $ R $ is
+            in an equivalence relation on a set $ A $ and $ x $ is an element of $ A $, we can define the equivalence class of $ x $
+            to be the set of all elementsr elated to $ x $
+            \begin{displaymath}
+               [x]_{R}=  \{ y \in A \mid x R y \}
+            \end{displaymath}
+        \end{itemize}
+
+
+        \section{Graphs}
+
+        \subsection{Transitive Closure}
+        \begin{itemize}
+            \item On a transitive graph, if $ A $ has arrow leading to $ B $, which has arrow leading to $ C $, then
+            \hl{there must be an arrow leading from $ A $ to $ B $}.
+
+            \item In a graph with one element that has one arrow pointing toward itself, it is \textbf{symmetric, antisymmetric,
+            transitive and reflexive};
+            \begin{itemize}
+                \item \textbf{Antisymmetric}: refer to the second definition in section \ref{sec: symmetric and antisymmetric} on page
+                \pageref{sec: symmetric and antisymmetric}, \hl{the graph means $ a R a \to a R a $, which satisfies the first part
+                of the definition of antisymmetric and since $ a =  a $, the relation is antisymmetric};
+            \end{itemize}
+        \end{itemize}
+
+
+    \end{note}
+\end{document}

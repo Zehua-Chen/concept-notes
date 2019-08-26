@@ -1,0 +1,17 @@
+\section{Definitions}
+
+\subsection{BTree}
+
+  Given a btree of order $ m $:
+
+  \begin{itemize}
+    \item All keys are ordered;
+    \item All leaves are on the same level;
+  \end{itemize}
+  
+  \begin{tabu} to \columnwidth{ X[1, l] X[1, l] X[2, l] }
+    Node & Children & Keys \\ \hline 
+    Root & $ \left[ 2, m \right], 0 $ & $ \left[ 1, m - 1 \right] $ \\ \hline 
+    Non-root Internal & $ \left[ \ceil{ \frac{m}{2} }, m \right] $ & $ \left[ \ceil{\frac{m}{2}} - 1, m - 1 \right] $ \\ \hline 
+    Leaf & $ 0 $ & $ \left[ 0, m - 1 \right] $
+  \end{tabu}

@@ -1,0 +1,36 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+
+\subject{CS 173}
+\date{April 16-- 17, 107}
+\id{CS17310704161}
+\title{Proof by Contradiction}
+
+\begin{document}
+\begin{note}{Exam 7}
+
+\section{Overview}
+
+Given a claim $ k $:
+\begin{enumerate}
+    \item Show that $ \neg k $ leads to \textbf{contradiction (a condition that cannot occur)};
+    \item If $ \neg k $ leads to contradiction, $ \neg k $ must be false;
+    \item Therefore $ \neg \left( \neg k \right) \to k $ must be true;
+\end{enumerate}
+
+\end{note}
+\end{document}

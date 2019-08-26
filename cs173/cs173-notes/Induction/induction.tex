@@ -1,0 +1,165 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{tcolorbox}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+\subject{CS 173}
+\date{February 25 -- 27, 107}
+\id{CS17310702191}
+\title{Induction}
+
+\begin{document}
+    \begin{note}{Exam 7}
+
+        \section{Math Review}
+
+        \subsection{Summation}
+
+        If $ a_{i} $ is some formula that depends on $ i $, then the summation of $ a_{1} \to a_{n} $ is
+        \begin{equation}\label{eq: summation}
+            \sum_{i=1}^{n} a_{i} = a_{1} + a_{2} + ... + a_{n}
+        \end{equation}
+
+        the product is
+        \begin{equation}\label{eq: product}
+            \prod_{i = 1}^{n} a_{i} = a_{1} \cdot a_{2} \cdot ... \cdot a_{n}
+        \end{equation}
+
+        \begin{itemize}
+            \item Certain sums can be \textbf{expressed in a closed form}, \hl{where there is no summation sign}
+            \item Summation in CS 173 \hl{only deals with \textbf{finite series}};
+        \end{itemize}
+
+        \subsubsection{Closed Forms}
+
+        \begin{equation}\label{eq: closed form 1}
+            \sum_{i = 1}^{n} \frac{1}{a_{i}} = 1 - \frac{1}{2^{n}}
+        \end{equation}
+
+        \begin{equation}\label{eq: geometric series}
+            \sum_{k = 0}^{n} r^{k} = \frac{r^{n + 1} - 1}{r - 1}
+        \end{equation}
+
+	\subsection{Strings}
+
+	\begin{definition}
+	    \textbf{Strings} in computer science in a character sequence with \textbf{finite length}
+	\end{definition}
+
+    	\begin{itemize}
+	    \item $ \epsilon $ is used to represent the \textbf{string with no characters};
+	\end{itemize}
+
+	\subsubsection{String Concatenation}
+
+	\begin{itemize}
+	    \item To \hl{concatenate two strings, simply put them together};
+		\begin{itemize}
+		    \item $ a = \text{Jackson} $;
+		    \item $ b = \text{is a philosopher} $;
+		    \item $ ab = \text{Jackson is a philosopher} $;
+		\end{itemize}
+	\end{itemize}
+
+	\subsubsection{Bit Strings}
+
+	\begin{definition}
+	    A \textbf{bit string} is a string that contains only characters $ 1 $ and $ 0 $.
+	\end{definition}
+
+	\subsubsection{Sub Sets}
+
+	\begin{definition}
+	    Given a string $ A $, $ A* $ is the string that contains \textbf{characters from $ A $}.
+	\end{definition}
+
+	\begin{itemize}
+	    \item $ A* $ (of $ A $ above) \hl{also contains $ \epsilon $};
+	\end{itemize}
+
+	\subsubsection{Patterns}
+
+	\begin{itemize}
+	    \item We use \textbf{regular expressions} to \hl{describe a pattern of a set of similar strings};
+		\begin{itemize}
+		    \item $ a \mid b $ means either the character $ a $ or the character $ b $;
+		    \item $ a* $ means \textbf{zero or more copies} of the character $ a $;
+		\end{itemize}
+	    \item $ () $ are used to show groupings;
+	    \item \textbf{Examples}:
+		\begin{itemize}
+		    \item $ ab* = \text{a, ab, abb ...} $;
+		    \item $ c \left( b \mid a \right) * c = \text{cc, cac, cbbac ..} $;
+		\end{itemize}
+	\end{itemize}
+
+	\section{Induction}
+
+	\subsection{Induction Proof Format}
+
+	\begin{center}
+		Given a statement $ P(x) $
+	\end{center}
+
+	\begin{tcolorbox}
+
+		\textbf{Proof}: by induction on $ x $
+
+		\textbf{Base}: let $ x = 0 $, prove $ P(0) $
+
+		\textbf{Inductive Hypothesis} Suppose \underline{\textbf{inductive hypothesis}} ($ P(x) $ holds for
+		$ x = 1...(k - 1) $).
+		\begin{itemize}
+			\item Typically used to replace recursive part in \underline{Inductive Proof}
+		\end{itemize}
+
+		\textbf{Inductive Proof}: Show that $ P(x), x = k $.
+
+		\begin{center}
+			Proof of $ P(x), x = k $
+		\end{center}
+	\end{tcolorbox}
+
+	\subsection{Components of Induction Proof}
+
+	\begin{itemize}
+		\item \textbf{Inductive Variable}: an \textbf{integer} variable;
+	\end{itemize}
+
+	\subsection{Styling}
+
+	\begin{itemize}
+	    \item \textbf{Mention} that you are doing induction proof;
+	    \item Label:
+		\begin{itemize}
+		    \item \textbf{Induction Variable};
+		    \item \textbf{Base};
+		    \item \textbf{Inductive Steps};
+		\end{itemize}
+
+	    \item At the beginning of inductive steps, \hl{quote what $ P(k) $ is};
+	\end{itemize}
+
+	\section{Graph Coloring}
+
+	\begin{theorem}
+	    For an integer $ D $, if all nodes in a graph $ G $ have $ degrees \leq D $, then $ \chi G = D + 1 $
+	\end{theorem}
+
+
+    \end{note}
+\end{document}

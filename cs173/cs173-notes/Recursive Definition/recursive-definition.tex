@@ -1,0 +1,131 @@
+\documentclass{note}
+
+\usepackage{float}
+%\usepackage{color, colortbl}
+%\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{color}
+\usepackage{listings}
+
+\definecolor{codebackground}{rgb}{0.9,0.9,0.9}
+\definecolor{codenumber}{rgb}{0.7,0.7,0.7}
+\definecolor{codekeyword}{rgb}{0,0,1}
+\definecolor{codestring}{rgb}{1,0,0}
+\lstdefinestyle{cpp-list}{
+    backgroundcolor=\color{codebackground},
+    numberstyle=\color{codenumber},
+    keywordstyle=\color{codekeyword},
+    stringstyle=\color{codestring},
+    numbers=left,
+    caption=C++ Implementation of Hypercubes Edges,
+}
+\lstset{style=cpp-list}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\subject{CS 173}
+\date{March 6, 107}
+\id{CS17310703051}
+\title{Recursive Definition}
+
+\begin{document}
+\begin{note}{Exam 1}
+
+\section{Recursive Definition}
+
+\begin{itemize}
+    \item Similar to that in programming languages;
+    \item A recursive definition has two parts:
+    \begin{itemize}
+        \item \hl{At least one} \textbf{Base case};
+        \begin{itemize}
+            \item Multiple base cases do no harm and may help with constructing the proof;
+        \end{itemize}
+        \item \textbf{Recursive formula};
+    \end{itemize}
+    \item These two components do not have to be labeled.
+\end{itemize}
+
+\paragraph{Example}
+
+\begin{itemize}
+    \item $ F_{0} = 0 $;
+    \item $ F_{1} = 1 $;
+    \item $ F_{i} = F_{i - 1} + F_{i - 2}, \forall i > 2 $;
+\end{itemize}
+
+    \subsection{Closed Form}
+
+    \begin{itemize}
+        \item A \textbf{closed form} is a \textbf{expression} that \hl{does not involve}:
+        \begin{itemize}
+            \item \textbf{Recursion};
+            \item \textbf{Summation};
+        \end{itemize}
+        \item \hl{Closed form should have a input variable} as recursive definitions have \textbf{base cases};
+    \end{itemize}
+
+    \paragraph{Unrolling}: Keeping writing an expression in terms of itself. For example, given $ T(1) = 1, T(x) = 2 \times T(x - 1) - 1 $.
+    The unrolling result will be:
+    \begin{align*}
+        T(x) &= 2 \times T(x - 1) - 1 \\
+        &= 2 \times \left( 2 \times T(x - 2) - 1 \right) - 1\\
+        &= ...
+    \end{align*}
+
+    \begin{itemize}
+        \item \hl{Variables \textbf{outside of the recursive function calls} needs to be updated in each unroll as well};
+        \begin{align*}
+            T(x) &= T \left( \frac{x}{2} \right) + x  \\
+            &= \left( T \left( \frac{x}{4} \right) + \frac{x}{2} \right) + x
+        \end{align*}
+    \end{itemize}
+
+\section{Solving Problems}
+
+    \subsection{Divide and Conquer}
+
+    \paragraph{Divide and Conquer} the way of solving problems by dividing a big problem of size $ n $, into smaller sub problems,
+    each of size $ \frac{n}{b} $
+
+    \begin{align*}
+        S(1) &= c\\
+        S(n) &= a S\left(\ceil*{ \frac{n}{b}} \right) + f \left(n \right), \forall n \geq 2
+    \end{align*}
+
+    \begin{itemize}
+        \item $ c $: the work needed to solve the base case;
+        \item \hl{$ a $: the amount of sub problems};
+        \item \hl{$ b $: the ratio of the size of a problem to that of its sub problem}.
+        \item $ f \left(n \right) $: the work needed to divide a big problem into smaller problems and, or merging the solutions from smaller
+        problems;
+        \item $ \ceil*{} $ needs to be applied to ensure what feeds into $ S (n) $ is always an integer;
+    \end{itemize}
+
+    \subsection{Hypercubes}
+
+    $ Q_{n} $ is a graph of corners and edges of an $ n $ dimensional cube.
+
+    \begin{align*}
+        Q_{o} &\text{ is a single nodes without edges;}\\
+        Q_{n} &\text{ consists of two } Q_{n - 1} \text{ nodes with edges joining corresponding nodes;}
+    \end{align*}
+
+    \begin{itemize}
+        \item $ Q_{n} $ has $ 2^{n} $ nodes;
+        \item \hl{$ Q_{n} $ has a \textbf{diameter} of $ n $};
+        \item $ Q_{n} $ has the following amount of edges:
+        \begin{align}
+            E(n) &= 2 E(n - 1) + V(n - 1)\\
+            &= 2^{n - 1} \cdot n
+        \end{align}
+    \end{itemize}
+
+        \subsubsection{C++ Code}
+        \texttt{\lstinputlisting[language=C++]{hypercubes-edges.cpp}}
+
+\end{note}
+\end{document}

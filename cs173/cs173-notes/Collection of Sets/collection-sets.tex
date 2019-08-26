@@ -1,0 +1,178 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+
+\subject{CS 173}
+\date{April 9 -- 10, 107}
+\id{CS17310704091}
+\title{Collection of Sets}
+
+\begin{document}
+\begin{note}{Exam 11}
+
+\section{Math Review}
+
+\begin{itemize}
+    \item Refer to the following notes:
+    \begin{itemize}
+        \item Logic;
+    \end{itemize}
+\end{itemize}
+
+\section{Collection}
+
+\begin{displaymath}
+    \{ \{A, B, C \}, \{ A_{1}, B_{1}, C_{1} \} \}
+\end{displaymath}
+
+\begin{itemize}
+    \item A collection is a just a set of sets;
+    \item A set like the following have cardinality of three:
+    \begin{displaymath}
+        \{ \{ 1, 2, 3 \}, \{ 4 \}, \{ 5 \} \}
+    \end{displaymath}
+    \item When a function is \textbf{domain of a function}, the functions \hl{maps an entire \textbf{subset}} to an output value;
+\end{itemize}
+
+    \subsection{Edge Cases}
+
+    \begin{itemize}
+        \item \hl{An empty set $ \varnothing $, can be put into a collection};
+        \begin{itemize}
+            \item For example, the following collection contains two elements:
+            \begin{displaymath}
+                \{ \{ 1, 2 \}, \varnothing \}
+            \end{displaymath}
+        \end{itemize}
+
+        \item An empty set is a \hl{subset of any set};
+
+    \end{itemize}
+
+\section{Power Sets}
+
+\begin{itemize}
+    \item Given a set $ A $, the power set of $ A $, $ \mathbb{P}(A) $ is the collection containing all \textbf{subsets of $ A $}; in another word,
+    a power set of $ A $ is a collection that contains sets of all the combinations of $ A $;
+    \begin{itemize}
+        \item A set $ M $ must be a member of $ \mathbb{P}(A) $;
+    \end{itemize}
+
+    \item Since the choice of each set in the collection is independent of choices of other elements, \hl{there are $ 2^{n} $ way 
+    of forming a subsets}. Thus, $ P (A) $ contains $ 2^{n} $ elements;
+    
+    \begin{align*}
+        \left| A \right| &= n \\
+        \left| \mathbb{P} (A)  \right| &= 2^{n}
+    \end{align*}
+
+    \item \textbf{Example}
+    \begin{align*}
+        A &= \{ 1, 2, 3\} \\
+        P (A) &= \{ \varnothing, \{ 1 \}, \{ 2 \}, \{ 3 \}, \{ 1, 2 \}, \{ 1, 3 \}, \{ 2, 3 \}, \{ 1, 2, 3 \} \}
+    \end{align*}
+
+    \item \hl{An super set of \textbf{any set} always contains an empty set $ \varnothing $};
+    \item Power sets often appear as the \textbf{codomain of a function that needs to return a set of values};
+\end{itemize}
+
+    \subsection{Edge Cases}
+
+    \begin{itemize}
+        \item $ \mathbb{P} \left( \varnothing \right) = \{ \varnothing \} $
+    \end{itemize}
+
+\section{Partition}
+
+\begin{itemize}
+    \item A \textbf{partition of $ A $} is a \textbf{non-overlapping} subsets of every element of $ A $;
+    \item If the partitions of a collection $ A $ is $ B $:
+    \begin{enumerate}
+        \item The subsets cover all of $ A $:
+        \begin{displaymath}
+            \cup_{x \forall B} X = A
+        \end{displaymath}
+        
+        \item None empty:
+        \begin{displaymath}
+            B \neq \forall X \in B
+        \end{displaymath}
+        
+        \item No overlap:
+        \begin{displaymath}
+            X \cap Y = \varnothing, \forall X, Y \in B, X \neq Y
+        \end{displaymath}
+    \end{enumerate}
+
+    \item \textbf{Examples}:
+    \begin{itemize}
+        \item If $ A $ is partition of $ \mathbb{Z} $, \hl{then $ \varnothing $ is never a member of $ A $};
+        \item If $ P $ is a partition on 26 lowercase letters, then an element of $ P $ is a \textbf{set of lower case letters};
+    \end{itemize}
+
+    \item \hl{Not all collections have partitions};
+
+    \item The three defining conditions of \textbf{equivalence classes}:
+    \begin{enumerate}
+        \item Reflexive;
+        \item Symmetric;
+        \item Transitive;
+    \end{enumerate}
+    are chosen to force the equivalence clasess to be a partition; Equivalence classes without one of these partitions might be 
+    \begin{itemize}
+        \item Empty;
+        \item Have partial overlaps;
+    \end{itemize}
+\end{itemize}
+
+\section{Combinations}
+
+\begin{itemize}
+    \item \textbf{K-combinations}: having \textbf{$ n $ elements}, counting all subsets of size $ k $;
+    \begin{itemize}
+        \item In combinations, \hl{orders does not matter};
+    \end{itemize}
+    \begin{equation}
+        \frac{n !}{ k! \left( n - k \right) ! } = C \left(n, k \right) = \binom{n}{k}, n \geq k \geq 0
+    \end{equation}
+\end{itemize}
+
+    \subsection{Edge Cases}
+    
+    \begin{itemize}
+        \item $ \binom{0}{0} = \dfrac{0 !}{0 ! \left( 0 - 0 \right) !} = 1 $
+    \end{itemize}
+    
+    \subsection{Binomial Identities}
+    
+    \begin{equation}
+        \binom{n}{k} = \binom{n}{n - k}
+    \end{equation}
+    
+    \paragraph{Pascal's Identity}
+    
+    \begin{equation}
+        \binom{n + 1}{k} = \binom{n}{k} + \binom{n}{k - 1}
+    \end{equation}
+    
+    \subsection{Binomial Theorem}
+    
+    \begin{equation}
+        \left( x + y \right)^{n} = \sum_{k = 0}^{n} \binom{n}{k} x^{n - k} y^{k}
+    \end{equation}
+
+\end{note}
+\end{document}

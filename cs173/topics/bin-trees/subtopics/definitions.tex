@@ -1,0 +1,101 @@
+\section{Definitions}
+
+\subsection{Type of Trees}
+
+  \subsubsection{Binary Trees}
+
+    \begin{equation}
+      T = 
+      \begin{cases}
+        \{ r, T_{l}, T_{r} \} \\ 
+        \{ \} = \varnothing
+      \end{cases}
+    \end{equation}
+
+  \subsubsection{Full Trees}
+
+    \begin{equation}
+      F = 
+      \begin{cases}
+        \{ r, T_{l}, T_{r} \} \\ 
+        \{ \} = \varnothing
+      \end{cases}
+    \end{equation}
+    
+    \begin{itemize}
+      \item $ T_{l}, T_{r} $ both have either \highlight{0 or 2 children};
+    \end{itemize}
+
+  \subsubsection{Perfect Trees}
+
+    \begin{equation}
+      \begin{cases}
+        P_{-1} = \{ \} \\ 
+        P_{h} = \{ r, P_{h - 1}, P_{h - 1} \}
+      \end{cases}
+    \end{equation}
+    
+    \begin{itemize}
+      \item A perfect tree is defined in terms of its height;
+      \item The \highlight{children of each node has the same height};
+    \end{itemize}
+
+  \subsubsection{Complete Trees}
+
+    \begin{equation}
+      \begin{cases}
+        C_{-1} = \{ \} \\ 
+        C_{h} = 
+        \begin{cases}
+          \{r, C_{h - 1}, P_{h - 2} \} \\ 
+          \{r, P_{h - 1}, C_{h - 1} \} \\ 
+        \end{cases}
+      \end{cases}
+    \end{equation}
+    
+    \begin{definition}
+      \textbf{Complete tree}: a \highlight{perfect tree for every level 
+      except the last level}, where \highlight{the level is pushed to the left};
+    \end{definition}
+  
+\subsection{BST Tree Variants}
+
+  \subsubsection{Height Balance}
+
+    \begin{equation}
+      b = \height \left( T_{r} \right) - \height \left( T_{l} \right)
+    \end{equation}
+    
+    \begin{equation}
+      b = 
+      \begin{cases}
+        < 0, \text{heavy on the left side} \\ 
+        > 0, \text{heavy on the right side}
+      \end{cases}
+    \end{equation}
+    
+    \begin{definition}
+      To say a tree is balanced is to say 
+      \begin{equation}
+        \left| b \right| \leq 1
+      \end{equation}
+    \end{definition}
+    
+  \subsubsection{AVL Tree}
+
+    \begin{definition}
+      An AVL Tree is similar to a BST Tree, except that the 
+      \highlight{insert or remove} code balance the tree along path of 
+      insertion or removal so that the $ \left| b \right| $ of each node 
+      is $ < 1 $. 
+    \end{definition}
+    
+  \subsubsection{KD Trees}
+
+    \begin{definition}
+      A KD Tree is very similar to a AVL tree, except that 
+      \highlight{each level represents a \textbf{dimension}}. When nodes 
+      are inserted, or searched, the code 
+      \highlight{decides to go left or right based on comparison 
+      on the datas at a specific dimension, of \enquote{this} node and the query or insertion}.
+    \end{definition}

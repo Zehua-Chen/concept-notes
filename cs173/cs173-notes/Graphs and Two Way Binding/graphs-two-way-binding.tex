@@ -1,0 +1,287 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+
+\subject{CS 173}
+\date{February 19 -- 20, 107}
+\id{CS17310702191}
+\title{Graphs and Two Way Binding}
+
+\begin{document}
+    \begin{note}{Exam 6}
+
+        \section{Graphs}
+
+        \begin{definition}
+            \textbf{Graphs}: a graph consists of \textbf{two sets} $ V $ and $ E $. Each node in $ E $ joins two nodes in
+            $ V $. Graphs are also revered to \textbf{a pair of sets ($ V $, $ E $)}
+        \end{definition}
+        \begin{itemize}
+            \item \textbf{Neighbors / Adjacents}: \hl{two nodes connected} by an edge;
+            \item \textbf{Undirected Graphs}: graphs where edges \underline{can be traveresed / \textbf{undirected}};
+            \item \textbf{Directed Graphs}: graphs where edges \underline{cannot be traveresed / \textbf{directed}};
+            \item Nodes \hl{can be connected by \textbf{multiple edges}};
+            \item \textbf{Simple Graphs}: simple graphs are graphs that \hl{do not have \textbf{multiple edges} or \textbf{loop edges}};
+        \end{itemize}
+
+        \subsection{Assumptions}
+
+        Unless otherwise specified, the followings are true:
+        \begin{itemize}
+            \item Graphs are assumed to be \textbf{undirected};
+            \item Graphs are assumed to be \textbf{simple};
+            \item Graphs are assumed to \textbf{have one node} and \textbf{has finite number of nodes and edges};
+            \item Graphs are assumed to not have two nodes that \hl{that has multiple edges connect each other};
+        \end{itemize}
+
+        \subsection{Edges}
+
+        \begin{itemize}
+            \item \textbf{Multiple Edges}: edges with the same end point;
+            \item \textbf{Loop Edges}: edges that connect a node to itself;
+        \end{itemize}
+
+        \section{Degrees}
+
+        \begin{definition}
+            \textbf{Degrees}: a degree of a node $ v $ written as $ deg\left( v \right) $ is the \textbf{number of edges} that
+            has $ v $ as an endpoint;
+        \end{definition}
+
+        \subsection{Handshaking Theorem}
+
+        Given a graph with a set $ V $ as \textbf{nodes}, and a set $ E $ as \textbf{edges};
+
+        \begin{equation}\label{eq: handshaking theorem 1}
+            \sum_{v \in V} deg(v) = 2 \left| E \right|
+        \end{equation}
+
+        or written as
+
+        \begin{equation}\label{eq: handshaking theorem 2}
+            \sum_{k = 1}^{n} v_{k} \in V deg(v) = 2 \left| E \right|
+        \end{equation}
+
+        \begin{itemize}
+            \item Each \hl{\textbf{edge} contributes to \textbf{two degrees}};
+        \end{itemize}
+
+        \subsection{Special Cases}
+
+        \begin{itemize}
+            \item \hl{Node with self loops has a degree of two};
+        \end{itemize}
+
+        \section{Special Graphs}
+
+        \subsection{Complete Graph}
+
+        \begin{definition}
+            A \textbf{complete graph} is a graph with $ n $ nodes ($ K_{n} $) and \hl{each of the nodes are connected to every other node}.
+        \end{definition}
+
+        \paragraph{Number of Edges in Complete Graph} Given a agraph with $ n $ nodes, ($ K_{n} $), there are $ x $ number of edges:
+        \begin{equation}
+            x = \sum_{k = 1}^{n} \left( n - k \right) = \sum_{k = 0}^{n - 1} \left( k \right) = \frac{n \left(n - 1 \right)}{2}
+        \end{equation}
+
+        \subsection{Cyclye Graph $ C $}
+
+        \begin{definition}
+            A \textbf{cycle graph} is a graph with $ n $ nodes ($ C_{n} $) where the nodes are \hl{connected as} $ v_{i} \to v_{i + 1} $
+            with an additional edge $ v_{n} \to v_{1} $
+            \begin{equation}\label{eq: cycle graphs}
+                E = \{ v_{1}v_{2}, v_{2}v_{3}, ... , v_{n-1}v_{n}, v_{n}v_{1} \}
+            \end{equation}
+        \end{definition}
+
+        \begin{itemize}
+            \item The cycle graph $ C_{n} $ has
+            \begin{itemize}
+                \item $ n $ nodes;
+                \item $ n $ edges;
+            \end{itemize}
+        \end{itemize}
+
+        \subsection{Wheel Graph $ W $}
+
+        \begin{definition}
+            A \textbf{wheel graph} graph with $ n $ nodes ($ W_{n} $) is a central graph $ C_{n} $ \hl{with an additional
+            \textbf{central hub} node that \textbf{connects to every other node.}}
+        \end{definition}
+
+        \begin{itemize}
+            \item The cycle graph $ W_{n} $ has
+            \begin{itemize}
+                \item $ n + 1 $ nodes;
+                \item $ 2n $ edges;
+            \end{itemize}
+        \end{itemize}
+
+        \subsection{Bipartite Graph $ K_{m,n} $}
+
+        \begin{definition}
+            A graph $ G = \left(V, E\right) $ is bipartite if every edge in $ G $ connects and element from $ V_{1} $ and
+            an element from $ V_{2} $ when $ V $ is split into $ V_{1},V_{2} $
+        \end{definition}
+
+        \begin{itemize}
+            \item A bipartite graph can be colored with only two colors;
+            \item \hl{$ K_{m,n} $ is a complete bipartite graph with $ m $ in $ V_{1} $ and $ n $ in $ V_{2} $};
+        \end{itemize}
+
+
+        \section{Isomorphism}
+
+        \begin{definition}
+            A Isomorphism from $ G_{1} $ to $ G_{2} $ means bijection $ f : V_1 \to V_2 $such that nodes $ a $ and $ b $ are joined
+            by an edge if and only if  $ f(a) $ and $ f(b) $ are joined by an edge.
+        \end{definition}
+
+        \subsection{Properties that Only Isomorphism Has}
+
+        \begin{enumerate}
+            \item Same number of \textbf{nodes and edges};
+            \item For any degree $ k $, both graphs has two have \hl{the same number of nodes with degree $ k $};
+        \end{enumerate}
+
+        \section{Subgraph}
+
+        \begin{definition}
+            Given two graphs $ G $ and $ G' $, $ G' $ is a subgraph of $ G $ if and only if \textbf{nodes} in $ G' $ is a
+            \textbf{subsect of nodes in} $ G $ and \textbf{edges} in $ G' $ is a \textbf{subset of edges in} $ G $.
+        \end{definition}
+
+        \begin{itemize}
+            \item If two graphs are \textbf{isomorphic}, then \hl{the subgraph of one graph \textbf{has a matching}
+            subgraph in another};
+        \end{itemize}
+
+        \section{Walk, Paths, Cycles}
+
+        \begin{description}
+            \item[Closed Walks] walks where the \hl{starting node and the ending node are the same};
+            \item[Open Walks] walks where the \hl{starting node and the ending node are different};
+            \item[Path] a path is a \textbf{walk} with no duplicate nodes;
+            \item[Cycle] a cycle is a \textbf{closed walk} with \hl{at least three nodes} and \hl{with no duplicate nodes \textbf{except the
+            starting and ending node}}.
+            \item[Acylic] a graph with no cycles;
+        \end{description}
+
+        \begin{itemize}
+            \item A cycle graph $ C_{n} $ has \hl{$ 2n $ different cycles};
+            \item Given a description of a \lq\lq walk\rq\rq, if there is \hl{no edge connecting two nodes, then it is \textbf{not a walk}};
+            \item \hl{There is \textbf{no} such thing as a \textbf{closed path}};
+        \end{itemize}
+
+        \section{Connectivity}
+
+        \begin{definition}
+            A graph is connected if \hl{there is a \textbf{walk} between \textbf{every pair of nodes}};
+        \end{definition}
+
+        \begin{itemize}
+            \item \hl{A graph with one node is still \textbf{connected}};
+        \end{itemize}
+
+        \subsection{Cut Edge}
+
+        \begin{definition}
+            A cut edge is an edge that if \textbf{broken}, a graph will \textbf{no longer be conected};
+        \end{definition}
+
+        \subsection{Connected Components}
+
+        \begin{definition}
+            Graphs can be divided into \textbf{Connected Components}, if the graph \textbf{might or might not be connected},
+            each of which contains the maximum amount of nodes that are \textbf{connected} to each other;
+        \end{definition}
+
+        \section{Distance and Diameter}
+
+        \begin{definition}
+            \textbf{Distance} is the shortest \textbf{path} connected a \textbf{pair of nodes};
+        \end{definition}
+
+        \begin{definition}
+            \textbf{Diameter} is the longest \textbf{distance which is hte shorted path} between two points connected a \textbf{pair of nodes};
+        \end{definition}
+
+        \section{Eular Circuit}
+
+        \begin{definition}
+            A eular circuit of a graph $ G $ is a \textbf{closed walk that used each one of the edges exactly once};
+        \end{definition}
+
+        \paragraph{Possible when}
+        \begin{itemize}
+            \item The graph is \textbf{connected};
+            \item Each node has a \textbf{even degree};
+        \end{itemize}
+
+        \section{Two Way Bonding}
+
+        \begin{itemize}
+            \item Sometimes it may be useful to approach a problem from two directions;
+            \begin{itemize}
+                \item Ex. To prove there is $ 5 $ ways of doing something, prove
+                \begin{enumerate}
+                    \item There are $ 5 $ ways of doing something;
+                    \item It is not possible to do it in $ 6 $ ways.
+                \end{enumerate}
+
+                \item Ex. to prove set equality $ A = B $, prove:
+                \begin{enumerate}
+                    \item $ A \subseteq B $
+                    \item $ B \subseteq A $
+                \end{enumerate}
+            \end{itemize}
+        \end{itemize}
+
+        \section{Graph Coloring}
+
+        \begin{itemize}
+            \item Graph coloring needs to be done in such a way that \hl{no \textbf{adjacent elements}} have the same color;
+        \end{itemize}
+
+        \subsection{Chromatic Number}
+
+        \begin{definition}
+            A chromatic number is the smallest types of colors need to color a graph $ G $.
+            \begin{displaymath}
+                \chi \left(G\right)
+            \end{displaymath}
+        \end{definition}
+
+        \begin{longtabu} to \textwidth{| X[l, 1] | X[l, 3] | X[l, 2] |}
+            \caption{Chromatic Number of Speical Graphs}\\
+            \hline
+            \textbf{Types of Graph} & \textbf{Odd, Even} & \textbf{Chromatic Number}\\
+            \hline \hline
+            Wheel $ W_{n} $ & $ n = \text{Even} $, meaning odd number of elements & 3 \\
+            \hline
+            Wheel $ W_{n} $ & $ n = \text{Odd} $, meaning even number of elements & 4 \\
+            \hline \hline
+            Cycle $ C_{n} $ & $ n = \text{Even} $, meaning even number of elements & 2 \\
+            \hline
+            Cycle $ C_{n} $ & $ n = \text{Odd} $, meaning odd number of elements & 3 \\
+            \hline \hline
+            Complete $ K_{n} $ & \textbf{Not Applicable} & $ n $ \\
+            \hline
+        \end{longtabu}
+
+    \end{note}
+\end{document}

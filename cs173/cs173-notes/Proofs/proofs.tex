@@ -1,0 +1,178 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\subject{CS 173}
+\date{January 22 -- 23, 107}
+\id{CS17310701221}
+\title{Proof}
+
+\begin{document}
+    \begin{note}{Exam 1}
+
+        \section{Proofs}
+
+        \begin{itemize}
+            \item The reader and author of the proof should \hl{agree on what's \textbf{familiar and obvious} 
+            and what's \textbf{unfamiliar}}, 
+        \end{itemize}
+
+        \subsection{Universal Proofs}
+
+        \textbf{Example Claim}, Let $ k $ be any integer and suppose that $ k $ is odd. 
+        We need to show that $ k^{2} $ is odd
+
+        \begin{itemize}
+            
+            \item \textbf{Direct Proof Outline}:
+
+            \begin{enumerate}
+                \item Start with known information:
+                \begin{itemize}
+                    \item \hl{\textbf{Variable delcaration} or \textbf{hypothesis} of if-then statement};
+                    \item \textbf{Ex.} \lq\lq $ k $ is an integer and it is odd\rq\rq;
+                \end{itemize} 
+
+                \item Move toward information needing to be proved:
+                \begin{itemize}
+                    \item \hl{\textbf{Conclusion} of if-then statement};
+                    \item \textbf{Ex.} \lq\lq $ k^{2} $ is odd\rq\rq;
+                \end{itemize}
+
+                \item \hl{At the end of the proof, put}:
+                \begin{itemize}
+                    \item Box;
+                    \item Dots of tirangle ($ \therefore $);
+                    \item \lq\lq Q.E.D\rq\rq or \lq\lq what we needed to know\rq\rq;
+                \end{itemize}
+            \end{enumerate}
+
+            \item \hl{The final version of the proof should always be of the above order};
+
+            \item Everytime a \hl{definition is expanded}, \hl{a fresh variable should be used};
+            \begin{itemize}
+                \item The definition $ m $ is a perfect square can be \hl{extended into $ m = j^{2} $}
+            \end{itemize}
+        \end{itemize}
+
+        \subsection{Existential Proofs}
+
+        \paragraph{Claim}
+        \textbf{Ex.} There is an integer $ k $ such that $ k^{2} = 0 $.
+
+        \paragraph{Proof}
+        Zero is an integer, so that claim is true.
+
+        \begin{itemize}
+            \item Instantiate a value of the specified type;
+            \item The value \textbf{must satisfy the statement};
+        \end{itemize}
+
+        \section{Disproving}
+
+        \begin{itemize}
+            \item The disproof of a \textbf{universla statement} is a \textbf{existantial statement};
+            \item The disproof of an \textbf{existantial statement} is \textbf{universal statement};
+        \end{itemize}
+
+        \subsection{Unviersal Statements}
+
+        \paragraph{Claim} Every rational number $ q $ has a multiplicative inverse.
+        \paragraph{Disproof} This claim isn’t true, because we know from high school algebra that zero has no inverse.
+        \begin{itemize}
+            \item To diapprove a universal claim, prove an \textbf{existantial claim} of an exception value;
+        \end{itemize}
+
+        \subsection{Existantial Statements}
+
+        \paragraph{Claim}For every integer $ k $, $ k2 +2k+1≥0 $.
+        \paragraph{Disproof} Let $ k $ be an integer. Then $ (k + 1)2 \geq 0 $ 
+        because the square of any real number is non-negative. But $ (k+1)^{2} = k2 +2k+1 $. 
+        So, by combining these two equations, we find that $ k2 + 2k + 1 \geq 0 $.
+
+        \section{Proof by Cases}
+
+        \begin{itemize}
+            \item Sometimes the claim may have two cases;
+            \item When there are two cases, use \textbf{proof by cases};
+            \begin{itemize}
+                \item It is ok to have more than two cases;
+                \item It is ok for casese to overlap ($ x \geq 0 $ and $ x \leq 0 $);
+                \item It is ok for cases to have variables with same names, \hl{because only
+                one case is active at a time};
+            \end{itemize}
+        \end{itemize}
+
+        \subsection{Example}
+
+        \paragraph{Prove:} for every $ x, x \in \mathbb{Z} $, $ x^{2} + 2 $ is not divisible by 4
+
+        \paragraph{Proof:} By definition of division algorithm, let $ x $ be $ x = 4q + r $, where... 
+        Since $ 0 \leq r < b $, there are four cases
+        \begin{enumerate}
+            \item $ x = 4q $, plugin $ x $ into $ x^{2} + 2 $...
+            \item $ x = 4q + 1 $, plugin $ x $ into $ x^{2} + 2 $...
+            \item $ x = 4q + 2 $, plugin $ x $ into $ x^{2} + 2 $...
+            \item $ x = 4q + 3 $, plugin $ x $ into $ x^{2} + 2 $...
+        \end{enumerate}
+
+        \section{Rephrasing Claims}
+
+        \paragraph{Claim} There is no integer $ k $ such that k is odd and $ k^{2} $ is even.
+        \begin{itemize}
+            \item Using \textbf{logical equivalence}, such statements can be converted to statements
+            that can be prooved using techniques discussed;
+        \end{itemize}
+
+        \textbf{Example}, rephrasing the above claim
+
+        \begin{enumerate}
+            \item For every integer $ k $, it is not the case that $ k $ is odd and $ k^{2} $ is even;
+            \item For every integer $ k $, $ k $ is not odd or $ k^{2} $ is not even;
+            \item For every integer $ k $, $ k $ is not odd or $ k^{2} $ is odd.
+            \item For every integer $ k $, if $ k $ is odd then $ k^{2} $ is odd.
+        \end{enumerate}
+
+        \subsection{Proof by Contrapositive}
+
+        \begin{itemize}
+            \item Since the \hl{contrapositive of a statemnt is equivalent to itself}, contrapositive
+            can be used to rephrase proofs;
+            \item \hl{When negating statement, do not forget \textbf{De Morgan's Law!}};
+        \end{itemize}
+
+        \textbf{Example}, given the claim: For any integer $ a $ and $ b $, if  $ a+b \geq 15 $, then $ a \geq 8 $ or $ b \geq 8 $.
+        \begin{enumerate}
+            \item For any integers $ a $ and $ b $, if it’s not the case that  $ a \geq 8 $ or $ b \geq 8 $, 
+            then it’s not the case that $ a + b \geq 15 $.
+            \item For any integers $ a $ and $ b $, if $ a < 8 $ and $ b < 8 $, then $ a + b < 15 $.
+        \end{enumerate}
+
+        \section{Writing Proofs}
+
+        \subsection{Variables}
+
+        \begin{itemize}
+            \item To \hl{declare a variable}, use 
+            \begin{center}
+                \texttt{Let \underline{identifier} be \underline{value}.}
+            \end{center}
+
+            \item To \hl{describe a variable}, use 
+            \begin{center}
+                \texttt{Suppose \underline{identifier} is \underline{description}}(Ex. bigger than 0)
+            \end{center}
+        \end{itemize}
+        
+    \end{note}
+\end{document}

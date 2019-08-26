@@ -1,0 +1,146 @@
+\section{Operations}
+
+\subsection{BST}
+
+  \subsubsection{Remove}
+  
+    \begin{enumerate}
+      \item \highlight{Find} the child to remove;
+      \item Conditions:
+      \begin{itemize}
+        \item \textbf{No child remove};
+        \item \textbf{One child remove};
+        \item \textbf{Two child remove};
+      \end{itemize}
+    \end{enumerate}
+    
+    \paragraph{No Child Remove}
+    \begin{enumerate}
+      \item Delete the found node;
+    \end{enumerate}
+    
+    \paragraph{One Child Remove}
+    \begin{itemize}
+      \item Make the left or right child the 
+      current node, and delete this node;
+    \end{itemize}
+    
+    \paragraph{Two Child Remove}
+    \begin{enumerate}
+      \item Find the \textbf{in order predecessor}, which is the largest
+      value on the left substance; \highlight{go to left, and then 
+      keep going right until there is no more right child};
+      \item \highlight{Swap} the found \textbf{node} 
+      with \textbf{in order predecessor};
+      \item \highlight{Remove \textbf{in order predecessor}}, which is now the 
+      target node after swapping.
+    \end{enumerate}
+    
+\subsection{AVL}
+
+  \begin{align*}
+    t_{c} &= \text{current node} \\ 
+    t_{l} &= \text{left child node} \\ 
+    t_{r} &= \text{right child node}
+  \end{align*}
+
+  \subsubsection{Simple Rotation}
+  
+    \paragraph{Characteristics}
+    \begin{itemize}
+      \item \highlight{Balance} of \highlight{this node} and \highlight{
+      right child} must have \highlight{the same sign};
+      \begin{itemize}
+        \item $ < 0 $, heavy on the left, rotate right;
+        \item $ > 0 $, heavy on the right, rotate left;
+      \end{itemize}
+    \end{itemize}
+    
+    \paragraph{Pre-condition}
+  
+    \begin{equation}
+      \text{Left}
+      \begin{cases}
+        \balance \left( t_{c} \right) = 2 \\ 
+        \balance \left( t_{r} \right) = 1 
+      \end{cases}
+    \end{equation}
+    
+    \begin{equation}
+      \text{Right}
+      \begin{cases}
+        \balance \left( t_{c} \right) = -2 \\ 
+        \balance \left( t_{l} \right) = -1 
+      \end{cases}
+    \end{equation}
+    
+    \paragraph{Implementaiton}
+    
+    \subparagraph{Left}
+    \begin{enumerate}
+      \item Assign right child's left to current node's right;
+      \item Assign current node to right child's left;
+      \item Swap left child with current node;
+    \end{enumerate}
+    
+    \subparagraph{Right}
+    \begin{enumerate}
+      \item Assign left child's right to current node's left;
+      \item Assign current node to left child's right;
+      \item Swap right child with current node;
+    \end{enumerate}
+  
+  \subsubsection{Complex Rotation}
+  
+    \paragraph{Characteristics}
+    \begin{itemize}
+      \item \highlight{Balance} of \highlight{this node} and \highlight{
+      right child} must have \highlight{different signs};
+    \end{itemize}
+  
+    \paragraph{Pre-condition}
+  
+    \begin{equation}
+      \text{Right Left}
+      \begin{cases}
+        \balance \left( t_{c} \right) = 2 \\ 
+        \balance \left( t_{r} \right) = -1 
+      \end{cases}
+    \end{equation}
+    
+    \begin{equation}
+      \text{Left Right}
+      \begin{cases}
+        \balance \left( t_{c} \right) = -2 \\ 
+        \balance \left( t_{l} \right) = 1 
+      \end{cases}
+    \end{equation}
+    
+    \paragraph{Implementation}
+    
+    \subparagraph{Right Left}
+    \begin{enumerate}
+      \item Rotate $ t_{r} $ to the right;
+      \begin{itemize}
+        \item Pass $ t_{r} $ to rotate right function;
+      \end{itemize}
+      
+      \item Rotate $ t_{c} $ to the left;
+      \begin{itemize}
+        \item Pass $ t_{c} $ to rotate left function;
+      \end{itemize}
+    \end{enumerate}
+    
+    \subparagraph{Left Right}
+    \begin{enumerate}
+      \item Rotate $ t_{l} $ to the left;
+      \begin{itemize}
+        \item Pass $ t_{l} $ to rotate left function; 
+      \end{itemize}
+      
+      \item Rotate $ t_{c} $ to teh right;
+      \begin{itemize}
+        \item Pass $ t_{c} $ to rotate right function; 
+      \end{itemize}
+      
+    \end{enumerate}

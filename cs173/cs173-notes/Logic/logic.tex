@@ -1,0 +1,490 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\subject{CS 173}
+\date{January 16 -- 18, 107}
+\id{CS17310701161}
+\title{Logic}
+
+\begin{document}
+    \begin{note}{Exam 1}
+
+        \section{Types of Logic}
+
+        \begin{itemize}
+            \item Proportinal Logic;
+            \item Predicate Logic;
+        \end{itemize}
+
+        \section{Proportional Logic}
+
+        \begin{itemize}
+            \item Proportional logic: \hl{\textbf{true} or \textbf{false}}
+            \item Proportional logic does not take variables;
+            \item Examples:
+            \begin{itemize}
+                \item Jacksons likes philosophy;
+                \item $ P = N \cdot P $
+                \item \textbf{Not a proportional logic}: Run away! (Command)
+                \item \textbf{Not a proportional logic}: Is it raining outside? (Question)
+            \end{itemize}
+        \end{itemize}
+
+        \subsection{Sets}
+
+        \begin{itemize}
+            \item $ \mathbb{Z} $: $ \{ -3, -2, -1, 0, 1, 2, 3 \} $ \textbf{integers};
+            \item $ \mathbb{Z}^{+} $: $ \{1, 2, 3 \} $ \textbf{positive integers};
+            \item $ \mathbb{N} $: $ \{0, 1, 2, 3 \} $ \textbf{non-negative integers};
+            \item $ \mathbb{R} $: \textbf{real numbers} (all \textbf{rational numbers, include irrational numbers
+            $ \sqrt{12} $});
+            \item $ \mathbb{Q} $: \textbf{rational numbers} ($ \dfrac{a}{b}, b \ne 0 $);
+            \item $ \mathbb{C} $: \textbf{complex numbers} ($ \sqrt{-1} $)
+            \item \hl{Natural numbers in CS 173 include 0};
+        \end{itemize}
+
+        \subsection{Variable Types}
+        An variable $ x $ is of type $ T $
+        \begin{equation}\label{eq: var type}
+            x \in T
+        \end{equation}
+
+        \subsection{Intervals}
+        \begin{itemize}
+            \item \textbf{Closed interval}: $ \left[a, b\right] $, \hl{include a, b};
+            \item \textbf{Open interval}: $ \left(a, b\right) $, \hl{does not include a, b};
+            \item \textbf{half open}: $ \left(a, b\right] $
+        \end{itemize}
+
+        \subsection{Pairs of Reals}\label{sec: pairs}
+
+        \begin{itemize}
+            \item A pair of type $ R $: $ \mathbb{R}^{2}, (\mathbb{R}, \mathbb{R}) $;
+            \item A triple of type $ R $: $ \mathbb{R}^{3}, (\mathbb{R}, \mathbb{R}, \mathbb{R}) $;
+        \end{itemize}
+
+        \subsubsection{Purposes with Pairs}
+        \begin{itemize}
+            \item Given a set, \textbf{different purposes} intended for the sets \hl{affect the type of operations
+            that can be done to a type};
+            \item If a pair is an interval, then it is safe to say $ z \in \left(a, b\right) $
+            \item IF a pair is a point on the graph, then addition with another point will be 
+            $ \left(a + c, b + d\right) $;
+        \end{itemize}
+
+        \subsubsection{ Notation for 2D Points}
+        x, y are points on the graph:
+        \begin{displaymath}
+            \exists (x, y) \in \mathbb{R}^{2}, x^{2} + y^{2} = 1
+        \end{displaymath}
+        For pairs, refer to \ref{sec: pairs} on page \pageref{sec: pairs}
+
+        \subsection{Operators}
+
+        \begin{itemize}
+            \item Not ($ \neg $, LaTeX: neg): \hl{flip true to false}, and \hl{false to true}
+            \item And ($ \wedge $, LaTeX: wedge);
+            \item But, Or ($ \vee $, LaTeX: vee);
+            \begin{itemize}
+                \item Or in this course refers to \hl{inclusive \textbf{or}};
+                \item \textbf{Inclusive Or}: \hl{either $ p $, or $ q $ or both} have to be true for the operator to be \textbf{true};
+                \item \textbf{Exclusive Or}($ \oplus $): \hl{either $ p $, or $ q $ or \textbf{but not both}} have to be true for the operator to be \textbf{true};
+            \end{itemize}
+            \item Imply ($ p \to  q $, LaTeX: to);
+            \begin{itemize}
+                \item $ p $ is the \textbf{hypothesis};
+                \item $ q $ is the \textbf{conclusion};
+                \item \hl{Implication in CS is \textbf{timeless}}, $ q $ can happen after $ p $;
+            \end{itemize}
+        \end{itemize}
+
+        \subsubsection{Truth Tables}
+
+        \begin{itemize}
+            \item There are only a limited amount of possbilities for the operands of the operators;
+            \item The number of rows in the table is quadratic ($ 2^{operands} $) of the number of operands;
+        \end{itemize}
+
+        \begin{longtabu} to \textwidth{ | X[l, 1] | X[l, 1] | X[l, 2] | }
+            \caption{Inclusive But, Or Operator}\\
+            \hline
+            $ p $ & $ q $ & $ p \vee q $ \\ \hline \hline
+            T & T & T \\ \hline
+            T & F & T \\ \hline
+            F & T & T \\ \hline
+            F & F & F \\ \hline
+        \end{longtabu}
+
+        \begin{longtabu} to \textwidth{ | X[l, 1] | X[l, 1] | X[l, 2] | }
+            \caption{Exclusive But, Or Operator}\\
+            \hline
+            $ p $ & $ q $ & $ p \oplus q $ \\ \hline \hline
+            T & T & F \\ \hline
+            T & F & T \\ \hline
+            F & T & T \\ \hline
+            F & F & F \\ \hline
+        \end{longtabu}
+
+        \begin{longtabu} to \textwidth{ | X[l, 1] | X[l, 1] | X[l, 2] | }
+            \caption{Implication Operator}\\
+            \hline
+            $ p $ & $ q $ & $ p \to q $ \\ \hline \hline
+            T & T & T \\ \hline
+            \rowcolor{red}
+            T & F & F \\ \hline
+            F & T & T \\ \hline
+            F & F & T \\ \hline
+        \end{longtabu}
+
+        \subsection{Permutations and Logs}
+
+        \begin{itemize}
+            \item In CS, the default base of $ \log $ is $ 2 $, $ \log b \to \log_{2} b $ 
+        \end{itemize}
+
+        \subsection{Constants}
+        \begin{itemize}
+            \item $ T $ is a constant for \textbf{true};
+            \item $ F $ is a constant for \textbf{false};
+            \item $ xxx \equiv F $ means the statement $ xxx $ is \textbf{false};
+        \end{itemize}
+
+        \subsection{Converse}
+        \begin{itemize}
+            \item \textbf{Converse} is \hl{going backward in an \textbf{implication}};
+            \item Converse \hl{does not mean equivalence, \textbf{unless specified}};
+            \item \textbf{Ex}, the converse of $ p \to q $ is $ q \to p $;
+        \end{itemize}
+
+        \subsubsection{Truth Table}
+        \begin{longtabu} to \textwidth{ | X[l, 1] | X[l, 1] | X[l, 2] | }
+            \caption{Converse Implication Operator}\\
+            \hline
+            $ p $ & $ q $ & $ q \to p $ \\ \hline \hline
+            T & T & T \\ \hline
+            T & F & T \\ \hline
+            \rowcolor{red}
+            F & T & F \\ \hline
+            F & F & T \\ \hline
+        \end{longtabu}
+
+        \subsection{Bidirectional}
+        \begin{itemize}
+            \item \textbf{Bidirectional} are \textbf{implications} \hl{taht works in two directions};
+        \end{itemize}
+        \begin{longtabu} to \textwidth{ | X[l, 1] | X[l, 1] | X[l, 2] | }
+            \caption{Bidirectional Implication Operator}\\
+            \hline
+            $ p $ & $ q $ & $ q \Leftrightarrow p $ \\ \hline \hline
+            T & T & T \\ \hline
+            \rowcolor{red}
+            T & F & F \\ \hline
+            \rowcolor{red}
+            F & T & F \\ \hline
+            F & F & T \\ \hline
+        \end{longtabu}
+
+        \subsection{Contrapositive}
+        \begin{enumerate}
+            \item \textbf{Swapping} $ p $ and $ q $;
+            \item \textbf{Negating} $ q $ and $ p $;
+        \end{enumerate}
+        \begin{itemize}
+            \item Contrapositive is the \hl{same as its original content};
+        \end{itemize}
+
+        Given 
+        \begin{displaymath}
+            p \to q
+        \end{displaymath}
+        the contrapsotive is
+        \begin{equation}\label{eq: contrapositive}
+            \neg q \to \neg p
+        \end{equation}
+
+        \subsubsection{Truth Table}
+        \begin{longtabu} to \textwidth{ | X[l, 1] | X[l, 1] | X[l, 1] | X[l, 1] | X[l, 1] | }
+            \caption{Contrapositive Operator}\\
+            \hline
+            $ p $ & $ q $ & $ \neg q $ & $ \neg p $ & $ \neg q \Leftrightarrow \neg p $ \\ \hline \hline
+            T & T & F & F & T\\ \hline
+            \rowcolor{red}
+            T & F & T & F & F\\ \hline
+            F & T & F & T & T\\ \hline
+            F & F & T & T & T\\ \hline
+        \end{longtabu}
+
+        \subsection{De Morgan's Logic / Rules of Negation}
+
+        \begin{align*}
+            \neg \left(\neg q\right) &\equiv q\\
+            \neg \left( p \wedge q \right) &\equiv \neg p \vee \neg q\\
+            \neg \left( p \vee q \right) &\equiv \neg p \wedge \neg q\\
+            \neg \left( p \to q \right) &\equiv p \wedge \neg q\\
+            p \to q &\equiv \left( \neg p \right) \vee q\\
+        \end{align*}
+
+        \subsubsection{Negating Does-Not-Exist Statements}\label{sec: negate does not exist}
+        \begin{align*}
+            \neg &\left( \neg \exists y, z \in A, P \left( y \right) \wedge P \left( z \right) \wedge y \neq z \right)\\
+            &\exists y, z \in A, P \left( y \right) \wedge P \left( z \right) \wedge y \neq z\\
+        \end{align*}
+
+        \textit{Taken from Examlet 1, Logic Study Problems, Problem 3a}
+
+        \subsubsection{Examples}
+        \begin{description}
+            \item[Ex] Negate $ a \to \left(b \to c \right) $
+            \begin{align*}
+                a \to \left(b \to c \right) &\equiv \neg a \vee \left(b \to c\right)\\
+                &\equiv \neg a \vee \left( b \to c \right)\\
+                &\equiv \neg a \vee \left( c \vee \neg b \right)\\
+                &\equiv \neg a \vee \neg b \vee c\\
+            \end{align*}
+        \end{description}
+
+        \subsection{Distributive Laws}
+        \begin{align*}
+            r \vee \left( p \wedge q \right) &\equiv \left(r \vee p\right) \wedge \left(r \vee q \right)\\
+            r \wedge \left( p \vee q \right) &\equiv \left(r \wedge p\right) \vee \left(r \wedge q \right)
+        \end{align*}
+
+        \section{Predicate Logic}
+
+        \begin{itemize}
+            \item Predicate logic \hl{have variables in the logic statement};
+            \item Once the variables are \hl{replaced with actual values, predicate logic become 
+            \textbf{proposition logics}};
+        \end{itemize}
+
+        Given the predicate logic 
+        \begin{displaymath}
+            x > 2
+        \end{displaymath}
+            if $ x $ is 3, then
+        \begin{displaymath}
+            3 > 2
+        \end{displaymath}
+            is true.
+
+        \subsection{Quantifiers}
+
+        \begin{itemize}
+            \item \textbf{Quantifiers} are languages that \hl{how many elements in the domain \textbf{satisfy a domain}};
+            \item Types of Quantifiers
+            \begin{description}
+                \item[Universla Quantifiers]: \textit{for all} $ \forall $;
+                \item[Existential Quantifiers]: \textit{there exists} $ \exists $;
+                \item[Unique Existance]: \textit{There is a unique xxx} $ \exists ! $;
+            \end{description}
+        \end{itemize}
+
+        \begin{displaymath}
+            \forall x < \mathbb{Z}, x^{2} \geq 0
+        \end{displaymath}
+
+        \begin{itemize}
+            \item $ \forall $: \textbf{Quantifier}
+            \item $ x $: \textbf{Bound Variable}
+            \item $ \mathbb{Z} $: \textbf{Domain, Replacement Set}
+            \item The scope of variable $ x $ is within this statement
+        \end{itemize}
+
+        \subsection{Quantifier Negation}
+
+        \begin{itemize}
+            \item The opposite of $ \forall $ is $ \exists $;
+            \item The opposite of $ \exists $ is $ \forall $;
+        \end{itemize}
+
+        \begin{description}
+            \item[Ex] Negate $ \forall \text{ cookies } c, \left( \neg s \left(c\right) \wedge g \left(c\right) \right) \to \neg h \left(c\right) $
+            \begin{align*}
+                &\equiv \exists \text{ cookies } c, \neg \left[ \left( \neg s (c) \wedge g (c) \right) \to \neg h (c) \right]\\
+                &\equiv \exists \text{ cookies } c, \left( \neg s (c) \wedge g (c) \right) \wedge \neg \neg h (c\\
+                &\equiv \exists \text{ cookies } c, \neg s (c) \wedge g (c) \wedge h (c)\\
+            \end{align*}
+        \end{description}
+
+        \subsection{Scope}
+
+        \begin{itemize}
+            \item If a variable is not 
+            \begin{itemize}
+                \item bound;
+                \item assigned value;
+                \item given a set of replacement values;
+            \end{itemize}
+            \hl{it is said to be free}
+
+            \item Statements containing textbf{free} variabels \hl{do not have truth values},
+            and therefore \hl{cannot be used in a step in proof};
+        \end{itemize}
+
+        \subsubsection{With Theorems}
+
+        \begin{displaymath}
+            \text{Theorem:} \exists x \in \mathbb{Z}, x^{2} = 0
+        \end{displaymath}
+
+        \begin{itemize}
+            \item Variables stays inside theorem: \hl{x goes out of scope here!}
+        \end{itemize}
+
+        \begin{displaymath}
+            \text{So, } x^{2} + 2x + 1 = 1
+        \end{displaymath}
+
+        \begin{itemize}
+            \item $ x $ is \textbf{undefined};
+        \end{itemize}
+
+        \subsubsection{With Normal Statements}
+
+        \begin{displaymath}
+            \exists x \in \mathbb{Z}, x^{2} = 0 \text{ and } \exists x \in \mathbb{Z}, x^{2} = 1, 
+        \end{displaymath}
+
+        \begin{itemize}
+            \item The first $ x $ syas in the scope until \textbf{and};
+            \item At \textbf{and}, teh second $ x $ \textbf{masks} the first $ x $;
+            \item Since the first $ x $ is masked, the statement after $ x $ is true;
+
+            \item Another way to write the statement (\hl{Use \textbf{two variables}}):
+            \begin{align*}
+                \exists x \in \mathbb{Z} &, x^{2} = 0 \text{ and}\\
+                \exists y \in \mathbb{Z} &, y^{2} = 1
+            \end{align*}
+        \end{itemize}
+
+        % Not included in lectures
+
+        \section{Handy Functions}
+
+        \subsection{Logs and Exponentials}
+        \begin{displaymath}
+            \log_{b}x = \log_{b} a \cdot \log_{a} x
+        \end{displaymath}
+
+        \subsubsection{Factorials}
+        \begin{equation}\label{eq: factorial}
+            k ! = 1 \cdot 2 \cdot ... \cdot \left(k - 1\right) \cdot k
+        \end{equation}
+
+        \begin{displaymath}
+            0 ! = 1
+        \end{displaymath}
+
+        \subsection{Probabilities}
+
+        \subsubsection{Arranging}
+        Given a set with $ n $ elements, there are 
+        \begin{equation} \label{eq: arranging}
+            n!
+        \end{equation}
+        (\ref{eq: factorial}) ways to arrange them into an order;
+
+        \subsubsection{Permutation}
+        \begin{itemize}
+            \item Given a set of $ n $ elements, to pick $ k $ elements, there are $ y $ ways:
+            \begin{equation}\label{eq: unordered}
+                y = \frac{n!}{k! \left(n - k\right)!} 
+            \end{equation}
+
+            \item \ref{eq: unordered} can be abbreviated as 
+            \begin{equation} \label{eq: abbrievated unordered}
+                \binom{n}{k}
+            \end{equation}
+            \textbf{n choose k}
+        \end{itemize}
+        
+        \subsection{Max Function}
+        Max function returns the largest of its inputs
+        \begin{equation}\label{eq: large func}
+            max(a, b): \text{largest of a, b}
+        \end{equation}
+
+        \textbf{Example}, 
+        \begin{align*}
+            f(x) &= max\left( x^{2}, 7 \right)\\
+            f(2) &= max\left( 4, 7 \right) = 7
+        \end{align*}
+
+        \subsection{Floor and Ceiling}
+        \subsubsection{Floor}
+        \begin{itemize}
+            \item Floor takes \hl{\textbf{real numebers} are inputs}, and returns an \textbf{integer} that is 
+            \hl{\textbf{nearest} and \textbf{no bigger} than the input};
+            \begin{itemize}
+                \item If the input is \hl{already integer, the input is returned};
+            \end{itemize}
+            \item Floor is represented as $ \floor*{x} $;
+            \item Examples
+            \begin{itemize}
+                \item $ \floor*{3.44} = 3 $
+                \item $ \floor*{3} = 3 $
+                \item $ \floor*{-3.44} = -4 $
+            \end{itemize}
+        \end{itemize}
+
+        \subsubsection{Ceiling}
+        \begin{itemize}
+            \item Ceiling takes \hl{\textbf{real numebers} are inputs}, and returns an \textbf{integer} that is 
+            \hl{\textbf{nearest} and \textbf{no smaller} than the input};
+            \begin{itemize}
+                \item If the input is \hl{already integer, the input is returned};
+            \end{itemize}
+            \item Floor is represented as $ \ceil*{x} $;
+            \item Examples
+            \begin{itemize}
+                \item $ \ceil*{3.44} = 4 $
+                \item $ \ceil*{3} = 3 $
+                \item $ \ceil*{-3.44} = -3 $
+            \end{itemize}
+        \end{itemize}
+
+        \newpage
+        \appendix
+        \section{Missed Problems}
+
+        \subsection{i}
+
+        \begin{itemize}
+            \item Try to get rid of $ i^{2} $ by subsituting $ \sqrt{- 1} $ anytime you can;
+        \end{itemize}
+
+        \subsection{Change of Log Base}
+
+        \begin{displaymath}
+            \log_{b}x = \log_{b}a \cdot \log_{a} x
+        \end{displaymath}
+
+        \subsection{Logic}
+
+        \begin{itemize}
+            \item When it comes to problems like \textit{when do the following expression evalulate to true}, \hl{the only way
+            is to make a truth table};
+
+            \item When it comes to problems like \textit{prove the following expressions are not logically equivalent}, \hl{the only way
+            is to have \textbf{an exception}};
+
+            \item To negating a $ \neg \exists x \in A, ... $ like statement, simply get rid of the $ \neg $ and get 
+            \begin{displaymath}
+                \exists x \in A, ...
+            \end{displaymath} 
+            \textit{Refer to section \ref{sec: negate does not exist} on page \pageref{sec: negate does not exist}}
+        \end{itemize}
+
+    \end{note}
+\end{document}

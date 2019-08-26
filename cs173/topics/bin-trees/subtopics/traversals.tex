@@ -1,0 +1,46 @@
+\section{Traversals}
+
+\subsection{Depth First Traversal}
+
+  \subsubsection{Pre Order Traversal}
+  
+    \begin{enumerate}
+      \item Visit the \highlight{\enquote{current}} node;
+      \item Visit the \highlight{\enquote{left}} node;
+      \item Visit the \highlight{\enquote{right}} node;
+    \end{enumerate}
+  
+  \subsubsection{In Order Traversal}
+  
+    \begin{enumerate}
+      \item Visit the \highlight{\enquote{left}} node;
+      \item Visit the \highlight{\enquote{current}} node;
+      \item Visit the \highlight{\enquote{right}} node;
+    \end{enumerate}
+  
+  \subsubsection{Post Order Traversal}
+  
+    \begin{enumerate}
+      \item Visit the \highlight{\enquote{left}} node;
+      \item Visit the \highlight{\enquote{right}} node;
+      \item Visit the \highlight{\enquote{current}} node;
+    \end{enumerate}
+  
+\subsection{Breadth First Traversal}
+
+  \begin{enumerate}
+    \item Visit the \highlight{\enquote{children}} nodes;
+    \item Visit the \highlight{\enquote{grand children}} nodes;
+  \end{enumerate}
+  
+  \subsubsection{Implementation}
+  
+  \begin{enumerate}
+    \item Enqueue the root node;
+    \item While the queue is not empty;
+    \begin{enumerate}
+      \item Dequeue the first element in the queue;
+      \item Do something about the first element;
+      \item Enqueue the children of the element;
+    \end{enumerate}
+  \end{enumerate}

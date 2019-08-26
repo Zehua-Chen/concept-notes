@@ -1,0 +1,135 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+
+\subject{CS 173}
+\date{April 16-- 17, 107}
+\id{CS17310704162}
+\title{State Diagram}
+
+\begin{document}
+\begin{note}{Exam 7}
+
+\section{State Diagrams}
+
+\begin{itemize}
+    \item \textbf{State Diagram} is a \textbf{graph} where:
+    \begin{itemize}
+        \item \textbf{graph nodes} represents \textbf{states};
+        \item \textbf{graph edges} represents \textbf{actions};
+        \begin{itemize}
+            \item \hl{\textbf{Graph Edges} have \textbf{arrows}};
+        \end{itemize}
+    \end{itemize}
+    
+    \item \hl{\textbf{Walks} must follow the arrow directions};
+    \item \hl{An action can result in \textbf{no change in state}}; the arrow points to the same node where it is rooted;
+    \item \hl{Two actions can lead to the same state}; two arrows pointing to the same node;
+\end{itemize}
+
+    \subsection{Start and End State}
+
+    \begin{itemize}
+        \item \textbf{Start States} are marked by \hl{an arrow from the void pointing to it};
+        \item \textbf{End States} are marked by a \hl{double ring};
+    \end{itemize}
+
+    \subsection{Edge Cases}
+
+    \begin{itemize}
+        \item \hl{No edges can go out from \textbf{end states}};
+        \item \hl{A graph can have \textbf{more than one end state}};
+        \item \hl{A graph can have \textbf{only one start state}};
+        \item \textbf{An end state} \hl{can have edges goint out from it};
+    \end{itemize}
+    
+    \subsection{Applications}
+    
+        \subsubsection{Phone Lattices}
+        
+        \begin{itemize}
+            \item Phone Lattices models the pronounciation of a word for \textbf{speech recognition};
+            \item \hl{\textbf{The action of pronouncing a sound} is represented as a \textbf{edge}};
+        \end{itemize}
+        
+        \subsection{Finite Automation}
+        
+        \begin{enumerate}
+            \item A finite automation program \textbf{reads a sequence of characters};
+            \item It then follow the \textbf{edges} in \textbf{phone lattices};
+            \item At the end of the running, it reports wheter it has reached an end state;
+        \end{enumerate}
+        
+    \subsection{Types of State Diagrams}
+    
+    \begin{itemize}
+        \item \textbf{Deterministic State Diagram}: diagrams \hl{where one edge leads to one state};
+        \item \textbf{Non-deterministic State Diagram} diagrams where one edge leads to multiple states; 
+        one state;
+    \end{itemize}
+        
+\section{Transition Functions}
+
+Given a set of states $ S $ and a set of actions $ A $
+
+\begin{equation}
+    \delta : S \times A \to \mathbb{P} \left( S \right)
+\end{equation}
+
+\begin{itemize}
+    \item A transition function $ \delta $ can be explained as:
+    \begin{enumerate}
+        \item Mapping out the edges of a graph;
+        \item Show how actions result in state changes;
+        \item \hl{Show what happen (\textbf{the new states that you can be in}) when you are in state $ s $ and execute action $ a $}
+    \end{enumerate}
+    
+    \item The input to $ \delta $ is a state and an action $ \left( s, a \right) $;
+    \item The output of $ \delta $ is a set of states:
+    \begin{itemize}
+        \item Can be $ \varnothing $;
+        \item \hl{$ \mathbb{P} \left( S \right) $ contains $ \varnothing $, but not every output has to hae $ \varnothing $;
+        See \textit{Reading quiz due 16 April 2 (2), Question 7}};
+    \end{itemize}
+\end{itemize}
+
+    \subsection{Possibilities of Transition Functions}
+    
+    Given $ n $ states, $ p $ edges
+
+    \begin{itemize}
+        \item Size of domain: $ n \times p $;
+        \item Size of co-domain: $ n $;
+        \item Possible transition functions:
+        \begin{displaymath}
+            n^{n \times p}
+        \end{displaymath}
+        
+        \item \hl{\textbf{Recall}, given domain of size $ n $, co-domain of size $ p $, there are $ p^{n} $ ways of 
+        constructing the function};
+    \end{itemize}
+
+    \subsection{Types of Transition Functions}
+    
+    \begin{itemize}
+        \item \textbf{Deterministic}: transition functions that return \hl{a single state};
+        \item \textbf{Non-Deterministic}: transition function that return \hl{a set of states};
+    \end{itemize}
+    
+    
+
+\end{note}
+\end{document}

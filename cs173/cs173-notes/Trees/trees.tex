@@ -1,0 +1,258 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newcommand{\intersect}{\cap}
+\newcommand{\union}{\cup}
+
+\newtheorem{definition}{Definition}
+\newtheorem{claim}{Claim}
+\newtheorem{proof}{Proof}
+
+\newcommand{\ex}{\textbf{Ex.} }
+
+\subject{CS 173}
+\date{March 12 -- 13, 107}
+\id{CS17310703121}
+\title{Sets}
+
+\begin{document}
+\begin{note}{Exam 7}
+
+\section{Examlet 9 Practices}
+
+    \subsection{Concepts Missed}
+
+    \paragraph{Spring 2016, B Sheet}
+
+    \begin{itemize}
+        \item The \textbf{diameter of a full, complete tree of height $ h $}: $ 2h $;
+        \begin{itemize}
+            \item The \textbf{diameter of a graph of tree of height $ h $}: $ \leq 2h $;
+        \end{itemize}
+
+        \item The \textbf{level of a leaf node in a tree of height $ h $}: $ \leq h $;
+        \begin{itemize}
+            \item A leaf node does not have to be at the bottom;
+        \end{itemize}
+
+        \item A tree \textbf{must end with the specified terminal nodes} and \textbf{start with the specified start variable};
+
+        \item The \textbf{chromatic number of a full x-mary tree}: $ \leq 2 $:
+        \begin{itemize}
+            \item Consider the case where there is only one node, \hl{which still fits the definition of full x-mary nodes};
+        \end{itemize}
+
+        \item The \textbf{level of the root node} of any graph: 0;
+    \end{itemize}
+
+    \paragraph{Fall 2016, B Sheet}
+
+    \begin{itemize}
+        \item The number of paths between two distinct nodes in an n-node tree:
+        \begin{itemize}
+            \item \hl{Paths in opposite directions count as different}: $ n \left( n - 1 \right) $;
+            \item \hl{Paths in opposite directions count as the same}: $ \frac{n \left( n - 1 \right)}{2} $;
+        \end{itemize}
+
+        \item The number of paths between two nodes in an n-node tree. Paths in opposite directions count as different: $ n^{2} $ 
+        
+    \end{itemize}
+
+\newpage
+
+\section{Trees}
+
+\begin{definition}
+    \textbf{Tree}: a tree is an \textbf{undirected graph} with a special note called \textbf{root} and every node is connected to the
+    \textbf{root} by \textbf{exactly one path}.
+\end{definition}
+
+\begin{itemize}
+    \item Given a pair of neighbors (connected nodes) in a graph:
+    \begin{itemize}
+        \item The one closest to the root is \textbf{parent};
+        \item The other one is the \textbf{child};
+    \end{itemize}
+    \item Two children with the same parent is \textbf{siblings};
+    \item A \hl{node with \textbf{no children}} is a \textbf{leaf node};
+    \item A \hl{node \textbf{with children}} is an \textbf{internal node};
+\end{itemize}
+
+    \subsection{Assumptions}
+
+    \begin{enumerate}
+        \item The set of nodes of a tree is \textbf{finite};
+        \item Each set of \textbf{siblings} is ordered \hl{from left to right};
+    \end{enumerate}
+
+    \subsection{Levels}
+
+    \begin{itemize}
+        \item Nodes can be organized in to \textbf{levels}, based on \hl{how many \textbf{edges} away they are from the \textbf{root}};
+        \item \hl{The \textbf{root} of tree is level \textbf{0}};
+        \item \textbf{Height} is:
+        \begin{itemize}
+            \item the maximum \hl{levels of nodes} there are;
+            \item the maximum \hl{levels of its leaves};
+            \item the maximum \hl{\textbf{length} from the \textbf{root} to the \textbf{leaf}};
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Ancestors}
+
+    \begin{itemize}
+        \item If you can go from $ x $ to $ g $ by \hl{folloing \textbf{zero or more} parent links}, then:
+        \begin{itemize}
+            \item $ x $ is an \textbf{descendent} of $ g $;
+            \item $ g $ is an \textbf{ancestor} of $ x $;
+        \end{itemize}
+
+        \item \hl{The node $ x $ is the \textbf{ancestor, and descendent} of itself};
+        \item The ancestor, and decedents of $ x $ other than $ x $ itself are \textbf{proper ancestors};
+        \item Given a tree $ T $ with a node $ a $, the \textbf{subtree rooted at $ a $}, \hl{consists of}:
+        \begin{enumerate}
+            \item $ a $, the \textbf{root};
+            \item all \textbf{decendents of $ a $};
+            \item all \textbf{edges linking these (the above) nodes};
+        \end{enumerate}
+    \end{itemize}
+
+\section{m-ary Trees}
+
+\begin{itemize}
+    \item \hl{$ m-ary $ tree allows each node to have at most $ m $ children}:
+    \begin{itemize}
+        \item \textbf{A binary tree} allows its nodes to have \hl{at most $ 2 $ children};
+    \end{itemize}
+
+    \item A $ m-ary $ tree with $ i $ internal nodes has $ m \cdot i + 1 $ nodes;
+\end{itemize}
+
+    \subsection{Special Cases}
+    \begin{description}
+        \item[Full] In a \textbf{full} $ m-ary $ tree, each node has either $ 0 $ or $ m $ children (\hl{No intermediate numbers})
+        \item[Complete] In a \textbf{complete} tree, \hl{each \textbf{leaf} are at the \textbf{same height}};
+        \item[Full and Complete] Tree where the \hl{entire bottom level is populated with leaves};
+    \end{description}
+
+    \subsection{Height vs Number of Nodes}
+
+    Consider a tree of height $ h $:
+    \begin{itemize}
+        \item A tree has \textbf{at least one leaf};
+        \item A tree has \textbf{at least $ h + 1 $ nodes};
+    \end{itemize}
+
+    Consider a binary tree of height $ h $ that is \textbf{full and complete}:
+    \begin{itemize}
+        \item The \textbf{number of leaves} is $ 2^{h} $ (\hl{This is the max});
+        \item The \textbf{number of nodes} is
+        \begin{equation}
+            \sum_{L = 0}^{h} 2^{L} = 2^{h + 1} - 1
+        \end{equation}
+        \item Given the number of nodes $ n $, the \textbf{height of a tree} is $ \log_{2}n $
+    \end{itemize}
+
+    \subsection{Balanced Binary Trees}
+    \begin{itemize}
+        \item Balanced binary trees are trees where the \hl{leaves are \textbf{approximately} at the same height};
+        \item Balanced binary trees \hl{also have height of $ \log_{2}n $};
+        \item Data in balanced binary can be accessed in $ \log_{2}n $ time.
+    \end{itemize}
+
+\section{Parse Trees}
+
+\begin{definition}
+    \textbf{Parse Tree}: a parse tree shows a structure of a sequence of terminal symbols;
+\end{definition}
+
+\begin{definition}
+    \textbf{Terminal Symbols}: a terminal symbol a character or word \textbf{stored in the leaf nodes} in a parse tree.
+\end{definition}
+
+    \subsection{Context-Free Grammar}
+
+    \begin{definition}
+        \textbf{Context Free Grammar} is a set of rules that specify what sorts of children are possible for a parent node
+        with each type of label.
+        \begin{displaymath}
+            LHS \to RHS
+        \end{displaymath}
+    \end{definition}
+    \begin{itemize}
+        \item \textbf{The left hand side}, $ LHS $ \hl{gives the \textbf{symbol} on the parent node};
+        \item \textbf{The right hand side}, $ RHS $ \hl{shows \textbf{one possbile pattern} for the symbols on its children};
+        \item If all the nodes in the tree $ T $ \hl{have children matching the rules of a grammer $ G $}, we say that 
+        \hl{the tree $ T $ and the \textbf{terminal sequences stored in its leaves} are generated by $ G $};
+        \item If a grammar specifies multiple children for one node, they can be packed using $ \mid $:
+        \begin{align*}
+            E &\to E + V \mid E \times V \\
+            V &\to a \mid b \mid c
+        \end{align*}
+        \item \hl{The order the nodes appear on a graph must match that on in the grammar}:
+        \begin{itemize}
+            \item \textbf{Example}, $ E \to 1,2,3 $ means, $ 1,2,3 $ must appears in order from left to right;
+        \end{itemize}
+    \end{itemize}
+
+    \paragraph{Example}a grammar
+    \begin{displaymath}
+        E \to E + V
+    \end{displaymath}
+    allows $ E $ to have three children, the left most, $ E $, the middle on $ + $,
+    and the right most one $ V $;
+
+    \subsection{Beyond Grammar}
+
+    \begin{itemize}
+        \item Other than grammar, \textbf{terminals and start symbols} also needs
+        to be specified;
+        \item \textbf{Terminals}: symbols \hl{allowed to appeared on the leaf nodes};
+        \item \textbf{Start Symbols}: symbols \hl{allowed on the root node};
+    \end{itemize}
+
+    \paragraph{Example} The start symbol is $ E $, the terminals are $ a,b $
+    \begin{displaymath}
+        E \to a \mid b \mid E
+    \end{displaymath}
+    $ E $ can appear as a children of another $ E $, but only $ a, b $ are allowed on 
+    \textbf{leaf nodes};
+
+    \subsection{Branch that Does not Generate Anything in the Termninal Sequence}
+    \begin{itemize}
+        \item If an internal node has a $ \epsilon $, the $ \epsilon $ is not included
+        in the \textbf{terminal sequence};
+        \item $ \epsilon $ stands for empty string;
+    \end{itemize}
+
+\section{Recursion Trees}
+
+\begin{align*}
+    S(1) &= c\\ 
+    S(n) &= 2 S \left( \frac{n}{2} \right) + n, \forall n \geq 2
+\end{align*}
+
+\begin{itemize}
+    \item Each node in the recursion tree \hl{contains everything in the formula except 
+    the \textbf{recursive calls}};
+    \begin{displaymath}
+        n, \frac{n}{2}, \frac{n}{4}, \frac{n}{8}
+    \end{displaymath}
+    \item Each \textbf{internal node} contains \textbf{$ n $ children}, where $ n $ is the amount of terms in the formula; 
+    (Ex. $ f(x) + x + 1 $ gives three terms, $ n = 3 $)
+\end{itemize}
+
+\end{note}
+\end{document}

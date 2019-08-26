@@ -1,0 +1,281 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+
+\subject{CS 173}
+\date{February 12 -- 13, 107}
+\id{CS17310703201}
+\title{Functions}
+
+\begin{document}
+\begin{note}{Exam 7}
+
+\section{Running Time}
+
+\begin{definition}
+    \textbf{Running Times} running time is an abstract view of how fast an algorithm runs, regardless of
+    \textbf{programming languages} or \textbf{hardware}.
+\end{definition}
+
+\section{Asymptotic Relationships}
+
+\textit{Comparing the running time of two algorithms with running time $ f(n) $ and $ g(n) $, given a data set of
+size $ n $}.
+
+\begin{itemize}
+    \item A running time function is a combination of multiple terms $ f(n) = n^{2} + n + 2 $
+    \item In such a function, \hl{the \textbf{fastest-growing term} is compared} while comparing runtimes;
+    \begin{itemize}
+        \item In this case, the $ f(n) = n^{2} + n + 2 \equiv f(n) = n^{2} $;
+        \item \hl{The running time of $ f(n) $ will be donimated by $ n^{2} $};
+    \end{itemize}
+
+    \item To compare the two functions $ f(n), g(n) $, look at their ratio
+    \begin{displaymath}
+        \lim_{n \to \infty} \frac{f(n)}{g(n)}
+    \end{displaymath}
+\end{itemize}
+
+\subsection{Comparison Result}
+
+\begin{itemize}
+    \item If $ \lim_{n \to \infty} \frac{f(x)}{g(x)} = c $, then $f (n) \approx g(n) $, \hl{the two functions are
+    \textbf{asymptotic similar}};
+    \item If $ \lim_{n \to \infty} \frac{f(x)}{g(x)} = 0 $, then $f (n) << g(n) $, \hl{$ f(n) $
+    \textbf{asymptotic smaller}};
+    \item Sometimes the fraction $ \lim_{x \to \infty} \frac{f(n)}{g(x)} = \infty $ might not exist as the functions \textbf{osicllates};
+
+    \item \hl{The above definition only works with \textbf{well-defined and primitive functions}};
+\end{itemize}
+
+\section{Ordering Primitive Functions}
+
+\begin{equation}\label{eq: ordering of pritmitive functions}
+    1 << \log n << n << n \log n << n^{2} << n^{3} << ... << 2^{n} << 3^{n} << n!
+\end{equation}
+
+\begin{itemize}
+    \item Only the \textbf{three terms} can be used in actual programming;
+    \item \hl{Memorize the above list!}
+\end{itemize}
+
+\section{Big O}
+
+\begin{definition}\label{def: big-o}
+    Given two functions $ f(n), g(n) $, $ f(n) \equiv O\left( g(n) \right) $ if and only if
+    \hl{there are positive real numbers $ c, k $ such that $ 0 \leq f(n) \leq c \times g(n) $ for every
+    $ n \geq k $.}
+\end{definition}
+
+\paragraph{Another Way of Saying} If $ f(n) $ is \textbf{asymptotic smaller than} $ g(n) $,
+then $ f(n) \equiv O\left( g(n) \right) $, \hl{but $ g(n) $ is not $ f(n) $}. The big-o relation also
+holds true if $ f(n) = g(n) $, and in this case \hl{$ g(n) $is also $ f(n) $}.
+
+\begin{itemize}
+    \item $ c $ is there because \hl{we do not care about the multiple on the terms of a functions,
+    \textbf{even the dominant term}};
+    \item $ k $ is the lower bond of the input $ n $;
+
+    \item \hl{Unless otherwise specified, big-O analysis is \textbf{worst-case analysis}}(the case that takes the longest
+    running time);
+\end{itemize}
+
+    \subsection{Difference from Asymptotic Smaller}
+
+    \begin{itemize}
+        \item Asymptotic smaller is a \textbf{strict partial order}: $ < $;
+        \item Big-O is \textbf{not a strickt partial order}: $ \leq $;
+    \end{itemize}
+
+    \subsection{When Both Functions are Equal}
+
+    \begin{definition}
+        Given two functions, $ f(n), g(n) $, $ f(n) $ is $ \Theta(g(n)) $ if $ f(n) $ is $ O(g(n)) $ and
+        $ O(f(n)) $ is $ g(n) $.
+    \end{definition}
+
+        \subsubsection{Logs}
+
+        \begin{itemize}
+            \item Log functions \hl{only differ by a constant};
+            \item $ \log_{p} (n) $ is $ \Theta \left( \log_{q}(n) \right) $ for any choice of $ p,q $;
+		\begin{equation}
+		    \log_{b} x = \log_{a} x \log_{b} a
+		\end{equation}
+            \item \hl{The same also applies on standard \textbf{big-o notations}}, due to the definition of $ \Theta $;
+        \end{itemize}
+
+\section{Writing Proofs}
+
+\begin{itemize}
+    \item Need to show that there are $ c, k $ that exist for the definition of big-O (\ref{def: big-o}).
+    \item Do not have to minimize $ c, k $;
+\end{itemize}
+
+\section{Runnint Time of Algorithms}
+
+    \subsection{Collections}
+
+    There are two ways to store collections:
+    \begin{itemize}
+        \item Array
+        \item Linked List
+    \end{itemize}
+
+        \subsubsection{Array}
+
+        \begin{itemize}
+            \item Array provides \hl{constant time $ O \left( 1 \right) $ access to any element, regardless of the position};
+            \item \hl{The \textbf{length} of the array is \textbf{fixed}} when the array is initialized;
+            \item \hl{Changing the size of an array takes $ O \left( n \right) $ time}, otherwise known as \textbf{linear time};
+            \item \textbf{Adding or deleting} elements in the \textbf{center} of the array takes \textbf{linear time};
+            \begin{itemize}
+                \item \hl{Adding or deleting elements requires pushing elements sideways}, which typically requires linear time;
+            \end{itemize}
+
+            % 2-D
+            \item Two dimensional arrays are similar;
+        \end{itemize}
+
+        \subsubsection{Linked List}
+
+        \begin{itemize}
+            \item Linked list algorithms have access to the \textbf{head of the list};
+            \item Adding or deleting elements are easier than doing that in arrays;
+        \end{itemize}
+
+        \paragraph{For Head}
+
+        \hl{Below operations are constant time} $ O \left( 1 \right) $
+
+        \begin{itemize}
+            \item The function \hl{\textbf{first} returns the first element};
+            \item The function \hl{\textbf{rest} returns the list \textbf{excep the first element}};
+            \item The function \hl{\textbf{cons} adds a new element to the head of the linkedlist, and returns 
+            the \textbf{new head} of the linked list};
+        \end{itemize}
+
+        \paragraph{For Others}
+
+        \begin{itemize}
+            \item \textbf{Adding, removing, and accessing} elements \hl{a constant offset away from the head} also takes
+            \textbf{constant time};
+            \item \textbf{Adding, removing, and accessing} elements \hl{at other locations} takes
+            \textbf{linear time};
+            \item \textbf{Adding, removing, and accessing} elements \hl{at the tail} \underline{can also} takes
+            \textbf{constant time};
+        \end{itemize}
+
+        \paragraph{Comparison to Arrays}
+
+        \begin{itemize}
+            \item In algorithms where \hl{the size of the collection is fixed}, and \hl{the objects are accessed in sequential order},
+            the running time does not care if it uses linked list or arrays;
+            \item However since, $ O $ ignores multiplicative constants, \hl{arrays are faster as arrays's \textbf{multiplicative constant}
+            is typically smaller};
+        \end{itemize}
+
+    \subsection{Nested Loops}
+
+    \begin{itemize}
+        \item The \textbf{initialization} of the loops takes \textbf{constant time};
+        \item \hl{Each loop body takes constant time to executes}, except the part with the nested loops;
+        \item The running time is \hl{determined by how many times the loop body runs};
+        \begin{itemize}
+            \item Each loop body runs $ O \left( n \right) $ times, the \hl{total running time is $ O \left( n^{k} \right) $,
+            where $ k $ is how many loops are nested};
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Connected Components}
+
+    \begin{definition}
+        A \textbf{connected componet algorithm} find all nodes that is in the same \textbf{connected component}
+        as the input node $ s $;
+    \end{definition}
+
+    \paragraph{Runnint Time}
+
+    Given a graph with $ n $ nodes, and $ m $ edges, the running time is 
+    \begin{displaymath}
+         O \left( n + m \right) 
+    \end{displaymath}
+
+    \subsection{Binary Search}
+
+    \paragraph{Form of Binary Search}
+    \begin{align*}
+        T(1) &= c \\
+        T(n) &= T \left( \frac{n}{2} \right) + d
+    \end{align*}
+
+    \paragraph{Runnint Time}
+    \begin{itemize}
+        \item Running time is $ O \left( \log n \right) $\footnote{Recall that $ \log x $ in CS has implies $ \log_{2} x $}
+    \end{itemize}
+
+    \subsection{Merging Two Lists}
+
+    \paragraph{List Merging Form}
+    \begin{align*}
+        T(1) &= c \\
+        T(n) &= T \left( n - 1 \right) + d \\
+        &= nd + c
+    \end{align*}
+
+    \paragraph{Runnint Time}
+    \begin{itemize}
+        \item The running time is $ O \left( n \right) $ 
+    \end{itemize}
+
+    \subsection{Merge Sort}
+
+    \paragraph{How Merge Sort Works}
+    \begin{enumerate}
+        \item Divide a collection by half;
+        \item When there are only one or two elements in a divided collection, begin merging the divided colleciton in order;
+        \begin{itemize}
+            \item One element is alreayd sorted $ O (1) $;
+            \item Two elements can be sorted in a constant time $ O (1) $;
+        \end{itemize}
+    \end{enumerate}
+
+    \paragraph{Form of Mergesort}
+    \begin{align*}
+        T(1) &= c \\
+        T(n) &= 2 T \left( \frac{n}{2} \right) + d n
+    \end{align*}
+
+    \paragraph{Runnint Time}
+    \begin{itemize}
+        \item Running time is $ O \left( n \log n \right) $;
+    \end{itemize}
+
+    \subsection{Tower of Hanoi}
+
+    \paragraph{Form of Tower of Hanoi}
+    \begin{align*}
+        T(1) &= c \\
+        T(n) &= 2 T \left( n - 1 \right) + d n
+    \end{align*}
+
+    \paragraph{Runnint Time}
+    \begin{itemize}
+        \item Running time is $ O \left( 2^{n} \right) $;
+    \end{itemize}
+
+\end{note}
+\end{document}

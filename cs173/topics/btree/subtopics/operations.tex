@@ -1,0 +1,14 @@
+\section{Operations}
+
+\begin{itemize}
+  \item Always insert at leaf nodes;
+  \item \highlight{Once the number of keys in leaf nodes reach $ m $}:
+  \begin{itemize}
+    \item \highlight{Throw up the middle key} in the node to the parent node;
+    \item Repeat all the way up till root so that all nodes obey the rule 
+    of btree;
+  \end{itemize}
+\end{itemize}
+
+For visualization, visit
+\href{https://www.cs.usfca.edu/~galles/visualization/BTree.html}{www.cs.usfca.edu}

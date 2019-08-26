@@ -1,0 +1,250 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{listings}
+
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+\subject{CS 173}
+\date{January 24 -- 25, 107}
+\id{CS17310701241}
+\title{Number Theory}
+
+\begin{document}
+    \begin{note}{Exam 2, 3(Modular Arithmatic)}
+        \textbf{Number Theory}: A branch of mathmatics concerning the behavior of \textbf{integers};
+
+        \section{Divisibility}
+
+        \begin{definition}
+            Suppose that $ a $ and $ b $ are integers. Then $ a $ divides $ b $ if $ b = an $
+            for some integer $ n $. \hl{a is called a \textbf{factor or divisor} of $ b $}. $ b $ is called a multiple of $ a $.
+        \end{definition}
+
+        \begin{itemize}
+            \item Shorthand for $ a $ divides $ b $ ($ \frac{b}{a} $) is
+            \begin{equation}\label{eq: shorthand for divide}
+                a \mid b
+            \end{equation}
+            \item If the quotient of $ b $ divided by a \hl{is an integer}, then $ a \mid b $ is true;
+            \item $ 7 \mid 7 \to 7 = 7 \cdot 1 $
+            \item $ 7 \mid 0 \to 0 = 7 \cdot 0 $ 
+            \begin{itemize}
+                \item \hl{Zero is \textbf{divisble by any integer}}
+            \end{itemize}
+            \item $ 0 \nmid 7 $ because $ 7 = 0 \cdot ? $
+            \begin{itemize}
+                \item \hl{Zero is only a \textbf{a factor of zero}}
+            \end{itemize}
+
+            \item \hl{An integer $ p $ is \textbf{even}} when $ 2 \mid p $
+        \end{itemize}
+
+        \subsection{Zero}
+
+        \begin{itemize}
+            \item \textbf{Zero} is even;
+            \item \textbf{Zero} does not divide anything unless itself;
+            \item Any integer divides \textbf{zero};
+        \end{itemize}
+
+        \subsection{Stay in the Set}
+        \hl{Try not to rephrase $ a \mid b $ into $ \frac{b}{a} $}, due to following reasons:
+        \begin{itemize}
+            \item $ a \mid b \to b = a \cdot n $ only involves \textbf{integer}, $ \frac{b}{a} $ involves
+            \textbf{float}, making some cases complicated;
+
+            \item When constructing math from ground up, \hl{\textbf{integers} are constructed first, and then
+            \textbf{decimals} based on integers}.
+            \begin{itemize}
+                \item Using floats at the beginning may \hl{lead to \textbf{circular proofs}}
+            \end{itemize}
+
+            \item In computers, \hl{integer operations gives \textbf{exact values}}, whereas \texttt{float}
+            and \texttt{double} are just \textbf{approximates}, making calculations \textbf{involved with errors}.
+        \end{itemize}
+
+        \section{Prime, Composite Numbers}
+
+        \begin{definition}
+            An integer $ q \geq 2 $ is \textbf{prime} \hl{if the only \textbf{positive factors}} are $ q $ itself, and $ 1 $;
+            otherwise it is \textbf{composite}
+        \end{definition}
+        \textbf{Examples}
+        \begin{displaymath}
+            3, 5, 7
+        \end{displaymath}
+
+        \begin{itemize}
+            \item \hl{$ 1 $ and $ 0 $ are not prime};
+        \end{itemize}
+
+        \subsection{Fundamental Theorem of Arithmatic}
+
+        \begin{theorem}
+            \textbf{Fundamental Theorem of Arithmatic}: Every integer $ \geq 2 $ can be written as the 
+            product of one or more prime factors. Except for the order in which you write the factors, 
+            this prime factorization is unique.
+        \end{theorem}
+
+        \subsubsection{\lq\lq Unique\rq\rq}
+        \textbf{\lq\lq Unique\rq\rq}: there is \hl{only one way an integer can be factored}.
+        \begin{displaymath}
+            180 = 2 \cdot 2 \cdot 3 \cdot 3 \cdot 5.
+        \end{displaymath}
+
+        \section{GCD and LCM}
+
+        \subsection{GCD}
+
+        \begin{definition}
+            \textbf{Common Factor}: if $ c $ divides $ a $ ($ c \mid a $) and $ b $ ($ c \mid b $), 
+            then $ c $ is a \textbf{common factor} of $ a $ and $ b $. \textbf{Greatest Common Factor}: 
+            the biggest of \textbf{common factor}s is the \textbf{greatest common factor}.
+        \end{definition}
+
+        \begin{itemize}
+            \item $ gcd \left( 0,0 \right) $ is \textbf{undefined};
+            \item $ x > 0, gcd \left( x, 0 \right) = x $
+            \item $ x < 0, gcd \left( x, 0 \right) = -x $
+        \end{itemize}
+
+        \subsubsection{Finding GCD}
+        \begin{enumerate}
+            \item Listing the \textbf{prime factorization} of two numbers;
+            \item Extract the shared factors;
+            \item \hl{For algorithm that compute GCD, refer to section} \ref{sec euclidean algorithm} on page
+            \pageref{sec euclidean algorithm};
+        \end{enumerate}
+
+        \subsection{LCM}
+
+        \begin{definition}
+            \textbf{Common Factor}: a common factor $ c $ of $ a $ and $ b $, such that $ a \mid c $, $ b \mid c $.
+            The \textbf{Greatest Common Factor} is the \hl{smallest positive number for which this is true}.
+        \end{definition}
+
+        \begin{itemize}
+            \item \hl{\textbf{Zero} is a \textbf{multiple} of any whole number};
+        \end{itemize}
+
+        \begin{equation}
+            lcm \left(a, b\right) = \frac{a \cdot b}{gcd \left(a, b \right)}
+        \end{equation}
+
+        \subsection{Relative Prime}
+        \begin{itemize}
+            \item If two integers $ a $, $ b $, \hl{share \textbf{no common factors}}, then
+            $ gcd \left( a, b \right) = 1$.
+            \item The pair of integer $ a, b $ is called \textbf{Relatively Prime}.
+        \end{itemize}
+
+        \section{Euclidean Algorithm}\label{sec euclidean algorithm}
+
+        \subsection{Division Theory}
+
+        \begin{theorem}
+            \textbf{Division Algorithm}: For any integers $ a $ and $ b $, where $ b $ is positive, 
+            there are unique integers $ q $ (\textbf{the quotient}) and $ r $ 
+            (\textbf{the remainder}) such that $ a = bq + r $ and $ 0 \leq r < b $.
+        \end{theorem}
+
+        \begin{itemize}
+            \item The \hl{\textbf{remainder} is required to be \textbf{non-negative}};
+            \item \textbf{Ex}, $ \left[7 \mid \left(-10\right)\right] \to  \left[ -10 =7 \cdot \left( -2 \right) + 4 \right] $
+            \item \textbf{Unique}: only one pair of $ q $ and $ r $ satisfy the equation;
+        \end{itemize}
+
+        \subsection{Euclidean Algorithm}
+
+\begin{lstlisting}[caption=Code, numbers=left, frame=lines]
+gcd(a, b: positive integers):
+    x := a
+    y := b
+
+    while (y > 0)
+        begin:
+            r := remainder(a, b)
+            x := y
+            y := r
+        end:
+
+return x
+\end{lstlisting}
+
+        \section{Congruence mod k}
+
+        \begin{definition}
+            \textbf{Congruent mod k}: \hl{If $ k $ is positive}, two integers $ a $ and $ b $ are 
+            \textbf{congruent mod k} if 
+            \begin{equation} \label{eq: congruent mod k}
+                k \mid \left( a - b \right)
+            \end{equation}
+        \end{definition}
+
+        \begin{itemize}
+            \item Integers $ a, b $ are congruent mod $ k $ is written as 
+            \begin{displaymath}
+                a \equiv b \left(\text{mod } k\right)
+            \end{displaymath}
+
+            \item $ k \mid \left( a - b \right) $ \hl{if and only if} $ k \mid \left( b - a \right) $;
+            \item $ 4 \equiv 4 \left(\text{mod } 7 \right) $;
+            \begin{itemize}
+                \item $ 4 - 4 = 0 $, which is a multiple of $ 7 $;
+            \end{itemize}
+
+            \item The $ \left(\text{mod } k\right) $ \hl{is infact a \textbf{logical quantifier}};
+        \end{itemize}
+
+        \section{Equivalent Classes}
+        \begin{definition}
+            \textbf{Congruence Cases, Equivalent Calsses} \textit{The gathering of \textbf{a group of conguent integers} treated
+            as a unit}; Suppose a value $ k $, and an integer $ x $ the group of integers congruent to $ x $ mod $ k $ is 
+            the equivalent class of $ x $ represented as 
+            \begin{equation}
+                \left[ x \right]
+            \end{equation}
+        \end{definition}
+
+        \begin{itemize}
+            \item Integers congruent to $ x $ mod $ k $ \hl{are integers that has a difference with $ x $ of the multiple of $ k $.}
+            \item \textbf{Integers mod $ k $}: a set of equivalence class of integers ($ [0], [1], [2], ... [k - 1] $). Written as 
+            \begin{equation}
+                \mathbb{Z}_{k}
+            \end{equation}
+        \end{itemize}
+
+        \subsection{Equivalence Class Operation}
+
+        \begin{itemize}
+            \item Just like ordinary arithmetic operation
+        \end{itemize}
+
+        \begin{align*}
+            \left[x \right] + \left[y \right] &= \left[x + y \right]\\
+            \left[x \right] \times \left[y \right] &= \left[x \times y \right]\\
+        \end{align*}
+
+        \textbf{Ex. }
+
+        \begin{displaymath}
+            \left[2 \right] + \left[2 \right] = \left[4 \right]
+        \end{displaymath}
+
+
+    \end{note}
+\end{document}

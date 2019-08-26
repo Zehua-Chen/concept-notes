@@ -1,0 +1,42 @@
+\section{Implementations}
+
+\subsection{Linear Probing, Double Hashing}
+
+  \begin{itemize}
+    \item Both hash collision strategy requires the following member 
+    variables to store key and values:
+    \begin{enumerate}
+      \item An array of \highlight{key-value pairs 
+      with \textbf{optional} semnatics}
+      \footnote{Optional semantics: the value is either empty or hold 
+      valid values};
+      
+      \item An \highlight{array of booleans} used to 
+      \highlight{determine if probing should be performed};
+    \end{enumerate}
+  \end{itemize}
+  
+  \paragraph{Why an Array of Booleans?}
+  \begin{itemize}
+    \item The array is used to determine if a value is 
+    either \highlight{occupying} or \highlight{was previously 
+    occupying} a cell;
+    
+    \item Consider the following case:
+    \begin{enumerate}
+      \item There is an entry in the hashtable at index 0;
+      \item A newly inserted entry gives an initial hash value of 0.
+      After computing linear probing or double hasing,
+      the new entry is placed in index 1;
+      \item Remove the entry at 0 by invalidating the cell at index 0;
+      \item A if-key-exits operation is invoked with the key of the 
+      entry at index 1 being what the operation is looking for;
+      \begin{enumerate}
+        \item The initial hashing operation output index 0;
+        \item Without the boolean array, the lookup will return $ -1 $ as
+        the cell at index 0 is invalid;
+        \item With the boolean array, the lookup will continue to index $ 1 $,
+        as there was a cell that was previously occupying index 0.
+      \end{enumerate}
+    \end{enumerate}
+  \end{itemize}

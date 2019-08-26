@@ -1,0 +1,151 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+
+\subject{CS 173}
+\date{April 2 -- 3, 107}
+\id{CS17310704021}
+\title{NP}
+
+\begin{document}
+\begin{note}{Exam 9}
+
+\section{Multiplying Big Integers}
+
+\begin{align*}
+    T \left( 1 \right) &= d \\
+    T \left( n \right) &= 3 T \left( \frac{n}{2} \right) + c \times n
+\end{align*}
+
+\begin{itemize}
+    \item Anatolii Karatsuba's algorithm of multiplying numbers has a running time of:
+    \begin{equation}
+        O \left( n^{ \log_{2} 3 } \right)
+    \end{equation}
+
+    \item The original algorithm for multiplying numbers is $ O \left( n^{ 2 } \right) $
+\end{itemize}
+
+\section{Types of Problems}
+
+    \subsection{EXP}
+
+    \begin{itemize}
+        \item \textbf{EXP}: problems that has to be solved using \textbf{exponential} time algorithm, proven. Examples are as follows:
+        \begin{enumerate}
+            \item Tower of Hanoi $ \Theta \left( 2^{n} \right) $;
+            \begin{align*}
+                T (1) &= d \\
+                T (n) &= 2 T (n - 1) + c 
+            \end{align*}
+            \item Parse Tree
+        \end{enumerate}
+    \end{itemize}
+
+    \subsection{NP}
+
+    \begin{itemize}
+        \item \textbf{NP}: problems that have existing \textbf{exponential} time algorithm. \hl{However, no one has proven them being 
+        impossible to do using \textbf{polynomial time algorithm}}.
+        
+        \begin{enumerate}
+            \item Graph Colorability Problems;
+            \item Satisfiability of Boolean Circuits;
+        \end{enumerate}
+
+        \item Problems for which we can \hl{provide \textbf{succint positive} answers} are in \textbf{NP};
+        \begin{itemize}
+            \item For an answer to be succint, the result must be \hl{checkable in \textbf{polynomial time}};
+        \end{itemize}
+    \end{itemize}
+
+        \subsubsection{Satisfiability of Boolean Circuits}
+
+        \begin{itemize}
+            \item \textbf{Circuit Satisfiability Problems}: problems where we find \hl{if there is a set of values $ n $ 
+            that would create a fordbidden pattern of output}:
+            \begin{itemize}
+                \item To test, \hl{generate $ 2^{n} $ possbile input patterns} give $ n $ input wires;
+                \item To justify the solution of the problem, \hl{show on pattern of input that will generate the fordbidden output};
+                \item \hl{Therefore the problem is in \textbf{NP}};
+            \end{itemize}
+        \end{itemize}
+
+        \paragraph{What is Boolean Circuit}
+
+        \begin{itemize}
+            \item A boolean circuit is a graph that consists of set of gates connected by wires;
+            \item Each wires carries true (1) or false (0);
+            \item The label on a gate determines how the value on its output value are determined by its input value:
+            \begin{itemize}
+                \item \textbf{Example}, for an output value of an \textbf{AND} gate to be true, both of its input wires needs to be true;
+            \end{itemize}
+            \item Labels on gates (nodes) are the logical operators;
+        \end{itemize}
+
+    \subsection{NP-Complete}
+
+    \begin{itemize}
+        \item \textbf{NP-Complete}: problems for \hl{which once \textbf{polynomial runtime} can be proven, all other NP problems can have
+        polynomial runtime}; back-bone problems;
+        
+        \item \textbf{Examples}:
+        \begin{itemize}
+            \item Propositional logic satisfiability
+            \item Clique
+            \item The Marker Making problem
+            \item Vertex cover
+            \item The Travelling Salesman Problem
+        \end{itemize}
+
+        \item \hl{Problems typically remain \textbf{NP-complete} even when stripped to their base cases (extreme cases)}:
+        \begin{itemize}
+            \item Restrict boolean circuit to have a single output;
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{co-NP}
+
+    \begin{itemize}
+        \item Problems for which we can \hl{provide \textbf{succint negative} answers} are in \textbf{co-NP}:
+        \begin{itemize}
+            \item Circuit Safety
+        \end{itemize}
+
+        \item If both succint \textbf{positive and negative} answers can be provided, then the problem is in both \textbf{NP and co-NP};
+    \end{itemize}
+
+        \subsubsection{Circuit Safety}
+
+        \begin{itemize}
+            \item Prove none of the input patterns can provide forbidden output pattern;
+            \item The problem is in \textbf{co-NP};
+            \begin{itemize}
+                \item There are \textbf{exponential amount of input pattern};
+                \item Negative answers can be proven using \textbf{polynomial runtime};
+            \end{itemize}
+        \end{itemize}
+
+
+    \subsection{P}
+
+    \begin{itemize}
+        \item Problems in \textbf{P} \hl{can be solved \textbf{in polynomial time}};
+        \item \textbf{P} \hl{is a subset of \textbf{NP and co-NP}};
+    \end{itemize}
+
+\end{note}
+\end{document}

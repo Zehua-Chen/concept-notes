@@ -1,0 +1,54 @@
+\section{Theorems}
+
+\subsection{Seeks Performed During Search}
+
+  \begin{theorem}
+    The height of a btree of $ m $ order 
+    and have $ n $ elements is no more than 
+    \begin{displaymath}
+      \log_{m} \left( n \right)
+    \end{displaymath}
+    Which is also the max number of seeks during a search on a btree.
+  \end{theorem}
+  
+  \paragraph{Functions and Variables}
+  \begin{align*}
+    \minnodes &= \text{min number of nodes} \\ 
+    t &= \text{min number of children} \\ 
+    &= \ceil{ \frac{m}{2} } \\
+    &\approx \frac{m}{2} \approx m \\
+    \minkeys &= \text{min number of keys} \\ 
+    &= t - 1
+  \end{align*}
+  
+  \paragraph{Proof}
+  \begin{align*}
+    \minnodes_{internal} &= \ceil{ \frac{m}{2} } \\
+    \minnodes_{root} &= 1 \\ 
+    \minnodes_{1} &= 2 \\ 
+    \minnodes_{2} &= 2 t \\
+    \minnodes_{3} &= 2 t \times t \\
+    \minnodes_{h} &= 2 t^{h - 1} \\
+  \end{align*}
+  
+  \begin{align*}
+    \minnodes &= 1 + \sum_{k = 0}^{h - 1} 2 \times t^{k} \\ 
+    &= 1 + 2 \left( \frac{ t^{h - 1 + 1} - 1 }{ t - 1 } \right) \\
+    \minkeys &= 1 + 2 \left( \frac{ t^{h - 1 + 1} - 1 }{ t - 1 } \right) \times \left( t - 1 \right) \\ 
+    &= 1 + 2 \left( t^{h} - 1 \right) \\ 
+    &= 2 \left( t^{h} \right) - 1 \\ 
+    &= 2 \left( \ceil{ \frac{m}{2} } \right)^{h} - 1
+  \end{align*}
+  
+  \begin{align*}
+    2 t^{h} - 1 &\leq n \\ 
+    \log_{t} \left( \frac{n + 1}{3} \right) &\leq h \\ 
+    &\approx \log_{m} \left( n \right)
+  \end{align*}
+  
+\subsection{Summary}
+
+  \paragraph{Max Keys}
+  \begin{equation}
+    k = m^{h + 1} - 1
+  \end{equation}

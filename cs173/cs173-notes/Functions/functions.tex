@@ -1,0 +1,267 @@
+\documentclass{note}
+
+\usepackage{float}
+\usepackage{color, colortbl}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage[english]{babel}
+
+\definecolor{red}{rgb}{1, 0, 0}
+
+% For ceil and floor
+\usepackage{mathtools}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+\newtheorem{definition}{Definition}
+
+\subject{CS 173}
+\date{February 12 -- 13, 107}
+\id{CS17310702111}
+\title{Functions}
+
+\begin{document}
+    \begin{note}{Exam 6}
+
+        \section{Functions}
+        \begin{definition}
+            Let $ A $ and $ B $ be sets, a function $ f $ from $ A $ to $ B $ is an \textbf{assignment of exactly one element
+            from $ B $ to $ A $.}
+        \end{definition}
+        \begin{equation}\label{eq: function shorthand}
+            f: A \to B
+        \end{equation}
+
+        \begin{itemize}
+            \item $ A $ is the \textbf{domain} of the function;
+            \item $ B $ is the \textbf{codomain} of the function;
+            \item If $ x $ is in the set $ A $, then $ f(x) $ is an \textbf{image of $ x $};
+            \item For $ f $ to be a function, \hl{\textbf{one input value} must only generate \textbf{one output value}};
+            \begin{itemize}
+                \item If \hl{a input does not have an output}, then $ f $ is \textbf{not a function};
+                \item If \hl{a input has \textbf{multiple} output}, then $ f $ is \textbf{not a function};
+            \end{itemize}
+        \end{itemize}
+
+        \subsection{Identity Functions}
+
+        \begin{definition}
+            Given a set $ A $, the identity functions $ id_{A} $ are functions that map every element of $ A $ to itself;
+            \begin{align*}
+                id_{A} &: A \to A\\
+                id_{A}(x) &= x
+            \end{align*}
+        \end{definition}
+
+        \subsection{Possibilities of Functions}
+
+        \begin{definition}
+            Given the function $ f $ on the sets $ A, B $, where $ \left| A \right| = n $ and $ \left| B \right| = p $, then the function
+            $ f: A \to B $ has $ p^{n} $ possibilitis of construction of the function;
+        \end{definition}
+
+        \subsection{Image}
+
+        \begin{definition}
+            \textbf{Definition}: The image of function $ f: A \to B $ is the exact values produced when $ f $ is applied to every element
+            of $ A $;
+            \begin{equation}\label{eq: definition of image}
+                f \left( A \right) = \{ f \left( x \right), x \in A \}
+            \end{equation}
+        \end{definition}
+
+        \begin{itemize}
+            \item if the values a function produces is $ \mathbb{Z} $, \hl{then the image is $ \mathbb{Z} $ and not $ \mathbb{R} $},
+            even  though $ \mathbb{R} $ includes $ \mathbb{Z} $;
+        \end{itemize}
+
+        \begin{definition}
+            \textbf{Pre-Image}: an value that maps to an element in the image;
+        \end{definition}
+
+        For a function $ f: A \to B $
+        \begin{equation}
+            \exists y \in B, \forall x \in A, f(x) \neq y
+        \end{equation}
+
+        \section{Properties of Functions}
+
+        \subsection{Equality}
+
+        For two functions to be equal:
+        \begin{itemize}
+            \item Two functions must assign the \hl{same output values to the same input values};
+            \item \hl{Has the same \textbf{type signatures}}:
+            \begin{itemize}
+                \item \textbf{Type Signature}: the \textbf{type or range} of set $ A $ and $ B $ in
+                \begin{displaymath}
+                    f : A \to B
+                \end{displaymath}
+            \end{itemize}
+
+            \item \textbf{Example}, the below two functions are not equivalent
+            \begin{align*}
+                f &: \mathbb{N} \to \mathbb{N}, f(x) = 2x\\
+                f &: \mathbb{R} \to \mathbb{R}, f(x) = 2x\\
+            \end{align*}
+        \end{itemize}
+
+        \subsection{Onto}
+
+        \begin{definition}
+            \textbf{Onto}: the function $ f: A \to B $ is \textbf{onto} if \textbf{the image of $ f $} is its \textbf{whole co-domain}.
+            \begin{equation}\label{eq: definition of onto}
+                \forall y \in B, \exists x \in A, f(x) = y
+            \end{equation}
+        \end{definition}
+
+        \begin{itemize}
+            \item A function is onto or not \hl{depends heavily on the type signature};
+        \end{itemize}
+
+        \subsubsection{Negating Onto}
+        \begin{itemize}
+            \item For a function to be \textbf{not onto}, there must be a value $ y $ from the codomain that no matter what value $ x $
+            is picked from the domain does not give $ y $;
+        \end{itemize}
+
+        \subsection{One to One}
+
+        \begin{definition}
+            \textbf{One-to-One Functions}: functions that only has \hl{one pre-image for one image}; there are \hl{no two inputs that give
+            the same output};
+            \begin{align}
+                \forall x, y \in A, x \neq y &\to f(x) \neq f(y)\\
+                \forall x, y \in A, f(x) = f(y) &\to x = y
+            \end{align}
+        \end{definition}
+
+        \subsubsection{Pigeonhole Principle}
+
+        \begin{definition}
+            Given $ n $ objects, and $ k $ labels to assign on those objects, \hl{if $ n > k $, then two objects must share the same label}.
+        \end{definition}
+
+        \subsubsection{Strictly Increasing is One-to-One}
+
+        \begin{definition}
+            \textbf{Strictly Increasing}: an increasing functions where
+            \begin{equation}\label{eq: strictly increasing}
+                x < y \to f(x) < f(y)
+            \end{equation}
+            \hl{in another word, there is no flat area on the function}.
+        \end{definition}
+
+        \begin{itemize}
+            \item \hl{A \textbf{strictly increasing} function is a \textbf{one to one function}}.
+            \item An \textbf{one to one function} is \textbf{not nessarily strictly increasing};
+            \begin{itemize}
+                \item A one to one function can also be \textbf{decreasing};
+                \item Definition of one to one:
+                \begin{displaymath}
+                    \forall x, y \in A, x \neq y \to f(x) \neq f(y)
+                \end{displaymath}
+            \end{itemize}
+        \end{itemize}
+
+        \subsection{Bijection}
+
+        \begin{definition}
+            A function that is both \textbf{onto and one-to-one} is bijection.
+        \end{definition}
+
+        Given a set $ A $ and $ B $ in $ f: A \to B $
+        \begin{itemize}
+            \item For the function to be \textbf{onto}, $ A $ needs to have the same amount of elements as $ B $;
+            \item For the function to be \textbf{one-to-one}, $ B $ needs to have the same amount of elements as $ A $;
+            \item \hl{For the function to be \textbf{bijection}, the sets needs to have the same amount of elements};
+        \end{itemize}
+
+        \section{Permutation}
+
+        There are $ y $ ways of ordering $ n $ objects, \hl{if all the objects are different}
+        \begin{equation}\label{eq: ordering permutation}
+            y = n!
+        \end{equation}
+
+        \subsection{Selection}
+
+        There are $ y $ ways of selecting $ k $ objects from a $ n $ set of objects
+        \begin{equation}\label{eq: select permutations}
+            y = \frac{n !}{\left( n - k\right)!}
+        \end{equation}
+
+        \subsection{Duplicates}
+
+        There are $ y $ ways of ordering $ n $ objects, where there are $ n_{1} $ of type 1, $ n_{2} $ of type 2...
+        \begin{equation}\label{eq: duplicate permutation}
+            y = \frac{n !}{n_{1}! n_{2}!...}
+        \end{equation}
+
+        \section{Probabilities and Functions}
+
+        \paragraph{Functions}
+        Given two sets $ A, B $,
+        \begin{align*}
+            \left| A \right| &= p\\
+            \left| B \right| &= q\\
+            p &\leq q\\
+        \end{align*}
+        \hl{There are $ x $ \textbf{one-to-one} functions from $ A $ to $ B $}
+        \begin{displaymath}
+            x = q^{p}
+        \end{displaymath}
+
+        \paragraph{One to one}
+        Given two sets $ A, B $,
+        \begin{align*}
+            \left| A \right| &= p\\
+            \left| B \right| &= q\\
+            p &\leq q\\
+        \end{align*}
+        \hl{There are $ x $ \textbf{one-to-one} functions from $ A $ to $ B $}
+        \begin{displaymath}
+            x = \frac{q!}{\left(q - p\right)!}
+        \end{displaymath}
+
+        \paragraph{Onto}
+        Given two sets $ A, B $,
+        \begin{align*}
+            \left| A \right| &= p\\
+            \left| B \right| &= q\\
+            p &\leq q\\
+        \end{align*}
+        \hl{There are $ x $ \textbf{onto} functions from $ A $ to $ B $}
+
+        \section{Tricky Cases}
+
+        \paragraph{GCD}
+        Given a function $ f: N^{2} \to N $, where $ f $ is
+        \begin{displaymath}
+            f(x,y) = gcd(x,y)
+        \end{displaymath}
+        \hl{This is not a function}, consider $ f(0,0) = gcd(0,0) $ is undefined.
+
+        \paragraph{Nested Quantifier 1}
+        \begin{displaymath}
+            \forall m, n \in \mathbb{Z}, \exists x: x = \frac{m}{n}
+        \end{displaymath}
+        The statement is \textbf{false}, consider what happens if $ n = 0 $;
+
+        \section{Writing Proofs}
+
+        \subsection{Onto}
+
+        \begin{itemize}
+            \item Declare a varriable $ n $, find a way to show that there is an $ x $
+            such that $ f(x) = n $;
+            \begin{enumerate}
+                \item Declare the variable $ n $, but do not assign a value to $ n $(x needs to be \textbf{arbitrary});
+                \item Make $ f(x) = n $;
+                \item Figure out an $ x $ such that $ f(x) = n $;
+            \end{enumerate}
+        \end{itemize}
+
+
+    \end{note}
+\end{document}
