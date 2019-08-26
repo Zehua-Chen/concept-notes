@@ -245,3 +245,7 @@ TSWLatexianTemp*
 
 # VSCode
 .vscode/
+
+# Jupyter 
+
+.ipynb_checkpoints/
