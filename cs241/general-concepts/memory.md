@@ -20,6 +20,13 @@ void* malloc(size_t bytes);
 - Returns a pointer to the start of a heap memory block if it can be found;
 - Returns a null pointer if there is insufficient memory;
 
+```c
+void *calloc(count, type_size);
+```
+
+- **When working with string related functions, use this instead of `malloc`
+to avoid memory errors**
+
 ### Heap Free
 
 ```c
