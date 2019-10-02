@@ -1,0 +1,64 @@
+\section{Probabilities}
+
+  \subsection{Random Variables}
+
+    A \textbf{random variable} is a \ul{variable whose value depends on an random
+    event}; can also be considered as a function that takes an event as input and
+    gives some kind of output
+
+    \begin{itemize}
+      \item \textbf{Discrete} random varaibles have values that are clearly
+      separated from other variables
+      \item \textbf{Continuous} random varaibles have values that are
+      different, but not so different from each other. ex. $ 1.0 $ and $ 1.01 $
+    \end{itemize}
+
+  \subsection{Probabilities}
+
+    \begin{itemize}
+      \item \textbf{Variables} are typically \ul{capitalized}
+      \item \textbf{Values} are typically \ul{not capitalized}
+    \end{itemize}
+
+    \begin{align}
+      P\left( \text{variable} = \text{value} \right) &= x \\
+      P\left( E \right) &= x
+    \end{align}
+
+    $ E $ is event; $ P $ means what percentage of time does the
+    variable has the value or when the event holds true
+
+    \begin{equation}
+      P\left( X = v \text{and} Y = w \right)
+    \end{equation}
+
+    $ P $ is how often do we see $ X $ has the value of $ v $ and $ Y $ has
+    the value of $ w $
+
+    \begin{equation}
+      P\left( v, w \right)
+    \end{equation}
+
+    The author hope the reader can guess what values these variables belong
+    to.
+
+  \subsection{}
+
+  \subsection{Distribution}
+
+    A distribution is an assignment of probability values to
+    all events of interest; or all values for particular random variable or
+    pair of random variables
+
+    \subsubsection{Properties}
+
+    $ P(A, B, C) = P(C) \cdot P(A | C) \cdot P(B | A, C) $
+
+    \subsection{Independence}
+
+      A, B are indenpendent iff
+
+      $ P(A, B) = P(A) \cdot P(B) $ equivocally
+
+      $ P(A|B) = P(A) $
+      $ P(B|A) = P(B) $

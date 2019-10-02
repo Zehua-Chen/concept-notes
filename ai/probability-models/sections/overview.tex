@@ -1,25 +1,16 @@
 \section{Overview}
 
-  \subsection{Problem: How to Recognize Leaves?}
+  \subsection{Why Are Probability Models Needed}
 
-    \paragraph{Bad: Logic Based Recognitiion (Discrete Features)}
     \begin{itemize}
-      \item Too complex
-      \item Too much need for experts
-      \item Hand crafting (very very slow and error prone)
-    \end{itemize}
-
-    \paragraph{Good: Learn From Example}
-    \begin{itemize}
-      \item Learn from pictures, audio data, text databases, big collection of text
-      \item \ul{Problems}:
+      \item Logic based model is too hard to do and does not scale
+      \item Learning models from examples has problems as well:
       \begin{itemize}
         \item Data contains uncertainties, errors (Department of Computer Silence)
         \item Data maybe incomplete
-        \item Data lack annotations (transcription, background context); annotations can also be wrong
+        \item Data lack annotations (transcription, background context);
+        annotations can also be wrong
       \end{itemize}
-
-      \item Use probabilities to model the data and work around the data (as much as possible)
     \end{itemize}
 
   \subsection{Recognizing Rail-Road Intersections}

@@ -123,6 +123,28 @@
         \end{itemize}
       \end{itemize}
 
+      \paragraph{Phrases}
+      Group words into a set
+      \begin{itemize}
+        \item Bigram: \say{big cat}
+        \item Trigram...
+      \end{itemize}
+
+      Words set make training harder to do
+      \begin{itemize}
+        \item Sparser training data
+        \item Make need for smoothing
+      \end{itemize}
+
+      \subparagraph{Solution 1}
+      Calculate probabilities from word probabilities and context probabilities.
+      Ex. given \say{The angry X}. Some words can be X more in come context
+
+      \subparagraph{Solution 2}
+      \textbf{Fertile contexts}: if we have seen a lot of words in some context,
+      we are likely to see more words there
+      Ex. given \say{give me the X}, there can be a lot of \say{X}
+
   \subsection{Early Use}
 
     \subsubsection{Spam Cops (1998)}

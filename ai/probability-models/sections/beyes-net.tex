@@ -1,0 +1,45 @@
+\section{Beyes Net}
+
+  Beyes net is usually used to capture causal structure.
+
+  \begin{itemize}
+    \item When a node has two parent, only one needs to be true for the
+    node to be true
+    \item Independent varaibles/nodes do not have any connection
+    on the graph
+  \end{itemize}
+
+  \subsection{Child-Parent Relationship}
+
+    \begin{itemize}
+      \item \textbf{One parent}: two parameters
+      \item \textbf{Multiple parent}: joint table
+    \end{itemize}
+
+    Given $ n $ variables, max number of parent is $ m $, there are
+    $ n \times 2^{m} $ parents
+
+  \subsection{Background Knolwedge}
+
+    \subsubsection{Partial Order}
+
+      \ul{Only some} of the elements in the collection is ordered
+
+      \begin{itemize}
+        \item Can linearize a partial order into a total order
+      \end{itemize}
+
+    \subsubsection{Total Order}
+
+      \ul{Everything} in the collection is orderered.
+
+  \subsection{Formal Description}
+
+    Beyes net is a \ul{directed, acyclic} graph
+    \begin{itemize}
+      \item Partial ordered
+      \item No cycles
+    \end{itemize}
+
+    Each node is conditionally independent of its ancestors
+    given its parents.
