@@ -4,6 +4,7 @@
 \usepackage{color, colortbl}
 \usepackage{longtable}
 \usepackage{tabu}
+\usepackage{soul}
 
 \definecolor{red}{rgb}{1, 0, 0}
 
@@ -23,17 +24,17 @@
         \section{Proofs}
 
         \begin{itemize}
-            \item The reader and author of the proof should \hl{agree on what's \textbf{familiar and obvious} 
-            and what's \textbf{unfamiliar}}, 
+            \item The reader and author of the proof should \hl{agree on what's \textbf{familiar and obvious}
+            and what's \textbf{unfamiliar}},
         \end{itemize}
 
         \subsection{Universal Proofs}
 
-        \textbf{Example Claim}, Let $ k $ be any integer and suppose that $ k $ is odd. 
+        \textbf{Example Claim}, Let $ k $ be any integer and suppose that $ k $ is odd.
         We need to show that $ k^{2} $ is odd
 
         \begin{itemize}
-            
+
             \item \textbf{Direct Proof Outline}:
 
             \begin{enumerate}
@@ -41,7 +42,7 @@
                 \begin{itemize}
                     \item \hl{\textbf{Variable delcaration} or \textbf{hypothesis} of if-then statement};
                     \item \textbf{Ex.} \lq\lq $ k $ is an integer and it is odd\rq\rq;
-                \end{itemize} 
+                \end{itemize}
 
                 \item Move toward information needing to be proved:
                 \begin{itemize}
@@ -96,8 +97,8 @@
         \subsection{Existantial Statements}
 
         \paragraph{Claim}For every integer $ k $, $ k2 +2k+1≥0 $.
-        \paragraph{Disproof} Let $ k $ be an integer. Then $ (k + 1)2 \geq 0 $ 
-        because the square of any real number is non-negative. But $ (k+1)^{2} = k2 +2k+1 $. 
+        \paragraph{Disproof} Let $ k $ be an integer. Then $ (k + 1)2 \geq 0 $
+        because the square of any real number is non-negative. But $ (k+1)^{2} = k2 +2k+1 $.
         So, by combining these two equations, we find that $ k2 + 2k + 1 \geq 0 $.
 
         \section{Proof by Cases}
@@ -117,7 +118,7 @@
 
         \paragraph{Prove:} for every $ x, x \in \mathbb{Z} $, $ x^{2} + 2 $ is not divisible by 4
 
-        \paragraph{Proof:} By definition of division algorithm, let $ x $ be $ x = 4q + r $, where... 
+        \paragraph{Proof:} By definition of division algorithm, let $ x $ be $ x = 4q + r $, where...
         Since $ 0 \leq r < b $, there are four cases
         \begin{enumerate}
             \item $ x = 4q $, plugin $ x $ into $ x^{2} + 2 $...
@@ -153,7 +154,7 @@
 
         \textbf{Example}, given the claim: For any integer $ a $ and $ b $, if  $ a+b \geq 15 $, then $ a \geq 8 $ or $ b \geq 8 $.
         \begin{enumerate}
-            \item For any integers $ a $ and $ b $, if it’s not the case that  $ a \geq 8 $ or $ b \geq 8 $, 
+            \item For any integers $ a $ and $ b $, if it’s not the case that  $ a \geq 8 $ or $ b \geq 8 $,
             then it’s not the case that $ a + b \geq 15 $.
             \item For any integers $ a $ and $ b $, if $ a < 8 $ and $ b < 8 $, then $ a + b < 15 $.
         \end{enumerate}
@@ -163,16 +164,16 @@
         \subsection{Variables}
 
         \begin{itemize}
-            \item To \hl{declare a variable}, use 
+            \item To \hl{declare a variable}, use
             \begin{center}
-                \texttt{Let \underline{identifier} be \underline{value}.}
+                \texttt{Let \ul{identifier} be \ul{value}.}
             \end{center}
 
-            \item To \hl{describe a variable}, use 
+            \item To \hl{describe a variable}, use
             \begin{center}
-                \texttt{Suppose \underline{identifier} is \underline{description}}(Ex. bigger than 0)
+                \texttt{Suppose \ul{identifier} is \ul{description}}(Ex. bigger than 0)
             \end{center}
         \end{itemize}
-        
+
     \end{note}
 \end{document}

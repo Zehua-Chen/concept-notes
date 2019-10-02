@@ -1,0 +1,48 @@
+\section{Overview}
+
+  \subsection{Graph: Problem Representation}
+
+    \begin{itemize}
+      \item Most search problems can be represented as a state graph
+      \item Most state diagrams are done in graphs
+      \item Some state graphs can be very large, therefore we need to be efficient
+      \item AI typically only see a small portion of the whole graph at the beginning
+    \end{itemize}
+
+    \subsubsection{Graph Component}
+
+      \paragraph{State}
+      \begin{itemize}
+        \item Each graph should have a \textbf{start state} and numerous
+        \textbf{end states}
+        \item \textbf{Information in states:}
+        \begin{itemize}
+          \item Cost so far
+          \item Esimated cost of the remaining search (informed search only)
+        \end{itemize}
+
+        \item \textbf{Organization of states}:
+        \begin{itemize}
+          \item Not yet seen
+          \item \textbf{Frontier} the semantics of the frontier determines
+          the type of search
+          \item Done
+        \end{itemize}
+
+        \item States can be built on-demand
+      \end{itemize}
+
+      \paragraph{Action}
+      Actions are graph edges with costs
+
+  \subsection{Types of Searches}
+
+    \begin{itemize}
+      \item Uninformed search
+      \begin{itemize}
+        \item BFS
+        \item DFS
+      \end{itemize}
+
+      \item Informed search
+    \end{itemize}

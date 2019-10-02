@@ -1,0 +1,93 @@
+\section{A Star Search}
+
+  \begin{align*}
+    f(s) &= g(s) + h(s) \\
+    g(s) &= \text{cost so far} \\
+    h(s) &= \text{guess at cost remains to reach goal "heuristic"}
+  \end{align*}
+
+  \begin{itemize}
+    \item Implementation is same as Uniform Cost Search,
+    \ul{except $ g(s) $ is replaced with $ f(s) $} to
+    order the priority queue
+    \item $ h(s) $ needs to be:
+    \begin{itemize}
+      \item Fast to compute
+      \item Underestimate, aka \textbf{admissible heuristic} (lower bond),
+      ex. take straight line
+      \item As large as possible without overestimating
+    \end{itemize}
+
+    \item Simplfy problems:
+    \begin{itemize}
+      \item Remove walls
+      \item Straighten out the roads
+      \item \textbf{Manhatten distance}: $\left| \Delta x \right| + \left| \Delta y \right|$;
+      (\ul{this is a better solution when we can't move diagnally; if we can this is no longer an underestimate})
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Heuristic for IS Puzzle (Drag Puzzle Demoed in Class)}
+
+    \begin{itemize}
+      \item How many not in correct position
+      \item How far does each piece has to move? (Manhattan distance)
+    \end{itemize}
+
+  \subsection{Why Admissible?}
+
+    \begin{itemize}
+      \item Let $ c $ be the cost of the solution,
+      $ c' $ be an estimated cost of a state, $ s' $ be a non-solution state
+      \item Get optimal solution (shortest path)
+      \item Don't return solution until its at the front of hte priority
+      queue (inherited from uniform cost search);
+      \begin{itemize}
+        \item $ c' \le $ true cost for $ s' $
+        \item $ c $ at front $ c \le c' $
+        \item $ c \le $ true cost for any $ s' $ in priority queue
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{A Star vs Uniform Cost}
+
+    \begin{itemize}
+      \item \textbf{UCS}: updates to distances all involve state on frontier
+      \item \textbf{A star}: updates may invovle closed states
+    \end{itemize}
+
+  \subsection{Workarounds}
+
+    \begin{itemize}
+      \item If we read a seen state via better path , update s even if s is done. Pus s back into the frontier
+      \item Will priority queue get me update costs for X?
+      \begin{itemize}
+        \item Workaround: put x into queue a second time with the new cost
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Admissible}
+
+    \begin{itemize}
+      \item Admissible: A star will connct btter
+      \item Constructor:  A return optimal path, a lot fancy boundaries
+      \item A star reduces optimal path with last boundaries
+    \end{itemize}
+
+  \subsection{Consistant}
+
+    Many common heuristics are consistant . e.g. straing line in
+    2d geometry of his consistent, updates are only to states in frontiers.
+    UCS in A star with $ (ha) = 0 $, $ h (s) $ is consistent.
+
+  \subsection{A Star Variants}
+
+    \begin{itemize}
+      \item \textbf{Beam search}: like A* but only keeps best k in the frontier
+      \begin{itemize}
+        \item Consumption of extensive resources
+      \end{itemize}
+
+      \item \textbf{Suboptimal}: hueristic
+      \item \textbf{Database}: just look at 4 squares
+    \end{itemize}

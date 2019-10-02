@@ -1,0 +1,35 @@
+\section{Uniform Cost Search}
+
+  \begin{itemize}
+    \item Base the search on the distance so far
+    \item Frontier stored as a priority queue where the key is the distance so far
+    \item BFS only finds the best path if all edges have the same cost
+    \item \ul{Finds the best path}
+    \item Only works if \ul{edges costs are well-behaved}:
+    \begin{itemize}
+      \item All positive
+      \item All edge costs are >= b (some positive minimum lengths)
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Implementation}
+
+    \begin{lstlisting}[style=pseudo]
+g(s) = distance so far
+
+frontier priority queue:
+  based on g(s)
+
+if we return to a state s:
+  update distance g(s)
+    \end{lstlisting}
+
+    \begin{enumerate}
+      \item Expand best state (state with the lowest cost so far) on frontier
+      \begin{itemize}
+        \item Use priority queue
+      \end{itemize}
+
+      \item Stop when goal is at the top of the priority queue;
+      \item When return to a state, via better route, update the route distance;
+    \end{enumerate}

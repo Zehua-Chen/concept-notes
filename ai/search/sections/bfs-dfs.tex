@@ -1,0 +1,51 @@
+\section{BFS and DFS}
+
+  \subsection{BFS}
+
+    \begin{itemize}
+      \item BFS's frontier is implemented as a stack
+      \item BFS goes out in circle, gives an optimal solution
+      when the actions have the same cost
+      \item \ul{Memory heavy}:
+      \begin{itemize}
+        \item Frontier is very larage; grows linearly with distance from the start
+        \item Must \ul{store all seen} states to \ul{avoid looping}
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{DFS}
+
+    \begin{itemize}
+      \item Frontier done as a stack
+      \item Solution can be less than optimal
+      \item Can go straight off the goal or get lost
+      \item May not reach goal is state is infinite
+      \item Can be \ul{very efficient}
+      \begin{itemize}
+        \item Small frontier
+      \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Seen State Optimization}
+
+      \begin{itemize}
+        \item Don't explicitly store states
+        \item Check wether we are returning to a state that's on the stack
+        or on the paths leading up to these stacks
+        \item This strategy leads to redundant work as the search
+        has poor memory of what it has done
+      \end{itemize}
+
+  \subsection{Iterative Deepening}
+
+    \begin{itemize}
+      \item Iterative deepending is a varaint of DFS, but with depth constraint
+      \item Search behavior looks like BFS
+      \item Each iteration starts from scratch, forgettting all previous works
+      \item Uses very little memory
+    \end{itemize}
+
+    \begin{lstlisting}[style=pseudo]
+for i from 1 to infty:
+  do DFS with bond i
+    \end{lstlisting}

@@ -246,6 +246,9 @@ TSWLatexianTemp*
 # VSCode
 .vscode/
 
-# Jupyter 
+# Jupyter
 
 .ipynb_checkpoints/
+
+# Custom Latex
+bin/

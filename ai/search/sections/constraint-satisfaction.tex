@@ -1,0 +1,32 @@
+\section{Constraint Satisfaction}
+
+  \begin{itemize}
+    \item Result matters; path does not matter
+    \item Need to find a goal state path doesn't matter
+    \item Goal means passes some tests
+  \end{itemize}
+
+  \subsection{N Queens}
+
+    \begin{itemize}
+      \item Given n x n board and n queens, place so that no queen threathens others
+      \item \ul{Approach}: each col is a variable; variable values are
+      rows (\ul{domains}); exactly one queen per column
+      \begin{itemize}
+        \item Constraints are interactions between values for different variables
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Map Coloring}
+
+    \begin{itemize}
+      \item Have k colors
+      \item Color each sate
+      \item Adjacent states must have different colors
+      \item 4 color theorem
+    \end{itemize}
+
+  \subsection{NP Complete Problem}
+
+    Best known algorithm is exponential, but we can't prove there isn'
+    a polynomial algorithm. In practice,
