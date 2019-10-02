@@ -1,0 +1,145 @@
+\section{Naive Beyes}
+
+  $ P(cause | evidence) = \frac{P(evidence | cause)}{P(evidence)} P(cause) $
+
+  \begin{itemize}
+    \item Posterior: $ P(cause | evidence) $
+    \item Likelihood: $ P(evidence | cause) $
+    \item Normalization: $ P(evidence) $
+    \item Prior: $ P(cause) $
+  \end{itemize}
+
+  Want to compute posterior from likelihood, normalization and prior
+  (which are easier to obtain than posterior)
+
+  \subsection{Examples}
+
+    \subsubsection{Bike}
+
+      We saw a teal bike, what brand (standard, veodride) is it?
+
+      $ P(veo | teal) = \frac{P(teal | veo) P(veo)}{P(teal)} = 0.905 $
+
+      $ P(standard | teal) = \frac{P(teal | standard) P(standard)}{P(teal)} = 0.095 $
+
+      \paragraph{Assign Classes}
+
+      $ \underset{c\in C_{0}, ..., C_{n}}{\operatorname{argmax}} P( C_{n} | evidence) $
+
+      Find the class in which the object most likely belongs to (**maximize posterior**).
+
+      \paragraph{Maximum Likelihood Estimate (MLE Estimate)}
+
+    \subsubsection{Bag of Words}
+
+      \begin{itemize}
+        \item Treat words independently
+        \begin{itemize}
+          \item No phrases (ex. good people, can't recognize "not x")
+          \item No word order
+        \end{itemize}
+
+        \item Use the word with the highest probability as the class
+      \end{itemize}
+
+      \paragraph{Steps}
+      \begin{enumerate}
+        \item Convert input string to a clean string of words
+        \begin{itemize}
+          \item Divide at whitespace
+          \item Normalize punctuations (capitalization, wierd characters, ...)
+          \item Put words with the same base together (helping, helped, help)
+        \end{itemize}
+
+        \item Find $ P(w | class) $ and $ P (w | uk) $, perform naive estimate:
+      \end{enumerate}
+
+      \paragraph{Problems: Underflow}
+      \begin{itemize}
+        \item All numbers are small
+        \begin{itemize}
+          \item Each $ P ( w| class) $ is small
+          \item Use multiple passes
+        \end{itemize}
+
+        \item Use logs (converts mutliplications to sums)
+      \end{itemize}
+
+      \paragraph{Problem: Overfitting}
+      \begin{itemize}
+        \item Common words should have similar frequencies
+        \item Rare words may appear in one set but not the other
+        \begin{itemize}
+          \item Each one is rare
+          \item Foreign words
+          \item Proper names
+        \end{itemize}
+      \end{itemize}
+
+      \paragraph{Smoothing}
+      \begin{itemize}
+        \item Give non-zero probability to rare words
+        \item Probability mass: probability viewed as stuff
+        \begin{itemize}
+          \item Way too many methods
+          \item All "empirical": not well-backed by theory
+        \end{itemize}
+      \end{itemize}
+
+      \paragraph{Laplace Smoothing}
+      \begin{align*}
+        n &= \text{number of words in our data} \\
+        count(w) &= \text{number of times w was seen} \\
+        v &= \text{number of word types} \\
+        alpha &= \text{magic constant (tunable parameter)} \\
+        P(w) &= (count(w) + alpha) / (n + alpha (v + 1)) \\
+        P(unk) &= (alpha) / (n + alpha (v + 1))
+      \end{align*}
+
+      \paragraph{Problems When Dealing with Non-English}
+      \begin{itemize}
+        \item No space between words: find word segements
+        \begin{itemize}
+          \item Chinese
+        \end{itemize}
+
+        \item Long words: divide up complex words
+        \begin{itemize}
+          \item German: Winter-coat
+        \end{itemize}
+      \end{itemize}
+
+      \paragraph{Problems Dealing With English}
+      \begin{itemize}
+        \item Common words: remove, not giving useful information
+        \begin{itemize}
+          \item Stop word: a, the, in, arm
+        \end{itemize}
+
+        \item Very rare words: delete or translate into common place holder, i.e. UNK)
+        \begin{itemize}
+          \item Hard to measure probabilities
+          \item Lots of them; takes up memory
+        \end{itemize}
+      \end{itemize}
+
+  \subsection{Early Use}
+
+    \subsubsection{Spam Cops (1998)}
+
+      \begin{itemize}
+        \item 4.33 error rate
+        \item O(n) parameters
+        \item O(n + k)
+      \end{itemize}
+
+    \subsubsection{Fishser Corpus}
+
+      \begin{itemize}
+        \item 16000 transcribed phone conversations
+        \item Try to tell gender of speaker from words used (bag of word problem)
+        \begin{itemize}
+          \item Filler words (ah)
+          \item Function words (at, and)
+        \end{itemize}
+      \end{itemize}

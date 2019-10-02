@@ -1,0 +1,98 @@
+\section{Overview}
+
+  \subsection{Problem: How to Recognize Leaves?}
+
+    \paragraph{Bad: Logic Based Recognitiion (Discrete Features)}
+    \begin{itemize}
+      \item Too complex
+      \item Too much need for experts
+      \item Hand crafting (very very slow and error prone)
+    \end{itemize}
+
+    \paragraph{Good: Learn From Example}
+    \begin{itemize}
+      \item Learn from pictures, audio data, text databases, big collection of text
+      \item \ul{Problems}:
+      \begin{itemize}
+        \item Data contains uncertainties, errors (Department of Computer Silence)
+        \item Data maybe incomplete
+        \item Data lack annotations (transcription, background context); annotations can also be wrong
+      \end{itemize}
+
+      \item Use probabilities to model the data and work around the data (as much as possible)
+    \end{itemize}
+
+  \subsection{Recognizing Rail-Road Intersections}
+
+    \begin{itemize}
+      \item \textbf{Discrete random variables}
+      \item Time of day
+      \item Train near by
+      \item Traffic light color
+      \item Barrier arm (up or down)
+      \item Continues random variables are beyond the scope of the class
+    \end{itemize}
+
+    \subsubsection{Probability}
+
+      \begin{itemize}
+        \item $ P(var = value) $: how often does this variable occur with this value
+        \item Ex. $ P(arm = up) = 0.95 $
+        \item Sometimes notations can be simplified (ex. $ P(up, morning) $)
+      \end{itemize}
+
+    \subsection{Distribution}
+
+      \begin{itemize}
+        \item How much each value occurs of each variables
+        \item Ex. night: 0.3, morning: 0.7
+      \end{itemize}
+
+    \subsection{Kolmogorov's Aimes}
+
+      \begin{itemize}
+        \item $ P(A) $ is non-negative real number
+        \item $ P(true) = 1 $
+        \item $ (P(true \land \neg up) = 1 $
+        \item $ P(A \lor B) = P(A) + P(B) - P(A, B) $, A, B mutually exclusive
+        \item Let's say $ x $ has values, p, q, r, $ P(x = p \lor x = q \lor x = r) = 1 $
+      \end{itemize}
+
+    \subsection{Source of Distribution}
+
+      \begin{itemize}
+        \item Observations
+        \item Scientific beliefs:
+        \item Causual structures: if iCard is broken, then door does not work
+        \item Distribution has some standard form: ex. normal distribution
+        \item Everything is possible $ P(A) \ne 0, P(A) = 0.00000001 $
+        \item Nothing is guaranteed to be true: $ P(A) \ne 1 $
+      \end{itemize}
+
+    \subsubsection{Smoothing}
+
+      Takes observation and shifts probabilities onto what we have not observed
+
+    \subsection{Joint Distribution}
+
+      \begin{figure}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+          \hline
+          & G & Y & R \\ \hline
+          G & 0 & 0 & 0.2 \\ \hline
+          Y & 0 & 0 & 0.1 \\ \hline
+          R & 0.5 & 0.1 & 0.1 \\ \hline
+        \end{tabular}
+      \end{figure}
+
+      \begin{itemize}
+        \item $ \sum P (x = ...) = 1 $
+        \item Know $ N/S $ light is red
+      \end{itemize}
+
+      C: insertect
+      A: probability of intersect
+
+      $ P(A|C) = \frac{P(A, C)}{P(C)} $
+      $ P(A,C) = P(C) \cdot P(A|C) $
