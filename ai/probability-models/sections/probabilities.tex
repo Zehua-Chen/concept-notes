@@ -20,6 +20,7 @@
       \item \textbf{Values} are typically \ul{not capitalized}
     \end{itemize}
 
+    \paragraph{Predicate}
     \begin{align}
       P\left( \text{variable} = \text{value} \right) &= x \\
       P\left( E \right) &= x
@@ -28,37 +29,121 @@
     $ E $ is event; $ P $ means what percentage of time does the
     variable has the value or when the event holds true
 
-    \begin{equation}
-      P\left( X = v \text{and} Y = w \right)
-    \end{equation}
+    \paragraph{And/Joint}
+    \begin{align}
+      P\left( X = v \text{ and } Y = w \right) &= a \\
+      P\left( X = v , Y = w \right) &= a
+    \end{align}
 
     $ P $ is how often do we see $ X $ has the value of $ v $ and $ Y $ has
     the value of $ w $
 
+    \paragraph{Implicit Notation}
     \begin{equation}
       P\left( v, w \right)
     \end{equation}
 
-    The author hope the reader can guess what values these variables belong
-    to.
+    When written as just $ P\left( v, w \right) $, the author
+    hope the reader can guess what values these variables belong to
+    \begin{displaymath}
+      P\left( V = v, W = w \right)
+    \end{displaymath}
 
-  \subsection{}
+  \subsection{Axioms of Probability}
+
+    \paragraph{Base Theorem}
+    Given $ A $ and $ B $ are \ul{mutually exclusive} events:
+    \begin{align}
+      0 &\le P\left( A \right) \\
+      P\left( \text{true} \right) &= 1 \\
+      P\left( A \text{ or } B \right) &= P\left( A \right) + P\left( B \right)
+    \end{align}
+
+    \paragraph{Extension Theorem}
+    \begin{align}
+      0 &\le P\left( A \right) \le 1 \\
+      P\left( \text{true} \right) &= 1 \\
+      P\left( \text{false} \right) &= 0 \\
+      P\left( A \text{ or } B \right)
+        &= P\left( A \right) + P\left( B \right)
+        - P\left( A \text{ and } B \right)
+    \end{align}
+
+    If $ X $ has possible values $ p, q, r $, then
+    \begin{equation}
+      P\left( X = p \text{or} X = q \text{or} X = r \right) = 1
+    \end{equation}
+
+  \subsection{Where Do Probabilities Come From}
+
+    \begin{itemize}
+      \item From observations
+      \item Constraints may be from scientific beliefs
+      \begin{itemize}
+        \item Underlying models used to complete gaps in datas
+        \item Anything is possible $ P\left( A \right) > 0 $
+        \item Nothing is guaranteed $ P\left( A \right) < 1 $
+      \end{itemize}
+    \end{itemize}
 
   \subsection{Distribution}
 
     A distribution is an assignment of probability values to
-    all events of interest; or all values for particular random variable or
+    all events of interest; or \ul{all values for particular random variable} or
     pair of random variables
+
+    \begin{itemize}
+      \item For a group of Probabilities to be a distribution, they must add
+      up to 1 (\ul{derived from Axioms})
+      \item Most model-builders assume probabilities are not zero; \ul{
+      events are just infrequent}
+    \end{itemize}
+
+  \subsection{Marginal Probabilities}
+
+    Given $ Y $ has value $ y_{1}, y_{2}, ..., y_{n} $, the marginal
+    probability is
+
+    \begin{equation}
+      P\left( X = x \right) = \sum_{k = 1}^{n} P\left( x, y_{k} \right)
+    \end{equation}
+
+    Given multiple random variables displayed in a n-D grid format,
+    the \textbf{marginal probability} is the \ul{distribution of a single variable},
+    while ignoring all other random variables.
+
+  \subsection{Conditional Probabilities}
+
+    \begin{equation}
+      P\left( \text{THEN} | \text{IF} \right)
+    \end{equation}
+
+    \begin{itemize}
+      \item \say{Raw} conditional probabilities does not always add up to
+      $ 1 $, to resolve this, divide each probability by the sum of all
+      probabilities
+    \end{itemize}
 
     \subsubsection{Properties}
 
-    $ P(A, B, C) = P(C) \cdot P(A | C) \cdot P(B | A, C) $
+      \begin{align}
+        P\left( A | C \right) &= \frac{P\left( A, C \right)}{P\left( C \right)} \\
+        P\left( A, C \right) &= P(C) \cdot P(A | C) \\
+        P\left( A, C \right) &= P(A) \cdot P(C | A) \\
+        P\left( A, B, C \right) &= P(C) \cdot P(A | C) \cdot P(B | A, C)
+      \end{align}
 
-    \subsection{Independence}
+  \subsection{Independence}
 
-      A, B are indenpendent iff
+    A, B are indenpendent iff
 
-      $ P(A, B) = P(A) \cdot P(B) $ equivocally
+    \begin{equation}
+      P(A, B) = P(A) \cdot P(B)
+    \end{equation}
 
-      $ P(A|B) = P(A) $
-      $ P(B|A) = P(B) $
+    The following is an equivalent proof of independence
+
+    \begin{align}
+      P(A|B) &= P(A) \\
+      P(B|A) &= P(B)
+    \end{align}
