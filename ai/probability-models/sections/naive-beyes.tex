@@ -1,16 +1,90 @@
 \section{Naive Beyes}
 
-  $ P(cause | evidence) = \frac{P(evidence | cause)}{P(evidence)} P(cause) $
+  \begin{align}
+    P\left( B | A \right)
+      &= P\left( A | B \right) \frac{P\left( B \right)}{P\left( A \right)} \\
+    P\left( \text{cause} | \text{evidence} \right)
+      &= P\left( \text{evidence} | \text{cause} \right)\frac{P\left( \text{cause} \right)}{P\left( \text{evidence} \right)}
+  \end{align}
 
   \begin{itemize}
-    \item Posterior: $ P(cause | evidence) $
-    \item Likelihood: $ P(evidence | cause) $
-    \item Normalization: $ P(evidence) $
-    \item Prior: $ P(cause) $
+    \item \textbf{Posterior}: $ P\left( \text{cause} | \text{evidence} \right) $
+    \item \textbf{Likelihood}: $ P\left( \text{evidence} | \text{cause} \right) $
+    \item \textbf{Normalization}: $ P\left( \text{evidence} \right) $
+    \item \textbf{Prior}: $ P\left( \text{cause} \right) $
   \end{itemize}
 
-  Want to compute posterior from likelihood, normalization and prior
-  (which are easier to obtain than posterior)
+  Want to compute posterior from likelihood, normalization and prior,
+  which are easier to obtain than posterior. Setting up the algorithm this
+  way would also helps with adjusting for $ P\left( \text{cause} \right) $
+
+  \subsection{Ignoring the Normalization}
+
+    Since in most cases, we just want to know either the probability ratio or
+    the biggest probability, in which case $ P\left( \text{evidence} \right) $
+    is always the same, we can ignore $ P\left( \text{evidence} \right) $
+    from the Beyes equation
+
+    \begin{equation}
+      P\left( \text{cause} | \text{evidence} \right)
+        \propto P\left( \text{evidence} | \text{cause} \right) P\left( \text{cause} \right)
+    \end{equation}
+
+  \subsection{Maximum a Posteriori (MAP)}
+
+    To find a cause that leads to an evidence, pick a type $ X $ from a set of
+    types $ T $ such that:
+
+    \begin{equation}
+      X = \argmax_{x \in T} P\left( x | \text{evidence} \right)
+    \end{equation}
+
+  \subsection{Maximum Likelihood Estimate (MLE)}
+
+    If we know all causes are equally likely, we can set $ P\left( \text{cause} \right) $
+    to $ 1 $
+
+    \begin{equation}
+      P\left( \text{cause} | \text{evidence} \right)
+        \propto P\left( \text{evidence} | \text{cause} \right)
+    \end{equation}
+
+    \begin{itemize}
+      \item \ul{Can be very inaccurate if priors are different}
+      \item \ul{Sensible} choice if we have \ul{poor information about
+      prior probabilities}
+    \end{itemize}
+
+  \subsection{Naive Beyes Model}
+
+    We have evidence $ A $, $ B $ related to cause $ C $. So we have
+    \begin{displaymath}
+      P\left( C | A, B \right) \propto P\left( A, B | C \right) \cdot P\left( C \right)
+    \end{displaymath}
+
+    Suppose $ A $ and $ B $ are conditionally independent given $ C $. Then
+    \begin{displaymath}
+      P\left( A, B | C \right) = P\left( A | C \right) * P\left( B | C \right)
+    \end{displaymath}
+
+    Subsituting, we get
+    \begin{align}
+      P\left( C | A, B \right) &\propto P\left( A | C \right) * P\left( B | C \right) \cdot P\left( C \right) \\
+      P\left( C | E_{1} ... E_{n} \right) &\propto P\left( C \right) \cdot \sum_{k = 1}^{n} P\left( E_{k} | C \right)
+    \end{align}
+
+    With this, we can estimate the \ul{relationship to the cause separately
+    for each type of evidence, then combine information to get the MAP
+    estimate}.
+
+    \subsubsection{Size of Naive Beyes Model vs Full Joint Distribution}
+
+      \begin{itemize}
+        \item A naive beyes model only has $ O\left( n \right) $ models to
+        estiamte
+        \item A full joint distribution model has $ 2^{n} $ parameters to
+        estiamte
+      \end{itemize}
 
   \subsection{Examples}
 

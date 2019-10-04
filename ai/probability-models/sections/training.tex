@@ -1,0 +1,51 @@
+\section{Training}
+
+  \begin{itemize}
+    \item Training Data: used to estimate the probability values we
+    need for Naive Beyes
+    \begin{itemize}
+      \item Not exhaustive
+    \end{itemize}
+
+    \item Development Data: used to tuning algorithm details
+    \begin{itemize}
+      \item Used to make sure the system isn't too sensitive to the differences
+    \end{itemize}
+
+    \item Test Data: used for final evaluation, or the data seen only when
+    the system is used
+  \end{itemize}
+
+  \subsection{Evaluation Metrics}
+
+    \begin{figure}[H]
+      \centering
+      \begin{tabular}{ | c | c | c |}
+        \hline
+        & Span & Not Spam \\ \hline
+        Spam & True Positive (TP) & False Negative (FN) \\ \hline
+        Not Spam & False Positive (FP) & True Negative (TN) \\ \hline
+      \end{tabular}
+    \end{figure}
+
+    Colum is the output of the classifier
+
+    \begin{align}
+      \text{false positive rate} &= \frac{\text{FP}}{\text{FP} + \text{TN}} \\
+      \text{false negative rate} &= \frac{\text{FN}}{\text{TP} + \text{TN}} \\
+      \text{accuracy} &= \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FN} + \text{FP}} \\
+      \text{error rate} &= 1 - \text{accuracy} \\
+      \text{precision} &= \frac{\text{TP}}{\text{TP} + \text{FP}} \\
+      \text{recall} &= \frac{\text{TP}}{\text{TP} + \text{FN}} \\
+      \text{F1} &= \frac{2 pr}{p + r}
+    \end{align}
+
+    \begin{itemize}
+      \item Precision is also known as $ p $
+      \item Recall is also known as $ r $
+      \item F1 is the harmonic mean of precision and recall
+      \begin{itemize}
+        \item Both $ p $ and $ r $ needs to be good to get a high
+        $ \text{F1} $ value
+      \end{itemize}
+    \end{itemize}

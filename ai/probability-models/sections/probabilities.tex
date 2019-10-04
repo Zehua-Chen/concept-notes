@@ -88,9 +88,7 @@
 
   \subsection{Distribution}
 
-    A distribution is an assignment of probability values to
-    all events of interest; or \ul{all values for particular random variable} or
-    pair of random variables
+    How much/probability of each value of a random variable occuring
 
     \begin{itemize}
       \item For a group of Probabilities to be a distribution, they must add
@@ -146,4 +144,14 @@
     \begin{align}
       P(A|B) &= P(A) \\
       P(B|A) &= P(B)
+    \end{align}
+
+  \subsection{Conditional Independence}
+
+    Whether two variabels are independence when some context holds
+
+    \begin{align}
+      P\left( A, B | C \right) &= P\left( A | C \right) \cdot P\left( B | C \right) \\
+      P\left( A | B, C \right) &= P\left( A | C \right) \\
+      P\left( B | A, C \right) &= P\left( B | C \right)
     \end{align}
