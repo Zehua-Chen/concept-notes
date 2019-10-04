@@ -1,0 +1,40 @@
+\section{Robot Planning}
+
+  \subsection{What is a Good Path}
+
+    \begin{itemize}
+      \item Reaches goal
+      \item Resonably short
+      \item Less obstacles
+      \begin{itemize}
+        \item Clearance from obstacles
+      \end{itemize}
+
+      \item Smooth (sharp paths are hard to do and damaging to the robots)
+    \end{itemize}
+
+  \subsection{Visibility Graph}
+
+    \begin{itemize}
+      \item States/Way points are vertices of objects
+      \item Edges are straight line connecting vertices
+      \item Not very safe
+    \end{itemize}
+
+  \subsection{Generalized Voronoi Diagram}
+
+    Creating paths that are at the center of the free space
+
+    \begin{itemize}
+      \item Safe paths
+      \item A bit long
+      \item Does not work with higher dimensions
+    \end{itemize}
+
+    \subsubsection{Implementation}
+
+      \begin{itemize}
+        \item Create vertical cuts along the map
+        \item Use the center point of each vertical line segment
+        (segment created by obstacles)
+      \end{itemize}

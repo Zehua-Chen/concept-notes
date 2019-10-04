@@ -1,0 +1,38 @@
+\section{Approaches}
+
+  \subsection{Situation Space}
+
+    \begin{itemize}
+      \item Each state is a complete model of the world
+      \item Each action is an action that change the state of the world
+    \end{itemize}
+
+    \paragraph{Issues}
+    \begin{itemize}
+      \item Very large branching factor
+      \item Unnecessarily definite about ordering of unrelated actions
+    \end{itemize}
+
+  \subsection{Plan Space}
+
+    \begin{itemize}
+      \item Each state is an incompelte action, missing actions or ordering
+      links
+      \item Each edge add detail to the partial plan
+      \item To modify a plan space:
+      \begin{itemize}
+        \item Add actions
+        \item Add ordering links between actions
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Frame Problem}
+
+    A complete logical representation also requires
+    \say{frame axioms} that specify all the predicates that an action does
+    not change. We need a lot of frame axioms, so it's easy for some to be missing
+
+    \subsubsection{Solution}
+
+      Incorporating a default assumption that properties don't
+      change unless actions explicitly change them

@@ -1,0 +1,43 @@
+\section{Types of Planning}
+
+  A deterministic plan is a sequence of actions to achieve a
+  goal from a starting state.
+
+  \subsection{Forward Planning}
+
+    A forward planner searches in the state space from the
+    initial state to a goal state.
+
+  \subsection{Backward Planning}
+
+    A backward planner, also known as a regression planner,
+    searches backwards from the goal, where each node in
+    the search space is a subgoal to be achieved.
+
+  \subsection{Plan Space (Partial-Order) Planning}
+
+    Start and finish are special actions:
+    \begin{itemize}
+      \item \textbf{Start}: no preconditions, sets up information true
+      at start of plan
+      \item \textbf{Finish}: no effects, preconditions are what
+      needs to be true at end of plan
+    \end{itemize}
+
+    \subsection{Defects}
+
+      \paragraph{Open Precondition}
+      An action (including finish) has a precondition with no
+      guarantee that it will be true. To fix:
+      \begin{itemize}
+        \item Add ordering link to an existing action
+        \item Add a new action
+      \end{itemize}
+
+      \paragraph{Threat}
+      Y's precondition is true at some point, but an (unordered) action, X,
+      might cause not(Y). To fix:
+      \begin{itemize}
+        \item Order X after Y
+        \item Order Y after X (leaving Y with an explicitly open precondition)
+      \end{itemize}
