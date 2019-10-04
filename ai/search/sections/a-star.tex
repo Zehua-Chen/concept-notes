@@ -22,16 +22,45 @@
     \begin{itemize}
       \item Remove walls
       \item Straighten out the roads
-      \item \textbf{Manhatten distance}: $\left| \Delta x \right| + \left| \Delta y \right|$;
-      (\ul{this is a better solution when we can't move diagnally; if we can this is no longer an underestimate})
     \end{itemize}
   \end{itemize}
 
-  \subsection{Heuristic for IS Puzzle (Drag Puzzle Demoed in Class)}
+  \subsection{Update Length}
 
     \begin{itemize}
-      \item How many not in correct position
-      \item How far does each piece has to move? (Manhattan distance)
+      \item If we read a seen state via better path , update s even if s is done. Pus s back into the frontier
+      \item Will priority queue get me update costs for X?
+      \begin{itemize}
+        \item Workaround: put x into queue a second time with the new cost
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Heuristic Functions}
+
+    \begin{itemize}
+      \item \textbf{Manhatten distance}: $\left| \Delta x \right| + \left| \Delta y \right|$;
+      \item \textbf{Straight line}
+      \item \ul{Manhatten distance is a better solution when we can't
+      move diagnally; if we can this is no longer an underestimate}
+    \end{itemize}
+
+  \subsection{Admissible and Consistency}
+
+    \begin{itemize}
+      \item \textbf{Admissible}: underestimate the true distance of the goal,
+      i.e. lower than the theoretical  lower limit
+      \item \textbf{Consistent}: if we can get from $ s $ to $ s' $ with cost
+      $ c(s,s') $, we must have
+      \begin{equation}
+        h\left( s \right) \le c\left( s, s' \right) + h\left( s' \right)
+      \end{equation}
+
+      \item The higher (still admissible) the heuristic function is, the
+      better the function is as the function \ul{would better reflect the
+      actual path}
+      \item \textbf{Weighted A Start}: some weighted heuristic occasionaly
+      estimates, leading to suboptimal performnace; Weighted A Start is one
+      of these;
     \end{itemize}
 
   \subsection{Why Admissible?}
@@ -56,30 +85,6 @@
       \item \textbf{A star}: updates may invovle closed states
     \end{itemize}
 
-  \subsection{Workarounds}
-
-    \begin{itemize}
-      \item If we read a seen state via better path , update s even if s is done. Pus s back into the frontier
-      \item Will priority queue get me update costs for X?
-      \begin{itemize}
-        \item Workaround: put x into queue a second time with the new cost
-      \end{itemize}
-    \end{itemize}
-
-  \subsection{Admissible}
-
-    \begin{itemize}
-      \item Admissible: A star will connct btter
-      \item Constructor:  A return optimal path, a lot fancy boundaries
-      \item A star reduces optimal path with last boundaries
-    \end{itemize}
-
-  \subsection{Consistant}
-
-    Many common heuristics are consistant . e.g. straing line in
-    2d geometry of his consistent, updates are only to states in frontiers.
-    UCS in A star with $ (ha) = 0 $, $ h (s) $ is consistent.
-
   \subsection{A Star Variants}
 
     \begin{itemize}
@@ -88,6 +93,6 @@
         \item Consumption of extensive resources
       \end{itemize}
 
-      \item \textbf{Suboptimal}: hueristic
+      \item \textbf{Suboptimal A Star}: hueristic
       \item \textbf{Database}: just look at 4 squares
     \end{itemize}

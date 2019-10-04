@@ -4,29 +4,169 @@
     \item Result matters; path does not matter
     \item Need to find a goal state path doesn't matter
     \item Goal means passes some tests
+    \item Constraints are interactions between values for different variables
   \end{itemize}
 
-  \subsection{N Queens}
+  \subsection{Classic Examples}
 
+    NP complete examples
     \begin{itemize}
-      \item Given n x n board and n queens, place so that no queen threathens others
-      \item \ul{Approach}: each col is a variable; variable values are
-      rows (\ul{domains}); exactly one queen per column
+      \item Map coloring
+    \end{itemize}
+
+    We don't know if NP complete problems would require polynomial or
+    exponential time. Best konwn algorithm is exponential.
+    Applications can exploit domain-specific heuristics
+
+    \subsubsection{N Queens}
+
+      Given n x n board and n queens, place so that no queen threathens others
+
       \begin{itemize}
-        \item Constraints are interactions between values for different variables
+        \item \ul{Model}:
+        \begin{itemize}
+          \item One varaibel per column
+          \item Possible values: n vertical position within the column
+          \item Constraints: can't have two in the same row or diagnoal
+        \end{itemize}
       \end{itemize}
+
+    \subsubsection{Map Coloring}
+
+      Color a map in a way that no neighboring regions have the same color
+
+      \begin{itemize}
+        \item Variables: regions
+        \item Values: colors
+        \item Constraints: extended boundaries $ \to $ different color
+      \end{itemize}
+
+    \subsubsection{Cryptarithmetic}
+
+      A game consists of an equation of numbers represented as letters.
+      The goal is to identify the value of each letter.
+
+      \begin{itemize}
+        \item Values: the letters
+        \item Possible values: $ 1 ... 9 $
+        \item Constraints: All letters are of different values, addition
+        works as intended, leading digits aren't zero
+      \end{itemize}
+
+    \subsubsection{Waltz Line Labeling}
+
+      A problem developed for comptuer vision
+
+  \subsection{Search}
+
+    Constraint satisfaction search can be generalized as follows:
+    \begin{itemize}
+      \item Start: no variable has a value
+      \item Each step: assign a value to one variable
+      \item End: all variables has a value
     \end{itemize}
 
-  \subsection{Map Coloring}
+    If there are $ n $ variables, all solutions are $ n $ steps away,
+    therefore \textbf{DFS} is a good option.
 
     \begin{itemize}
-      \item Have k colors
-      \item Color each sate
-      \item Adjacent states must have different colors
-      \item 4 color theorem
+      \item Don't need optimal path
+      \item No loop: each step assigns a value and search cuts off at $ n $
     \end{itemize}
 
-  \subsection{NP Complete Problem}
+    \paragraph{Backtracking Search} DFS spends most of the time getting blocked
+    and go up the search tree to try different options
 
-    Best known algorithm is exponential, but we can't prove there isn'
-    a polynomial algorithm. In practice,
+    \subsection{When to Stop and Backtrack}
+
+      \begin{itemize}
+        \item \ul{Stupid method}: always go down $ n $ levels to create
+        a complete solution; Checks if it meets a constraint; If not,
+        retreat back up the DFS tree
+        \item \ul{Smart method}: each variable keeps a list of possible values
+        after each step, remove values that would violate the constraint.
+        \ul{back up when any variable has no more values}
+        \begin{itemize}
+          \item Refer to forward checking and constraint propogation
+        \end{itemize}
+      \end{itemize}
+
+    \subsubsection{Heuristics for Variable Assignment}
+
+      Pick variabels that
+      \begin{itemize}
+        \item Variable with the fewest remaining values
+        \item If there are ties, which variable constraints the most over
+        other variables
+      \end{itemize}
+
+    \subsubsection{Choosing a Value}
+
+      A good value to choose is a value that leaves the most options open
+      for other variables
+
+    \subsubsection{Constraint Satisfaction and Forward Checking}
+
+      \paragraph{Forward Checking}
+      At each step, forward checking only checks a variable sharing the same
+      constraint as $ X $, i.e. \ul{adjacent} in constraint graph.
+
+      \paragraph{Constraint Propogation}
+      Constraint propogation works its way outward from $ X $'s neighbor
+      to their neighbors, until it runs of neighbors to update.
+      \begin{itemize}
+        \item Reduces the amont of assignment to do
+        \item Detects failure much earlier
+      \end{itemize}
+
+      Used at two points in the search
+
+      \begin{itemize}
+        \item Start of search
+        \item Upgrade to forward checking or backtracking search
+      \end{itemize}
+
+    \subsubsection{AC-3}
+
+      AC-3 is a fully working constriant propogation algorithm.
+
+      \begin{itemize}
+        \item We view constraints between variables as ordered pairs.
+        $ \left( X, Y \right) $ represents a constraint flowing from $ Y $
+        to $ X $. Revise $ \left( X, Y \right) $ prunes values in
+        $ D\left( X \right) $ that are inconsistent with what's in
+        $ D\left( Y \right) $
+
+        \item Maintian queue of pairs that needs attention
+        \item \ul{Initialize queue; two options}
+        \begin{itemize}
+          \item All constraints in the problem (during start)
+          \item All arcs $ (X,Y) $ where $ Y $'s value was just set (during
+          search)
+        \end{itemize}
+
+        \item \ul{Loop}
+        \begin{itemize}
+          \item Remove $ (X,Y) $ from queue. Call Revise $ (X,Y) $.
+          \item If $ D(X) $ has become empty, halt returning a value
+          that forces main algorithm to backtrack.
+          \item If $ D(X) $ changed, push all arcs $ (C,X) $ onto the queue,
+          but don't push $ (Y,X) $.
+        \end{itemize}
+
+        \item Stop when queue is empty
+      \end{itemize}
+
+    \subsubsection{Hill Climbing}
+
+      Randomly pick a full set of variable assignments and try to tweak it
+      to have the constraints satisfied. At each step, we change the value
+      of one variable to reduce the number of conflicts.
+
+      Hill climbing can be effective. At times this algorithm gets stuck in
+      local optima. Solution is randomization
+      \begin{itemize}
+        \item Randomly pick a new starting configuration when stuck
+        \item Add a random component to the movement algorithm. So it sometimes
+        move to a higher cost configuration (aka. \textbf{simulated annealing})
+      \end{itemize}
