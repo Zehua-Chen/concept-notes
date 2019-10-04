@@ -92,17 +92,10 @@
 
       We saw a teal bike, what brand (standard, veodride) is it?
 
-      $ P(veo | teal) = \frac{P(teal | veo) P(veo)}{P(teal)} = 0.905 $
-
-      $ P(standard | teal) = \frac{P(teal | standard) P(standard)}{P(teal)} = 0.095 $
-
-      \paragraph{Assign Classes}
-
-      $ \underset{c\in C_{0}, ..., C_{n}}{\operatorname{argmax}} P( C_{n} | evidence) $
-
-      Find the class in which the object most likely belongs to (**maximize posterior**).
-
-      \paragraph{Maximum Likelihood Estimate (MLE Estimate)}
+      \begin{align*}
+        P(veo | teal) = \frac{P(teal | veo) P(veo)}{P(teal)} &= 0.905 \\
+        P(standard | teal) = \frac{P(teal | standard) P(standard)}{P(teal)} &= 0.095
+      \end{align*}
 
     \subsubsection{Bag of Words}
 

@@ -147,11 +147,13 @@
 
         \item \ul{Loop}
         \begin{itemize}
-          \item Remove $ (X,Y) $ from queue. Call Revise $ (X,Y) $.
+          \item Remove $ (X,Y) $ from queue.
+          \item Remove content from $ D(X) $ if they are inconsistent with
+          the contents of $ D(Y) $
           \item If $ D(X) $ has become empty, halt returning a value
           that forces main algorithm to backtrack.
           \item If $ D(X) $ changed, push all arcs $ (C,X) $ onto the queue,
-          but don't push $ (Y,X) $.
+          for all $ C $ that shares constraints with $ X $ but don't push $ (Y,X) $.
         \end{itemize}
 
         \item Stop when queue is empty
