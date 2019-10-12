@@ -19,4 +19,4 @@ extern char **environ;
 ### `getenv(name)`
 
 - `getenv(name)` returns a string as the value of the environment variable
-whose key string is passed as the parameter.
+  whose key string is passed as the parameter.

@@ -1,6 +1,7 @@
 # Subscript
 
 Given the integer pointer `data`:
+
 ```c
 int *data;
 ```
