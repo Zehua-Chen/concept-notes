@@ -1,0 +1,73 @@
+\section{Overview}
+
+  \subsection{High Level Idea}
+
+    \begin{itemize}
+      \item Train the classifier on the training data
+      \item Tune any parameters (e.g. the smoothing constant)
+      by trying to classify the development data
+      \item Discover how well we did using the final test data
+    \end{itemize}
+
+  \subsection{Usage}
+
+    \begin{itemize}
+      \item Labeling low-level input (ex. pictures)
+      \item Speech recognition
+      \item Make decisions
+    \end{itemize}
+
+  \subsection{Overall System}
+
+    \begin{tabu} to \columnwidth{ | X[1, l] | X[1, l] | X[1, l] | X[1, l] | X[1, l] | }
+      \hline
+      & Speech Recognizers & Object Identification & Parsing & Word Meanings \\ \hline
+      Raw Input & Waveform & Image & Text & Text \\ \hline
+      Low Level Features & MFCC Features & SIFT Feature Edges & Stems, Suffixes, Word bigrams & Word neighbors \\ \hline
+      Low Level Labels & Phone Probabilities & Local Object ID & POS Tag & Word Embeddings \\ \hline
+      Output Labels & Word Sequence & Scene Description & Parse Tree & Word Classes \\ \hline
+    \end{tabu}
+
+  \subsection{Algorithms}
+
+    \begin{itemize}
+      \item \textbf{Deterministic transformations}
+      \item \textbf{Classifiers with learned parameters}
+      \begin{itemize}
+        \item Statistical (ex. naive bayes)
+        \item Simple traditional classifiers (ex. decision tree, k-nearest neighbors)
+        \item Neural
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Tuning Parameters}
+
+    Parameters of classification algorithms can be tuned to produce the
+    best results:
+
+    \begin{itemize}
+      \item Values learned from the training set
+      \item Tuning constants adjusted using the development data
+      (ex. Laplace smoothing constant in naive Bayes)
+    \end{itemize}
+
+    Models can also be redesigned \ul{mannually}
+
+    \begin{itemize}
+      \item General design of algorithm (neural net vs HMM)
+      \item Geometry of the model (ex. the number of units and
+      the connections in a Bayes net or neural net)
+      \item Theory-based parameters (ex. a word must have at least one vowel)
+    \end{itemize}
+
+  \subsection{Supervision}
+
+    \begin{itemize}
+      \item \textbf{Supervised} (full, explicit annotations and evaluations)
+      \item \textbf{Unsupervised} (algorithm must figure out how to organize data)
+      \item \textbf{Semi-supervised} (some explicit answers plus lots of raw data)
+      \item \textbf{Self-supervised} (algorithms seeks out answers)
+    \end{itemize}
+
+    Feedback is always noisy, algorithms must be able to handle annotation
+    mistakes.
