@@ -1,0 +1,86 @@
+\section{Modeling Test Data}
+
+  \begin{itemize}
+    \item \textbf{Word type}: a dictionary entry
+    \item \textbf{Word token}: a word in a specific position
+  \end{itemize}
+
+  \subsection{Data Cleaning}
+
+    \begin{itemize}
+      \item \textbf{Stemming}: removing prefixes and suffixes, leaving only
+      the content part of the word
+      \begin{itemize}
+        \item Martin Porter came up with the standard solution in 1980
+        \item \say{nltk} use a model similar to that of Martin Porter
+      \end{itemize}
+
+      \item \textbf{Tokenization}: preprocess the input text in a way that
+      makes later processing easier
+      \begin{itemize}
+        \item English:
+        \begin{itemize}
+          \item Divide the string at white spaces
+          \item Throw away captaizliation
+        \end{itemize}
+      \end{itemize}
+
+      what to do during tokenization varies depending on tasks
+
+      \item \textbf{Making units of useful size}: while working with languages
+      have either have no spaces between words or long words, units size
+      may need to be different from what appears in the input text
+      \begin{itemize}
+        \item \textbf{Chinese}: group 1 - 3 related characters into a word
+        \item \textbf{German}: divide complex words into simpler words
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Special Words}
+
+    \begin{itemize}
+      \item \textbf{Stop words}:
+      \begin{itemize}
+        \item Very frequent words; don't convey much information
+        \item \ul{Delete before bags of words processing}
+      \end{itemize}
+
+      \item \textbf{Rare words}:
+      \begin{itemize}
+        \item Uncommon concepts, proper names, foreign words, simple mistakes
+        \begin{itemize}
+          \item Hard to estimate probability
+          \item Make data table grow quickly
+        \end{itemize}
+
+        \item \ul{May be deleted; more often considered as a single word type,
+        \textbf{UNK}, with a resonable probability assigned}
+      \end{itemize}
+      % TODO:
+      \item Filter
+      \item Backchannel
+      \item Function vs. content
+    \end{itemize}
+
+  \subsection{Models}
+
+    \begin{itemize}
+      \item \textbf{Bag of words model}: determines the class of a document
+      based on
+      \begin{itemize}
+        \item how frequent each word occurs
+      \end{itemize}
+      while ignoring
+      \begin{itemize}
+        \item the order in which the words occur
+        \item which words occur together
+      \end{itemize}
+      as a result, this model would miss certain details
+
+      \item \textbf{Ngrarm Models}: ngram models use multiple neighboring words
+      as features to classify text document; has higher accuracy than bag
+      of words model
+      \begin{itemize}
+        \item Speech recognition use trigrams
+      \end{itemize}
+    \end{itemize}
