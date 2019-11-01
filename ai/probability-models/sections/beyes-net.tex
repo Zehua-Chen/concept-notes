@@ -2,24 +2,71 @@
 
   Beyes net is usually used to capture causal structure.
 
-  \begin{itemize}
-    \item When a node has two parent, only one needs to be true for the
-    node to be true
-    \item Independent varaibles/nodes do not have any connection
-    on the graph
-  \end{itemize}
-
-  \subsection{Child-Parent Relationship}
+  \subsection{Structure}
 
     \begin{itemize}
-      \item \textbf{One parent}: two parameters
-      \item \textbf{Multiple parent}: joint table
+      \item Representned as a \textbf{partial ordered},
+      \textbf{directed acyclic graph}
+      \item A each node is associated with a probability value
+      \begin{itemize}
+        \item \textbf{Non-conditinoal}: nodes without parent
+        \item \textbf{Conditional}: nodes with parent have the \say{if} part
+        of conditional probabilities set to its parent; \ul{represented
+        as a probability table that consist of all possible values for all
+        combinations of probability values from the parent}
+      \end{itemize}
+
+      \item Each node is considered as either true or false
+      \item When a node has multiple parent, only one needs to be true for the
+      node to be true
+      \item Given $ n $ variables, max number of parent is $ m $, there are
+      $ n \times 2^{m} $ parents
     \end{itemize}
 
-    Given $ n $ variables, max number of parent is $ m $, there are
-    $ n \times 2^{m} $ parents
+  \subsection{Conditional Independence and Independence}
 
-  \subsection{Background Knolwedge}
+    \begin{itemize}
+      \item Conditional independence and independence are not related
+      \item Two nodes sharing the same parent are not independent
+      \item Each node is conditionally independent of its ancestors,
+      given its parents
+      \item Nodes that are not connected to each other at all
+      are independent of each other
+    \end{itemize}
+
+  \subsection{Reconstruct Joint Distribution}
+
+    We can build the probability of any specific set of values by working
+    from top to bottom
+
+    \begin{equation}
+      P\left( X_{1}, ... , X_{n} \right)
+        = \prod_{k = 1}^{n} P\left( X_{k} | \parents\left( X_{k} \right) \right)
+    \end{equation}
+
+    \begin{itemize}
+      \item Need to store $ P\left( X_{k} | \parents\left( X_{k} \right) \right) $
+      at each node
+      \item Nodes that are start at are also known as query variables
+    \end{itemize}
+
+  \subsection{Building a Bayes Net From a Joint Probability Distribution}
+
+    \begin{enumerate}
+      \item Put the variables in any order
+      \item Fork $ k $ from $ 1 $ to $ n $
+      \item Choose $ \parents\left( X_{k} \right) $ to contain all variables
+      from $ X_{1} ... X_{k - 1} $ that $ P\left( X_{k} \right) $ depends on
+      \item The output beyes net depends on the order in which we process
+      the nodes
+    \end{enumerate}
+
+  \subsection{Topological Sort of Partial Order}
+
+    Total/linear order of all the objects which respects the partial order.
+    That is, a node always follows its ancestors.
+    Usually there is more than one possible topological sort
+    and we don't care which one is chosen.
 
     \subsubsection{Partial Order}
 
@@ -29,17 +76,48 @@
         \item Can linearize a partial order into a total order
       \end{itemize}
 
-    \subsubsection{Total Order}
+    \subsubsection{Totla Order}
 
       \ul{Everything} in the collection is orderered.
 
-  \subsection{Formal Description}
+  \subsection{Inferrence}
 
-    Beyes net is a \ul{directed, acyclic} graph
+    \subsubsection{Brute Force}
+
+      \begin{itemize}
+        \item Optimize $ P\left( \textbf{effect}, \text{causes} \right) $
+      \end{itemize}
+
+  \subsection{Inferrence Efficientcy}
+
     \begin{itemize}
-      \item Partial ordered
-      \item No cycles
+      \item Optimized beyesnet inferrence is NP complete
     \end{itemize}
 
-    Each node is conditionally independent of its ancestors
-    given its parents.
+    \subsubsection{Poly Trees}
+
+      Polynomial runtime for \textbf{polytree} graphs (graph that does not have
+      cycle if you consider edeges as non-directional)
+
+    \subsubsection{Junction Tree Algorithm}
+
+      \begin{enumerate}
+        \item Remove the directionality of the edges
+        \item Add edges between nodes that are \textbf{not directly connected}
+        but \textbf{statistically connected}, aka. moralization
+        \item Add edges to breakup cycles
+        \item Fully connected groups of nodes are then merged into single nodes
+      \end{enumerate}
+
+    \subsubsection{NP and NP Complete}
+
+      \begin{itemize}
+        \item A problem is NP if you can provide a succint answer that a
+        \say{yes} is correct
+        \begin{itemize}
+          \item Problems in NP are widely believed to require exponentnial
+          time; it is not decided if a polynomial time algorith exists
+          \item A problem is NP complete if an polynomial time algorithm
+          can be found
+        \end{itemize}
+      \end{itemize}
