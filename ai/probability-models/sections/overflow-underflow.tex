@@ -1,0 +1,26 @@
+\section{Overflow and Underflow}
+
+  \subsection{Underflow}
+
+    Some probabilities can be very small. When you multiply the small
+    probabilities, you get a probability that is even smaller, some too
+    small for floating point storage
+
+    \subsubsection{Solution}
+
+      \begin{itemize}
+        \item Apply $ \log\left( x \right) $ to all probabilities
+        \item Convert \ul{multiplication to addition}
+      \end{itemize}
+
+  \subsection{Overflow}
+
+    \begin{itemize}
+      \item Words that does not appear in training gets zero probability
+      \item Words thare are not common in training get probability that are
+      not prepresentative
+    \end{itemize}
+
+    \subsubsection{Solution}
+
+      Use smoothing

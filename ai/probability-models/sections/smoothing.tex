@@ -1,0 +1,49 @@
+\section{Smoothing}
+
+  \subsection{Laplace Smoothing}
+
+    \begin{align}
+      P\left( \text{unseen evidence} | \text{cause} \right)
+        &= \frac{\alpha}{n + \alpha \left( V + 1 \right)} \\
+      P\left( \text{seen evidence} | \text{cause} \right)
+        &= \frac{\countf\left( \text{seen evidence} \right)}{n + \alpha \left( V + 1 \right)}
+    \end{align}
+
+    \begin{itemize}
+      \item All unseen items are considered to be a single item
+      \item $ n $: number of evidences in training data
+      \item $ \alpha $: some constant
+      \item $ V $: number of different type of evidence
+      \begin{itemize}
+        \item Ex: number of tags
+      \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Performance}
+
+      \begin{itemize}
+        \item Overestimate the probability of \textbf{unseen evidence}
+        \item Underestimate the probability of \textbf{seen evidence}
+      \end{itemize}
+
+  \subsection{Deleted Estimation}
+
+    \begin{enumerate}
+      \item Divide the training words into two sets, each of size $ n $,
+      $ A, B $
+      \item Suppose $ W_{1} ... W_{k} $ are the words that occur $ r $ times
+      in set $ A $
+      \item Let $ X_{A} $ be the average count of $ W_{1} ... W_{k} $ in set
+      $ B $
+      \item The probability of each word $ P\left( W_{i} \right) $
+      \begin{equation}
+        P\left( W_{i} \right) = \frac{X_{A}}{n}
+      \end{equation}
+    \end{enumerate}
+
+    \subsubsection{Splitting Training Data}
+
+      \begin{itemize}
+        \item Splitting in the middle works poorly
+        \item Better to split by even and odd sentences
+      \end{itemize}

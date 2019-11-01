@@ -87,3 +87,18 @@
         \item Speech recognition use trigrams
       \end{itemize}
     \end{itemize}
+
+    \subsubsection{Ngram Smoothing}
+
+      Ngram smoothing can assigns the same probability for all unseen
+      \textbf{single words}; phrases are harder to deal with
+
+      \begin{itemize}
+        \item Guess the probability from the probability of its prefix
+        \begin{itemize}
+          \item Ex. \say{the angry} from \say{the angry cat}
+        \end{itemize}
+
+        \item Gues that an unseen words in mroe likely in a context
+        where we have seen many different words
+      \end{itemize}
