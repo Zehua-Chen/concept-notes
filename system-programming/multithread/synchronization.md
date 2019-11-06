@@ -1,8 +1,4 @@
-# Thread
-
-## Busy Waiting
-
-When a process repeatedly checks if a condition is true
+# Synchronization
 
 ## Mutex vs Atomic
 

@@ -26,3 +26,7 @@ only terminates the calling thread.
 - A process would terminate when either of the following conditions are true
   - The main thread **returns**
   - All theads has completed, when after main thread has **existed**,
+
+## Busy Waiting
+
+When a process repeatedly checks if a condition is true
