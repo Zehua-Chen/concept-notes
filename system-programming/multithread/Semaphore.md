@@ -1,10 +1,10 @@
-# Semaphore
+# Header
 
 ```c
 #include <semaphore.h>
 ```
 
-## Create Semaphore
+# Create Semaphore
 
 ```c
 int sem_init(sem_t *sem, int pshared, unsigned int value)
@@ -14,7 +14,7 @@ int sem_init(sem_t *sem, int pshared, unsigned int value)
   (non zero) or between threads of a process (zero)
 - `value`
 
-## Using Semaphore
+# Using Semaphore
 
 ```c
 int sem_wait(sem_t *sem);

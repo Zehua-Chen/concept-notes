@@ -6,6 +6,6 @@
 - A character is exactly one byte (not necessarily 8 bits, see below);
   - `CHAR_BITS` provides the number of bits used to implement a a `char`
 
-## Byte
+# Byte
 
 - C standard does not require a byte to be 8 bits;

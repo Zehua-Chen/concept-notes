@@ -1,6 +1,4 @@
-# Synchronization
-
-## Mutex vs Atomic
+# Mutex vs Atomic
 
 - Mutex and atomic works in a similar fasion:
   - Require exclusive access
