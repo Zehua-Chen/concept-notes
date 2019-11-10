@@ -1,4 +1,6 @@
-# `fork()`
+```c
+pid_t fork()
+```
 
 - Copies everything of a process's address space (including kernel context)
 - Open file handles are the only things shared between forks()

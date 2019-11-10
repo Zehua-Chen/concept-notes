@@ -1,4 +1,6 @@
-# `waitpid(pid_t pid, int *status, int options)`
+```c
+waitpid(pid_t pid, int *status, int options)
+```
 
 When the process `pid` finishes, retrieves its information from the process
 table and **remove the entry from the process table**.

@@ -1,4 +1,6 @@
-# `exec(path, ...)`
+```c
+exec(path, ...)
+```
 
 Replace the current process image with a new process image created from
 the executable file created from `path`
