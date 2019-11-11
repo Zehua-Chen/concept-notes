@@ -11,3 +11,9 @@ following situations hold in a system:
   the process holding it, after that resource has completed its task
 - **Mutual exclusion**: at least one resource is held in a non-sharable
   state
+
+## Sample Questions
+
+- **No circular wait**: threads need two items, one item is distributed first,
+and then the other.
+- **No mutual exclusion**: if anything related to **sharing** is mentioned

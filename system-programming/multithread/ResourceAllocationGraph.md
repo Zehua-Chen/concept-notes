@@ -11,3 +11,7 @@ A "resource allocation graph" is a directed graph in which:
 ## Detecting Deadlock
 
 A **deadlock would occur** if there is **a circle in the graph**.
+
+Note that it may not only be the threads that are invovled in the cycle
+that are deadlocked. **All threads** requesting resources owned
+by the deadlocked threads have the potential to deadlock
