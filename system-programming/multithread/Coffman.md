@@ -15,5 +15,5 @@ following situations hold in a system:
 ## Sample Questions
 
 - **No circular wait**: threads need two items, one item is distributed first,
-and then the other.
+  and then the other.
 - **No mutual exclusion**: if anything related to **sharing** is mentioned
