@@ -23,9 +23,3 @@ fscanf(FILE *, char *, args...)
 ```
 
 Parse from a file stream
-
-```c
-void rewind(FILE *)
-```
-
-Return to the beginning of file
