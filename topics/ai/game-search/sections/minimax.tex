@@ -1,0 +1,34 @@
+\section{Minimax}
+
+  \subsection{Alpha Beta Pruning}
+
+    \begin{itemize}
+      \item $ \alpha $: upper bound on the outcome
+      \item $ \beta $: lower bound on the outcome
+      \item $ \alpha, \beta $ would be largely calculated based on the values
+      of the nodes to the left hand side of \say{this} node
+      \item Nodes are only pruned if the left nodes are better than
+      the right nodes
+    \end{itemize}
+
+    For a viable path,
+
+    \begin{equation}
+      \alpha < v < \beta
+    \end{equation}
+
+    Therefore, we would \textbf{give up} under these conditions
+
+    \begin{enumerate}
+      \item If $ v < \alpha $ or $ v > \beta $
+      \item If $ v = \alpha $ or $ v = \beta $
+    \end{enumerate}
+
+  \subsection{Tweaks}
+
+    \begin{itemize}
+      \item Search deeper when threatened
+      \item Search deeper on strong moves
+      \item Data tables for start and end of the game
+      \item Transposition table
+    \end{itemize}
