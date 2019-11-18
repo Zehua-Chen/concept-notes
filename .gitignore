@@ -252,3 +252,6 @@ TSWLatexianTemp*
 
 # Custom Latex
 bin/
+
+# Idea
+.idea/
