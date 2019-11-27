@@ -1,0 +1,27 @@
+\section{Datasets}
+
+  \subsection{Text}
+
+    \subsubsection{Sparse vs Dense Vectors}
+
+      \paragraph{Sparse Vectors} Similar to how flags are represented using
+      bits of an integer. We have a vector of zeros and a single one,
+      the indexes at which the one is would represent a unique word.
+      \begin{itemize}
+        \item Inefficient, most numbers are zero
+      \end{itemize}
+
+      \paragraph{Dense Vectors} Assign a unique ID to each word, therefore
+      a sentence can be represented as a unique strings
+      \begin{itemize}
+        \item Efficient
+        \item Similarity between words are not expressed
+      \end{itemize}
+
+    \subsubsection{Word Embeddings}
+
+      Each word is represented as a vector of floating points and the value
+      of the floating points are trained, rather than manually specified.
+
+      A word is also associated with an integer, which is used to lookup
+      a specific embedding in the embeddings list
