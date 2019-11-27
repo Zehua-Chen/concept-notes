@@ -1,0 +1,43 @@
+\section{Bellman Equation}
+
+  Bellman equations provide a way to calcualte the utility function
+
+  \begin{equation}
+    U\left( s \right)
+      = R\left( s \right)
+      + \gamma \max_{a \in A} \sum_{s' \in S}
+      P\left( s' | s, a \right)
+      U\left( s' \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item $ s' $: the next state
+    \item $ \gamma $: the delay multiplier, decreases the contribution of
+    neighboring states causes rewards of farther states to be less important
+    than the reward of immediate states.
+    \begin{itemize}
+      \item This \ul{causes the system of equation to converge}
+    \end{itemize}
+
+    \item Only in primitive version, $ \move\left( a, s \right) $:
+    \ul{assuming the agent always picks the best move}, the function
+    $ \move $ is the state that result if we perform action $ a $ in state $ s $
+  \end{itemize}
+
+  \paragraph{Why this converges}
+
+  Since our MDP is finite, our rewards all have absolute value $ \le $
+  some bound $ M $. If we repeatedly apply the Bellman equation to write out
+  the utility of an extended sequence of actions, the $ k $th action in
+  the sequence will have a discounted reward $ \le \gamma kM $.
+  So the sum is a geometric series and thus converges if $ 0 \le \gamma < 1 $.
+
+  \subsection{Bellman Equation for a Fixed Policy}
+
+    \begin{equation}
+      U\left( s \right)
+        = R\left( s \right)
+        + \gamma \max_{a \in A} \sum_{s' \in S}
+        P\left( s' | s, \pi\left( s \right) \right)
+        U\left( s' \right)
+    \end{equation}

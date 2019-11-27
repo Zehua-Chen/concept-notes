@@ -1,0 +1,82 @@
+\section{Mathematical Setup of Markov Decision Process}
+
+  Different actions would result in differnet scores, and the
+  \ul{goal of the agent is to accumulate the most points}
+
+  \begin{itemize}
+    \item \textbf{Set of states}: $ s \in S $
+    \item \textbf{Set of actions}: $ a \in A $
+    \item \textbf{Reward function}: $ R\left( s \right) $
+    \item \textbf{Transition function}: $ P\left( s' | s, a \right) $;
+    the transition function gives us the \ul{probability that
+    given a state $ s $, and an action $ a $, we moving into state $ s' $}
+    \item \textbf{Policy function / solution}: $ \pi\left( s \right) $;
+    \ul{commands the agent what to do given a state $ s $}
+  \end{itemize}
+
+  \subsection{Reward Function}
+
+    \begin{itemize}
+      \item Can have any pattern of positive or negative values
+      \item A few states has big rewards or negative consequences
+      \item The rest of the states have some background reward (ex.
+      constant across all of these background states)
+    \end{itemize}
+
+    \subsubsection{Impact of Reward Function}
+
+      \begin{itemize}
+        \item If background reward is high, \ul{agent has no motivation
+        for high reward states}
+        \item If background reward is low (more negative), \ul{agent
+        has more motivation for high reward states}
+      \end{itemize}
+
+  \subsection{A Good Policy}
+
+    The policy function is supposed to maximize the reward
+    over time. In another word, we want optimize the following
+
+    \begin{equation}
+      P\left( \text{sequence} \right) R\left( \text{sequence} \right)
+    \end{equation}
+
+    \begin{itemize}
+      \item $ R $: the total reward for the sequence of states
+      \item $ P $: how often this sequence of states happen
+      \item \textbf{Problem with the sequence of states}
+      \begin{itemize}
+        \item The sequence might be infinitely long
+        \item The values might not converge to finite values, even with the
+        probabilities taken into account
+      \end{itemize}
+
+      \item \textbf{Solution}:
+      \begin{itemize}
+        \item Make the assumption that the sonner the rewards occr the
+        better
+        \item Define a utility function
+      \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Utility Function}
+
+      The utility of each state is based on
+
+      \begin{itemize}
+        \item its own reward
+        \item rewards that can be obtained from nearby states
+      \end{itemize}
+
+      \begin{equation}
+        U\left( \text{sequence} \right)
+      \end{equation}
+
+      $ U $ is the sum of the utilities of of the states in the
+      \say{sequence}
+
+      \begin{equation}
+        P\left( \text{sequence} \right) U\left( \text{sequence} \right)
+      \end{equation}
+
+      Therefore, what we actually want to optimize is the above
