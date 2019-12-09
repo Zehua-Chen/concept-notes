@@ -38,3 +38,5 @@ to client**.
 1. SYN (client to server)
 2. SYN-ACK (server to client)
 3. ACK (client to server)
+
+Meaninful data can be sent as early as the third step "ACK":
