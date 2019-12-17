@@ -1,7 +1,7 @@
 # Transportation Protocols
 
-Transportation protocols determine how data are sent between points
-on a network, including
+Transportation protocols determine how data are sent between points on a
+network, including
 
 - Segmentation
 - Acknoledgement
@@ -13,10 +13,10 @@ on a network, including
 
 - Connectionless (send and don't chare if the target can be reached)
 - Very limited error correction
-- Limited in transmission size, the bigger the transmission, the easier
-  it would drop
-- Use this if the application **prefer to handle missing packets
-  over late packets**
+- Limited in transmission size, the bigger the transmission, the easier it would
+  drop
+- Use this if the application **prefer to handle missing packets over late
+  packets**
 
 ## TCP (Transmission Control Protocol)
 
@@ -32,8 +32,8 @@ on a network, including
 
 ### Handshaking Process
 
-A **round trip** refers to a message to **get from client to server and back
-to client**.
+A **round trip** refers to a message to **get from client to server and back to
+client**.
 
 1. SYN (client to server)
 2. SYN-ACK (server to client)

@@ -6,8 +6,7 @@ int main(int argc, char * argv[]) { return 0; }
 
 - `argc`: number of arguments;
 - `argv`: an array of arguments where each argument is a string;
-  - `argv` has `argc + 1` elements, though the last element
-    is always `NULL`;
+  - `argv` has `argc + 1` elements, though the last element is always `NULL`;
 
 ## Execution Name
 

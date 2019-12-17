@@ -7,7 +7,9 @@
 ## JavaScript
 
 ```js
-let someBoolean = collection.every((entry) => { return false; });
+let someBoolean = collection.every(entry => {
+  return false;
+});
 ```
 
 ## Swift
@@ -26,7 +28,7 @@ bool result = std::all_of(collection.begin(), collection.end(), [=](auto e) {
 });
 ```
 
-## C#
+## C
 
 ```cs
 using System.Linq;

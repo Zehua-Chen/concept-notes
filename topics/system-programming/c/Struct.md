@@ -8,8 +8,8 @@ struct Name {
 struct Name name;
 ```
 
-- Without using typedefs or macros, the `struct` keywords must be used
-  everytime to declare a struct;
+- Without using typedefs or macros, the `struct` keywords must be used everytime
+  to declare a struct;
 
 # Syntax Using Typedefs
 

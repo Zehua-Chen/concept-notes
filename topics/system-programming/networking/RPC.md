@@ -40,8 +40,8 @@ char *GetName(int key) {
 
 - **Stub code**: code that transfers information across the network
 - **Server stub code**: stub code on the server
-- **Marshalling**: the process of serializing information for transmission
-  to remote locations
+- **Marshalling**: the process of serializing information for transmission to
+  remote locations
 - **Unmarshalling**: the process of deserializing information from remote
   transmissions
 

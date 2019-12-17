@@ -1,0 +1,44 @@
+\section{Model Based Reinforcement Learning}
+
+  \begin{itemize}
+    \item Very similar to naive-based learning, but have to make predictions
+    as it trains
+    \item Initially use default methods for picking actions
+    \item Keep counts for what rewards it got in different states and what
+    state transition resulted from its commanded actions
+    \item \ul{Periodically}, use the counts to
+    \begin{enumerate}
+      \item Update $ P\left( s' | s, a \right) $ and $ R\left( s \right) $
+      \item Use values for $ P $ and $ R $ to estimate $ U\left( s \right) $
+      and $ \pi\left( s \right) $
+    \end{enumerate}
+  \end{itemize}
+
+  A problem with this approach is the learner tends to be risk-averse:
+
+  \begin{itemize}
+    \item Once a strong incentive starts to emerge, it tends to stick to its
+    familiar strategy, rather than exploring the rest of hte environment
+    \item Miss very good possibilities if it did not see them early
+  \end{itemize}
+
+  \subsection{Adding Exploration}
+
+    To improve accuracy, we change our method of selecting actions
+
+    \begin{itemize}
+      \item With probability $ p $, pick $ \pi\left( s \right) $
+      \item With probability $ 1 - p $, explore
+      \begin{itemize}
+        \item Make a uniform random guess among the actions
+        \item Try actions that we haven't tried enough times in the past
+      \end{itemize}
+
+      \item The probability of exploring must decrease as the learning process
+      goes, so the learner can settle down to a policy
+      \item The decision of how often to explore must depend on $ s $:
+      for each state $ s $, it's important to continue doing significant
+      amonts of exploration \ul{until each action has been tried in $ s $
+      enough times to have a clear sense of what it does}
+    \end{itemize}
+

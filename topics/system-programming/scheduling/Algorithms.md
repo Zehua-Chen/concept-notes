@@ -2,8 +2,7 @@
 
 ## Cons
 
-- Need to make an estimate of how long a process would take, which is
-  hard to do
+- Need to make an estimate of how long a process would take, which is hard to do
 
 # First Come First Serve
 

@@ -8,5 +8,5 @@ wait_time = end_time - arrival_time - run_time
 
 # Turn Around Time
 
-Turn around time is the time from when a process arrives to when
-a process finishes.
+Turn around time is the time from when a process arrives to when a process
+finishes.

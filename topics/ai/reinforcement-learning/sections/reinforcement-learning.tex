@@ -1,0 +1,53 @@
+\section{Reinforcement Learning}
+
+  The reinforcement learner does not have any knowledge of $ P $ and
+  $ R $ at the beginning. The learner must figure out
+
+  \begin{itemize}
+    \item $ P $
+    \item $ R $
+    \item $ U $
+    \item $ \pi $
+  \end{itemize}
+
+  through taking actions and see what's happening.
+
+  \subsection{Types of Learners}
+
+    \begin{itemize}
+      \item \textbf{Online}: interacting directly with the world
+      \item \textbf{Offline}: interacting with the simulation of some sort
+      \begin{itemize}
+        \item Better for sitautions with real-life hazards
+      \end{itemize}
+
+      \item \textbf{Experience Replay}: a type of learner in which
+      \begin{itemize}
+        \item The old experiences of interacting with the real world
+        is not forgotten
+        \item Spend some time replaying old experiences rather than taking new
+        actions
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Reinforcemnet Learning Training Loop}
+
+    \begin{enumerate}
+      \item Take an action
+      \item Observe the outcome
+      \begin{itemize}
+        \item State
+        \item Reward
+      \end{itemize}
+
+      \item Update internal representation
+    \end{enumerate}
+
+    \subsubsection{Choices of Internal Representation}
+
+      \begin{itemize}
+        \item \textbf{Model-based}: explicitly estimate values for
+        $ P\left( s' | s, a \right) $ and $ R\left( s \right) $
+        \item \textbf{Model-free}: estimate $ Q $ values, which, sidesteps the
+        need to estimate $ P $ and $ R $
+      \end{itemize}

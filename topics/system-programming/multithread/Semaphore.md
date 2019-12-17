@@ -10,8 +10,8 @@
 int sem_init(sem_t *sem, int pshared, unsigned int value)
 ```
 
-- `pshared` indicates whether the semaphore is shared between processes
-  (non zero) or between threads of a process (zero)
+- `pshared` indicates whether the semaphore is shared between processes (non
+  zero) or between threads of a process (zero)
 - `value`
 
 # Using Semaphore

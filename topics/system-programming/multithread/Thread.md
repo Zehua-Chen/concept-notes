@@ -2,8 +2,8 @@
 
 - **Memory space**: a process has its own memory space while a thread only has
   its own stack
-- When `forking a program`, the threads won't be copied. In another word,
-  the **child process only has a single thread**
+- When `forking a program`, the threads won't be copied. In another word, the
+  **child process only has a single thread**
 
 # Thread Life Cycle
 
@@ -13,8 +13,8 @@
 - Cancel a thread `pthread_cancel`
 
 Note that even though you try to cancel a thread, a thread may still continue.
-In practice this function is not used much as threads won't be able to clean
-up their resources.
+In practice this function is not used much as threads won't be able to clean up
+their resources.
 
 `exit(int)` would terminate the calling process while `pthread_exit(void *)`
 only terminates the calling thread.

@@ -4,8 +4,8 @@
 void memset(void *ptr, int value, size_t bytes)
 ```
 
-- Set the content of a memory block (specified by pointer and bytes)
-  to a specified value
+- Set the content of a memory block (specified by pointer and bytes) to a
+  specified value
 
 # Heap
 
@@ -22,8 +22,8 @@ void* malloc(size_t bytes);
 void *calloc(count, type_size);
 ```
 
-- **When working with string related functions, use this instead of `malloc`
-  to avoid memory errors**
+- **When working with string related functions, use this instead of `malloc` to
+  avoid memory errors**
 
 ## Heap Free
 

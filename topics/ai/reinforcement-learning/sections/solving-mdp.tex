@@ -1,0 +1,77 @@
+\section{Solving Markov Decision Process}
+
+  There is a variety of ways to solve Markov Decision Process:
+
+  \begin{itemize}
+    \item Value iteration
+    \item Policy iteration
+    \item Dynamic methods that looks like perceptron training
+  \end{itemize}
+
+  \subsection{Value Iteration}
+
+    Repeatedly applies the Bellman equation to update utility values for
+    each state. The policy will be based of the final utility values:
+    \ul{move toward the highest utility values}
+
+    Suppose $ U_{k}\left( s \right) $ is the utility value
+    for $ s $ in iteration $ k $, then
+
+    \begin{enumerate}
+      \item Initialize $ U_{1}\left( s \right) $ for all states $ s $
+      \item Loop for $ k = 1 $ until the values converge
+      \begin{equation}
+        U_{k + 1}\left( s \right)
+          = R\left( s \right)
+          + \gamma \max_{a \in A} \sum_{s' \in S}
+          P\left( s' | s, \pi\left( s \right) \right)
+          U_{k}\left( s' \right)
+      \end{equation}
+    \end{enumerate}
+
+  \subsection{Policy Iteration}
+
+    Policy iteration is faster than value iteration, but similar to value
+    iteration
+
+    \begin{enumerate}
+      \item Start with an initial guess for policy $ \pi $
+      \item Alternate two steps
+      \begin{enumerate}
+        \item \textbf{Policy evaluation}: use the policy $ \pi $ to estimate
+        utility values $ U $
+        \item \textbf{Policy improvement}: use utility values $ U $ to
+        calculate a new policy $ \pi $
+      \end{enumerate}
+    \end{enumerate}
+
+    \subsubsection{Utility from Esimated Policy}
+
+      \begin{equation}
+        U\left( s \right)
+          = R\left( s \right)
+          + \gamma \sum_{s' \in S}
+          P\left( s' | s, \pi\left( s \right) \right)
+          U\left( s' \right)
+      \end{equation}
+
+      There are two solutions to finding a solution to the above equation:
+
+      \begin{itemize}
+        \item Linear algebra
+        \item A few iterations of value iteration
+        \begin{itemize}
+          \item Faster
+          \item We don't need exact values
+        \end{itemize}
+      \end{itemize}
+
+    \subsubsection{Async Dynamic Programming}
+
+      We don't need to update all the states; we may select only a few states
+      for updating
+
+      \begin{itemize}
+        \item States frequently seen in some applications
+        \item States for which the Bellman equation has a large error
+      \end{itemize}
