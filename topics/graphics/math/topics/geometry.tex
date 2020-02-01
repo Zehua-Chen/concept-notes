@@ -1,0 +1,51 @@
+\chapter{Geometry}
+
+\section{Translation}
+
+  \begin{align}
+    T\left( x, y, z \right) &=
+    \begin{bmatrix}
+      1 & 0 & 0 & x \\
+      0 & 1 & 0 & y \\
+      0 & 0 & 1 & z \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+  \end{align}
+
+\section{Scaling}
+
+  \begin{align}
+    S\left( x, y, z \right) &=
+    \begin{bmatrix}
+      x & 0 & 0 & 0 \\
+      0 & y & 0 & 0 \\
+      0 & 0 & z & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+  \end{align}
+
+\section{Rotation}
+
+  \begin{align}
+    R_{x}\left( \theta \right) &=
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & \cos\theta & -\sin\theta & 0 \\
+      0 & \sin\theta & \cos\theta & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix} \\
+    R_{y}\left( \theta \right) &=
+    \begin{bmatrix}
+      \cos\theta & 0 & \sin\theta & 0 \\
+      0 & 1 & 0 & 0 \\
+      -\sin\theta & 0 & \cos\theta & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix} \\
+    R_{z}\left( \theta \right) &=
+    \begin{bmatrix}
+      \cos\theta & -\sin\theta & 0 & 0 \\
+      \sin\theta & \cos\theta & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix} \\
+  \end{align}
