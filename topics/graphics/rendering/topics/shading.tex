@@ -1,0 +1,68 @@
+\chapter{Shading}
+
+\section{Reflection}
+
+  \begin{equation}
+    I_{p} = k_{a} i_{a} +
+    \sum_{m \in \text{lights}}
+    \left(
+      k_{d} \left( \hat{L}_{m} \cdot \hat{N} \right) i_{m, d} +
+      k_{s} \left( \hat{R}_{m} \cdot \hat{V} \right)^{\alpha} i_{m, s}
+    \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item All vectors are unit vectors
+    \item \textbf{Ambient Term}:
+    \begin{equation}
+      k_{a} i_{a}
+    \end{equation}
+    \begin{itemize}
+      \item \textbf{Light source}: indirect light
+    \end{itemize}
+
+    \item \textbf{Diffuse Term}:
+    \begin{equation}
+      k_{d} \left( \hat{L}_{m} \cdot \hat{N} \right) i_{m, d}
+    \end{equation}
+    \begin{itemize}
+      \item $ k_{d} $: material reflectivity
+      \item $ i_{m, d} $: $ \left( r, g, b \right) $ for a single light $ m $
+      \item $ \hat{L}_{m} \cdot \hat{N} $: the angle between $ L $ and $ N $
+      (which are unit vectors)
+      \item Diffuse reflection is strongest when $ L $ is
+      perpendicular to $ N $
+      \item Models an idealized\footnote{scatter light uniformly} surface
+      (aka, rough surfaces)
+    \end{itemize}
+
+    \item \textbf{Specular Term}
+    \begin{equation}
+      k_{s} \left( \hat{R}_{m} \cdot \hat{V} \right)^{\alpha} i_{m, s}
+    \end{equation}
+    \begin{itemize}
+      \item $ \hat{R}_{m} \cdot \hat{V} $: the angle between reflection and
+      light source
+      \item Specular terms models shiny surfaces
+      \item \textbf{Shinier}: a higher $ \alpha $; \textbf{rougher}:
+      lower $ \alpha $
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Open Questions}
+
+    \begin{itemize}
+      \item \textbf{Include attenuation
+      \footnote{reduction in illumination as distance increases} in equation}:
+      Add a term in the front of summation
+      \begin{equation*}
+        \frac{1}{ad^{2} + bd + c}
+      \end{equation*}
+
+      \item \textbf{When there are no specular surfaces, no moving light}:
+      colors of vertices can be optimized to be precomputed at the start and
+      be reused later on
+
+      \item \textbf{Modeling 3 wavelength is sufficient} because most people
+      have 3 tones in eyes (the three tones are similar to R, G, B)
+    \end{itemize}
