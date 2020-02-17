@@ -4,6 +4,9 @@
   \item Some (combinations of) transformations commute
   \footnote{if you change the order of transformation, the result remains the
   same}
+  \item All the transformations here are done using \textbf{homogeneous
+  coordinates}\footnote{matrix in \textbf{homogenous coordinates} all have
+  an additional rows of 0s at the bottom, with the last element being 1}
 \end{itemize}
 
 \section{Translation}
@@ -112,3 +115,11 @@
       & \cos\theta + u_{z}^{2}\left( 1 - \cos\theta \right)
     \end{bmatrix}
   \end{equation}
+
+  \subsection{Rotation Around an Object's Center}
+
+    \begin{enumerate}
+      \item Translate to the origin
+      \item Rotate
+      \item Translate back using the inverse
+    \end{enumerate}

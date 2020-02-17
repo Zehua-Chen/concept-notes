@@ -1,5 +1,24 @@
 \chapter{Overview}
 
+\section{Projection}
+
+  \begin{align}
+    \frac{y_{\text{clip}}}{d} &= \frac{y_{\text{view}}}{-z_{\text{view}}} \\
+    y_{\text{clip}}
+    &= d\frac{y_{\text{view}}}{-z_{\text{view}}} \\
+    &= \frac{y_{\text{view}}}{-z_{\text{view}} / d}
+  \end{align}
+
+  \begin{itemize}
+    \item The equation applies in situations where
+    \begin{itemize}
+      \item The \textbf{eyes} are \textbf{centered at the origin}
+      \item The \textbf{view} is in \textbf{negative z direction}
+      \item The clip is between the eyes and the view
+    \end{itemize}
+    \item $ d $: distance from eyes to the screen (clip)
+  \end{itemize}
+
 \section{Graphics Pipeline}
 
   Transforming model coordinates to viewport coordinates
