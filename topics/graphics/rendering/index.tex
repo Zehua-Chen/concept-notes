@@ -1,6 +1,7 @@
 \documentclass[letterpaper, 11pt]{report}
-\input{../../../shared/config/packages}
-\input{../../../shared/config/styles}
+\usepackage{import}
+\import{../../../shared/config/}{packages}
+\import{../../../shared/config/}{styles}
 
 \title{Computer Graphics - Rendering}
 \author{Zehua Chen}
@@ -9,5 +10,6 @@
   \maketitle
   \tableofcontents
 
-  \input{topics/shading}
+  \import{topics/shading/}{shading}
+  \import{topics/model/}{model}
 \end{document}

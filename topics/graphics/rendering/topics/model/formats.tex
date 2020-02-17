@@ -1,0 +1,20 @@
+\section{Formats}
+
+\begin{itemize}
+  \item \textbf{STL}
+  \begin{itemize}
+    \item Aka. faceset
+    \item A file of lines of floats
+    \item Each line represent a triangle
+  \end{itemize}
+
+  \item \textbf{OBJ}
+  \begin{itemize}
+    \item Aka. indexed faceset
+    \item Use two columns, one of vertices and one of indexes (3x)
+    \item The indexes refer to the index in the vertices columns;
+    three vertices represent a triangle
+    \item Changing individual vertices is more performant in \textbf{OBJ}
+    than \textbf{STL}
+  \end{itemize}
+\end{itemize}

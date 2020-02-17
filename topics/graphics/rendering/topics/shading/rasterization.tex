@@ -1,0 +1,95 @@
+\section{Rasterization}
+
+  After knowing the colors of each vertex, we need to know how to fill the
+  inside of the triangles
+
+\subsection{Linear Interpolation}
+
+  Interpolation refers to the process of knowing a few points on the function
+  and then modeling the rest of the function. In rasterization, we knows
+  the colors on the vertices and we now want to know how to color the inside
+  of the triangles
+
+  \begin{align*}
+    l\left( t \right) &=
+      \left( 1 - t \right) \left< x_{0}, y_{0} \right>
+      + t \left< x_{1}, y_{1} \right> \\
+    f\left( t \right) &=
+      \left( 1 - t \right) f\left( x_{0}, y_{0} \right)
+      + t f\left( x_{1}, y_{1} \right)
+  \end{align*}
+
+  \begin{itemize}
+    \item $ l $: gives the coordinate of a point that is $ t $ distance
+    from $ \left< x_{0}, y_{0} \right> $
+    \item $ f $: gives the value on the coordinate that is $ t $ distance
+    from $ \left< x_{0}, y_{0} \right> $
+  \end{itemize}
+
+\subsection{Barycentric Coordinates}
+
+  One way that the GPU interpolates color on the face of a triangle is
+  implemented using \say{barycentric coordinates}
+
+  \begin{itemize}
+    \item Three points
+    \begin{itemize}
+      \item $ \left< 1, 0, 0 \right> $
+      \item $ \left< 0, 1, 0 \right> $
+      \item $ \left< 0, 0, 1 \right> $
+    \end{itemize}
+    represent the three vertices of a triangle.
+  \end{itemize}
+
+  \subsubsection{Constructing Barycentric Coordinates}
+
+    \begin{itemize}
+      \item Given a point $ p $, $ p $ and the three vertices of a triangle
+      $ p_{0}, p_{1}, p_{2} $, $ p, p_{0}, p_{1}, p_{2} $ forms three
+      smaller triangles.
+
+      \begin{align}
+        a_{0}\left( p \right) &= A\left( p_{1}, p_{2}, p \right) \\
+        a_{1}\left( p \right) &= A\left( p_{2}, p_{0}, p \right) \\
+        a_{2}\left( p \right) &= A\left( p_{0}, p_{1}, p \right)
+      \end{align}
+
+      From the areas of the smaller triangles, the barycentric coordinate
+      of the point $ p $ can then be calculated
+
+      \begin{align}
+        b_{0} &= \frac{a_{0}}{A\left( p_{0}, p_{1}, p_{2} \right)} \\
+        b_{1} &= \frac{a_{1}}{A\left( p_{0}, p_{1}, p_{2} \right)} \\
+        b_{2} &= \frac{a_{2}}{A\left( p_{0}, p_{1}, p_{2} \right)} \\
+        b_{0} + b_{1} + b_{2} &= 1 \\
+        P &= \left< b_{0}, b_{1}, b_{2} \right>
+      \end{align}
+
+      \item Barycentric coordinate construction is similar to linear
+      interpolation
+      \item There is \textbf{no restriction on the dimension of space} the
+      triangle was orignally in
+    \end{itemize}
+
+  \subsubsection{Point Testing}
+
+    \begin{enumerate}
+      \item Convert the point of interest to barycentric coordinate
+      \item If one component of the converted point is negative, the point is
+      outside of the triangle
+    \end{enumerate}
+
+  \subsubsection{Interpolate Colors}
+
+    Given a barycentric coordinate
+    $ p = \left< \lambda_{0}, \lambda_{1}, \lambda_{2} \right> $, and the
+    colors at the corners,
+    $ f\left( a \right), f\left( b \right), f\left( c \right) $. The color
+    at $ p $, $ f\left( p \right) $ is
+
+    \begin{equation}
+      f\left( p \right)
+        = \lambda_{0} f\left( a \right)
+        + \lambda_{1} f\left( b \right)
+        + \lambda_{2} f\left( c \right)
+    \end{equation}
