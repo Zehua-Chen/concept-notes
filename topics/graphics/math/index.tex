@@ -1,14 +1,15 @@
 \documentclass[letterpaper, 11pt]{report}
-\input{../../../shared/config/packages}
-\input{../../../shared/config/styles}
+\usepackage{import}
+\import{../../../shared/config/}{packages}
+\import{../../../shared/config/}{styles}
 
-\title{Computer Graphics - Rendering}
+\title{Computer Graphics - Math}
 \author{Zehua Chen}
 
 \begin{document}
   \maketitle
   \tableofcontents
 
-  \input{topics/matrix}
-  \input{topics/geometry}
+  \import{topics/}{matrix}
+  \import{topics/}{transformation}
 \end{document}
