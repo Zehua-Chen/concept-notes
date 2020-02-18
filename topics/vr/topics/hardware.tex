@@ -1,0 +1,84 @@
+\chapter{Hardware}
+
+Hardwares in VR are split into the following categories
+
+\begin{itemize}
+  \item \textbf{Display}: a way to generate stimuli for sense organs
+  (ex. screens, speakers, haptic feedback)
+  \item \textbf{Sensors}: devices that extracts information from the real world
+  The \textbf{positions and orientations} of sense organs must be tracked to
+  adapt the stimulus
+  \item \textbf{Computers} where the VWG is executed
+\end{itemize}
+
+\section{Display}
+
+  \begin{itemize}
+    \item \textbf{Virtual World Generator (VWG)}: something that generates the
+    virtual world
+    \item \textbf{Rendering}: the process of send info from VWG onto the
+    display
+    \item Types of aural \& visual displays
+    \begin{itemize}
+      \item \textbf{User-fixed}
+      \item \textbf{World-fixed}
+    \end{itemize}
+
+    The two systems differ in the following areas
+    \begin{itemize}
+      \item Volume
+      \item Power consumption
+      \item Privacy
+      \item Comfort
+      \item Sharing
+      \item Costs
+      \item Ways they adapt to actions
+    \end{itemize}
+  \end{itemize}
+
+\section{Sensors}
+
+  \begin{itemize}
+    \item \textbf{Transducer}: converts energy from one form to another
+    \item \textbf{Sensor}: converts energy to signals for electrical circuit
+    \item Sensors typically have a \textbf{receptor} that collects energies
+    \item \textbf{Sense organs} convert energy to neural impulses
+    \item Each sense organ has a \textbf{configuration space}, which represents
+    all the ways in which it can be transformed or configured; the most
+    important aspect is the degree of freedom, \textbf{DOF}
+    \item A rigid body has 6 DOFs
+    \begin{enumerate}
+      \item Side to side motion
+      \item Vertical motion
+      \item Closer-further motion
+      \item Yaw
+      \item Pict
+      \item Roll
+    \end{enumerate}
+
+    \item Inertial Measurement Unit \textbf{IMU} captures orientations
+    \begin{itemize}
+      \item \textbf{Gyroscope}: measures angular velocity
+      \begin{itemize}
+        \item Modern hardware uses MEMS-based gyroscopes that measure the
+        effect of rotation on a vibrating object
+      \end{itemize}
+
+      \item \textbf{Accelerometer}: measures acceleration
+      \item \textbf{Magnetometer}: measures the direction of a magnetic field
+    \end{itemize}
+
+    \item Cameras can also capture inforation from the environment
+    (ex. hand, arms, bodies, ...)
+    \begin{itemize}
+      \item \textbf{Depth camera} projects light and observes reflection
+      \item \textbf{Optical mouse}
+    \end{itemize}
+  \end{itemize}
+
+\section{Computers}
+
+  \begin{itemize}
+    \item Microcontrollers can be used to gather info from sensors and
+    send them to the main computer
+  \end{itemize}

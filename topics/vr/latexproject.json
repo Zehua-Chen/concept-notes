@@ -1,6 +1,7 @@
 {
   "entry": "index.tex",
   "includes": [
-    "../../shared/config/"
+    "../../shared/config/",
+    "topics"
   ]
 }

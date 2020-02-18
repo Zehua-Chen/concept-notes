@@ -1,7 +1,9 @@
 \documentclass[letterpaper, 11pt]{report}
 \usepackage{import}
+\usepackage[utf8]{inputenc}
 \import{../../shared/config/}{packages}
 \import{../../shared/config/}{styles}
+\import{../../shared/config/}{macros}
 
 \title{VR}
 \author{Zehua Chen}
@@ -10,11 +12,8 @@
   \maketitle
   \tableofcontents
 
-  \chapter{Stimulus}
-
-  \begin{itemize}
-    \item \textbf{Stevens's power law} characterizes the relationship
-    between the increase of intensity of stimulus and the perceived magnitude
-    increase in sensation created by the stimulus
-  \end{itemize}
+  \import{./topics/}{overview}
+  \import{./topics/}{hardware}
+  \import{./topics/}{software}
+  \import{./topics/}{physiology}
 \end{document}
