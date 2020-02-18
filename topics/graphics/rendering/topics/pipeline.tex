@@ -1,0 +1,102 @@
+\chapter{Pipelines}
+
+\section{Graphics Pipeline}
+
+  \begin{enumerate}
+    \item \textbf{Vertex}
+    \item \textbf{Rasterization}
+    \item \textbf{Fragment}
+    \begin{itemize}
+      \item Not pixels: each fragment has a 2D location in a raster and a color;
+      final value is found by appliying hidden surface removal and possibly
+      compositing to a set of fragments
+    \end{itemize}
+  \end{enumerate}
+
+\section{Transformation Pipeline}
+
+  Transforming model coordinates to viewport coordinates
+
+  \begin{equation}
+    \begin{bmatrix}
+      x_{s} \\
+      y_{s} \\
+      0 \\
+      1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      \text{W2V}
+    \end{bmatrix}
+    \begin{bmatrix}
+      \text{Projection}
+    \end{bmatrix}
+    \begin{bmatrix}
+      \text{View}
+    \end{bmatrix}
+    \begin{bmatrix}
+      \text{Model}
+    \end{bmatrix}
+    \begin{bmatrix}
+      x_{m} \\
+      y_{m} \\
+      z_{m} \\
+      1
+    \end{bmatrix}
+  \end{equation}
+
+  \begin{enumerate}
+    \item The \textbf{model matrix} map local object coordinates to
+    world coordinates (ex. rotation)
+    \item Given a camera looking down the z-axis from the origin,
+    the \textbf{view matrix} map world coordinates to camera coordinates
+    \item The \textbf{projection matrix} map camera coordinates to canonical
+    view volume
+    \item The \textbf{W2V (window to view) matrix} map canonical view volume
+    to screen space
+  \end{enumerate}
+
+  Every transformations except W2V transformation happen in vertex
+  processing stage
+
+  \subsection{In Unity}
+
+    \begin{itemize}
+      \item Transform component on a camera is the view matrix
+      \item Camera settings are used to create
+      \begin{itemize}
+        \item Projection matrix
+        \item Viewport matrix
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Projection}
+
+    Projection refers to the process of reducing dimensionality. There are two
+    modes of projection
+
+    \begin{itemize}
+      \item \textbf{Orthographic}: toss out the z component
+      \item \textbf{Perspective}: scale decreases as distance increases
+    \end{itemize}
+
+    Below is on perspective projection:
+
+    \begin{align}
+      \frac{y_{\text{clip}}}{d} &= \frac{y_{\text{view}}}{-z_{\text{view}}} \\
+      y_{\text{clip}}
+      &= d\frac{y_ {\text{view}}}{-z_{\text{view}}} \\
+      &= \frac{y_{\text{view}}}{-z_{\text{view}} / d}
+    \end{align}
+
+    \begin{itemize}
+      \item The equation applies in situations where
+      \begin{itemize}
+        \item The \textbf{eyes} are \textbf{centered at the origin}
+        \item The \textbf{view} is in \textbf{negative z direction}
+        \item The clip is between the eyes and the view
+      \end{itemize}
+
+      \item $ d $: distance from eyes to the screen (clip)
+      \item This equation also applies to $ x $ and $ y $
+    \end{itemize}

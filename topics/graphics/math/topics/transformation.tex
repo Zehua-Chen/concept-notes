@@ -5,8 +5,7 @@
   \footnote{if you change the order of transformation, the result remains the
   same}
   \item All the transformations here are done using \textbf{homogeneous
-  coordinates}\footnote{matrix in \textbf{homogenous coordinates} all have
-  an additional rows of 0s at the bottom, with the last element being 1}
+  coordinates}
 \end{itemize}
 
 \section{Translation}
@@ -80,6 +79,12 @@
       0 & \cos\theta & -\sin\theta & 0 \\
       0 & \sin\theta & \cos\theta & 0 \\
       0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
     \end{bmatrix} \\
     R_{y}\left( \theta \right) &=
     \begin{bmatrix}
@@ -87,6 +92,12 @@
       0 & 1 & 0 & 0 \\
       -\sin\theta & 0 & \cos\theta & 0 \\
       0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
     \end{bmatrix} \\
     R_{z}\left( \theta \right) &=
     \begin{bmatrix}
@@ -94,12 +105,18 @@
       \sin\theta & \cos\theta & 0 & 0 \\
       0 & 0 & 1 & 0 \\
       0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
     \end{bmatrix} \\
     R^{-1} &= R^{T}
   \end{align}
 
-  \begin{equation}
-    R_{u}\left( u, \theta \right) =
+  \begin{align*}
+    R_{u}\left( u, \theta \right) &=
     \begin{bmatrix}
       % row 1
       \cos\theta + u_{x}^{2}\left( 1 - \cos\theta \right)
@@ -113,8 +130,15 @@
       u_{z} u_{x} \left( 1 - \cos\theta \right) - u_{y} \sin\theta
       & u_{z} u_{y} \left( 1 - \cos\theta \right) + u_{x} \sin\theta
       & \cos\theta + u_{z}^{2}\left( 1 - \cos\theta \right)
+    \end{bmatrix} \\
+    &\times
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
     \end{bmatrix}
-  \end{equation}
+  \end{align*}
 
   \subsection{Rotation Around an Object's Center}
 

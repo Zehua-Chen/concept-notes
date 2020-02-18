@@ -1,63 +1,10 @@
 \chapter{Overview}
 
-\section{Projection}
-
-  \begin{align}
-    \frac{y_{\text{clip}}}{d} &= \frac{y_{\text{view}}}{-z_{\text{view}}} \\
-    y_{\text{clip}}
-    &= d\frac{y_{\text{view}}}{-z_{\text{view}}} \\
-    &= \frac{y_{\text{view}}}{-z_{\text{view}} / d}
-  \end{align}
+\section{Raytracing vs Rasterization}
 
   \begin{itemize}
-    \item The equation applies in situations where
-    \begin{itemize}
-      \item The \textbf{eyes} are \textbf{centered at the origin}
-      \item The \textbf{view} is in \textbf{negative z direction}
-      \item The clip is between the eyes and the view
-    \end{itemize}
-    \item $ d $: distance from eyes to the screen (clip)
+    \item Ray tracing works by shooting lights from the camera and see if they
+    hit any light source; Rasterization works by filling triangles
+    \item Rasterization is cheaper; the tasks can be paralleled
   \end{itemize}
 
-\section{Graphics Pipeline}
-
-  Transforming model coordinates to viewport coordinates
-
-  \begin{equation}
-    \begin{bmatrix}
-      x_{s} \\
-      y_{s} \\
-      0 \\
-      1
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-      \text{W2V}
-    \end{bmatrix}
-    \begin{bmatrix}
-      \text{Perspective}
-    \end{bmatrix}
-    \begin{bmatrix}
-      \text{View}
-    \end{bmatrix}
-    \begin{bmatrix}
-      \text{Model}
-    \end{bmatrix}
-    \begin{bmatrix}
-      x_{m} \\
-      y_{m} \\
-      z_{m} \\
-      1
-    \end{bmatrix}
-  \end{equation}
-
-  \begin{enumerate}
-    \item The model matrix apply changes to the model (ex. rotation)
-    \item Given a camera looking down the z-axis from the origin,
-    the view matrix positions the model positions the model relative to the
-    view (camera)
-    \item The perspective matrix distorts the model to give it a realistic
-    look
-    \item The W2V (window to view) matrix transforms the the model into a
-    coordinate system used by the view port
-  \end{enumerate}
