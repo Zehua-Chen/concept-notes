@@ -1,0 +1,101 @@
+\chapter{Turing Machine}
+
+\begin{align}
+  M &= \left( Q, \Sigma, \Gamma, \delta, q_{0}, B, q_{accept}, q_{reject} \right) \\
+  \delta &: Q \times \Gamma \to Q \times \Gamma \times \left\{ L, R, S \right\}
+\end{align}
+
+\begin{itemize}
+  \item DFA with infinite:
+  $ $
+  \begin{itemize}
+    \item $ Q $: finite set of states
+    \item $ \Sigma $: finite input alphabet
+    \item $ \delta $: transition function
+    \begin{itemize}
+      \item \textbf{Input}
+      \begin{itemize}
+        \item Current state
+        \item Symbol scanned
+      \end{itemize}
+
+      \item \textbf{Output}
+      \begin{itemize}
+        \item Output state
+        \item Write symbol
+        \item Direction to move on the tape
+      \end{itemize}
+
+      \item Undefined on some choices of $ q, a $, aka. crashes
+      \item Can't move off edges of the tapes
+      \item $ ID \to^{*} ID' $: eventually be able to reach $ ID' $ after
+      some finite number of moves
+    \end{itemize}
+
+    \item $ \Gamma $: finite tape alphabet
+    \item $ q_{0} $ is the inital state
+    \item $ B \in \Gamma - \Sigma $: is the blank symbol
+    \item $ q_{accept}, q_{reject} $ unique accept and reject states in $ Q $
+  \end{itemize}
+
+  \item One operation at a time
+  \begin{itemize}
+    \item Read
+    \item Write
+    \item Move
+    \item Change state
+  \end{itemize}
+
+  \item Whatever the machine is able to do is computable
+  \item \textbf{ID}: Instantaneous Definition
+  \begin{itemize}
+    \item Contains all necessary info to cpature the state of the machine
+  \end{itemize}
+
+  \item There can be multiple machines for the same language
+\end{itemize}
+
+\section{Graphical Representation}
+
+\section{Accept and Reject}
+
+  \begin{itemize}
+    \item Once the acceping state or the rejecting state is reached,
+    the string is either accepted or rejrected; no further movmenets would
+    be made
+    \item A string is rejected if
+    \begin{itemize}
+      \item Reject state
+      \item Moves off left edge
+      \item No next transition
+      \item Computing forever
+    \end{itemize}
+
+    \item Don't have to reject states, crashing also works
+  \end{itemize}
+
+\section{Recursive vs Recursive Enumerable}
+
+  \begin{itemize}
+    \item Recursive Enumerable languages
+    \begin{equation}
+      \left\{ L | \exists M, L(M) = L \right\}
+    \end{equation}
+
+    \item Recursive Languages
+    \begin{equation}
+      \left\{ L | \exists M \text{ M halts } \forall w \in \Sigma^{*}, L(M) = L \right\}
+    \end{equation}
+    \begin{itemize}
+      \item Eventually enter accepting or rejecting state
+    \end{itemize}
+  \end{itemize}
+
+\section{TM Programming}
+
+  \begin{itemize}
+    \item Checking off symbols
+    \item Shifting over
+    \item Finite control memory
+    \item Subroutine calls
+  \end{itemize}

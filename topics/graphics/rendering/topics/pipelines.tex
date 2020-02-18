@@ -1,18 +1,5 @@
 \chapter{Pipelines}
 
-\section{Graphics Pipeline}
-
-  \begin{enumerate}
-    \item \textbf{Vertex}
-    \item \textbf{Rasterization}
-    \item \textbf{Fragment}
-    \begin{itemize}
-      \item Not pixels: each fragment has a 2D location in a raster and a color;
-      final value is found by appliying hidden surface removal and possibly
-      compositing to a set of fragments
-    \end{itemize}
-  \end{enumerate}
-
 \section{Transformation Pipeline}
 
   Transforming model coordinates to viewport coordinates
@@ -100,3 +87,20 @@
       \item $ d $: distance from eyes to the screen (clip)
       \item This equation also applies to $ x $ and $ y $
     \end{itemize}
+
+\section{Graphics Pipeline}
+
+  \begin{enumerate}
+    \item \textbf{Vertex}
+    \begin{itemize}
+      \item The majority of transformation pipeline happens here,
+      \textbf{except W2V}
+    \end{itemize}
+    \item \textbf{Rasterization}
+    \item \textbf{Fragment}
+    \begin{itemize}
+      \item Not pixels: each fragment has a 2D location in a raster and a color;
+      final value is found by appliying hidden surface removal and possibly
+      compositing to a set of fragments
+    \end{itemize}
+  \end{enumerate}
