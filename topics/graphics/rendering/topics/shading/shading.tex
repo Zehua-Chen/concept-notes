@@ -3,6 +3,7 @@
 \section{Shading Methods}
 
   \begin{itemize}
+    \item \textbf{Lambertian Shading}
     \item \textbf{Gouraud Shading}
     \begin{itemize}
       \item Find average normal at each vector
@@ -18,6 +19,21 @@
       \item Interpolate edge normals across polygon
       \item Apply Blinn-Phong model at each fragment
       \item \textbf{Better effect}
+    \end{itemize}
+
+    \item Bidirectional Reflectance Distribution Function \textbf{(BRDF)}
+    \begin{itemize}
+      \item Account for shading in a more general and precise way
+    \end{itemize}
+
+    \item \textbf{Global Illumination}
+    \begin{itemize}
+      \item There is typically a limit on how many reflections are calculated
+      when calculating light that bounces between objects
+      \item To calculate the bounced light, Lambertian and Blinn-Phong models
+      have been used, BDRF are also common
+      \item Increasing level of realism come at the cost of increasing
+      computation time
     \end{itemize}
   \end{itemize}
 

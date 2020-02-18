@@ -1,5 +1,39 @@
 \chapter{Overview}
 
+\section{Visibility Computation}
+
+  \begin{itemize}
+    \item \textbf{Object order}
+    \begin{itemize}
+      \item Iterate over the list of triangles
+      \item For each visible triangle, a pixel is only updated if \textbf{
+      the corresponding part of the triangle is closer to the eye than
+      other triangles encountered so far}
+    \end{itemize}
+    \item \textbf{Image order}: for each pixel, determine which triangle should
+    influence its RGB values
+  \end{itemize}
+
+  \subsection{Ray Tracing}
+
+    \begin{itemize}
+      \item A \textbf{viewing ray} is drawn from the focal point to the center
+      of the pixel; involes the following processes
+      \begin{enumerate}
+        \item \textbf{Ray casting}: the ray would be defined and its nearest
+        point of intersection with triangles would be determined
+        \begin{itemize}
+          \item 3D data structures (ex. BSP trees and
+          Bounding Volume Hierarchies) can be built to improve efficiency;
+          eliminating many triangles using coordinate tests
+          \item Methods (ex. Moller-Trumbore intersection algorithm) of performing ray-triangle intersectino has been
+          developed to improve efficiency
+        \end{itemize}
+        \textbf{Shading}: RGB values are calculated based on lighting
+        conditions and material properties at the intersection point
+      \end{enumerate}
+    \end{itemize}
+
 \section{Raytracing vs Rasterization}
 
   \begin{itemize}
@@ -7,4 +41,3 @@
     hit any light source; Rasterization works by filling triangles
     \item Rasterization is cheaper; the tasks can be paralleled
   \end{itemize}
-
