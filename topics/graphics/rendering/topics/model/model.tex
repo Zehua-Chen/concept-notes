@@ -1,10 +1,56 @@
 \chapter{Model}
 
 \begin{itemize}
+  \item Models are defined in terms of \textbf{primitives (i.e. triangles)}
+  \begin{equation}
+    \left(
+      \left( x_{1}, y_{1}, z_{1} \right),
+      \left( x_{2}, y_{2}, z_{2} \right),
+      \left( x_{3}, y_{3}, z_{3} \right)
+    \right)
+  \end{equation}
+
+  \begin{itemize}
+    \item Vertices are the coordinates within the triangle
+  \end{itemize}
+
+  \item Triangle form meshes
+  \item \textbf{Data structures}
+  \begin{itemize}
+    \item Meshes needs to be stored in an efficient way so that modifying
+    vertices (ex. rotation) can be done efficiently
+    \item \textbf{Common data structures}:
+    \begin{itemize}
+      \item Doubly connected edge list
+      \item Half-edge data structure
+    \end{itemize}
+  \end{itemize}
+
+  \item \textbf{Coherent model}: a model wehre the inside and the outside is
+  completely isolated; if we fill the model with gas, the gas would not leak
+  \begin{itemize}
+    \item The triangles in the model fit perfectly
+    \begin{itemize}
+      \item Each edge has two neighbors of triangles
+      \item No triangles intersect unless they are adjacent
+    \end{itemize}
+
+    \item Such models are required if inside and outside is critical to VWG
+    \item 3D modeling tools automatically construct coherent models
+  \end{itemize}
+
   \item Why triangles
   \begin{itemize}
-    \item GPUs are mades to process triangles
-    \item Triangles can made up any polygon
+    \item Algorithms are easy to be made
+    \item GPUs prefer smaller primitives as they are easier to parallelly
+    process
+  \end{itemize}
+
+  \item \textbf{Stationary vs movable models}
+  \begin{itemize}
+    \item \textbf{Stationary}: same coordiantes forever
+    \item \textbf{Movable}: can be transformed into various positions and
+    orientations
   \end{itemize}
 \end{itemize}
 
