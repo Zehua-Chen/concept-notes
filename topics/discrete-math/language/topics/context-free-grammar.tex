@@ -98,18 +98,20 @@
 \section{Closure Properties}
 
   \begin{itemize}
-    \item Given $ L_{1}, L_{2} $ are CFLs $ L_{1} \cup L_{2} $ is a CFL
-    \item Concatination
-    \item Kleene star
-    \item If $ L_{1} $ is a $ CFL $ and $ L_{2} $ is regular then
-    $ L_{1} \cap L_{2} $ is a CFL
-  \end{itemize}
+    \item \textbf{Closed}
+    \begin{itemize}
+      \item Given $ L_{1}, L_{2} $ are CFLs $ L_{1} \cup L_{2} $ is a CFL
+      \item Concatination
+      \item Kleene star
+      \item If $ L_{1} $ is a CFL and $ L_{2} $ is regular then
+      $ L_{1} \cap L_{2} $ is a CFL
+    \end{itemize}
 
-  Not closed under
-
-  \begin{itemize}
-    \item Complement
-    \item Intersection
+    \item \textbf{Not closed}
+    \begin{itemize}
+      \item Complement
+      \item Intersection
+    \end{itemize}
   \end{itemize}
 
 \section{Trees}
@@ -190,3 +192,11 @@
         \item Every derivation adds exactly one terminal
       \end{itemize}
     \end{itemize}
+
+\section{From DFA}
+
+  \begin{enumerate}
+    \item $ T = \left\{ S_{q} | q \in Q \right\} $
+    \item $ S = S_{s} $
+    \item $ S_{q} \to a S_{q'} b $
+  \end{enumerate}
