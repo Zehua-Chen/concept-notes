@@ -1,0 +1,31 @@
+\chapter{Quaternion}
+
+Given a rotation by angle $ \theta $ around an axis $ a $, the quaternion $ q $
+can be formed by
+
+\begin{equation}
+  q =
+  \left<
+    \cos\frac{\theta}{2},
+    a_{x} \sin\frac{\theta}{2},
+    a_{y} \sin\frac{\theta}{2},
+    a_{z} \sin\frac{\theta}{2}
+  \right>
+\end{equation}
+
+\section{Game Engines}
+
+  \subsection{Unity}
+
+    \begin{itemize}
+      \item Unity implements quaternion as follows
+      \begin{equation}
+        q =
+        \left<
+          a_{x} \sin\frac{\theta}{2},
+          a_{y} \sin\frac{\theta}{2},
+          a_{z} \sin\frac{\theta}{2},
+          \cos\frac{\theta}{2}
+        \right>
+      \end{equation}
+    \end{itemize}

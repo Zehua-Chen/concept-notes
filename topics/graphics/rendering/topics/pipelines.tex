@@ -104,3 +104,22 @@
       compositing to a set of fragments
     \end{itemize}
   \end{enumerate}
+
+  \subsection{Hidden Surface Removal}
+
+    \begin{itemize}
+      \item \textbf{Painter's algorithm}: draw farther object first
+      \begin{itemize}
+        \item Expensive to sort
+        \item Depth cycle
+      \end{itemize}
+
+      \item \textbf{Z-Buffer}: keep a z buffer on pixels, while drawing,
+      only write to pixel if the object being drawn has a z value that is
+      closer than the z value of the pixel
+      \begin{itemize}
+        \item More popular today; not used in the past for memory issues
+        \item If two z values are too close, it's hard to determine which is
+        closer
+      \end{itemize}
+    \end{itemize}
