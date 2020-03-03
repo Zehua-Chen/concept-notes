@@ -1,0 +1,15 @@
+\appendix
+
+\chapter{Theorems}
+
+  \section{Master's Theorem}
+
+  \begin{align}
+    T\left( n \right) &= a T\left( \frac{n}{b} \right) + cn^{k} \\
+    &=
+    \begin{cases}
+      a < b^{k}: \Theta \left( n^{k} \right) \\
+      a = b^{k}: \Theta \left( n^{k} \log\left( n \right) \right) \\
+      a > b^{k}: \Theta \left( n^{\log_{b}\left( a \right)} \right)
+    \end{cases}
+  \end{align}

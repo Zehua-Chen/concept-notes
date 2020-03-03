@@ -1,17 +1,92 @@
 \chapter{Reduction}
 
+Reduction refers to implementing an algorithm $ X $ using another algorithm
+$ Y $
+
+\begin{itemize}
+  \item The correctness of $ X $ does not depend on how $ Y $ is implemented;
+  it is assumed that $ Y $ is implemented correctly
+  \item The running time of $ X $ depends on $ Y $
+\end{itemize}
+
 \section{Recursion}
 
-  Recursion is a special type of reduction that
+  Recursion is a special type of reduction
 
   \begin{itemize}
-    \item
+    \item If a problem can be solved, solve it
+    \item Otherwise, break the problem into smaller instances of the same
+    problem
   \end{itemize}
 
 \section{Divide and Conquer}
 
-  \subsection{Multiplication}
+  \begin{enumerate}
+    \item \textbf{Divide} the problem into smaller instances of the same
+    probelm
+    \item \textbf{Delegate} each smaller instances to recursions
+    \item \textbf{Combine} the solutions from the smaller instances into
+    the final solution of the bigger problem
+  \end{enumerate}
 
+  \subsection{Correctness}
+
+    Proving the correctness of divide and conquer requires the use of induction
+
+  \subsection{Running Time}
+
+    Proving the running time of divide and conquer requires the use of
+    \textbf{recursion trees}
+
+\section{Recursion Trees}
+
+  \begin{itemize}
+    \item \textbf{Nodes} represent recursive subproblems
+    \item \textbf{Node values} represent the time spent on the subproblems
+    \textit{excluding recursive calls}
     \begin{itemize}
-      \item $ \times 10... $ can be done as bit shift operations
+      \item The \textbf{overall running time} is the sum of all node values
     \end{itemize}
+
+    \item \textbf{Leaf nodes} represent base cases
+  \end{itemize}
+
+  \begin{align}
+    T\left( n \right)
+    &= r T\left( \frac{n}{c} \right) + f\left( n \right) \\
+    &= \sum_{i = 0}^{L} r^{i} \cdot f\left( \frac{n}{c^{i}} \right)
+  \end{align}
+
+  \begin{itemize}
+    \item $ O\left( f\left( n \right) \right) $: time spent on non-recursive
+    works
+    \item $ r $: the number of recursive calls
+    \item $ r^{i} $: the number of nodes at level $ i $
+    \item $ \frac{n}{c} $: the size of each recursive problem
+    \item Nodes at depth $ d $ contain values $ \frac{n}{c^{d}} $
+  \end{itemize}
+
+  \subsection{Three Common Cases}
+
+    There are three common cases for level-by-level series
+    ($ \left\{ \text{sum of values of a level} \right\} $)
+
+    \begin{enumerate}
+      \item \textbf{Decreasing}: if the series decrease \textbf{exponentially},
+      then; the sum is dominated by the value at root of the tree
+      \begin{equation}
+        T\left( n \right) = O\left( f\left( n \right) \right)
+      \end{equation}
+
+      \item \textbf{Equal}: if all terms in the series are equal
+      \begin{align}
+        T\left( n \right) &= O\left( f\left( n \right) \cdot L \right) \\
+        &= O\left( f\left( n \right) \cdot \log n \right)
+      \end{align}
+
+      \item \textbf{Increasing}: if the series grow \textbf{exponentially}:
+      \begin{equation}
+        T\left( n \right) = O\left( n^{\log_{c} r} \right)
+      \end{equation}
+      the sum is dominated by the number of leaves in the recursion tree
+    \end{enumerate}
