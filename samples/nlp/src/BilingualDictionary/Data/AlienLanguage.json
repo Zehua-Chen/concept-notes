@@ -1,0 +1,53 @@
+{
+  "name": "Alien Language",
+  "data": [
+    {
+      "f": "ok-voon ororok sprok.",
+      "e": "at-voon bichat dat."
+    },
+    {
+      "f": "ok-drubel ok-voon anok plok sprok.",
+      "e": "at-drubel at-voon pippat rrat dat."
+    },
+    {
+      "f": "erok sprok izok hihok ghirok.",
+      "e": "totat dat arrat vat hilat."
+    },
+    {
+      "f": "ok-voon anok drok brok jok.",
+      "e": "at-voon krat pippat sat lat."
+    },
+    {
+      "f": "wiwok farok izok stok.",
+      "e": "totat jjat quat cat."
+    },
+    {
+      "f": "lalok sprok izok jok stok.",
+      "e": "wat dat krat quat cat."
+    },
+    {
+      "f": "lalok farok ororok lalok sprok izok enemok.",
+      "e": "wat jjat bichat wat dat vat eneat."
+    },
+    {
+      "f": "lalok brok anok plok nok.",
+      "e": "iat lat pippat rrat nnat."
+    },
+    {
+      "f": "wiwok nok izok kantok ok-yurp.",
+      "e": "totat nnat quat oloat at-yurp."
+    },
+    {
+      "f": "lalok mok nok yorok ghirok clok.",
+      "e": "wat nnat gat mat bat hilat."
+    },
+    {
+      "f": "lalok nok crrrok hihok yorok zanzanok.",
+      "e": "wat nnat arrat mat zanzanat."
+    },
+    {
+      "f": "lalok rarok nok izok hihok mok.",
+      "e": "wat nnat forat arrat vat gat."
+    }
+  ]
+}

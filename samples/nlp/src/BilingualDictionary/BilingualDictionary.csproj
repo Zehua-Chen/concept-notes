@@ -8,6 +8,6 @@
 
   <!--Resources-->
   <ItemGroup>
-    <EmbeddedResource Include="Data/AlienLanguage.txt"></EmbeddedResource>
+    <EmbeddedResource Include="Data/AlienLanguage.json"></EmbeddedResource>
   </ItemGroup>
 </Project>

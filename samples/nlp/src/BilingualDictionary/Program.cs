@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 
 namespace NLP
 {
@@ -6,6 +8,9 @@ namespace NLP
     {
         static void Main(string[] args)
         {
+            BilingualDictionaryTrainingData trainingData = BilingualDictionaryTrainingData.AlienLanguage;
+
+            Console.WriteLine(trainingData);
         }
     }
 }
