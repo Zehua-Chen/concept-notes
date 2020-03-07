@@ -9,7 +9,7 @@ namespace NLP
         static void Main(string[] args)
         {
             BilingualDictionaryTrainingData trainingData = BilingualDictionaryTrainingData.AlienLanguage;
-            BilingualDictionary dictionary = BilingualDictionary.Train(trainingData, 10);
+            BilingualDictionary dictionary = BilingualDictionary.Train(trainingData, 50);
 
             foreach (string f in trainingData.FWords)
             {
@@ -19,7 +19,7 @@ namespace NLP
                     return b;
                 });
 
-                Console.WriteLine("f: {0}, e: {1}, p = {2}", f, maxE.Key, maxE.Value);
+                Console.WriteLine("f = {0}, e = {1}, p = {2}", f, maxE.Key, maxE.Value);
             }
         }
     }

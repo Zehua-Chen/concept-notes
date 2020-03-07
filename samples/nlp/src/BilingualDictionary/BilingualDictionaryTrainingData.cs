@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 using System.Reflection;
 
@@ -59,8 +60,8 @@ namespace NLP
             {
                 SentencePair sentencePair = new SentencePair()
                 {
-                    FWords = pair.F.Split(" "),
-                    EWords = pair.E.Split(" ")
+                    FWords = this.ToWords(pair.F),
+                    EWords = this.ToWords(pair.E)
                 };
 
                 this.Add(sentencePair);
@@ -90,6 +91,34 @@ namespace NLP
             }
 
             Pairs.Add(pair);
+        }
+
+        private string[] ToWords(string sentence)
+        {
+            List<string> words = new List<string>();
+            StringBuilder builder = new StringBuilder();
+
+            foreach (char letter in sentence)
+            {
+                switch (letter)
+                {
+                    case ' ':
+                        if (builder.Length != 0)
+                        {
+                            words.Add(builder.ToString());
+                            builder.Clear();
+                        }
+                        break;
+                    case '.':
+                        words.Add(".");
+                        break;
+                    default:
+                        builder.Append(letter);
+                        break;
+                }
+            }
+
+            return words.ToArray();
         }
 
         public static BilingualDictionaryTrainingData AlienLanguage
