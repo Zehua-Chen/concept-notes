@@ -41,10 +41,9 @@ namespace NLP
     /// </code>
     /// </example>
     /// </summary>
-    public class BilingualDictionary
+    public class IBMModel1Dictionary
     {
         public FETable Table { get; private set; } = new FETable();
-        public float DefaultMatrixValue { get; set; } = 0.0f;
 
         public float this[string f, string e]
         {
@@ -58,18 +57,19 @@ namespace NLP
             }
         }
 
-        public static BilingualDictionary Train(
-            BilingualDictionaryTrainingData trainingData,
-            int iterations = 10)
+        public static IBMModel1Dictionary Train(
+            TranslationTrainingData trainingData,
+            int iterations = 10,
+            float defaultTableValue = 1.0f)
         {
-            BilingualDictionary dictionary = new BilingualDictionary();
+            IBMModel1Dictionary dictionary = new IBMModel1Dictionary();
 
             // Initialize dictionary
             foreach (string f in trainingData.FWords)
             {
                 foreach (string e in trainingData.EWords)
                 {
-                    dictionary.Table.InitializeDefautValue(f, e, 1.0f);
+                    dictionary.Table.InitializeDefautValue(f, e, defaultTableValue);
                 }
             }
 
@@ -91,7 +91,7 @@ namespace NLP
 
                     foreach (string e in trainingData.EWords)
                     {
-                        count.InitializeDefautValue(f, e, 1.0f);
+                        count.InitializeDefautValue(f, e, 0.0f);
                         dictionary.Table.InitializeDefautValue(f, e, 1.0f);
                     }
                 }
@@ -114,8 +114,8 @@ namespace NLP
                     {
                         foreach (string f in sentencePair.FWords)
                         {
-                            count[f][e] += dictionary.Table[f][e] / sTotal[e];
-                            total[f] += dictionary.Table[f][e] / sTotal[e];
+                            count[f][e] += dictionary[f, e] / sTotal[e];
+                            total[f] += dictionary[f, e] / sTotal[e];
                         }
                     }
                 }
@@ -125,7 +125,7 @@ namespace NLP
                 {
                     foreach (string e in trainingData.EWords)
                     {
-                        dictionary.Table[f][e] = count[f][e] / total[f];
+                        dictionary[f, e] = count[f][e] / total[f];
                     }
                 }
             }

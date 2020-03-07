@@ -13,7 +13,7 @@ namespace NLP
         public string[] FWords;
     }
 
-    public class BilingualDictionaryTrainingData : IEnumerable<SentencePair>
+    public class TranslationTrainingData : IEnumerable<SentencePair>
     {
         internal struct ModelPair
         {
@@ -44,7 +44,7 @@ namespace NLP
         /// Load training data from stream
         /// </summary>
         /// <param name="stream">some kind of stream</param>
-        public BilingualDictionaryTrainingData(Stream stream)
+        public TranslationTrainingData(Stream stream)
         {
             using StreamReader reader = new StreamReader(stream);
             JsonSerializerOptions options = new JsonSerializerOptions()
@@ -121,14 +121,14 @@ namespace NLP
             return words.ToArray();
         }
 
-        public static BilingualDictionaryTrainingData AlienLanguage
+        public static TranslationTrainingData AlienLanguage
         {
             get
             {
-                Assembly assembly = Assembly.GetAssembly(typeof(BilingualDictionaryTrainingData));
+                Assembly assembly = Assembly.GetAssembly(typeof(TranslationTrainingData));
                 using Stream stream = assembly.GetManifestResourceStream("NLP.Data.AlienLanguage.json");
 
-                return new BilingualDictionaryTrainingData(stream);
+                return new TranslationTrainingData(stream);
             }
         }
     }

@@ -8,8 +8,8 @@ namespace NLP
     {
         static void Main(string[] args)
         {
-            BilingualDictionaryTrainingData trainingData = BilingualDictionaryTrainingData.AlienLanguage;
-            BilingualDictionary dictionary = BilingualDictionary.Train(trainingData, 50);
+            TranslationTrainingData trainingData = TranslationTrainingData.AlienLanguage;
+            IBMModel1Dictionary dictionary = IBMModel1Dictionary.Train(trainingData, 10);
 
             foreach (string f in trainingData.FWords)
             {
