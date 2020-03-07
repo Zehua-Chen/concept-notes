@@ -110,6 +110,11 @@ namespace NLP
                         }
                         break;
                     case '.':
+                        if (builder.Length != 0)
+                        {
+                            words.Add(builder.ToString());
+                            builder.Clear();
+                        }
                         words.Add(".");
                         break;
                     default:

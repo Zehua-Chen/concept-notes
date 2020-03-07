@@ -92,7 +92,6 @@ namespace NLP
                     foreach (string e in trainingData.EWords)
                     {
                         count.InitializeDefautValue(f, e, 0.0f);
-                        dictionary.Table.InitializeDefautValue(f, e, 1.0f);
                     }
                 }
 

@@ -9,17 +9,26 @@ namespace NLP
         static void Main(string[] args)
         {
             TranslationTrainingData trainingData = TranslationTrainingData.AlienLanguage;
-            IBMModel1Dictionary dictionary = IBMModel1Dictionary.Train(trainingData, 10);
+            IBMModel1Dictionary dictionary = IBMModel1Dictionary.Train(trainingData, 20);
 
             foreach (string f in trainingData.FWords)
             {
-                KeyValuePair<string, float> maxE = dictionary.Table[f].Aggregate((a, b) =>
-                {
-                    if (a.Value > b.Value) return a;
-                    return b;
-                });
+                KeyValuePair<string, float>[] translations = dictionary.Table[f]
+                    .Select((pair, index) => { return pair; })
+                    .ToArray();
 
-                Console.WriteLine("f = {0}, e = {1}, p = {2}", f, maxE.Key, maxE.Value);
+                TranslationComparer comparer = new TranslationComparer();
+
+                Array.Sort(translations, comparer);
+                Array.Reverse(translations);
+
+                IEnumerable<string> bestTranslations = translations
+                    .Take(3)
+                    .Select((pair, index) => $"{pair.Key}({pair.Value:0.00})");
+
+                Console.WriteLine("(f = {0}): {1}",
+                    f,
+                    string.Join(", ", bestTranslations));
             }
         }
     }

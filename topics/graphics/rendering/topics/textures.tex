@@ -18,8 +18,36 @@
 
   \begin{itemize}
     \item \textbf{Magnification}: more fragments than texels
+    \begin{itemize}
+      \item Nearest neighbor
+      \item Bilinear filtering
+    \end{itemize}
     \item \textbf{Minification}: more texels than fragments
   \end{itemize}
+
+  \subsection{Nearest Neighbor}
+
+    Given the $ u, v $ of a fragment, the width $ w $ and height $ h $ of the
+    pixel, nearest neighbor gives us the pixel in texel $ s, t $ to use for
+    the fragment
+
+    \begin{align}
+      s &= \round\left( u \times w - \frac{1}{2} \right) \\
+      t &= \round\left( v \times h - \frac{1}{2} \right)
+    \end{align}
+
+    \begin{itemize}
+      \item This algorithm comes up with the texture coordinate on the
+      fragments
+      \item For pixels between fragments, we use linear interpolation to come
+      up with their \textbf{texture coordiantes}
+    \end{itemize}
+
+  \subsection{Bilinear Filtering}
+
+    \begin{itemize}
+      \item $ Q_{i} $: color values
+    \end{itemize}
 
   \subsection{Mipmapping}
 

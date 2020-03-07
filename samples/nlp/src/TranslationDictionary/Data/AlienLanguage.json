@@ -2,52 +2,52 @@
   "name": "Alien Language",
   "data": [
     {
-      "f": "ok-voon ororok sprok.",
-      "e": "at-voon bichat dat."
+      "e": "ok-voon ororok sprok.",
+      "f": "at-voon bichat dat."
     },
     {
-      "f": "ok-drubel ok-voon anok plok sprok.",
-      "e": "at-drubel at-voon pippat rrat dat."
+      "e": "ok-drubel ok-voon anok plok sprok.",
+      "f": "at-drubel at-voon pippat rrat dat."
     },
     {
-      "f": "erok sprok izok hihok ghirok.",
-      "e": "totat dat arrat vat hilat."
+      "e": "erok sprok izok hihok ghirok.",
+      "f": "totat dat arrat vat hilat."
     },
     {
-      "f": "ok-voon anok drok brok jok.",
-      "e": "at-voon krat pippat sat lat."
+      "e": "ok-voon anok drok brok jok.",
+      "f": "at-voon krat pippat sat lat."
     },
     {
-      "f": "wiwok farok izok stok.",
-      "e": "totat jjat quat cat."
+      "e": "wiwok farok izok stok.",
+      "f": "totat jjat quat cat."
     },
     {
-      "f": "lalok sprok izok jok stok.",
-      "e": "wat dat krat quat cat."
+      "e": "lalok sprok izok jok stok.",
+      "f": "wat dat krat quat cat."
     },
     {
-      "f": "lalok farok ororok lalok sprok izok enemok.",
-      "e": "wat jjat bichat wat dat vat eneat."
+      "e": "lalok farok ororok lalok sprok izok enemok.",
+      "f": "wat jjat bichat wat dat vat eneat."
     },
     {
-      "f": "lalok brok anok plok nok.",
-      "e": "iat lat pippat rrat nnat."
+      "e": "lalok brok anok plok nok.",
+      "f": "iat lat pippat rrat nnat."
     },
     {
-      "f": "wiwok nok izok kantok ok-yurp.",
-      "e": "totat nnat quat oloat at-yurp."
+      "e": "wiwok nok izok kantok ok-yurp.",
+      "f": "totat nnat quat oloat at-yurp."
     },
     {
-      "f": "lalok mok nok yorok ghirok clok.",
-      "e": "wat nnat gat mat bat hilat."
+      "e": "lalok mok nok yorok ghirok clok.",
+      "f": "wat nnat gat mat bat hilat."
     },
     {
-      "f": "lalok nok crrrok hihok yorok zanzanok.",
-      "e": "wat nnat arrat mat zanzanat."
+      "e": "lalok nok crrrok hihok yorok zanzanok.",
+      "f": "wat nnat arrat mat zanzanat."
     },
     {
-      "f": "lalok rarok nok izok hihok mok.",
-      "e": "wat nnat forat arrat vat gat."
+      "e": "lalok rarok nok izok hihok mok.",
+      "f": "wat nnat forat arrat vat gat."
     }
   ]
 }

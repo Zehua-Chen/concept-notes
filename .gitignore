@@ -255,3 +255,7 @@ bin/
 
 # Idea
 .idea/
+
+# .Net
+
+obj/

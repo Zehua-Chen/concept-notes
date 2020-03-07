@@ -1,0 +1,57 @@
+\section{Karatsuba Multiplication}
+
+\subsection{Baseline}
+
+  Given two integers $ x $ and $ y $, they can be written as
+
+  \begin{align*}
+    x &= 10^{\frac{n}{2}} x_{l} + x_{r} \\
+    y &= 10^{\frac{n}{2}} y_{l} + y_{r}
+  \end{align*}
+
+  Therefore $ xy $ can be wrtten as
+
+  \begin{align*}
+    xy &=
+      \left( 10^{\frac{n}{2}} x_{l} + x_{r} \right)
+      \left( 10^{\frac{n}{2}} y_{l} + y_{r} \right) \\
+    &=
+      10^{n} x_{l} y_{l}
+      + 10^{\frac{n}{2}} \left( x_{l} y_{r} + x_{r} y_{l} \right)
+      + x_{r} x_{r}
+  \end{align*}
+
+  This would require 4 \textbf{recursive} multiplciations;
+  multiplying by $ 10^{?} $ can be done using bit-shifts
+
+  \begin{align*}
+    T\left( n \right) &= 4 T\left( \frac{n}{2} \right) + O\left( n \right) \\
+    &= \Theta\left( n^{2} \right)
+  \end{align*}
+
+\subsection{Applying Gauss Trick}
+
+  \begin{equation*}
+    x_{l} y_{r} + x_{r} y_{l} =
+    \left( x_{l} + x_{r} \right)
+    \left( y_{l} + y_{r} \right)
+    - x_{l} y_{l} - x_{r} y_{r}
+  \end{equation*}
+
+  This means that we only need to recursively compute
+
+  \begin{itemize}
+    \item $ \left( x_{l} + x_{r} \right) $
+    \item $ \left( y_{l} + y_{r} \right) $
+    \item $ x_{l} y_{l} $
+    \item $ x_{r} y_{r} $
+  \end{itemize}
+
+  The running time would then be
+
+  \begin{align*}
+    T\left( n \right)
+    &= 3 T\left( \frac{n}{2} \right) + O\left( n \right) \\
+    &= O\left( n^{\log_{2} 3} \right) \\
+    &= O\left( n^{1.585} \right)
+  \end{align*}
