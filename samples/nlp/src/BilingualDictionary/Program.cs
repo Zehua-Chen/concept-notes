@@ -1,6 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NLP
 {
@@ -9,8 +9,18 @@ namespace NLP
         static void Main(string[] args)
         {
             BilingualDictionaryTrainingData trainingData = BilingualDictionaryTrainingData.AlienLanguage;
+            BilingualDictionary dictionary = BilingualDictionary.Train(trainingData, 10);
 
-            Console.WriteLine(trainingData);
+            foreach (string f in trainingData.FWords)
+            {
+                KeyValuePair<string, float> maxE = dictionary.Table[f].Aggregate((a, b) =>
+                {
+                    if (a.Value > b.Value) return a;
+                    return b;
+                });
+
+                Console.WriteLine("f: {0}, e: {1}, p = {2}", f, maxE.Key, maxE.Value);
+            }
         }
     }
 }

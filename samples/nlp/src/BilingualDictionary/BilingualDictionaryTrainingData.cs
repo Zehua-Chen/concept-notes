@@ -12,7 +12,7 @@ namespace NLP
         public string[] FWords;
     }
 
-    public class BilingualDictionaryTrainingData: IEnumerable<SentencePair>
+    public class BilingualDictionaryTrainingData : IEnumerable<SentencePair>
     {
         internal struct ModelPair
         {
@@ -91,7 +91,6 @@ namespace NLP
 
             Pairs.Add(pair);
         }
-
 
         public static BilingualDictionaryTrainingData AlienLanguage
         {

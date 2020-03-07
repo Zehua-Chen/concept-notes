@@ -1,13 +1,14 @@
+using System;
 using System.Collections.Generic;
 
 namespace NLP
 {
-    using WordMatrix = Dictionary<string, Dictionary<string, float>>;
+    using FETable = Dictionary<string, Dictionary<string, float>>;
 
-    internal static class WordMatrixExtension
+    internal static class FETableExtension
     {
         public static void InitializeDefautValue(
-            this WordMatrix matrix,
+            this FETable matrix,
             string f,
             string e,
             float defaultValue = 0.0f)
@@ -17,7 +18,7 @@ namespace NLP
             if (!matrix.TryGetValue(f, out row))
             {
                 row = new Dictionary<string, float>();
-                matrix[e] = row;
+                matrix[f] = row;
             }
 
             float value;
@@ -25,56 +26,76 @@ namespace NLP
             if (!row.TryGetValue(e, out value))
             {
                 value = defaultValue;
-                row[f] = value;
+                row[e] = value;
             }
         }
     }
 
+    /// <summary>
+    /// Word based dictionaries between two languages
+    ///
+    /// <example>
+    /// Access the t(e|f) using "f, e", as in "given f, get probability of e"
+    /// <code>
+    /// dictionary[f, e]
+    /// </code>
+    /// </example>
+    /// </summary>
     public class BilingualDictionary
     {
-        public WordMatrix Matrix { get; private set; } = new WordMatrix();
+        public FETable Table { get; private set; } = new FETable();
         public float DefaultMatrixValue { get; set; } = 0.0f;
 
-        public float Lookup(string e, string f)
+        public float this[string f, string e]
         {
-            return this.Matrix[f][e];
+            get
+            {
+                return this.Table[f][e];
+            }
+            set
+            {
+                this.Table[f][e] = value;
+            }
         }
 
         public static BilingualDictionary Train(
             BilingualDictionaryTrainingData trainingData,
             int iterations = 10)
         {
-            WordMatrix count = new WordMatrix();
-
-            // total(f)
-            Dictionary<string, float> total = new Dictionary<string, float>();
-            // s-total(e)
-            Dictionary<string, float> sTotal = new Dictionary<string, float>();
-
             BilingualDictionary dictionary = new BilingualDictionary();
 
-            // Initialize default values
-            // - count
-            // - total
-            foreach (SentencePair sentencePair in trainingData)
+            // Initialize dictionary
+            foreach (string f in trainingData.FWords)
             {
-                foreach (string f in sentencePair.FWords)
+                foreach (string e in trainingData.EWords)
                 {
-                    total[f] = 0.0f;
-                }
-
-                foreach (string f in sentencePair.FWords)
-                {
-                    foreach (string e in sentencePair.EWords)
-                    {
-                        count.InitializeDefautValue(f, e);
-                        dictionary.Matrix.InitializeDefautValue(f, e);
-                    }
+                    dictionary.Table.InitializeDefautValue(f, e, 1.0f);
                 }
             }
 
             for (int iteration = 0; iteration < iterations; iteration++)
             {
+                // count(e|f)
+                FETable count = new FETable();
+                // total(f)
+                Dictionary<string, float> total = new Dictionary<string, float>();
+                // s-total(e)
+                Dictionary<string, float> sTotal = new Dictionary<string, float>();
+
+                // Initialize default values
+                // - count
+                // - total
+                foreach (string f in trainingData.FWords)
+                {
+                    total[f] = 0.0f;
+
+                    foreach (string e in trainingData.EWords)
+                    {
+                        count.InitializeDefautValue(f, e, 1.0f);
+                        dictionary.Table.InitializeDefautValue(f, e, 1.0f);
+                    }
+                }
+
                 foreach (SentencePair sentencePair in trainingData)
                 {
                     // Compute normalizations
@@ -84,7 +105,7 @@ namespace NLP
 
                         foreach (string f in sentencePair.FWords)
                         {
-                            sTotal[e] += dictionary.Lookup(e, f);
+                            sTotal[e] += dictionary[f, e];
                         }
                     }
 
@@ -93,8 +114,8 @@ namespace NLP
                     {
                         foreach (string f in sentencePair.FWords)
                         {
-                            count[f][e] += dictionary.Matrix[f][e] / sTotal[e];
-                            total[f] += dictionary.Matrix[f][e] / sTotal[e];
+                            count[f][e] += dictionary.Table[f][e] / sTotal[e];
+                            total[f] += dictionary.Table[f][e] / sTotal[e];
                         }
                     }
                 }
@@ -104,7 +125,7 @@ namespace NLP
                 {
                     foreach (string e in trainingData.EWords)
                     {
-                        dictionary.Matrix[f][e] = count[f][e] / total[f];
+                        dictionary.Table[f][e] = count[f][e] / total[f];
                     }
                 }
             }
