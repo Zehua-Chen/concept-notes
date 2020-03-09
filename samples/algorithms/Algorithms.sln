@@ -7,10 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6EDE2621-7AA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrInLangStar", "src\StrInLangStar\StrInLangStar.csproj", "{1A0CBE3D-7851-40D7-8DEC-AE1B3DF55C39}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DC84BB83-87F0-4303-AC5B-A2C66C68E1F0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrInLangStar.Tests", "tests\StrInLangStar.Tests\StrInLangStar.Tests.csproj", "{D86F3B4E-9207-44E0-8A09-6568F08342B2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,21 +32,8 @@ Global
 		{1A0CBE3D-7851-40D7-8DEC-AE1B3DF55C39}.Release|x64.Build.0 = Release|Any CPU
 		{1A0CBE3D-7851-40D7-8DEC-AE1B3DF55C39}.Release|x86.ActiveCfg = Release|Any CPU
 		{1A0CBE3D-7851-40D7-8DEC-AE1B3DF55C39}.Release|x86.Build.0 = Release|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Debug|x64.Build.0 = Debug|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Debug|x86.Build.0 = Debug|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Release|x64.ActiveCfg = Release|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Release|x64.Build.0 = Release|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Release|x86.ActiveCfg = Release|Any CPU
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A0CBE3D-7851-40D7-8DEC-AE1B3DF55C39} = {6EDE2621-7AA5-4056-BE67-F2E36D46F2F5}
-		{D86F3B4E-9207-44E0-8A09-6568F08342B2} = {DC84BB83-87F0-4303-AC5B-A2C66C68E1F0}
 	EndGlobalSection
 EndGlobal
