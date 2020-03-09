@@ -1,0 +1,111 @@
+\section{Perception of Depth}
+
+\begin{description}
+  \item[Sensory cue, cue] a piece of information derived from sensory
+  stimulation and is useful for perception
+  \item[Monocular depth cue] depth cue derived from a single eye
+  \item[Stereo depth cue] depth cueue derived from two eyes
+  \begin{itemize}
+    \item There are more monocular cues than stereo cues (enable depths from
+    a single picture)
+    \item Monocular dpeths cues are powerful enough to create a realistic VR
+    experience
+    \item Stereo cues can be expensive to render and simulate and would cause
+    problems if not done perfectly
+    \begin{itemize}
+      \item Ex. stereo headsets can cause discomfort when viewing close up
+      objects
+    \end{itemize}
+  \end{itemize}
+\end{description}
+
+\subsection{Monocular Depth Cues}
+
+  \paragraph{Retina Image Size} the size of objects in the picture taken
+  by the retina.
+  \begin{equation}
+    \frac{1}{z}
+  \end{equation}
+  where $ z $ is the distance
+
+  \begin{itemize}
+    \item \textbf{Size constancy scaling} a brain operation on familiar objects
+    that assume that when objects come closer, the distance is changing, not
+    the size
+    \begin{itemize}
+      \item A variant of \textbf{subjective constancy}
+    \end{itemize}
+
+    \item Objects must occur naturally so that they do not conflict with other
+    depth cues
+    \item When the size of objects is uncertain, distance information is used
+    to estimate the size
+    \item One theory suggests that the actual viewing angle is different from
+    \textbf{the perceived viewing angle}; visual angle is proportional to the
+    \textbf{retina image size}
+    \begin{itemize}
+      \item Used to explain why moons near the horizon are bigger
+    \end{itemize}
+  \end{itemize}
+
+  \paragraph{Height in the Vidual Field} further objects appear smaller
+
+  \paragraph{Accomodation} optical power can be changed through accomodation.
+  young people can change as much as 10 diopters, older people can only change
+  less than 1 diopters
+
+  \paragraph{Motion Parallax} parallax means relative speed difference.
+  Motion parallax refers to farther objects appear to be moving slower than
+  closer objects
+
+  \paragraph{Others}
+  \begin{itemize}
+    \item \textbf{Interposition}: which objects are before another
+    \item \textbf{Image Blur}: distances are infered from the sharpness of focus
+    \item \textbf{Atmospheric}: humidity causes farther objects to have
+    lower contrast
+  \end{itemize}
+
+\subsection{Stereo Depth Cues}
+
+  \paragraph{Horopter} human perceives a single focused image over a surface
+  Eyes muscle for vergence motion provides the brain about the amount of
+  convergence, thereby direct information on depth.
+
+  Left and right eyes provide different images, called
+  \textbf{binocular disparity}. Human eyes can
+
+  \begin{itemize}
+    \item Converge
+    \item Lateral offset
+  \end{itemize}
+
+  enabling the images from two eyes to vary only slightly
+
+  \paragraph{Diplopia} while focusing on objects at one depth, we get images
+  of objects at other depths
+
+\subsection{Implications for VR}
+
+  \paragraph{Incorrect Scale Perception} three problems
+  \begin{itemize}
+    \item Objects in VR might resemble real world objects, but the scale is
+    hard to determine
+    \item User's height in VR might not match that of the real world
+    \item \textbf{Interpupillary distance mismatch}
+    \begin{itemize}
+      \item \textbf{Real world pupils farther apart than those in VR}: VR
+      worlds would be larger
+      \item \textbf{Real world pupils closer than those in VR}: VR worlds would
+      be smaller
+    \end{itemize}
+  \end{itemize}
+
+  \paragraph{Mismatches} mismatches between real world stimulis and those in
+  VR
+  \begin{itemize}
+    \item Vergence accomodation mismatch
+    \item Headset latency causes latency in stimulis
+    \item To perceive most depth cues based on motion, it is important to track
+    positions; many only track orientations, making motion parallax impossible
+  \end{itemize}
