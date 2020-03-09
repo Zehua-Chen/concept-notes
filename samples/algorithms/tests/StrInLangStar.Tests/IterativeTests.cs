@@ -3,18 +3,18 @@ using Algorithms;
 
 namespace StrInLangStar.Tests
 {
-    public class RecursiveTest
+    public class IterativeTest
     {
         [Fact]
         public void TestTrue()
         {
-            Assert.True("aaa".IsInLanguageStarRecursive("a"));
+            Assert.True("aaa".IsInLanguageStarIterative("a"));
         }
 
         [Fact]
         public void TestFalse()
         {
-            Assert.False("aaa".IsInLanguageStarRecursive("b"));
+            Assert.False("aaa".IsInLanguageStarIterative("b"));
         }
     }
 }

@@ -1,3 +1,54 @@
 \chapter{Dynamic Programming}
 
-Dynamic programming is smart recursion and memoization.
+Dynamic programming is backtracking done smart using memoization and loops
+
+\section{Memoization}
+
+  Memoization is the practice of remembering the results of previous
+  \say{recursive} calls and reuse them to improve performance.
+
+  Memoization is typically implemented using some kind of table
+
+\section{Write an Dynamic Programming Algorithm}
+
+  \begin{enumerate}
+    \item \textbf{Define the problem recursively}: a complete recursive
+    definition has two components
+    \begin{enumerate}
+      \item \textbf{Specification}: describe the problem to solve in English
+      \item \textbf{Solution}: give a recursive algorithm that answers
+      the problem in terms of answers to smaller instances of the exact same
+      problem
+    \end{enumerate}
+
+    \item \textbf{Build solution to recursion from bottom up}: computing the
+    base cases first and work your way up the recurrence tree
+    \begin{enumerate}
+      \item \textbf{Identifying subproblems}: ways that the recursion calls it
+      self
+      \item \textbf{Choose a memoization data structure}: find a data structure
+      that can store all the solutions to the subproblems
+      \item \textbf{Identify dependencies}: every subproblems depends on
+      some other subproblems, draw a dependency graph
+      \item \textbf{Find a good evaluation order}: orders the subproblems in a
+      way where each subproblems comes after the subproblems it depends on
+      \begin{itemize}
+        \item Must execute in linear order
+        \item Base cases first
+      \end{itemize}
+
+      \item \textbf{Analyze space and running time}:
+      \begin{itemize}
+        \item Number of subproblems determines the complexity
+        \item To compute running time, add up the running times of all possible
+        subproblems \textbf{assuming deeper recursive calls are already
+        memoized} (can be done after the first step)
+      \end{itemize}
+
+      \item \textbf{Write down the algorithm}
+    \end{enumerate}
+  \end{enumerate}
+
+\section{Greedy Algorithms}
+
+  Greedy algorithms do not work, use dynamic programming instead.
