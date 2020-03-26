@@ -1,0 +1,58 @@
+\section{Regular Expression}
+
+Regular expressions covered are \textbf{extended regular expressions}; some
+parsers may only recognize a subset of these
+
+\begin{itemize}
+  \item Case sensitive
+\end{itemize}
+
+\subsection{Disjunction}
+
+  A disjunction of characters represents a range of possible characters.
+  A disjunction is enclosed in \code{[start...end]}. In case a predefined
+  sequence of characters can be considered as elements in a disjunction,
+  \code{[start-end]} also works
+
+  \begin{itemize}
+    \item \code{[ab]}: maches a or b
+    \item \code{[12345]} mactches from 1 to 5
+    \item \code{[a-z]} matches any character from a to z
+  \end{itemize}
+
+  Disjunctions can be negated by adding \code{$ \wedge $} at the beginning:
+  \code{[$ \wedge $...]}
+
+  \begin{itemize}
+    \item \code{[$ \wedge $0-9]} match any characters that are not numbers
+  \end{itemize}
+
+\subsection{Optional}
+
+  \code{a?} the element before \code{?} can either appear \textbf{once} or
+  does not exist
+
+\subsection{Kleene Star}
+
+  \begin{itemize}
+    \item \code{a*} the element before \code{*} can appear any number of times
+    (including zero)
+    \item \code{a+} the element before \code{+} must appear at least once
+    (aka. Kleene Plus)
+  \end{itemize}
+
+\subsection{Wild Card}
+
+  \code{.} matches any single letter. \code{.*} matches any number of any
+  letter
+
+\subsection{Anchors}
+
+  \begin{description}
+    \item[Start of line] \code{$ \wedge $The} only matches \code{The} at the
+    beginning of a line
+    \item[End of line] \code{$ \$ $The} only matches \code{The} at the end of
+    line
+    \item[Word boundaries] \code{$ \backslash $b} matches a word boundary
+    \item[Non-Boundary] \code{$ \backslash $B} matches a non-boundary
+  \end{description}
