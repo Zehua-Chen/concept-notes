@@ -1,6 +1,8 @@
-\documentclass[11pt]{article}
-\input{config/packages}
-\input{config/styles}
+\documentclass[11pt]{book}
+\input{../../../shared/config/packages}
+\input{../../../shared/config/styles}
+\usepackage{listings}
+\input{./config/styles}
 
 \title{Neural Nets}
 \author{Artificial Intelligence (CS 440)}
@@ -9,11 +11,11 @@
   \maketitle
   \tableofcontents
 
-  \input{sections/overview}
-  \input{sections/perceptrons}
-  \input{sections/cnn}
-  \input{sections/rnn}
-  \input{sections/gan}
-  \input{sections/datasets}
+  \input{chapters/overview}
+  \input{chapters/perceptrons}
+  \input{chapters/cnn}
+  \input{chapters/rnn}
+  \input{chapters/gan}
+  \input{chapters/datasets}
 
 \end{document}

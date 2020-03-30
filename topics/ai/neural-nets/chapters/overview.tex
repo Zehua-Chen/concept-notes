@@ -1,0 +1,62 @@
+\chapter{Overview}
+
+\begin{itemize}
+  \item Neural nets are composed of hidden layers between input and output
+\end{itemize}
+
+\section{Types of Functions}
+
+  \begin{itemize}
+    \item \textbf{One layer}: linear decision
+    \item \textbf{A hidden layer}: any continuous function
+    \item \textbf{More layers}: finer boundaries
+    \item Flatter layers are harder to design
+  \end{itemize}
+
+\section{Feedforward Networks}
+
+\section{Training}
+
+  There are two steps
+
+  \begin{enumerate}
+    \item \textbf{Forward}: get the inference values; bottom up in computation
+    graph
+    \item \textbf{Backtracking}: update parameters; top down in computation
+    graph
+  \end{enumerate}
+
+  \subsection{Computation Graph}
+
+    \begin{itemize}
+      \item Computation graphs are evaluated bottom up
+      \begin{itemize}
+        \item Inputs go from the bottom
+        \item Output go from the top
+      \end{itemize}
+
+      \item While backtracking, we calculate the partial derivative
+      (\textbf{derivative of loss with regards to parameters (weights and loss)})
+      at each node in the graph; the partial derivatives are then used to given
+      to some kind of update equation to update the parmaeters
+
+      Below is the most basic update equation
+      \begin{equation}
+        p' = p - \mu \frac{dl}{dp}
+      \end{equation}
+
+      \begin{itemize}
+        \item $ p' $: new parameter
+        \item $ p $: parameter
+        \item $ \frac{dl}{dp} $: derivative of loss with respect to parameter
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Minibatch}
+
+    Ideally, we want to update the model per item in the training data.
+    With performance in mind, we want to update the model per epoch
+    (feeding all the training data in and then update)
+
+    \textbf{Minibatches} are a center point between these two extrems,
+    we feed a group of data and then update the models

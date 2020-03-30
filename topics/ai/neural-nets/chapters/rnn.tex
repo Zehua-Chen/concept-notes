@@ -1,0 +1,59 @@
+\chapter{Recurrent Neural Networks (Layers)}
+
+\begin{itemize}
+  \item \ul{Each \textbf{time stamp}}:
+  \begin{itemize}
+    \item \ul{Produce two outputs}: an output, and a state
+    \item \ul{Takes two inputs}: an input and a previous state
+    \item \ul{Loss is calculated from prediction}
+  \end{itemize}
+
+  \item May have a number of time stamps in on execution of the layer
+  \item Total loss is accmulated through time
+  \item Can be think of as a state machine
+  \item All neurons are fully inter-connected
+  \item Back-propogate through time
+  \begin{itemize}
+    \item Hard to train
+  \end{itemize}
+
+  \item \textbf{Sentence processing}: A time stamp is executed
+  for every word
+\end{itemize}
+
+\section{Gating}
+
+  \paragraph{Problem} signals from one time stamp run decay over time;
+  \ul{decay too fast for linguistic applications}
+
+  \paragraph{Solution} uses a gating vector that controls what is
+  forgotten and how fast; \ul{popular implementations}:
+  \begin{itemize}
+    \item LSTM
+    \item Long short term memory
+    \item GRU (Gold recurrent unit)
+  \end{itemize}
+
+\section{Design}
+
+  \begin{itemize}
+    \item Typically very shallow
+    \item Can have non-linear processing attached at the end of one
+  \end{itemize}
+
+\section{Execution}
+
+\section{Bidirectional RNN}
+
+  \begin{itemize}
+    \item Two RNN working in opposite directions
+    \item Generate a summary output from the output from the two networks
+    \item Use the same loss to optimize both networks
+  \end{itemize}
+
+\section{Linguistic Application}
+
+  \begin{itemize}
+    \item
+    \item \textbf{Bidirectional RNN}
+  \end{itemize}
