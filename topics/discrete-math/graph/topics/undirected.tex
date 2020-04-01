@@ -1,0 +1,93 @@
+\chapter{Undirected Graph}
+
+\section{Definitions}
+\paragraph{Unidirected Graph Definition} $ G = \left( V, E \right) $
+\begin{itemize}
+  \item $ V $: a set of vertices
+  \item $ E $: a set of edges where each edge is of the form
+  $ \left\{ u, v \right\}, u, v \in V, u \ne v $; $ u, v $ are endpoints of
+  edges
+\end{itemize}
+
+\paragraph{Multigraphs} Multigraphs are graphs that allow
+\begin{itemize}
+  \item Loops
+  \item Multi-edges
+\end{itemize}
+We assume a graph is a simple graph unless stated otherwise
+
+\section{Representations}
+
+  \subsection{Adjacency Matrix}
+
+    Represent $ n $ vertices and $ m $ edges using an $ m \times n $
+    adjacency matrix $ A $
+    \begin{itemize}
+      \item $ A\left[ i, j \right] = A\left[ j, i \right] = 1 $ if
+      $ \left\{ i, j \right\} \in E $
+      \item $ A\left[ i, j \right] = A\left[ j, i \right] = 0 $ if
+      $ \left\{ i, j \right\} \notin E $
+    \end{itemize}
+
+    \paragraph{Advantages}
+    \begin{itemize}
+      \item Can check if $ \left\{ i, j \right\} \in E $ in
+      $ O\left( n \right) $ time
+    \end{itemize}
+
+    \paragraph{Disadvantages}
+    \begin{itemize}
+      \item Need $ \Omega\left( n^{2} \right) $ space even if $ m < n^{2} $
+    \end{itemize}
+
+  \subsection{Adjacency List}
+
+    For each $ u \in V $ store list
+    $ \Adj\left( u \right) = \left\{ v | \left\{ u, v \right\} \in E \right\} $
+    that is the neighbors of $ u $
+
+    \paragraph{Advantages}
+    \begin{itemize}
+      \item Space is $ O\left( n + m \right) $
+    \end{itemize}
+
+    \paragraph{Disadvantages}
+    \begin{itemize}
+      \item Cannot check if $ \left\{ i, j \right\} \in E $ in
+      $ O\left( 1 \right) $ time
+      \begin{itemize}
+        \item Plain list gives $ O\left( m \right) $ time
+        \item Sorted list can give $ O\left( \log n \right) $ time
+        \item Hashed list can give $ O\left( 1 \right) $ time
+      \end{itemize}
+    \end{itemize}
+
+\section{Connectivity}
+
+  \begin{itemize}
+    \item A single vertex is a cycle, rather it is a \textbf{tour}
+  \end{itemize}
+
+  \subsection{Path}
+
+    A sequence of distinct vertices $ v_{1} ... v_{k} $ such that
+    $ \left\{ v_{1}, v_{i + 1} \right\} \in E $ for $ 1 \le i \le k - 1 $
+
+    \begin{itemize}
+      \item The path is from $ v_{i} $ to $ v_{k} $
+      \item LEngth of hte path is the number of edges, $ k - 1 $
+      \item A single vertex gives a path length of $ 0 $
+    \end{itemize}
+
+  \subsection{Connected}
+
+    $ u $ is connected to $ v $ if there is a path from $ u $ to $ v $
+
+  \subsection{Connected Component}
+
+    The connected component of $ u $, $ \cont\left( u \right) $, is the
+    set of all vertices connected to $ u $.
+
+    \begin{itemize}
+      \item A graph is connected if there is only one component
+    \end{itemize}

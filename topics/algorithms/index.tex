@@ -1,12 +1,17 @@
 \documentclass[letterpaper, 11pt]{report}
-\usepackage{import}
 \usepackage[utf8]{inputenc}
+\usepackage{../../shared/packages/import}
 \import{../../shared/config/}{packages}
 \import{../../shared/config/}{styles}
 \import{../../shared/config/}{macros}
 
 \title{Algorithms}
 \author{Zehua Chen}
+
+\DeclareMathOperator{\rch}{rch}
+\DeclareMathOperator{\SCC}{SCC}
+\DeclareMathOperator{\Out}{Out}
+\DeclareMathOperator{\In}{In}
 
 \begin{document}
   \maketitle
@@ -17,5 +22,6 @@
   \import{./topics/}{reduction}
   \import{./topics/}{backtracking}
   \import{./topics/}{dynamic}
+  \import{./topics/}{graph}
   \import{./topics/appendix/}{appendix}
 \end{document}

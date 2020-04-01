@@ -1,0 +1,68 @@
+\chapter{Graph}
+
+\section{Undirected Graph}
+
+  Algorithmic Problems
+
+  \begin{itemize}
+    \item Given graph $ G $, and node $ u, v $, is $ u $ connected to $ v $?
+    \item Given $ G $ and node $ u $, find all nodes that are connected to $ u $
+    \item Find all connected components of $ G $
+  \end{itemize}
+
+  Can be solved in $ O\left( n + m \right) $ time using BFS and DFS
+
+  \subsection{Traversal}
+
+    Graph traversal typically requires two datastructures
+
+    \begin{enumerate}
+      \item Visisted list
+      \item \say{To explore} list
+    \end{enumerate}
+
+\section{Directed Graph}
+
+  \begin{itemize}
+    \item Given $ G $ and nodes $ u, v $, can $ u $ reach $ v $?
+    \begin{itemize}
+      \item $ O\left( n + m \right) $
+    \end{itemize}
+    \item Given $ G $ and node $ u $, compute $ \rch\left( u \right) $?
+    \begin{itemize}
+      \item $ O\left( n + m \right) $
+    \end{itemize}
+
+    \item Given $ G $ and node $ u $, compute all $ v $ that can reach $ u $,
+    $ u \in \rch\left( u \right) $?
+    \begin{itemize}
+      \item \textbf{Naive}: $ O\left( n \left( n + m \right) \right) $
+      \item \textbf{Smart}: compute $ G^{rev} $ ($ O\left( n + m \right) $),
+      compute $ \rch\left( u \right) $ via search ($ O\left( n + m \right) $);
+      if $ \Out\left( v \right), \In\left( v \right) $ are all available at
+      each $ v $, then there is no need for $ G^{rev} $
+      \begin{itemize}
+        \item Instead of using $ \Out\left( v \right) = \In\left( v \right) $,
+        use $ \ln\left( v \right) $
+      \end{itemize}
+    \end{itemize}
+
+    \item $ \SCC\left( u \right) $
+    \begin{itemize}
+      \item $ \SCC\left( G, u \right) = \rch\left( G, u \right) \rch \left( G^{rev}, u \right) $
+      ($ O\left( n + m \right) $) time
+    \end{itemize}
+
+    \item Is $ G $ strongly connected
+    \begin{itemize}
+      \item Pick arbitrary vertex $ u $, check if
+      $ \SCC\left( G, u \right) = V $
+    \end{itemize}
+
+    \item Find all strongly connected components of $ G $
+    \begin{itemize}
+      \item While $ G $ is not empty, pick an arbitrary vertex $ u $,
+      remove $ \SCC\left( G,u \right) $ from $ G $
+      ($ O\left( n \left( n + m \right) \right) $)
+    \end{itemize}
+  \end{itemize}

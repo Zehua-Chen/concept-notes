@@ -1,0 +1,58 @@
+\chapter{Directed}
+
+Directed graphs edges are ordered paris of vertices
+
+\begin{equation}
+  \left( u, v \right) \ne \left( v, u \right)
+\end{equation}
+
+\section{Rrepresentations}
+
+  \subsection{Adjacency Lists}
+
+    For each node $ u $,
+
+    \begin{itemize}
+      \item $ \Out\left( u \right) $ stores the outgoing edges from $ u $
+      \item $ \In\left( u \right) $ stores the in-coming edges to $ u $
+    \end{itemize}
+
+  \subsection{Adjacency Matrix}
+
+    $ A $ is an $ n \times n $ asymmetric\footnote{$ u $ can reach $ v $,
+    but $ v $ maynot be able to reach $ u $} matrix
+
+    \begin{equation}
+      A\left[ u, v \right] =
+      \begin{cases}
+        1 & \left( u, v \right) \in E \\
+        0 & \left( u, v \right) \notin E
+      \end{cases}
+    \end{equation}
+
+\section{Connectivity}
+
+  Same as the connectivity of undirected graphs
+
+  \begin{itemize}
+    \item $ \rch\left( u \right) $ be set of all vertices reachable from $ u $
+    \item A cycle is formed when there is path that goes from $ u $ to $ u $
+    \begin{itemize}
+      \item Paths of a single vertex does not form cycles
+    \end{itemize}
+
+    \item \textbf{Strongly Connected}: $ u, v $ are strongly connected if
+    $ u $ can reach $ v $ and $ v $ can reach $ u $
+    \begin{itemize}
+      \item This is an \textbf{equivalence relation}
+      \begin{itemize}
+        \item Reflexive
+        \item Symmetric
+        \item Transitive
+      \end{itemize}
+    \end{itemize}
+
+    \item $ \SCC\left( u \right) $ strongly connected component containing
+    $ u $
+    \item $ G^{rev} $: $ G $ with all edges reversed
+  \end{itemize}
