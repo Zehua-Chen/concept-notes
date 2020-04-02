@@ -8,7 +8,7 @@ namespace Algorithms.Graph.Tests
         [Fact]
         public void Test()
         {
-            DirectedGraph<string, string> graph = new DirectedGraph<string, string>()
+            var graph = new DirectedGraph<string, string>()
             {
                 "a",
                 "b",
@@ -16,25 +16,45 @@ namespace Algorithms.Graph.Tests
                 { "b", "a", "b-a" },
             };
 
-            Assert.Equal(graph.GetOut("a"), new Dictionary<string, string>()
+            Assert.Equal(new Dictionary<string, string>()
             {
                 { "b", "a-b" }
-            });
+            }, graph.GetOut("a"));
 
-            Assert.Equal(graph.GetOut("b"), new Dictionary<string, string>()
+            Assert.Equal(new Dictionary<string, string>()
             {
                 { "a", "b-a" }
-            });
+            }, graph.GetOut("b"));
 
-            Assert.Equal(graph.GetIn("a"), new Dictionary<string, string>()
+            Assert.Equal(new Dictionary<string, string>()
             {
                 { "b", "b-a" }
-            });
+            }, graph.GetIn("a"));
 
-            Assert.Equal(graph.GetIn("b"), new Dictionary<string, string>()
+            Assert.Equal(new Dictionary<string, string>()
             {
                 { "a", "a-b" }
-            });
+            }, graph.GetIn("b"));
+        }
+
+        [Fact]
+        public void TestEquals()
+        {
+            var graph = new DirectedGraph<string, string>()
+            {
+                "a",
+                "b",
+                { "a", "b", "a-b" },
+            };
+
+            var expected = new DirectedGraph<string, string>()
+            {
+                "a",
+                "b",
+                { "a", "b", "a-b" },
+            };
+
+            Assert.True(expected.Equals(graph));
         }
     }
 }
