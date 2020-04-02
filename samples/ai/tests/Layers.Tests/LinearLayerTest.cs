@@ -1,10 +1,11 @@
-﻿using System;
+using Xunit;
 
 namespace AI.Layers.Tests
 {
-    class Program
+    public class LinearLayerTest
     {
-        static void Main(string[] args)
+        [Fact]
+        public void Test1()
         {
             LinearLayer layer = new LinearLayer(2, 2);
 
@@ -25,8 +26,7 @@ namespace AI.Layers.Tests
 
             layer.Evaluate(input, output);
 
-            Console.WriteLine("Expects 108 and 51");
-            Console.WriteLine(string.Join(", ", output));
+            Assert.Equal(new float[] { 108.0f, 51.0f }, output);
         }
     }
 }
