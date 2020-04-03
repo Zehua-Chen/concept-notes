@@ -31,6 +31,11 @@ namespace AI.Layers
             }
         }
 
+        public Matrix(float[] values)
+        {
+            _values = new float[][] { values };
+        }
+
         public bool Equals(Matrix other)
         {
             if (this.Height != other.Height) { return false; }
@@ -72,9 +77,40 @@ namespace AI.Layers
             }
         }
 
+        /// <summary>
+        /// Multiply a by b (a * b)
+        /// </summary>
+        /// <param name="left">left hand side matrix</param>
+        /// <param name="right">right hand side matrix</param>
+        /// <returns></returns>
         public static Matrix operator*(Matrix left, Matrix right)
         {
-            return null;
+            if (left.Width != right.Height)
+            {
+                throw new ArgumentException("a.Width must be equal to b.Height");
+            }
+
+            float[][] leftValues = left._values;
+            float[][] rightValues = right._values;
+
+            Matrix output = new Matrix(left.Height, right.Width);
+
+            for (int y = 0; y < output.Height; y++)
+            {
+                for (int x = 0; x < output.Width; x++)
+                {
+                    float sum = 0.0f;
+
+                    for (int i = 0; i < left.Width; i++)
+                    {
+                        sum += leftValues[y][i] * rightValues[i][x];
+                    }
+
+                    output[y, x] = sum;
+                }
+            }
+
+            return output;
         }
     }
 }
