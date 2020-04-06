@@ -1,20 +1,28 @@
 \chapter{Undirected Graph}
 
 \section{Definitions}
-\paragraph{Unidirected Graph Definition} $ G = \left( V, E \right) $
-\begin{itemize}
-  \item $ V $: a set of vertices
-  \item $ E $: a set of edges where each edge is of the form
-  $ \left\{ u, v \right\}, u, v \in V, u \ne v $; $ u, v $ are endpoints of
-  edges
-\end{itemize}
 
-\paragraph{Multigraphs} Multigraphs are graphs that allow
-\begin{itemize}
-  \item Loops
-  \item Multi-edges
-\end{itemize}
-We assume a graph is a simple graph unless stated otherwise
+  \paragraph{Unidirected Graph Definition} $ G = \left( V, E \right) $
+  \begin{itemize}
+    \item $ V $: a set of vertices
+    \begin{itemize}
+      \item $ \left| V \right| = n $
+    \end{itemize}
+
+    \item $ E $: a set of edges where each edge is of the form
+    $ \left\{ u, v \right\}, u, v \in V, u \ne v $; $ u, v $ are endpoints of
+    edges
+    \begin{itemize}
+      \item $ \left| E \right| = m $
+    \end{itemize}
+  \end{itemize}
+
+  \paragraph{Multigraphs} Multigraphs are graphs that allow
+  \begin{itemize}
+    \item Loops
+    \item Multi-edges
+  \end{itemize}
+  We assume a graph is a simple graph unless stated otherwise
 
 \section{Representations}
 
@@ -75,8 +83,18 @@ We assume a graph is a simple graph unless stated otherwise
 
     \begin{itemize}
       \item The path is from $ v_{i} $ to $ v_{k} $
-      \item LEngth of hte path is the number of edges, $ k - 1 $
+      \item Length of hte path is the number of edges, $ k - 1 $
       \item A single vertex gives a path length of $ 0 $
+    \end{itemize}
+
+  \subsection{Walk}
+
+    A walk is a traversal of a graph.
+
+    \begin{itemize}
+      \item Walks include edges and vertices
+      \item Edges and vertices can be repeated
+      \item Length of the walk is the numebr of edges
     \end{itemize}
 
   \subsection{Connected}

@@ -1,0 +1,39 @@
+\chapter{Directed Acyclic Graph}
+
+\textbf{DAG} are graphs without directed cycles
+
+\begin{itemize}
+  \item $ G $ is DAG iff $ G^{rev} $ is a DAG
+  \item $ G $ is DAG if each node is in its own SCC
+\end{itemize}
+
+\section{Source and Sink}
+
+  \begin{itemize}
+    \item \textbf{Source}: vertex without incoming edges
+    \item \textbf{Sink}: vertex without outgoing edges
+    \item Every DAG has at least one source and at least one sink
+  \end{itemize}
+
+\section{Topological Ordering, Sorting}
+
+  \begin{itemize}
+    \item DAGs can be topologically sorted
+    \item A DAG may have different topological orderings
+  \end{itemize}
+
+  \paragraph{Formal Definition} A topological ordering of
+  $ G = \left( V, E \right) $ is an ordering $ \prec $ on $ V $ such that
+  if $ \left( u, v \right) \in E $ then $ u \prec v $
+
+  \paragraph{Informal Definition} one can order the vertices of the graph
+  along a line such that all edges going in one direction
+
+  \subsection{Algorithm}
+
+    \begin{enumerate}
+      \item Pick a source $ u $, output $ u $, remove $ u $ and all edges
+      out of $ u $
+      \item Repeast until the graph is emtpy
+      \item $ O\left( n + m \right) $
+    \end{enumerate}

@@ -2,6 +2,7 @@
   "entry": "index.tex",
   "includes": [
     "../../../shared/config/",
-    "../../../shared/packages/"
+    "../../../shared/packages/",
+    "topics/"
   ]
 }

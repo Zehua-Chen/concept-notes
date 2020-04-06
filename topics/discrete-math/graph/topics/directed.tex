@@ -56,3 +56,22 @@ Directed graphs edges are ordered paris of vertices
     $ u $
     \item $ G^{rev} $: $ G $ with all edges reversed
   \end{itemize}
+
+  \subsection{Meta Graph}
+
+    A meta graph is a graph where
+
+    \begin{itemize}
+      \item The vertices are strongly connected components
+      \item There is an edge $ \left( S_{i}, S_{j} \right) $ if there is some
+      $ u \in S_{i}, v \in S_{j} $ such that $ \left( u, v \right) \in G $
+    \end{itemize}
+
+    \subsubsection{Properties}
+
+      \begin{enumerate}
+        \item The meta graph of $ G^{rev} $ is the same as the reverse of
+        the meta graph
+        \item There is no directed cycles between meta graphs
+        \item A meta graph has at least one cycle in it
+      \end{enumerate}
