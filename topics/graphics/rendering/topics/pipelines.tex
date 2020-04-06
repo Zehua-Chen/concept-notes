@@ -2,7 +2,8 @@
 
 \section{Transformation Pipeline}
 
-  Transforming model coordinates to viewport coordinates
+  Transforming model coordinates to viewport coordinates (\textbf{note that
+  transformations occur from right to left})
 
   \begin{equation}
     \begin{bmatrix}
@@ -67,26 +68,48 @@
       \item \textbf{Perspective}: scale decreases as distance increases
     \end{itemize}
 
-    Below is on perspective projection:
+    \subsubsection{Perspective Projection}
 
-    \begin{align}
-      \frac{y_{\text{clip}}}{d} &= \frac{y_{\text{view}}}{-z_{\text{view}}} \\
-      y_{\text{clip}}
-      &= d\frac{y_ {\text{view}}}{-z_{\text{view}}} \\
-      &= \frac{y_{\text{view}}}{-z_{\text{view}} / d}
-    \end{align}
+      \paragraph{Equation}
+      \begin{align}
+        \frac{y_{\text{clip}}}{d} &= \frac{y_{\text{view}}}{-z_{\text{view}}} \\
+        y_{\text{clip}}
+        &= d\frac{y_ {\text{view}}}{-z_{\text{view}}} \\
+        &= \frac{y_{\text{view}}}{-z_{\text{view}} / d}
+      \end{align}
 
-    \begin{itemize}
-      \item The equation applies in situations where
       \begin{itemize}
-        \item The \textbf{eyes} are \textbf{centered at the origin}
-        \item The \textbf{view} is in \textbf{negative z direction}
-        \item The clip is between the eyes and the view
+        \item The equation applies in situations where
+        \begin{itemize}
+          \item The \textbf{eyes} are \textbf{centered at the origin}
+          \item The \textbf{view} is in \textbf{negative z direction}
+          \item The clip is between the eyes and the view
+        \end{itemize}
+
+        \item $ d $: distance from eyes to the screen (clip)
+        \item This equation also applies to $ x $ and $ y $
       \end{itemize}
 
-      \item $ d $: distance from eyes to the screen (clip)
-      \item This equation also applies to $ x $ and $ y $
-    \end{itemize}
+      \paragraph{Matrix}
+      \begin{equation}
+        P =
+        \begin{bmatrix}
+          \frac{n}{2} & 0 & 0 & 0 \\
+          0 & \frac{n}{t} & 0 & 0 \\
+          0 & 0 & \frac{-f}{f - n} & \frac{-fn}{f - n} \\
+          0 & 0 & -1 & 0 \\
+        \end{bmatrix}
+      \end{equation}
+
+      \begin{itemize}
+        \item $ r $: right
+        \item $ t $: top
+        \item $ n $: near
+        \item $ f $: far
+      \end{itemize}
+
+      \href{http://www.songho.ca/opengl/gl_projectionmatrix.html}{Deriving
+      the matrix}
 
 \section{Graphics Pipeline}
 

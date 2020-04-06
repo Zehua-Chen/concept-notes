@@ -6,6 +6,12 @@
   same}
   \item All the transformations here are done using \textbf{homogeneous
   coordinates}
+  \item Transformations are applied \textbf{right to left}
+  \begin{equation*}
+    O = A \times B \times M
+  \end{equation*}
+  Given a coordinate $ M $, $ B $ is applied first, followed by $ A $. Note
+  that matrix multiplications still works from \textbf{left to right}
 \end{itemize}
 
 \section{Translation}
