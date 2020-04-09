@@ -28,9 +28,17 @@ namespace Algorithms.Graph.Tests
                 { 'e', 'b', new Edge() { Length = 2 } },
                 { 'b', 'c', new Edge() { Length = 5 } },
                 { 'c', 'b', new Edge() { Length = 5 } },
+                { 'e', 'c', new Edge() { Length = 5 } },
+                { 'c', 'e', new Edge() { Length = 5 } },
             };
 
             Dictionary<char, (int, char)> output = graph.Dijkstra('a');
+
+            Assert.Equal((0, 'a'), output['a']);
+            Assert.Equal((3, 'd'), output['b']);
+            Assert.Equal((7, 'e'), output['c']);
+            Assert.Equal((1, 'a'), output['d']);
+            Assert.Equal((2, 'd'), output['e']);
         }
     }
 }

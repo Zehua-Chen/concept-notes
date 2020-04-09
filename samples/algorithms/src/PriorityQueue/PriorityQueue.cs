@@ -4,20 +4,22 @@ namespace Algorithms.PriorityQueue
 {
     public class PriorityQueue<T, TPriority>
     {
-        IComparer<TPriority> _comparer;
+        IComparer<TPriority> _priorityComparer;
+        IComparer<T> _elementComparer;
         List<KeyValuePair<TPriority, T>> _entries = new List<KeyValuePair<TPriority, T>>();
 
         public int Count => _entries.Count - 1;
 
         int Root => 1;
 
-        public PriorityQueue() : this(Comparer<TPriority>.Default)
+        public PriorityQueue() : this(Comparer<TPriority>.Default, Comparer<T>.Default)
         {
         }
 
-        public PriorityQueue(IComparer<TPriority> comparer)
+        public PriorityQueue(IComparer<TPriority> comparer, IComparer<T> elementComparer)
         {
-            _comparer = comparer;
+            _elementComparer = elementComparer;
+            _priorityComparer = comparer;
             _entries.Add(new KeyValuePair<TPriority, T>());
         }
 
@@ -41,6 +43,28 @@ namespace Algorithms.PriorityQueue
             this.HeapifyDown(this.Root);
 
             return output;
+        }
+
+        public void Update(T element, TPriority oldPriority, TPriority newPriority)
+        {
+            for (int i = this.Root; i < _entries.Count; i++)
+            {
+                if (_elementComparer.Compare(_entries[i].Value, element) == 0)
+                {
+                    _entries[i] = new KeyValuePair<TPriority, T>(newPriority, _entries[i].Value);
+
+                    if (_priorityComparer.Compare(newPriority, oldPriority) <= 0)
+                    {
+                        this.HeapifyUp(i);
+                    }
+                    else
+                    {
+                        this.HeapifyDown(i);
+                    }
+
+                    return;
+                }
+            }
         }
 
         int GetLeftChild(int index) => index * 2;
@@ -69,7 +93,7 @@ namespace Algorithms.PriorityQueue
 
                 if (right < _entries.Count)
                 {
-                    if (_comparer.Compare(this.GetPriority(left), this.GetPriority(right)) <= 0)
+                    if (_priorityComparer.Compare(this.GetPriority(left), this.GetPriority(right)) <= 0)
                     {
                         return left;
                     }
@@ -99,7 +123,7 @@ namespace Algorithms.PriorityQueue
 
             int parent = this.GetParent(index);
 
-            if (_comparer.Compare(this.GetPriority(index), this.GetPriority(parent)) < 0)
+            if (_priorityComparer.Compare(this.GetPriority(index), this.GetPriority(parent)) < 0)
             {
                 this.Swap(index, parent);
                 this.HeapifyUp(parent);
@@ -112,7 +136,7 @@ namespace Algorithms.PriorityQueue
             {
                 int child = this.MaxPriorityChild(index);
 
-                if (_comparer.Compare(this.GetPriority(index), this.GetPriority(child)) > 0)
+                if (_priorityComparer.Compare(this.GetPriority(index), this.GetPriority(child)) > 0)
                 {
                     this.Swap(child, index);
                     this.HeapifyDown(child);

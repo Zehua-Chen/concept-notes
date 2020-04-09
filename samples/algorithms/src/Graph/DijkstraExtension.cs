@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Algorithms.PriorityQueue;
 
@@ -26,8 +25,9 @@ namespace Algorithms.Graph
             var comparer = EqualityComparer<TVertex>.Default;
 
             // initialize priority queue
-            PriorityQueue<int, TVertex> queue = new PriorityQueue<int, TVertex>();
-            queue.Add(0, start);
+            PriorityQueue<TVertex, int> queue = new PriorityQueue<TVertex, int>();
+            queue.Add(start, 0);
+            output.Add(start, (0, start));
 
             foreach (TVertex vertex in graph)
             {
@@ -37,13 +37,13 @@ namespace Algorithms.Graph
                 }
 
                 output.Add(vertex, (int.MaxValue, vertex));
-                queue.Add(int.MaxValue, vertex);
+                queue.Add(vertex, int.MaxValue);
             }
 
             // Go through all vertices
             for (int i = 0; i < graph.VertexCount; i++)
             {
-                KeyValuePair<int, TVertex> peek = queue.Peek();
+                KeyValuePair<int, TVertex> peek = queue.Pop();
 
                 foreach (KeyValuePair<TVertex, TEdge> @out in graph.GetOut(peek.Value))
                 {
@@ -53,9 +53,7 @@ namespace Algorithms.Graph
                     if (newLength < oldLength)
                     {
                         output[@out.Key] = (newLength, peek.Value);
-
-                        queue.Remove(oldLength);
-                        queue.Add(newLength, @out.Key);
+                        queue.Update(@out.Key, oldLength, newLength);
                     }
                 }
             }
