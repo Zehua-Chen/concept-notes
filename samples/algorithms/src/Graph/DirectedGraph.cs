@@ -5,27 +5,27 @@ using System.Linq;
 
 namespace Algorithms.Graph
 {
-    public class DirectedGraph<V, E> :
-        IEnumerable<V>,
-        IEquatable<DirectedGraph<V, E>>
+    public class DirectedGraph<TVertex, TEdge> :
+        IEnumerable<TVertex>,
+        IEquatable<DirectedGraph<TVertex, TEdge>>
     {
-        struct Vertex: IEquatable<Vertex>
+        struct VertexData: IEquatable<VertexData>
         {
-            public Dictionary<V, E> Out;
-            public Dictionary<V, E> In;
+            public Dictionary<TVertex, TEdge> Out;
+            public Dictionary<TVertex, TEdge> In;
 
-            public static Vertex Default()
+            public static VertexData Default()
             {
-                return new Vertex()
+                return new VertexData()
                 {
-                    Out = new Dictionary<V, E>(),
-                    In = new Dictionary<V, E>(),
+                    Out = new Dictionary<TVertex, TEdge>(),
+                    In = new Dictionary<TVertex, TEdge>(),
                 };
             }
 
-            public bool Equals(Vertex other)
+            public bool Equals(VertexData other)
             {
-                bool @out = this.Out.All((KeyValuePair<V, E> pair) =>
+                bool @out = this.Out.All((KeyValuePair<TVertex, TEdge> pair) =>
                 {
                     if (!other.Out.ContainsKey(pair.Key))
                     {
@@ -35,7 +35,7 @@ namespace Algorithms.Graph
                     return pair.Value.Equals(other.Out[pair.Key]);
                 });
 
-                bool @in = this.In.All((KeyValuePair<V, E> pair) =>
+                bool @in = this.In.All((KeyValuePair<TVertex, TEdge> pair) =>
                 {
                     if (!other.In.ContainsKey(pair.Key))
                     {
@@ -49,17 +49,22 @@ namespace Algorithms.Graph
             }
         }
 
-        Dictionary<V, Vertex> _dictionary = new Dictionary<V, Vertex>();
+        Dictionary<TVertex, VertexData> _dictionary = new Dictionary<TVertex, VertexData>();
 
-        public void Add(V vertex)
+        /// <summary>
+        /// Get a number of vertices
+        /// </summary>
+        public int VertexCount => _dictionary.Count;
+
+        public void Add(TVertex vertex)
         {
-            _dictionary.Add(vertex, Vertex.Default());
+            _dictionary.Add(vertex, VertexData.Default());
         }
 
-        public void Add(V @out, V @in, E e)
+        public void Add(TVertex @out, TVertex @in, TEdge e)
         {
-            Vertex fromVertex = _dictionary[@out];
-            Vertex inVertex = _dictionary[@in];
+            VertexData fromVertex = _dictionary[@out];
+            VertexData inVertex = _dictionary[@in];
 
             fromVertex.Out.Add(@in, e);
             inVertex.In.Add(@out, e);
@@ -68,17 +73,17 @@ namespace Algorithms.Graph
             _dictionary[@in] = inVertex;
         }
 
-        public Dictionary<V, E> GetOut(V vertex)
+        public Dictionary<TVertex, TEdge> GetOut(TVertex vertex)
         {
             return _dictionary[vertex].Out;
         }
 
-        public Dictionary<V, E> GetIn(V vertex)
+        public Dictionary<TVertex, TEdge> GetIn(TVertex vertex)
         {
             return _dictionary[vertex].In;
         }
 
-        public IEnumerator<V> GetEnumerator()
+        public IEnumerator<TVertex> GetEnumerator()
         {
             foreach (var pair in _dictionary)
             {
@@ -91,9 +96,9 @@ namespace Algorithms.Graph
             return this.GetEnumerator();
         }
 
-        public bool Equals(DirectedGraph<V, E> other)
+        public bool Equals(DirectedGraph<TVertex, TEdge> other)
         {
-            return _dictionary.All((KeyValuePair<V, Vertex> pair) =>
+            return _dictionary.All((KeyValuePair<TVertex, VertexData> pair) =>
             {
                 if (!other._dictionary.ContainsKey(pair.Key))
                 {
