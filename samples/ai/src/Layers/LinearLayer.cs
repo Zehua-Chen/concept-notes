@@ -2,49 +2,34 @@
 
 namespace AI.Layers
 {
+    /// <summary>
+    /// A linear layer
+    ///
+    /// Weights are stored in columns. There is a separate column for each
+    /// output. y = 0 stores the biases
+    /// </summary>
     public class LinearLayer
     {
-        int _inputLength = 0;
-        int _outputLength = 0;
+        public Matrix Matrix { get; private set; }
 
-        float[][] _parameters = null;
-
-        public int InputLength => _inputLength;
-        public int OutputLength => _outputLength;
-
-        /// <summary>
-        /// - Parameters[output][input]
-        /// - Parameters[output][0] is the bias
-        /// </summary>
-        public float[][] Parameters => _parameters;
+        public int InputLength => this.Matrix.Height;
+        public int OutputLength => this.Matrix.Width;
 
         public LinearLayer(int inputLength, int outputLength)
         {
-            _inputLength = inputLength;
-            _outputLength = outputLength;
-
-            _parameters = new float[outputLength][];
-
-            for (int o = 0; o < outputLength; o++)
-            {
-                _parameters[o] = new float[inputLength + 1];
-            }
+            this.Matrix = new Matrix(inputLength + 1, outputLength);
         }
 
-        public void Evaluate(in ReadOnlySpan<float> input, in Span<float> output)
+        /// <summary>
+        /// Evaluate layer
+        /// </summary>
+        /// <param name="input">
+        /// the input matrix, should have shape (1, input lenght + 1)
+        /// </param>
+        /// <returns></returns>
+        public Matrix Evaluate(Matrix input)
         {
-            for (int o = 0; o < _outputLength; o++)
-            {
-                // Initialize sum as the bias
-                float sum = _parameters[o][0];
-
-                for (int i = 0; i < _inputLength; i++)
-                {
-                    sum += _parameters[o][i + 1] * input[i];
-                }
-
-                output[o] += sum;
-            }
+            return input * this.Matrix;
         }
     }
 }

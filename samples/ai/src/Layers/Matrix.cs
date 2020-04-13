@@ -31,7 +31,7 @@ namespace AI.Layers
             }
         }
 
-        public Matrix(float[] values)
+        public Matrix(params float[] values)
         {
             _values = new float[][] { values };
         }
@@ -82,7 +82,9 @@ namespace AI.Layers
         /// </summary>
         /// <param name="left">left hand side matrix</param>
         /// <param name="right">right hand side matrix</param>
-        /// <returns></returns>
+        /// <returns>
+        /// A new matrix
+        /// </returns>
         public static Matrix operator*(Matrix left, Matrix right)
         {
             if (left.Width != right.Height)

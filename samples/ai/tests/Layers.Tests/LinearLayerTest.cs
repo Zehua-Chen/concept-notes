@@ -10,23 +10,21 @@ namespace AI.Layers.Tests
             LinearLayer layer = new LinearLayer(2, 2);
 
             // Bias
-            layer.Parameters[0][0] = 100.0f;
+            layer.Matrix[0, 0] = 100.0f;
             // Weights
-            layer.Parameters[0][1] = 1.0f;
-            layer.Parameters[0][2] = 7.0f;
+            layer.Matrix[1, 0] = 1.0f;
+            layer.Matrix[2, 0] = 7.0f;
 
             // Bias
-            layer.Parameters[1][0] = 50.0f;
+            layer.Matrix[0, 1] = 50.0f;
             // Weights
-            layer.Parameters[1][1] = 1.0f;
-            layer.Parameters[1][2] = 0.0f;
+            layer.Matrix[1, 1] = 1.0f;
+            layer.Matrix[2, 1] = 0.0f;
 
-            float[] input = new float[] { 1.0f, 1.0f };
-            float[] output = new float[] { 0.0f, 0.0f };
+            Matrix input = new Matrix(1.0f, 1.0f, 1.0f);
+            Matrix output = layer.Evaluate(input);
 
-            layer.Evaluate(input, output);
-
-            Assert.Equal(new float[] { 108.0f, 51.0f }, output);
+            Assert.Equal(new Matrix(108.0f, 51.0f), output);
         }
     }
 }
