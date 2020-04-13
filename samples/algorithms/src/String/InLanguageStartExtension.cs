@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Algorithms
+namespace Algorithms.String
 {
-    public static class StringExtension
+    public static class InLanguageStartExtension
     {
         internal static bool IsFullMatch(this string s, string expression)
         {

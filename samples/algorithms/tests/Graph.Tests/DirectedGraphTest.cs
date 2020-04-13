@@ -19,22 +19,22 @@ namespace Algorithms.Graph.Tests
             Assert.Equal(new Dictionary<string, string>()
             {
                 { "b", "a-b" }
-            }, graph.GetOut("a"));
+            }, graph.GetOuts("a"));
 
             Assert.Equal(new Dictionary<string, string>()
             {
                 { "a", "b-a" }
-            }, graph.GetOut("b"));
+            }, graph.GetOuts("b"));
 
             Assert.Equal(new Dictionary<string, string>()
             {
                 { "b", "b-a" }
-            }, graph.GetIn("a"));
+            }, graph.GetIns("a"));
 
             Assert.Equal(new Dictionary<string, string>()
             {
                 { "a", "a-b" }
-            }, graph.GetIn("b"));
+            }, graph.GetIns("b"));
         }
 
         [Fact]
@@ -55,6 +55,22 @@ namespace Algorithms.Graph.Tests
             };
 
             Assert.True(expected.Equals(graph));
+        }
+
+        [Fact]
+        public void TestClone()
+        {
+            var original = new DirectedGraph<string, string>()
+            {
+                "a",
+                "b",
+                { "a", "b", "a-b" },
+            };
+
+            var cloned = original.Clone() as DirectedGraph<string, string>;
+            original.Add("c");
+
+            Assert.False(cloned.Contains("c"));
         }
     }
 }

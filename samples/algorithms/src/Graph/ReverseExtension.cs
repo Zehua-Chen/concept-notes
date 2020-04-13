@@ -17,8 +17,8 @@ namespace Algorithms.Graph
 
             foreach (V vertex in graph)
             {
-                Dictionary<V, E> outs = graph.GetOut(vertex);
-                Dictionary<V, E> ins = graph.GetIn(vertex);
+                Dictionary<V, E> outs = graph.GetOuts(vertex);
+                Dictionary<V, E> ins = graph.GetIns(vertex);
 
                 foreach (var @out in outs)
                 {

@@ -45,7 +45,7 @@ namespace Algorithms.Graph
             {
                 KeyValuePair<int, TVertex> peek = queue.Pop();
 
-                foreach (KeyValuePair<TVertex, TEdge> @out in graph.GetOut(peek.Value))
+                foreach (KeyValuePair<TVertex, TEdge> @out in graph.GetOuts(peek.Value))
                 {
                     int newLength = @out.Value.Length + peek.Key;
                     int oldLength = output[@out.Key].Item1;

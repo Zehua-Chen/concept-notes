@@ -7,42 +7,43 @@ namespace Algorithms.Graph
 {
     public class DirectedGraph<TVertex, TEdge> :
         IEnumerable<TVertex>,
-        IEquatable<DirectedGraph<TVertex, TEdge>>
+        IEquatable<DirectedGraph<TVertex, TEdge>>,
+        ICloneable
     {
         struct VertexData: IEquatable<VertexData>
         {
-            public Dictionary<TVertex, TEdge> Out;
-            public Dictionary<TVertex, TEdge> In;
+            public Dictionary<TVertex, TEdge> Outs;
+            public Dictionary<TVertex, TEdge> Ins;
 
             public static VertexData Default()
             {
                 return new VertexData()
                 {
-                    Out = new Dictionary<TVertex, TEdge>(),
-                    In = new Dictionary<TVertex, TEdge>(),
+                    Outs = new Dictionary<TVertex, TEdge>(),
+                    Ins = new Dictionary<TVertex, TEdge>(),
                 };
             }
 
             public bool Equals(VertexData other)
             {
-                bool @out = this.Out.All((KeyValuePair<TVertex, TEdge> pair) =>
+                bool @out = this.Outs.All((KeyValuePair<TVertex, TEdge> pair) =>
                 {
-                    if (!other.Out.ContainsKey(pair.Key))
+                    if (!other.Outs.ContainsKey(pair.Key))
                     {
                         return false;
                     }
 
-                    return pair.Value.Equals(other.Out[pair.Key]);
+                    return pair.Value.Equals(other.Outs[pair.Key]);
                 });
 
-                bool @in = this.In.All((KeyValuePair<TVertex, TEdge> pair) =>
+                bool @in = this.Ins.All((KeyValuePair<TVertex, TEdge> pair) =>
                 {
-                    if (!other.In.ContainsKey(pair.Key))
+                    if (!other.Ins.ContainsKey(pair.Key))
                     {
                         return false;
                     }
 
-                    return pair.Value.Equals(other.In[pair.Key]);
+                    return pair.Value.Equals(other.Ins[pair.Key]);
                 });
 
                 return @out && @in;
@@ -66,21 +67,26 @@ namespace Algorithms.Graph
             VertexData fromVertex = _dictionary[@out];
             VertexData inVertex = _dictionary[@in];
 
-            fromVertex.Out.Add(@in, e);
-            inVertex.In.Add(@out, e);
+            fromVertex.Outs.Add(@in, e);
+            inVertex.Ins.Add(@out, e);
 
             _dictionary[@out] = fromVertex;
             _dictionary[@in] = inVertex;
         }
 
-        public Dictionary<TVertex, TEdge> GetOut(TVertex vertex)
+        public Dictionary<TVertex, TEdge> GetOuts(TVertex vertex)
         {
-            return _dictionary[vertex].Out;
+            return _dictionary[vertex].Outs;
         }
 
-        public Dictionary<TVertex, TEdge> GetIn(TVertex vertex)
+        public Dictionary<TVertex, TEdge> GetIns(TVertex vertex)
         {
-            return _dictionary[vertex].In;
+            return _dictionary[vertex].Ins;
+        }
+
+        public bool Contains(TVertex vertex)
+        {
+            return _dictionary.ContainsKey(vertex);
         }
 
         public IEnumerator<TVertex> GetEnumerator()
@@ -108,5 +114,34 @@ namespace Algorithms.Graph
                 return pair.Value.Equals(other._dictionary[pair.Key]);
             });
         }
-  }
+
+        public object Clone()
+        {
+            var copy = new DirectedGraph<TVertex, TEdge>();
+
+            foreach (var pair in _dictionary)
+            {
+                var outs = new Dictionary<TVertex, TEdge>();
+                var ins = new Dictionary<TVertex, TEdge>();
+
+                foreach (var @out in pair.Value.Outs)
+                {
+                    outs.Add(@out.Key, @out.Value);
+                }
+
+                foreach (var @in in pair.Value.Ins)
+                {
+                    ins.Add(@in.Key, @in.Value);
+                }
+
+                copy._dictionary.Add(pair.Key, new VertexData()
+                {
+                    Outs = outs,
+                    Ins = ins,
+                });
+            }
+
+            return copy;
+        }
+    }
 }

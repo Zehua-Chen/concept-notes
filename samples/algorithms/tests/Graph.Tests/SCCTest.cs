@@ -26,13 +26,13 @@ namespace Algorithms.Graph.Tests
                 { "E", "H", "E-H" },
             };
 
-            Assert.Equal(graph.GetSCCs(), new HashSet<HashSet<string>>()
+            Assert.Equal(new HashSet<HashSet<string>>()
             {
                 new HashSet<string>() { "B", "E", "F" },
                 new HashSet<string>() { "A", "C", "D" },
                 new HashSet<string>() { "G" },
                 new HashSet<string>() { "H" }
-            });
+            }, graph.GetSCCs());
         }
     }
 }
