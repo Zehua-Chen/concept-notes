@@ -1,7 +1,6 @@
 using Xunit;
-using Algorithms.String;
 
-namespace String.Tests
+namespace Algorithms.String.Tests
 {
     public class InLanguageStarTest
     {

@@ -1,0 +1,271 @@
+\chapter{Graph}
+
+\section{Undirected Graph}
+
+  Algorithmic Problems
+
+  \begin{itemize}
+    \item Given graph $ G $, and node $ u, v $, is $ u $ connected to $ v $?
+    \begin{itemize}
+      \item Can be solved using BFS and DFS
+    \end{itemize}
+
+    \item Given $ G $ and node $ u $, find all nodes that are connected to $ u $
+    \begin{itemize}
+      \item Can be solved using BFS and DFS
+    \end{itemize}
+
+    \item Find all connected components of $ G $
+    \begin{itemize}
+      \item Can be solved using BFS and DFS
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Traversal}
+
+    Graph traversal typically requires two datastructures
+
+    \begin{enumerate}
+      \item Visisted list
+      \item \say{To explore} list
+      \begin{itemize}
+        \item BFS uses a queue
+        \item DFS uses a stack
+      \end{itemize}
+    \end{enumerate}
+
+    Both BFS and DFS can be done in $ O\left( n + m \right) $ time
+
+  \subsection{DFS}
+
+    \subsubsection{Tree}
+
+      \begin{itemize}
+        \item $ T $ is a forst
+        \item Root of the tree is the first vertex iterated upon
+        \item Nodes are in the tree iff they are reachable from the root vertex
+        in the original graph
+        \item Edges can be classified into two types
+        \begin{itemize}
+          \item \textbf{Tree edge}: belongs to the tree
+          \item \textbf{Non tree edge}: does not belogn to the tree
+          \begin{itemize}
+            \item \textbf{Forward edge}:
+            \begin{align*}
+              \left( x, y \right):
+              \pre\left( x \right)
+              < \pre\left( y \right)
+              < \post\left( y \right)
+              < \post\left( x \right)
+            \end{align*}
+            Or in aonther word, go down the tree
+
+            \item \textbf{Backward edge}:
+            \begin{align*}
+              \left( y, x \right):
+              \pre\left( x \right)
+              < \pre\left( y \right)
+              < \post\left( y \right)
+              < \post\left( x \right)
+            \end{align*}
+            Or in aonther word, go up the tree
+
+            \item \textbf{Cross edge}: the intervals of two vertices in the
+            edge are disjoint; no child or parent relationship
+          \end{itemize}
+        \end{itemize}
+
+        \item If $ uv $ is a non tree edge, then in $ T $, one of the following
+        conditions can be true
+        \begin{itemize}
+          \item $ u $ is an ancestor of $ v $
+          \item $ v $ is an ancestor of $ u $
+        \end{itemize}
+      \end{itemize}
+
+    \subsubsection{Pre, Post Numbers}
+
+      \begin{itemize}
+        \item Node $ u $ is active in the interval
+        \begin{align*}
+          \left[ \pre\left( u \right), \post\left( u \right) \right]
+        \end{align*}
+
+        \item For two nodes $ u $ and $ v $, either there intervals are
+        \textbf{disjoint} or one is contained in the other
+      \end{itemize}
+
+  \subsection{BFS}
+
+    \begin{itemize}
+      \item BFS uses a queue to store the list of vertices to explore
+      \item BFS would always visists the vertices that are closer to the
+      starting vertices first
+    \end{itemize}
+
+    \subsubsection{Theorems}
+
+      The following holds true upon completion of $ \BFS\left( s \right) $ in
+      \textbf{undirected graphs}
+
+      \begin{enumerate}
+        \item The search tree contains exactly the vertices in the connected
+        component of $ s $
+        \item If $ \dist\left( u \right) < \dist\left( v \right) $, then $ u $
+        is visisted before $ v $
+        \item For every $ u $, $ \dist\left( u \right) $ is the length of the
+        shortest path (number of edges from $ s $ to $ u $)
+        \item If $ u, v $ are in the connected component of $ s $, and
+        $ e = \left\{ u,v \right\} $ is an edge of $ G $ then
+        \begin{equation}
+          \left| \dist\left( u \right) - \dist\left( v \right) \right| \le 1
+        \end{equation}
+      \end{enumerate}
+
+  \subsection{BFS with Layers}
+
+    $ \BFSLayers\left( s \right) $ instead of putting to explore nodes into a
+    queue, put them into layers
+
+    \begin{itemize}
+      \item \textbf{Runtime}: $ O\left( n + m \right) $
+      \item Outputs a BFS tree
+      \item $ L_{i} $ is the set of vertices at a shortest distance exactly
+      $ i $ from $ s $
+    \end{itemize}
+
+    \subsubsection{Theorems}
+
+      If $ G $ is undirected, then each edge $ e = \left\{ u, v \right\} $
+      is
+
+      \begin{enumerate}
+        \item Tree edge between two consecutive layers
+        \item Non-tree forward, backward edge between two consecutive layers
+        \item Non-tree cross edge with $ u, v $ in the same layer
+        \item Every edge in the graph between two vertices is either of the
+        followings
+        \begin{enumerate}
+          \item In the same layer
+          \item In two consecutive layers
+        \end{enumerate}
+      \end{enumerate}
+
+\section{Directed Graph}
+
+  \begin{itemize}
+    \item Given $ G $ and nodes $ u, v $, can $ u $ reach $ v $?
+    \begin{itemize}
+      \item $ O\left( n + m \right) $
+    \end{itemize}
+    \item Given $ G $ and node $ u $, compute $ \rch\left( u \right) $?
+    \begin{itemize}
+      \item $ O\left( n + m \right) $
+    \end{itemize}
+
+    \item Given $ G $ and node $ u $, compute all $ v $ that can reach $ u $,
+    $ u \in \rch\left( u \right) $?
+    \begin{itemize}
+      \item \textbf{Naive}: $ O\left( n \left( n + m \right) \right) $
+      \item \textbf{Smart}: compute $ G^{rev} $ ($ O\left( n + m \right) $),
+      compute $ \rch\left( u \right) $ via search ($ O\left( n + m \right) $);
+      if $ \Out\left( v \right), \In\left( v \right) $ are all available at
+      each $ v $, then there is no need for $ G^{rev} $
+      \begin{itemize}
+        \item Instead of using $ \Out\left( v \right) = \In\left( v \right) $,
+        use $ \ln\left( v \right) $
+      \end{itemize}
+    \end{itemize}
+
+    \item $ \SCC\left( u \right) $
+    \begin{itemize}
+      \item $ \SCC\left( G, u \right) = \rch\left( G, u \right) \rch \left( G^{rev}, u \right) $
+      ($ O\left( n + m \right) $) time
+    \end{itemize}
+
+    \item Is $ G $ strongly connected
+    \begin{itemize}
+      \item Pick arbitrary vertex $ u $, check if
+      $ \SCC\left( G, u \right) = V $
+    \end{itemize}
+
+    \item Find all strongly connected components of $ G $
+    \begin{itemize}
+      \item \textbf{Brue force}: while $ G $ is not empty, pick an arbitrary
+      vertex $ u $, remove $ \SCC\left( G,u \right) $ from $ G $
+      ($ O\left( n \left( n + m \right) \right) $ time)
+      \item \textbf{Linear Time}: Can be done in $ O\left( n + m \right) $ time
+      \ref{subsec: linear time sccs}
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Determining DAG}
+
+    \begin{enumerate}
+      \item Compute DFS
+      \item Not DAG if there is an backward edge $ e = \left( v, u \right) $
+      Output cycle formed by path from $ u $ to $ v $ in $ T $ plus edge $ vu $
+      \item Otherwise output nodes in decreasing post-visit order.
+      \item $ O\left( n + m \right) $ time
+    \end{enumerate}
+
+  \subsection{Linear Time Finding SCCs} \label{subsec: linear time sccs}
+
+    \paragraph{Outline}
+    \begin{enumerate}
+      \item Do DFS on the reverse graph and output intervals in decreasing post
+      order
+      \item Mark all vertices as unvisisted
+      \item For each vertex in the computed order
+      \begin{itemize}
+        \item if the vertex is not visisted
+        \begin{itemize}
+          \item DFS the vertex
+          \item Output the vertices reached by the vertex
+          \item Remove the outputed vertices from the graph
+        \end{itemize}
+      \end{itemize}
+    \end{enumerate}
+
+    \paragraph{Running Time}
+    \begin{itemize}
+      \item DFS would only visit vertices SCCs
+      \item DFS takes proportional time to the size of the SCC
+      \item Therefore running time is $ O\left( n + m \right) $
+    \end{itemize}
+
+  \subsection{BFS}
+
+    \subsubsection{Theorems}
+
+      The following hold true upon completion of $ \BFS\left( s \right) $
+      in \textbf{directed graphs}
+
+      \begin{enumerate}
+        \item Tree contains exactly the set of vertices \textbf{reachable}
+        from $ s $
+        \item if $ \dist\left( u \right) < \dist\left( v \right) $, then
+        $ u $ is visited before $ v $
+        \item For every $ u $, $ \dist\left( u \right) $ is the shortest length
+        from $ s $ to $ u $
+        \item If $ u $ is reachable from $ s $, and
+        $ e = \left\{ u, v \right\} $ is an edge of $ G $ then
+        \begin{equation}
+          \dist\left( v \right) - \dist\left( u \right) \le 1
+        \end{equation}
+      \end{enumerate}
+
+  \subsection{BFS with Layers}
+
+    If $ G $ is directed, then each edge $ e = \left\{ u, v \right\} $
+    is:
+
+    \begin{itemize}
+      \item Tree edge between two consecutive layers
+      \item A non-tree forward edge between two consecutive layers
+      \item A non-tree backward edge
+      \item A cross edge with both $ u, v $ in the same layer
+    \end{itemize}
+
+\subimport{./}{shortest-path-positive}
+\subimport{./}{shortest-path-negative}

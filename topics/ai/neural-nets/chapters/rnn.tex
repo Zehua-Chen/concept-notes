@@ -1,5 +1,16 @@
 \chapter{Recurrent Neural Networks (Layers)}
 
+In an recurrent layer, there is an additional input $ h_{i - 1} $, which is
+the output from the previous inference, and an additional set of weights
+$ V $ to control $ h_{i - 1} $
+
+\begin{equation}
+  h_{i} = f
+  \left(
+    b + \text{weight} \times \text{regular input} + V \times h_{i - 1}
+  \right)
+\end{equation}
+
 \begin{itemize}
   \item \ul{Each \textbf{time stamp}}:
   \begin{itemize}

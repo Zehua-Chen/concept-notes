@@ -1,0 +1,46 @@
+\chapter{Neural Machine Translation}
+
+\section{Encoder, Decoder and Attention Model}
+
+  State of the art model used today
+
+  \subsection{Encoder}
+
+
+  \subsection{Decoder}
+
+    \begin{itemize}
+      \item \textbf{Input}:
+      \begin{itemize}
+        \item Input context
+        \item Previous hidden state
+      \end{itemize}
+
+      \item \textbf{Output}:
+      \begin{itemize}
+        \item Word
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Attention}
+
+    \begin{itemize}
+      \item \textbf{Input}:
+      \begin{itemize}
+        \item All input words
+        \item Previous hidden state of the decoder
+      \end{itemize}
+
+      \item \textbf{Output}:
+      \begin{itemize}
+        \item A context state for the decoder
+      \end{itemize}
+    \end{itemize}
+
+  \subsection{Workflow}
+
+    \begin{enumerate}
+      \item Run encoder to get all encoded tuples
+      \item Keep running attention and the decoder until the end of sentence is
+      found
+    \end{enumerate}

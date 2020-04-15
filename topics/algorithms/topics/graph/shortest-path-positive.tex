@@ -1,0 +1,50 @@
+\section{Shortest Path with Positive Lengths}
+
+\subsection{Single Source Shortest Path}
+
+  Given a graph, find
+
+  \begin{itemize}
+    \item The shortest path from $ s $ to $ t $
+    \item The shortest paths from $ s $ to all other nodes
+  \end{itemize}
+
+  Undirected graphs can be solved using directed graphs (just replace each
+  undirected edge with two directed edges)
+
+  \subsubsection{Using BFS}
+
+    \paragraph{All Edges Have Length 1} BFS would use $ O\left( n + m \right) $
+    time
+
+    \paragraph{Edges Have Variable Lengths} Place dummy nodes on edges; the
+    edge between dummy nodes should have length $ 1 $. Let
+    \begin{equation}
+      L = \max_{e} l\left( e \right)
+    \end{equation}
+
+    The graph would have
+
+    \begin{itemize}
+      \item $ O\left( mL \right) $ edges
+      \item $ O\left( mL + n \right) $ nodes
+    \end{itemize}
+
+    The algorithm would take $ O\left( mL + n \right) $ time
+
+  \subsection{Dijkstra’s Algorithm}
+
+    \begin{itemize}
+      \item Only works for positive edge lengths
+    \end{itemize}
+
+    \subsubsection{Running Time}
+
+      \begin{itemize}
+        \item \textbf{Heap}: $ O\left( \left( n + m\right) \log n \right) $
+        \item \textbf{Fibonacci Heap}: $ O\left( n \log n + m \right) $
+        \begin{itemize}
+          \item If $ m = \Omega \left( n \log n \right) $, running time is
+          linear in input size
+        \end{itemize}
+      \end{itemize}
