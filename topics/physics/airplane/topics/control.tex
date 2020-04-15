@@ -1,0 +1,31 @@
+\section{Control}
+
+Use torque forces to implement pitch, roll and yall
+
+\begin{itemize}
+  \item If torques are multiplied by some value derived from the speed, then
+  one can create the illusion that airplane cannot pitch, roll or yall
+  when they are not moving
+\end{itemize}
+
+After yaw, pitch and roll are applied, make sure to slerp the direction of
+movement to the forward direction of the plane so that movement and
+control matches. Otherwise, the direction of movement would be out of sync
+with the direction of the plane.
+
+\subsection{Banking Effect}
+
+  When an airplane rolls, it would turn to the left and right
+
+  \begin{itemize}
+    \item This can be done using the roll angle
+  \end{itemize}
+
+\subsection{Direction}
+
+  To make sure the airplane points into the correct direction:
+
+  \begin{itemize}
+    \item Slerp the plane's current rotation to the look rotation of
+    the direction of movement
+  \end{itemize}
