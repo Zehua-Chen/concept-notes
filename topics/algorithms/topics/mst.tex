@@ -1,0 +1,193 @@
+\chapter{Minimum Spanning Tree}
+
+\paragraph{Problem} Given $ G $, we want to construct a tree such that
+all vertices from $ G $ are connected and we want to minimize the total cost
+of edges
+
+
+\paragraph{Applications}
+\begin{itemize}
+  \item Network Design
+  \item Approximation algorithm
+  \item Cluster analysis
+\end{itemize}
+
+\paragraph{Solution} Solvable using greedy algorithm with the main problems
+\begin{itemize}
+  \item In what orders should the edges be processed
+  \item When to add edge to the tree
+\end{itemize}
+
+\begin{algorithm}[H]
+  \Begin{
+    \tcp{the MST tree}
+    $ T \gets \left\{ \right\} $\;
+    \While{$ \left| E \right| > 0 $}{
+      \underline{Pick} $ e \in E $\;
+
+      \If{$ e $ \underline{satisfies condition}}{
+        Add $ e $ to $ T $\;
+      }
+    }
+  }
+\end{algorithm}
+
+\section{Properties of MST Tree}
+
+  \begin{itemize}
+    \item A graph is connected iff a MST is present
+    \item MST of $ n $ nodes has $ n - 1 $ edges
+    \item If we add an edge $ e $ that is not the in the tree to the tree $ T $,
+    there would be a unique cycle $ C $
+    \begin{itemize}
+      \item For $ f \in C - \left\{ e \right\} $, $ T - f + e $ is another
+      spanning tree of $ G $
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Cuts}
+
+    A cut is a partition of the vertices of the graph into two sets
+    $ S, \left( V \setminus S \right) $
+
+    \begin{itemize}
+      \item Edges having endpoints on both side are the edges of the cut
+      \item A cut edge is crossing the cut
+    \end{itemize}
+
+  \subsection{Safe, Unsafe}
+
+    \begin{itemize}
+      \item An edge $ e $ is \textbf{safe} if there is a cut such that among all
+      \textbf{edges of the cut}, $ e $ is the unique smallest cost
+      \begin{itemize}
+        \item Given a safe edge, all MST contains this edge
+        \item Safe edges form MST
+        \item Safe edges form connected graph
+      \end{itemize}
+
+      \item An edge $ e $ is \textbf{unsafe} if there is a cycle in which
+      $ e $ is the unique maximum cycle
+      \begin{itemize}
+        \item No MST contains unsafe edges
+      \end{itemize}
+
+      \item All edges are distinct if the edges are all either safe or unsafe
+    \end{itemize}
+
+
+\section{Kruskal’s Algorithm}
+
+  Process edges in the order of costs, and add edges to $ T $ so long as they
+  don't form cycles.
+
+\section{Prims's Algorithm}
+
+  Start with a node, add edges that induce the smallest attachment cost
+  to the tree
+
+\section{Reverse Delete}
+
+  \begin{algorithm}[H]
+    $ T \gets E $\;
+    \While{$ \left| E \right| > 0 $}{
+      Choose $ e \in E $ of the largest cost\;
+
+      \If{removing $ e $ does not disconnect $ T $}{
+        remove $ e $ from $ T $\;
+      }
+    }
+  \end{algorithm}
+
+\section{Boruvka's Algorithm}
+
+  Assume $ G $ is a connected graph
+
+  \begin{algorithm}[H]
+    $ T \gets \emptyset $\;
+    \While{$ T $ is not spanning}{
+      $ X \gets \emptyset $\;
+      \For{each connected component $ S \in T $}{
+        Add to $ X $ the cheapest edge between $ S $ and $ V \setminus S $\;
+      }
+
+      Add edges in $ X $ to $ T $\;
+    }
+  \end{algorithm}
+
+
+\section{Special Edges}
+
+  \subsection{Duplicate Edge Costs}
+
+    Break ties using index of edges (lexicographic ordering). The following
+    algorithms are optimal using lexicographic ordering
+    \begin{itemize}
+      \item Prims's
+      \item Kruskal’s
+      \item Reverse Delete Algorithm
+    \end{itemize}
+
+  \subsection{Negative Edge Costs}
+
+    MST algorithms work with negative edges without modifications
+
+\section{Implementation and Running Time}
+
+  Prims's algorithm has the best running time
+
+  \subsection{Kruska's Algorithm}
+
+    \begin{itemize}
+      \item Presort edges based on cost so that choosing is constant time
+      \item Do BFS on $ T \cup \left\{ u \right\} $, takes $ O\left( n \right) $
+      \item Total
+      \begin{equation}
+        O\left( m \log m \right) + O\left( m n \right) = O\left( m n \right)
+      \end{equation}
+
+      \item Can give $ O\left( \left( m + n \right) \log m \right) $ if done
+      using union find algorithm
+    \end{itemize}
+
+    \begin{algorithm}[H]
+      \caption{Using Union Find}
+
+      \Begin{
+        $ T \gets \emptyset $\;
+        Put each vertex $ u $ into its own set\;
+
+        \While{$ \left| E \right| > 0 $}{
+          pick $ e = \left( u, v \right) \in E $ of minimum cost\;
+          \If{$ u $ and $ v $ belongs to different sets}{
+            add $ e $ to $ T $\;
+            merge the set containing $ u $ and $ v $\;
+          }
+        }
+      }
+    \end{algorithm}
+
+  \subsection{Prims's Algorithm}
+
+    \begin{itemize}
+      \item Standard heap takes $ O\left( \left( n + m \right) \log n \right) $
+      \item Fibonacci heap takes $ O\left( n \log n + m \right) $
+      \item If $ m $ is $ O\left( n \right) $, then
+      $ \Omega\left( n \log n \right) $
+    \end{itemize}
+
+  \subsection{Boruvka's Algorithm}
+
+    \begin{equation}
+      O\left( m \log n \right)
+    \end{equation}
+
+    \begin{itemize}
+      \item While loop takes $ O\left( \log n \right) $
+      \begin{itemize}
+        \item Number of connected components shrink by at least half since
+        each component merges with one or more other components.
+      \end{itemize}
+      \item Loop body takes $ O\left( m \right) $
+      \item No special data structure needed
+    \end{itemize}
