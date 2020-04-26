@@ -1,6 +1,7 @@
-\chapter{Transformation}
+\chapter{Affine Transformations}
 
 \begin{itemize}
+  \item Most affine transformations do not commute
   \item Some (combinations of) transformations commute
   \footnote{if you change the order of transformation, the result remains the
   same}
@@ -78,6 +79,22 @@
       1
     \end{bmatrix}
   \end{align}
+
+\section{Shear}
+
+  \begin{equation}
+    H_{xz}\left( s \right) =
+    \begin{bmatrix}
+      1 & 0 & s & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+  \end{equation}
+
+  \begin{itemize}
+    \item Affine transformation
+  \end{itemize}
 
 \section{Rotation}
 
@@ -160,5 +177,9 @@
 \section{Rigid Body Transformations}
 
   \begin{itemize}
-    \item Scale is not a rigid body transformation
+    \item Non rigidbody transformations
+    \begin{itemize}
+      \item Scale
+      \item Shear
+    \end{itemize}
   \end{itemize}

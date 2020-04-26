@@ -22,6 +22,7 @@ can be formed by
 \begin{itemize}
   \item This can be thought as a rotation around a certain axis
   \item Combining the two variables make it easier to convert to matrices
+  \item All quaternions formed this way are unit length
 \end{itemize}
 
 \section{Properties}
@@ -32,8 +33,9 @@ can be formed by
       \item Directions can point in both ways
     \end{itemize}
 
-    \item Quaternion multiplications ares associative
-    \item Quaternion multiplications are distributive
+    \item Multiplying unit quaternions give you unit quaternions
+    \item Quaternion multiplications are associative
+    \item Quaternion multiplications are not associative
   \end{itemize}
 
 \section{Operations}
@@ -46,10 +48,10 @@ can be formed by
 
     \item \textbf{Unit Quaternion}
     \begin{equation}
-      a^{2} + b^{2} + c^{2} + d^{2} = 1
+      \left| q \right| = \sqrt{a^{2} + b^{2} + c^{2} + d^{2}} = 1
     \end{equation}
 
-    \item \textbf{Multiplication}: $ q_{3} = q_{1} \cdot q_{2} $
+    \item \textbf{Multiplication}: $ q_{3} = q_{1} q_{2} $
     \begin{equation}
       \begin{split}
         a_{3} &= a_{1} a_{2} - b_{1} b_{2} - c_{1} c_{2} - d_{1} d_{2} \\
@@ -58,6 +60,21 @@ can be formed by
         d_{3} &= a_{1} d_{2} + a_{2} d_{1} + b_{1} c_{2} - b_{2} c_{2}
       \end{split}
     \end{equation}
+
+    \begin{itemize}
+      \item This means $ q_{1} $ rotated by $ q_{2} $
+    \end{itemize}
+
+    \item \textbf{Dot Product}
+    \begin{equation}
+      p \cdot q = p_{0} q_{0} + p_{1} q_{1} + p_{2} q_{2} + p_{3} q_{3}
+      = \left| p \right| \left| q \right| \cos \theta
+    \end{equation}
+
+    \begin{itemize}
+      \item If the two quaternions are unit quaternions, this would be the
+      angle between the quaternions
+    \end{itemize}
 
     \item \textbf{Inverse}
     \begin{equation}
@@ -84,6 +101,15 @@ can be formed by
       \theta &= 2 \cos^{-1} a \\
       v &= \frac{1}{\sqrt{1 - a^{2}}} \left( b, c, d \right)
     \end{align}
+
+    \item \textbf{Linear Interpolation}: $ a, b $ are quaternions, $ t $ is time
+    \begin{equation}
+      \begin{split}
+        \theta &= \cos^{-1}\left( a, b \right) \\
+        \text{slerp} &= \frac{\sin\left( \left( 1 - t \right) \theta \right)}{\sin\theta} a
+        + \frac{\sin\left( t \theta \right)}{\sin\theta} b
+      \end{split}
+    \end{equation}
 
   \end{itemize}
 
