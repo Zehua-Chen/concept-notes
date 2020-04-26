@@ -1,5 +1,11 @@
 \chapter{Quaternion}
 
+Quaternions are made up of four numbers
+
+\begin{equation}
+  q = \left< a, b, c, d \right>
+\end{equation}
+
 Given a rotation by angle $ \theta $ around an axis $ a $, the quaternion $ q $
 can be formed by
 
@@ -12,6 +18,86 @@ can be formed by
     a_{z} \sin\frac{\theta}{2}
   \right>
 \end{equation}
+
+\begin{itemize}
+  \item This can be thought as a rotation around a certain axis
+  \item Combining the two variables make it easier to convert to matrices
+\end{itemize}
+
+\section{Properties}
+
+  \begin{itemize}
+    \item For every rotation other than identity, there are two quaternions
+    \begin{itemize}
+      \item Directions can point in both ways
+    \end{itemize}
+
+    \item Quaternion multiplications ares associative
+    \item Quaternion multiplications are distributive
+  \end{itemize}
+
+\section{Operations}
+
+  \begin{itemize}
+    \item \textbf{Identity}
+    \begin{equation}
+      q_{i} = \left< 1, 0, 0, 0 \right>
+    \end{equation}
+
+    \item \textbf{Unit Quaternion}
+    \begin{equation}
+      a^{2} + b^{2} + c^{2} + d^{2} = 1
+    \end{equation}
+
+    \item \textbf{Multiplication}: $ q_{3} = q_{1} \cdot q_{2} $
+    \begin{equation}
+      \begin{split}
+        a_{3} &= a_{1} a_{2} - b_{1} b_{2} - c_{1} c_{2} - d_{1} d_{2} \\
+        b_{3} &= a_{1} b_{2} + a_{2} b_{1} + c_{1} d_{2} - c_{2} d_{1} \\
+        c_{3} &= a_{1} c_{2} + a_{2} c_{1} + b_{2} d_{1} - b_{1} d_{2} \\
+        d_{3} &= a_{1} d_{2} + a_{2} d_{1} + b_{1} c_{2} - b_{2} c_{2}
+      \end{split}
+    \end{equation}
+
+    \item \textbf{Inverse}
+    \begin{equation}
+      q^{-1} = \left< a, -b, -c, -d \right>
+    \end{equation}
+
+    \item \textbf{Rotating Point}: given a point $ p = \left< 0, x, y, z \right> $,
+    and a quaternion $ q $, the rotated point $ p' $ is
+    \begin{equation}
+      p' = q p q^{-1}
+    \end{equation}
+
+    \item \textbf{Rotation Matrix}
+    \begin{equation}
+      \begin{bmatrix}
+        2\left( a^{2} + b^{2} \right) - 1 & 2\left( bc - ad \right) & 2\left( bd + ac \right) \\
+        2\left( bc + ad \right) & 2\left( a^{2} + c^{2} \right) - 1 & 2\left( cd - ab \right) \\
+        2\left( bd - ac \right) & 2\left( cd + ab \right) & 2\left( a^{2} + d^{2} \right) - 1
+      \end{bmatrix}
+    \end{equation}
+
+    \item \textbf{Quaternion to Angle Axis}
+    \begin{align}
+      \theta &= 2 \cos^{-1} a \\
+      v &= \frac{1}{\sqrt{1 - a^{2}}} \left( b, c, d \right)
+    \end{align}
+
+  \end{itemize}
+
+\section{Gimbal Lock}
+
+  Quaternions are useful because it solves \textbf{gimbal lock}, aka.
+  \textbf{kinematic singularity}: one or more degrees of freedom are lost when
+  a specific orientation is achieved.
+
+  \begin{itemize}
+    \item Ex. when the user looks straight up, the camera would spin
+    uncontrollably
+  \end{itemize}
+
 
 \section{Game Engines}
 
