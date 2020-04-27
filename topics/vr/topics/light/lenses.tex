@@ -1,0 +1,143 @@
+\section{Lenses}
+
+Patterns in VR lenses design are different from patterns that has emerged
+in history
+
+\subsection{Snell's Law}
+
+  Describes how much rays of light bend while \textbf{entering and exiting} a
+  transparent material
+
+  \paragraph{Refrective Index}
+  \begin{equation}
+    n = \frac{c}{s}
+  \end{equation}
+
+  \begin{itemize}
+    \item $ s $: speed of light in the material
+    \item $ c $: speed of light in vacuum
+    \item $ n = 2 $: light travels two times slower in the material than in
+    vacuum
+    \item Common refrective indexe
+    \begin{itemize}
+      \item \textbf{Air}: $ n = 1.000293 $
+      \item \textbf{Water}: $ n = 1.33 $
+      \item \textbf{Crown glass}: $ n = 1.523 $
+    \end{itemize}
+  \end{itemize}
+
+  Speed of light through a medium also depends on the wave length. Therefore
+  we can also write the refractive index as
+
+  \begin{equation}
+    n\left( \lambda \right)
+  \end{equation}
+
+  Which is a function of $ \lambda $
+
+  \paragraph{Crossing Material}
+  \begin{align}
+    n_{1} \sin \theta_{1} &= n_{2} \sin \theta_{2} \\
+    \theta_{2} &= \sin^{-1} \left( \frac{n_{1}}{n_{2}} \sin \theta_{1} \right)
+  \end{align}
+
+  \begin{itemize}
+    \item If $ n_{1} < n_{2} $, $ \theta_{2} $ is closer to perpendicular than
+    $ \theta_{1} $
+    \item If $ n_{1} > n_{2} $, $ \theta_{2} $ is farther to perpendicular than
+    $ \theta_{1} $
+    \begin{itemize}
+      \item Light may not penerate the surface if the incoming angle is too
+      large
+      \item If $ \frac{n_{1}}{n_{2}} \sin \theta_{1} > 1 $, then the light
+      rays are reflected; happens to swimmers below water, where they see
+      a reflection, rather than the surface above
+    \end{itemize}
+  \end{itemize}
+
+  \paragraph{Prisms}
+  \begin{itemize}
+    \item Upward light bends downard
+    \item Downward light bends upward
+    \item Outcoming angle is only influenced by the incoming angle, not the
+    thickness of prisms, once the reflection index is fixed
+  \end{itemize}
+
+\subsection{Lenses}
+
+  \subsubsection{Convex Lens}
+
+    Converges rays
+
+    \begin{itemize}
+      \item \textbf{Focal point}: the point at which parallel incoming rays
+      converges
+      \begin{itemize}
+        \item Focal point changes as the angle of incoming parallel rays
+        changes
+        \item Unparallel rays can still have a focal point
+        \item In the real world, different colors would give different
+        focal points
+      \end{itemize}
+
+      \item \textbf{Focal Length}: distance from the center of the lens to
+      the focal point
+      \item \textbf{Focal Plane}: the vertical plane where the focal point is
+    \end{itemize}
+
+    \begin{equation}
+      \frac{1}{s_{1}} + \frac{1}{s_{2}} = \frac{1}{f}
+    \end{equation}
+
+    \begin{itemize}
+      \item The light source is at $ s_{1} $
+      \begin{itemize}
+        \item If $ s_{1} = \infty $, then $ s_{2} = f $
+        \item If $ s_{1} = f $, then $ s_{2} = \infty $, i.e. the rays never
+        converge
+        \item If $ s_{1} < f $, then no real image is formed, instead
+        magnification happens; the magnified image appears after the light
+        source
+      \end{itemize}
+
+      \item Real image is at $ s_{2} $
+      \item Focal length is $ f $
+    \end{itemize}
+
+    \paragraph{Lens Maker Equation}
+    \begin{equation}
+      \left( n_{2} - n_{1} \right)
+      \left( \frac{1}{r_{1}} + \frac{1}{r_{2}} \right)
+      = \frac{1}{f}
+    \end{equation}
+
+    \begin{itemize}
+      \item $ r_{1} $: radius of curvature of front of the lens
+      \item $ r_{2} $: radius of curvature of back of the lens
+      \item Assume \textbf{thin lens approximation}, i.e. lens thickness is
+      small relative to $ r_{1}, r_{2} $
+      \item Assume $ n_{1} $, which is close enough to air
+    \end{itemize}
+
+  \subsubsection{Conave Lenses}
+
+    Rays diverge instead of converte
+
+    \begin{itemize}
+      \item Negative focal lengths can be obtained by tracing outgoing rays
+      backwards
+      \item Lens maker equation can be used to calculate negative focal lens
+    \end{itemize}
+
+  \subsubsection{Diopters}
+
+    \begin{equation}
+      D = \frac{1}{f}
+    \end{equation}
+
+    \begin{itemize}
+      \item Concave lens has $ D < 0 $
+      \item When combining multiple lenses, we add the $ D $s of each lens.
+      The resulting $ D $ would represent a single \say{lens} made up of multiple
+      lenses
+    \end{itemize}
