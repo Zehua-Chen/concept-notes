@@ -1,0 +1,9 @@
+{
+  "entry": "index.tex",
+  "includes": [
+    "../../../shared/config/",
+    "../../../shared/packages/",
+    "./types",
+    "./howtos"
+  ]
+}
