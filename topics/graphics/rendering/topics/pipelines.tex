@@ -1,9 +1,40 @@
-\chapter{Pipelines}
+\chapter{Pipelines}\label{chapter-pipelines}
+
+\begin{enumerate}
+  \item \textbf{Vertex}: The majority of transformation pipeline happens here,
+  \textbf{except W2V}
+  \begin{itemize}
+    \item Programmable through shader
+  \end{itemize}
+
+  \item \textbf{Rasterization}: produces a set of fragments (which are
+  potential pixels); fragments have
+  \begin{itemize}
+    \item Location in frame buffer (screen location)
+    \item Color
+    \item Depth
+  \end{itemize}
+
+  \item \textbf{Fragment}: the fragment shader would finalize the color
+  produced by the rasterization stage
+  \begin{itemize}
+    \item Not pixels: each fragment has a 2D location in a raster and a color;
+    final value is found by appliying hidden surface removal and possibly
+    compositing to a set of fragments
+    \item Programmable through shader
+  \end{itemize}
+\end{enumerate}
 
 \section{Transformation Pipeline}
 
-  Transforming model coordinates to viewport coordinates (\textbf{note that
-  transformations occur from right to left})
+  Transforming model coordinate system to viewport coordinate system
+  (\textbf{note that transformations occur from right to left})
+
+  \begin{itemize}
+    \item Mostly done on GPU (except \textbf{W2V})
+    \item GPU parts are done through the vertex shader
+    \item Can also handle colors
+  \end{itemize}
 
   \begin{equation}
     \begin{bmatrix}
@@ -33,16 +64,17 @@
     \end{bmatrix}
   \end{equation}
 
-  \begin{enumerate}
+  \begin{itemize}
     \item The \textbf{model matrix} map local object coordinates to
     world coordinates (ex. rotation)
     \item Given a camera looking down the z-axis from the origin,
-    the \textbf{view matrix} map world coordinates to camera coordinates
+    the \textbf{view matrix} map world coordinates to camera coordinates,
+    where camera sits at the origin
     \item The \textbf{projection matrix} map camera coordinates to canonical
-    view volume
+    view volume (basically 2D)
     \item The \textbf{W2V (window to view) matrix} map canonical view volume
     to screen space
-  \end{enumerate}
+  \end{itemize}
 
   Every transformations except W2V transformation happen in vertex
   processing stage
@@ -111,38 +143,21 @@
       \href{http://www.songho.ca/opengl/gl_projectionmatrix.html}{Deriving
       the matrix}
 
-\section{Graphics Pipeline}
+\section{Hidden Surface Removal}
 
-  \begin{enumerate}
-    \item \textbf{Vertex}
+  \begin{itemize}
+    \item \textbf{Painter's algorithm}: draw farther object first
     \begin{itemize}
-      \item The majority of transformation pipeline happens here,
-      \textbf{except W2V}
+      \item Expensive to sort
+      \item Depth cycle
     \end{itemize}
-    \item \textbf{Rasterization}
-    \item \textbf{Fragment}
+
+    \item \textbf{Z-Buffer}: keep a z buffer on pixels, while drawing,
+    only write to pixel if the object being drawn has a z value that is
+    closer than the z value of the pixel
     \begin{itemize}
-      \item Not pixels: each fragment has a 2D location in a raster and a color;
-      final value is found by appliying hidden surface removal and possibly
-      compositing to a set of fragments
+      \item More popular today; not used in the past for memory issues
+      \item If two z values are too close, it's hard to determine which is
+      closer
     \end{itemize}
-  \end{enumerate}
-
-  \subsection{Hidden Surface Removal}
-
-    \begin{itemize}
-      \item \textbf{Painter's algorithm}: draw farther object first
-      \begin{itemize}
-        \item Expensive to sort
-        \item Depth cycle
-      \end{itemize}
-
-      \item \textbf{Z-Buffer}: keep a z buffer on pixels, while drawing,
-      only write to pixel if the object being drawn has a z value that is
-      closer than the z value of the pixel
-      \begin{itemize}
-        \item More popular today; not used in the past for memory issues
-        \item If two z values are too close, it's hard to determine which is
-        closer
-      \end{itemize}
-    \end{itemize}
+  \end{itemize}
