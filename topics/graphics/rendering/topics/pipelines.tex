@@ -1,10 +1,12 @@
-\chapter{Pipelines}\label{chapter-pipelines}
+\chapter{Pipelines}\label{chapter: pipelines}
 
 \begin{enumerate}
   \item \textbf{Vertex}: The majority of transformation pipeline happens here,
   \textbf{except W2V}
   \begin{itemize}
     \item Programmable through shader
+    \item Produces vertices in \textbf{clip space} (a arbitrary region defined
+    by graphics APIs in which triangles are drawn)
   \end{itemize}
 
   \item \textbf{Rasterization}: produces a set of fragments (which are

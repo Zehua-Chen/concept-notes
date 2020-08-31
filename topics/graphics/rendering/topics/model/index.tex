@@ -1,0 +1,137 @@
+\chapter{Model}\label{chapter: model}
+
+Models are defined in terms of \textbf{primitives (i.e. triangles)}
+
+\begin{equation}
+  \left(
+    \left( x_{1}, y_{1}, z_{1} \right),
+    \left( x_{2}, y_{2}, z_{2} \right),
+    \left( x_{3}, y_{3}, z_{3} \right)
+  \right)
+\end{equation}
+
+\begin{itemize}
+  \item Vertices are the points of triangles
+  \item Triangle form meshes
+  \begin{itemize}
+    \item \textbf{Surface Normals}: each triangle has an outward surface
+    \textbf{normal} \footnote{normals are vectors that are perpendicular to a
+    surface}
+  \end{itemize}
+  \item \textbf{Data structures}: doubly connected edge list, aka, half-edge
+  data structure
+
+  \item \textbf{Coherent model}: a model wehre the inside and the outside is
+  completely isolated; if we fill the model with gas, the gas would not leak
+  \begin{itemize}
+    \item The triangles in the model fit perfectly
+    \begin{itemize}
+      \item Each edge has two neighbors of triangles
+      \item No triangles intersect unless they are adjacent
+    \end{itemize}
+
+    \item Such models are required if inside and outside is critical to VWG
+    \item 3D modeling tools automatically construct coherent models
+  \end{itemize}
+
+  \item Why triangles
+  \begin{itemize}
+    \item Algorithms are easy to be made
+    \item GPUs prefer smaller primitives as they are easier to parallelly
+    process
+  \end{itemize}
+
+  \item \textbf{Stationary vs movable models}
+  \begin{itemize}
+    \item \textbf{Stationary}: same coordiantes forever
+    \item \textbf{Movable}: can be transformed into various positions and
+    orientations
+  \end{itemize}
+
+  \item \textbf{Viewing the Model}
+  \begin{itemize}
+    \item Mapping virtual points to display points
+    \item Determine what parts of the model should look considering light and
+    surface characeteristics
+  \end{itemize}
+\end{itemize}
+
+\section{Mesh Properties}
+
+  \begin{itemize}
+    \item \textbf{Single component}: only one mesh entity
+    \item \textbf{Multiple component}: multiple mesh entities
+    \item \textbf{Closed}: no holes in meshes
+    \item \textbf{With boundaries}: some edges border with only one triangle
+    \textbf{boundary edge}
+    \item \textbf{Not only triangles}: shapes other than triangles
+    \item \textbf{Orientability}:
+    \begin{itemize}
+      \item On an \textbf{orientable} object, when a surface slides around the
+      face, and reaches it starting point, the surface would look the same
+      \begin{itemize}
+        \item Allows us to specify a set of normals, which is important for
+        shading
+      \end{itemize}
+
+      \item On an \textbf{non-oriental} object, the surface would not
+      look the same when it comes back the starting point; no consistent
+      definition of clock-wise and counter-clockwise
+    \end{itemize}
+
+    \item \textbf{Manifold}
+    \begin{enumerate}
+      \item Every edge connects to exactly two faces
+      \item Vertex neighborhood is \textbf{disk-like}\footnote{when
+      you crush the vertex on the mesh, you can draw a circle around the
+      vertex}
+      \begin{itemize}
+        \item Ex. cube is manifold
+        \item Ex. two cubes joined by a vertex is not manifold
+      \end{itemize}
+    \end{enumerate}
+
+    \item \textbf{Watertight}: orientable + manifold
+    \item \textbf{Ordered}: vertices (of triangle) in counter-clockwise
+    when viewed from normal
+    \item \textbf{Number of Genus} on a surface
+    \begin{itemize}
+      \item Sphere has a genus 0
+      \item Circle has a genus 1
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Euler Characteristic}
+
+    For a \textbf{closed (no boundaries)}, manifold, connected surface mesh
+
+    \begin{align}
+      V - E + F &= 2 \left( 1 - G \right) \\
+      &= \chi
+    \end{align}
+
+    \begin{enumerate}
+      \item $ V $: number of vertices
+      \item $ E $: number of edges
+      \begin{equation}
+        E = \frac{3F}{2}
+      \end{equation}
+
+      \item $ F $: number of faces
+      \item $ G $: genus
+      \item $ 2 \left( 1 - G \right) $: the characteristic
+      \begin{itemize}
+        \item Sphere has a euler characteristic of $ 2 $
+      \end{itemize}
+    \end{enumerate}
+
+    From euler characteristic, we can derive \textbf{triangle mesh statistics}
+    (only applies to triangle meshes)
+
+    \begin{align}
+      E &\approx 3V \\
+      F &\approx 2V
+    \end{align}
+
+\import{./}{formats}
+\import{./}{coordinate}

@@ -1,32 +1,64 @@
 \section{Formats}
 
-\begin{itemize}
-  \item \textbf{STL}
+\subsection{Storage Format}
+
   \begin{itemize}
-    \item Aka. faceset
-    \item A file of lines of floats
-    \item Each line represent a triangle
+    \item \textbf{STL}
+    \begin{itemize}
+      \item Aka. faceset
+      \item A file of lines of floats
+      \item Each line represent a triangle
+    \end{itemize}
+
+    \item \textbf{OBJ}
+    \begin{itemize}
+      \item Aka. indexed faceset
+      \item Use two columns, one of vertices and one of indexes (3x)
+      \item The indexes refer to the index in the vertices columns;
+      three vertices represent a triangle
+      \item Changing individual vertices is more performant in \textbf{OBJ}
+      than \textbf{STL}
+    \end{itemize}
+
+    \item \textbf{GLTF}
+    \begin{itemize}
+      \item Node hiearchy, PBR material textures and camera
+    \end{itemize}
+
+    \item \textbf{BIN}
+    \begin{itemize}
+      \item Geometry: vertices and indices
+      \item Animation:  key frames
+      \item SKins: inverse bind matrices
+    \end{itemize}
   \end{itemize}
 
-  \item \textbf{OBJ}
+\subsection{Graphics API Format}
+
   \begin{itemize}
-    \item Aka. indexed faceset
-    \item Use two columns, one of vertices and one of indexes (3x)
-    \item The indexes refer to the index in the vertices columns;
-    three vertices represent a triangle
-    \item Changing individual vertices is more performant in \textbf{OBJ}
-    than \textbf{STL}
+    \item \textbf{Points}: every $ 3 $ floats represents the $ x, y, z $ of
+    a point
+    \item \textbf{Lines}: every $ 2 \times 3 $ represents the start point
+    and end point of a line
+    \item \textbf{Strips}: every point form a line with its neighbors;
+    producing a path (\textbf{does not draw path between the last three float
+    and the first three float}, aka no closing)
+    \item \textbf{Line Loop}: strips + extra line from the last three to the
+    first three
+    \item \textbf{Triangle}: $ 3 \times 3 $ represent the three vertices of a
+    triangle
+    \item \textbf{Triangle Strips}: every $ 3 $ floats (except the first two in
+    buffer) form a triangle with the previous two $ 3 $ floats
+    \item \textbf{Triangle Fan}: every $ 3 $ floats (except the first two)
+    form a triangle by connecting to the previous $ 3 $ floats and the first
+    $ 3 $ floats
   \end{itemize}
 
-  \item \textbf{GLTF}
-  \begin{itemize}
-    \item Node hiearchy, PBR material textures and camera
-  \end{itemize}
+  \subsubsection{T Vertices}
 
-  \item \textbf{BIN}
-  \begin{itemize}
-    \item Geometry: vertices and indices
-    \item Animation:  key frames
-    \item SKins: inverse bind matrices
-  \end{itemize}
-\end{itemize}
+    T vertices are vertices that sits on a neighboring triangle's edge
+
+    \begin{itemize}
+      \item Produce visual artifacts during shading
+      \item Typically avoided by using modeling tools
+    \end{itemize}
