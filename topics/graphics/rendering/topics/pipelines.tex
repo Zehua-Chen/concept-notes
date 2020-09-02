@@ -29,15 +29,6 @@
 
 \section{Transformation Pipeline}
 
-  Transforming model coordinate system to viewport coordinate system
-  (\textbf{note that transformations occur from right to left})
-
-  \begin{itemize}
-    \item Mostly done on GPU (except \textbf{W2V})
-    \item GPU parts are done through the vertex shader
-    \item Can also handle colors
-  \end{itemize}
-
   \begin{equation}
     \begin{bmatrix}
       x_{s} \\
@@ -66,6 +57,16 @@
     \end{bmatrix}
   \end{equation}
 
+  Transforming model coordinate system to viewport coordinate system
+  (\textbf{note that transformations occur from right to left})
+
+  \begin{itemize}
+    \item Mostly done on GPU (except \textbf{W2V})
+    \item GPU parts are done through the vertex shader
+    \item Can also handle colors
+  \end{itemize}
+
+  \paragraph{Stages}
   \begin{itemize}
     \item The \textbf{model matrix} map local object coordinates to
     world coordinates (ex. rotation)
@@ -75,11 +76,17 @@
     \item The \textbf{projection matrix} map camera coordinates to canonical
     view volume (basically 2D)
     \item The \textbf{W2V (window to view) matrix} map canonical view volume
-    to screen space
+    to screen space; steps
+    \begin{enumerate}
+      \item \textbf{Clipping}: only draw stuff in clip space
+      \item \textbf{Homogeneous divide}
+      \item \textbf{Widnow to view port}: transform from clip coordinates
+      (aka. window coordinates $ -1 \to 1 $) to viewport space
+    \end{enumerate}
   \end{itemize}
 
-  Every transformations except W2V transformation happen in vertex
-  processing stage
+  \textbf{Every transformations except W2V transformation happen in vertex
+  processing stage}
 
   \subsection{In Unity}
 
@@ -92,58 +99,107 @@
       \end{itemize}
     \end{itemize}
 
-  \subsection{Projection}
+\section{Stage - Projection}
 
-    Projection refers to the process of reducing dimensionality. There are two
-    modes of projection
+  Projection refers to the process of reducing dimensionality. There are two
+  modes of projection
+
+  \begin{itemize}
+    \item \textbf{Orthographic}: toss out the z component
+    \item \textbf{Perspective}: scale decreases as distance increases
+  \end{itemize}
+
+  \subsection{Perspective Projection}
+
+    \paragraph{Equation}
+    \begin{align}
+      \frac{y_{\text{clip}}}{d} &= \frac{y_{\text{view}}}{-z_{\text{view}}} \\
+      y_{\text{clip}}
+      &= d\frac{y_ {\text{view}}}{-z_{\text{view}}} \\
+      &= \frac{y_{\text{view}}}{-z_{\text{view}} / d}
+    \end{align}
 
     \begin{itemize}
-      \item \textbf{Orthographic}: toss out the z component
-      \item \textbf{Perspective}: scale decreases as distance increases
+      \item The equation applies in situations where
+      \begin{itemize}
+        \item The \textbf{eyes} are \textbf{centered at the origin}
+        \item The \textbf{view} is in \textbf{negative z direction}
+        \item The clip is between the eyes and the view
+      \end{itemize}
+
+      \item $ d $: distance from eyes to the screen (clip)
+      \item This equation also applies to $ x $ and $ y $
     \end{itemize}
 
-    \subsubsection{Perspective Projection}
+    \paragraph{Matrix}
+    \begin{equation}
+      P =
+      \begin{bmatrix}
+        \frac{n}{2} & 0 & 0 & 0 \\
+        0 & \frac{n}{t} & 0 & 0 \\
+        0 & 0 & \frac{-f}{f - n} & \frac{-fn}{f - n} \\
+        0 & 0 & -1 & 0 \\
+      \end{bmatrix}
+    \end{equation}
 
-      \paragraph{Equation}
-      \begin{align}
-        \frac{y_{\text{clip}}}{d} &= \frac{y_{\text{view}}}{-z_{\text{view}}} \\
-        y_{\text{clip}}
-        &= d\frac{y_ {\text{view}}}{-z_{\text{view}}} \\
-        &= \frac{y_{\text{view}}}{-z_{\text{view}} / d}
-      \end{align}
+    \begin{itemize}
+      \item $ r $: right
+      \item $ t $: top
+      \item $ n $: near
+      \item $ f $: far
+    \end{itemize}
 
-      \begin{itemize}
-        \item The equation applies in situations where
-        \begin{itemize}
-          \item The \textbf{eyes} are \textbf{centered at the origin}
-          \item The \textbf{view} is in \textbf{negative z direction}
-          \item The clip is between the eyes and the view
-        \end{itemize}
+    \href{http://www.songho.ca/opengl/gl_projectionmatrix.html}{Deriving
+    the matrix}
 
-        \item $ d $: distance from eyes to the screen (clip)
-        \item This equation also applies to $ x $ and $ y $
-      \end{itemize}
+\section{Stage - Window to Viewport}
 
-      \paragraph{Matrix}
-      \begin{equation}
-        P =
-        \begin{bmatrix}
-          \frac{n}{2} & 0 & 0 & 0 \\
-          0 & \frac{n}{t} & 0 & 0 \\
-          0 & 0 & \frac{-f}{f - n} & \frac{-fn}{f - n} \\
-          0 & 0 & -1 & 0 \\
-        \end{bmatrix}
-      \end{equation}
+  This is the transformation used by WebGL and DirectX
 
-      \begin{itemize}
-        \item $ r $: right
-        \item $ t $: top
-        \item $ n $: near
-        \item $ f $: far
-      \end{itemize}
+  \begin{align}
+    \text{W2V } &=
+    \begin{bmatrix}
+      \frac{w - 1}{2} & 0 & 0 \\
+      0 & \frac{h - 1}{2} & 0 \\
+      0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 & 0 & 1 \\
+      0 & 1 & 1 \\
+      0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      1
+    \end{bmatrix} \\
+    &=
+    \begin{bmatrix}
+      \frac{w - 1}{2} & 0 & \frac{w - 1}{2} \\
+      0 & \frac{h - 1}{2} & \frac{h - 1}{2} \\
+      0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      1
+    \end{bmatrix}
+  \end{align}
 
-      \href{http://www.songho.ca/opengl/gl_projectionmatrix.html}{Deriving
-      the matrix}
+  From right to left:
+
+  \begin{enumerate}
+    \item Translate lower left corner to $ \left( 0, 0 \right) $
+    \item Translate upper right corner from $ \left( 2, 2 \right) $ (after step
+    1) to $ \left( w - 1, h - 1 \right) $
+  \end{enumerate}
+
+  \subsection{Continuous Space}
+
+    Even though pixels are discrete units (you can't have half of a pixel),
+    it can be helpful to still consider pixel spaces to be continuous; WebGL
+    and DirectX considers pixel centers to be
+    $ \left( x + 0.5, y + 0.5 \right) $
 
 \section{Hidden Surface Removal}
 

@@ -1,5 +1,9 @@
 \chapter{Affine Transformations}
 
+\textbf{An affine transformation is the sum of a linear transformation and a
+constant vector}; linear transformation preserves the origin, and translation
+map the origin to a new position
+
 \begin{itemize}
   \item Most affine transformations do not commute
   \item Some (combinations of) transformations commute
@@ -7,6 +11,10 @@
   same}
   \item All the transformations here are done using \textbf{homogeneous
   coordinates}
+  \begin{itemize}
+    \item Exists to make most operations doable as affine transformations
+  \end{itemize}
+
   \item Transformations are applied \textbf{right to left}
   \begin{equation*}
     O = A \times B \times M
@@ -64,7 +72,7 @@
       y \\
       z \\
       1
-    \end{bmatrix} \\
+    \end{bmatrix} \label{eq: affine-transformation-scale-bigger} \\
     S\left( x, y, z \right)^{-1} &=
     \begin{bmatrix}
       \frac{1}{x} & 0 & 0 & 0 \\
@@ -79,6 +87,10 @@
       1
     \end{bmatrix}
   \end{align}
+
+  Use $ -1 $ in any of $ x, y, z $ in equation
+  \ref{eq: affine-transformation-scale-bigger} would give an inversion matrix
+  around a certian axis
 
 \section{Shear}
 
