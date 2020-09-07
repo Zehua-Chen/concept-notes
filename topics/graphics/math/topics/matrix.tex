@@ -24,6 +24,18 @@
 
 \section{Multiplication}
 
+  Given $ a \times b $
+
+  \begin{algorithm}[H]
+    \Begin {
+      \For{row, y in $ a $}{
+        \For{column, x in $ b $} {
+          output$ [x][y] $ = column $ \times $ row\;
+        }
+      }
+    }
+  \end{algorithm}
+
 \section{Homogenous Coordinates}
 
   All have an additional rows of 0s at the bottom, with the last element
