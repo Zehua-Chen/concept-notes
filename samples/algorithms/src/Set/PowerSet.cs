@@ -18,9 +18,9 @@ namespace Algorithms.Set
 
             T[] setCopy = set.ToArray();
             T setHead = setCopy[0];
-            T[] setReset = setCopy.Skip(1).ToArray();
+            T[] setRest = setCopy.Skip(1).ToArray();
 
-            foreach (List<T> powerSet in setReset.GetPowerSet())
+            foreach (List<T> powerSet in setRest.GetPowerSet())
             {
                 List<T> buffer = new List<T>();
                 buffer.Add(setHead);
