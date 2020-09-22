@@ -1,3 +1,7 @@
+# ID
+
+Processes typically have IDs (PID)
+
 # Orphans and Zombies
 
 - A zombie is a process that is killed, but has not been waited by its parent
