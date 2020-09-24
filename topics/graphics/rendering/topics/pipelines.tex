@@ -99,6 +99,64 @@
       \end{itemize}
     \end{itemize}
 
+\section{Stage - View}
+
+  \begin{align}
+    V &=
+    \begin{bmatrix}
+      u & v & w & e \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}^{-1} \\
+    &=
+    \begin{bmatrix}
+      x_{u} & y_{u} & z_{u} & 0 \\
+      x_{v} & y_{v} & z_{v} & 0 \\
+      x_{w} & y_{w} & z_{w} & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      1 & 0 & 0 & -x_{e} \\
+      0 & 1 & 0 & -y_{e} \\
+      0 & 0 & 1 & -z_{e} \\
+      0 & 0 & 0 & 1
+    \end{bmatrix} \\
+    l &= \text{look at point } - \text{ eye point}
+  \end{align}
+
+  \begin{itemize}
+    \item $ \vec{u} $: right; assuming $ t $ is top
+    \begin{equation}
+      u = \frac{t \times w}{\left| t \times w \right|}
+    \end{equation}
+
+    \item $ \vec{v} $: top
+    \begin{equation}
+      v = w \times u
+    \end{equation}
+
+    \item $ \vec{w} $: forward
+    \begin{equation}
+      w = - \frac{l}{\left| l \right|}
+    \end{equation}
+    $ - $ is needed when dealing with systems where negative is closer to the
+    screen
+
+    \item $ \vec{e} $: position
+  \end{itemize}
+
+  \subsection{Deriving View Matrix}
+
+    \begin{enumerate}
+      \item Translate the eyepoint to the origin
+      \item Rotate so that:
+      \begin{itemize}
+        \item lookat vector aligns with $ –z $ axis (OpenGL/WebGL)
+        \item up aligns with y
+      \end{itemize}
+
+      \item We move all objects (the world) this way...
+    \end{enumerate}
+
 \section{Stage - Projection}
 
   Projection refers to the process of reducing dimensionality. There are two

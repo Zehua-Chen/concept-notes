@@ -3,21 +3,23 @@
 \subsection{Storage Format}
 
   \begin{itemize}
-    \item \textbf{STL}
+    \item \textbf{STL}: faceset; the file is made of lines of floats; each line
+    represent a triangle
     \begin{itemize}
-      \item Aka. faceset
-      \item A file of lines of floats
-      \item Each line represent a triangle
+      \item No connectivity
+      \item \textbf{Storage} 36 bytes per triangle
+      ($ 4 \times \left( 3 \times 3 \right) $); 72 bytes per vertex (number of
+      vertices is 2 times the number of faces)
     \end{itemize}
 
-    \item \textbf{OBJ}
+    \item \textbf{OBJ}: indexed faceset; use two lists, one of vertices and
+    one of faces (made of three indices into the list of vertices)
     \begin{itemize}
-      \item Aka. indexed faceset
-      \item Use two columns, one of vertices and one of indexes (3x)
-      \item The indexes refer to the index in the vertices columns;
-      three vertices represent a triangle
+      \item No neighborhood information
       \item Changing individual vertices is more performant in \textbf{OBJ}
       than \textbf{STL}
+      \item \textbf{Storage}: 12 bytes per face and vertex, 36 bytes per
+      vertex $ 12 + 12 \times 2 $
     \end{itemize}
 
     \item \textbf{GLTF}
@@ -29,7 +31,43 @@
     \begin{itemize}
       \item Geometry: vertices and indices
       \item Animation:  key frames
-      \item SKins: inverse bind matrices
+      \item Skins: inverse bind matrices
+    \end{itemize}
+
+    \item \textbf{Half Edge}\footnote{two half edges of opposite direction
+    exists on top of a real edge}: the file is made of three lists
+    \begin{itemize}
+      \item \textbf{Half Edge List}:
+      \begin{itemize}
+        \item Vertex ref
+        \item Face ref
+        \item Next half edge ref
+        \item Previous half edge ref (can be optimized away)
+        \item Opposite half edge ref (can be optimized away)
+      \end{itemize}
+
+      \item \textbf{Face List}
+      \begin{itemize}
+        \item Half edge ref
+      \end{itemize}
+
+      \item \textbf{Vertex List}
+      \begin{itemize}
+        \item Position
+        \item Half edge ref
+      \end{itemize}
+
+      \item \textbf{Space}: 16 bytes per vertex, 4 bytes per face, 12 bytes
+      per half edge
+      \begin{equation}
+        \sum = 16 + 4 \times 2 + 12 \times 6
+      \end{equation}
+
+      Total space is 96 bytes per vertex; if \textbf{previous and opposite
+      half edges are stored}, then 144 bytes per vertex
+
+      \item Can be used to traverse vertex neighborhoods; used more in
+      computational modeling
     \end{itemize}
   \end{itemize}
 
