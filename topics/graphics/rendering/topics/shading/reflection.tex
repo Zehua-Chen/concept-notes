@@ -1,5 +1,10 @@
 \section{Phong Reflection}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\columnwidth]{images/shading/phong.png}
+\end{figure}
+
 \begin{equation}
   I_{p} = k_{a} i_{a} +
   \sum_{m \in \text{lights}}
@@ -10,42 +15,77 @@
 \end{equation}
 
 \begin{itemize}
+  \item $ \vec{N} $: normal vector
+  \item $ \vec{L} $: direction to light; light has
+  \begin{itemize}
+    \item Position
+    \item Color
+  \end{itemize}
+  \item $ \vec{V} $: direction to viewer
+  \item $ \vec{R} $: reflection vector; mirror reflection direction; light
+  vector reflected around the normal
+  \item $ I_{p} $: the output RGB triple for a vertex
+  \item $ k $: material reflectivity; what kind of light reflects from a
+  surface; \textbf{material color}
+  \begin{itemize}
+    \item Each term has its own material color for artistic reasons
+  \end{itemize}
+
+  \item $ i_{m} $: $ \left( r, g, b \right) $ for a single light $ m $
+  \begin{itemize}
+    \item Each term has its own light color for artistic reasons
+  \end{itemize}
+
+  \item $ \alpha $: shiniess
+
   \item All vectors are unit vectors
-  \item \textbf{Ambient Term}:
-  \begin{equation}
-    k_{a} i_{a}
-  \end{equation}
-  \begin{itemize}
-    \item \textbf{Light source}: indirect light
-  \end{itemize}
-
-  \item \textbf{Diffuse Term}:
-  \begin{equation}
-    k_{d} \left( \hat{L}_{m} \cdot \hat{N} \right) i_{m, d}
-  \end{equation}
-  \begin{itemize}
-    \item $ k_{d} $: material reflectivity
-    \item $ i_{m, d} $: $ \left( r, g, b \right) $ for a single light $ m $
-    \item $ \hat{L}_{m} \cdot \hat{N} $: the angle between $ L $ and $ N $
-    (which are unit vectors)
-    \item Diffuse reflection is strongest when $ L $ is
-    perpendicular to $ N $
-    \item Models an idealized\footnote{scatter light uniformly} surface
-    (aka, rough surfaces)
-  \end{itemize}
-
-  \item \textbf{Specular Term}
-  \begin{equation}
-    k_{s} \left( \hat{R}_{m} \cdot \hat{V} \right)^{\alpha} i_{m, s}
-  \end{equation}
-  \begin{itemize}
-    \item $ \hat{R}_{m} \cdot \hat{V} $: the angle between reflection and
-    light source
-    \item Specular terms models shiny surfaces
-    \item \textbf{Shinier}: a higher $ \alpha $; \textbf{rougher}:
-    lower $ \alpha $
-  \end{itemize}
 \end{itemize}
+
+\subsection{Terms}
+
+  \subsubsection{Ambient Term}
+
+    \begin{equation}
+      k_{a} i_{a}
+    \end{equation}
+
+    \begin{itemize}
+      \item $ k_{a}, i_{a} $: $ a $ stands for ambient
+      \item Ambient term \textbf{models indirect light}, aka. environment light
+    \end{itemize}
+
+  \subsubsection{Diffuse Term}
+
+    \begin{equation}
+      k_{d} \left( \hat{L}_{m} \cdot \hat{N} \right) i_{m, d}
+    \end{equation}
+
+    \begin{itemize}
+      \item $ k_{d}, i_{m, d} $: $ d $ stands for diffuse
+      \item $ \hat{L}_{m} \cdot \hat{N} $: the angle between $ L $ and $ N $
+      (which are unit vectors)
+      \item \textbf{Diffuse reflection is strongest when $ L $ is
+      the same as $ N $, i.e. perpendicular to the surface}
+      \item Models an idealized\footnote{scatter light uniformly} surface
+      (aka, \textbf{rough surfaces})
+    \end{itemize}
+
+  \subsubsection{Specular Term}
+
+    \begin{equation}
+      k_{s} \left( \hat{R}_{m} \cdot \hat{V} \right)^{\alpha} i_{m, s}
+    \end{equation}
+
+    \begin{itemize}
+      \item $ k_{s}, i_{m, s} $: $ s $ stands for specular
+      \item $ \hat{R}_{m} \cdot \hat{V} $: the angle between reflection and
+      the eye
+      \item \textbf{Specular reflection is the strongest when the eye aligns
+      with the reflection vector}
+      \item Specular terms models shiny surfaces
+      \item \textbf{Shinier}: a higher $ \alpha $; \textbf{rougher}:
+      lower $ \alpha $
+    \end{itemize}
 
 \subsection{Open Questions}
 
