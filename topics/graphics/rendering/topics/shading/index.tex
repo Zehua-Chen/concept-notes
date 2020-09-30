@@ -6,18 +6,19 @@
     \item \textbf{Lambertian Shading}
     \item \textbf{Gouraud Shading}
     \begin{itemize}
+      \item \textbf{aka. per vertex shading}
       \item Find average normal at each vector
-      \item Apply blinn-phong model at each vertex
+      \item Apply some reflection model at each vertex
       \item Interpolate vertex shades across each polygon
     \end{itemize}
 
     \item \textbf{Phong Shading}
     \begin{itemize}
-      \item Aka. per pixel shading
+      \item \textbf{aka. per pixel shading}
       \item Find average normal at each vertex
       \item Interpoalte vertex normal across edges
       \item Interpolate edge normals across polygon
-      \item Apply Blinn-Phong model at each fragment
+      \item Apply some reflection model at each fragment
       \item \textbf{Better effect}
     \end{itemize}
 

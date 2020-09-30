@@ -1,4 +1,4 @@
-\section{Phong Reflection}
+\section{Phong Reflection Model}
 
 \begin{figure}[H]
   \centering
@@ -24,6 +24,9 @@
   \item $ \vec{V} $: direction to viewer
   \item $ \vec{R} $: reflection vector; mirror reflection direction; light
   vector reflected around the normal
+  \begin{equation}
+    \vec{R} = 2 \left( L \cdot N \right) N - L
+  \end{equation}
   \item $ I_{p} $: the output RGB triple for a vertex
   \item $ k $: material reflectivity; what kind of light reflects from a
   surface; \textbf{material color}
@@ -37,7 +40,6 @@
   \end{itemize}
 
   \item $ \alpha $: shiniess
-
   \item All vectors are unit vectors
 \end{itemize}
 
@@ -85,18 +87,27 @@
       \item Specular terms models shiny surfaces
       \item \textbf{Shinier}: a higher $ \alpha $; \textbf{rougher}:
       lower $ \alpha $
+      \begin{itemize}
+        \item Perfect vs. glossy specular reflection
+      \end{itemize}
+    \end{itemize}
+
+\subsection{Attenuated Light}
+
+    Add a term in the front of summation; light should decrease as distance
+    increases
+    \begin{equation*}
+      \frac{1}{ad^{2} + bd + c}
+    \end{equation*}
+
+    \begin{itemize}
+      \item $ d $ is the distance from light to surface
+      \item $ a, b, c $ are constants to be adjusted for different effects
     \end{itemize}
 
 \subsection{Open Questions}
 
   \begin{itemize}
-    \item \textbf{Include attenuation
-    \footnote{reduction in illumination as distance increases} in equation}:
-    Add a term in the front of summation
-    \begin{equation*}
-      \frac{1}{ad^{2} + bd + c}
-    \end{equation*}
-
     \item \textbf{When there are no specular surfaces, no moving light}:
     colors of vertices can be optimized to be precomputed at the start and
     be reused later on
@@ -116,9 +127,13 @@
     \item $ V $: the viewer
   \end{itemize}
 
-  In Blinn Phong model, we use $ H $ (the halfway vector) instead of $ r $
+  In Blinn Phong model, replace $ \left( V \cdot R \right)^{\alpha} $ with
+  $ \left( N \cdot H \right)^{b} $
 
   \begin{itemize}
     \item Slightly cheaper than the Phong model
+    \item Only different in specular highlight; not as smooth
     \item Claimed to be more physically correct
+    \item Higher $ b > \alpha $ would give an output that is similar to blin
+    phong model with $ \alpha $
   \end{itemize}
