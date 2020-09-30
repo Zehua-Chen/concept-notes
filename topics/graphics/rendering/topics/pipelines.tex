@@ -9,7 +9,7 @@
     by graphics APIs in which triangles are drawn)
   \end{itemize}
 
-  \item \textbf{Rasterization}: produces a set of fragments (which are
+  \item \textbf{Rasterisation}: produces a set of fragments (which are
   potential pixels); fragments have
   \begin{itemize}
     \item Location in frame buffer (screen location)
@@ -18,10 +18,10 @@
   \end{itemize}
 
   \item \textbf{Fragment}: the fragment shader would finalize the color
-  produced by the rasterization stage
+  produced by the rasterisation stage
   \begin{itemize}
     \item Not pixels: each fragment has a 2D location in a raster and a color;
-    final value is found by appliying hidden surface removal and possibly
+    final value is found by applying hidden surface removal and possibly
     compositing to a set of fragments
     \item Programmable through shader
   \end{itemize}
@@ -39,6 +39,9 @@
     =
     \begin{bmatrix}
       \text{W2V}
+    \end{bmatrix}
+    \begin{bmatrix}
+      \text{Clipping}
     \end{bmatrix}
     \begin{bmatrix}
       \text{Projection}
@@ -73,14 +76,24 @@
     \item Given a camera looking down the z-axis from the origin,
     the \textbf{view matrix} map world coordinates to camera coordinates,
     where camera sits at the origin
+    \begin{itemize}
+      \item Gives us a view volume that is not a cube
+    \end{itemize}
+
     \item The \textbf{projection matrix} map camera coordinates to canonical
     view volume (basically 2D)
+    \begin{itemize}
+      \item Gives us a clip volume that is a cube
+    \end{itemize}
+
+    \item \textbf{Clipping}: only contents within the view volume needs to be
+    drawn
     \item The \textbf{W2V (window to view) matrix} map canonical view volume
     to screen space; steps
     \begin{enumerate}
       \item \textbf{Clipping}: only draw stuff in clip space
       \item \textbf{Homogeneous divide}
-      \item \textbf{Widnow to view port}: transform from clip coordinates
+      \item \textbf{Window to view port}: transform from clip coordinates
       (aka. window coordinates $ -1 \to 1 $) to viewport space
     \end{enumerate}
   \end{itemize}
@@ -150,7 +163,7 @@
       \item Translate the eyepoint to the origin
       \item Rotate so that:
       \begin{itemize}
-        \item lookat vector aligns with $ –z $ axis (OpenGL/WebGL)
+        \item \say{lookat} vector aligns with $ –z $ axis (OpenGL/WebGL)
         \item up aligns with y
       \end{itemize}
 
@@ -163,11 +176,19 @@
   modes of projection
 
   \begin{itemize}
-    \item \textbf{Orthographic}: toss out the z component
+    \item \textbf{Ortho}: toss out the z component
     \item \textbf{Perspective}: scale decreases as distance increases
+    \item Graphics API typically performs orthographic projection out of
+    the box, but depth information is preserved for hidden surface removal
+    \begin{itemize}
+      \item Everything is projected onto $ z = 0 $
+    \end{itemize}
+
+    \item At this stage, everything is already in the context of the camera;
+    the view coordinates
   \end{itemize}
 
-  \subsection{Orthographic Projection}
+  \subsection{Ortho Projection}
 
     \paragraph{Matrix}
     \begin{equation}
@@ -187,6 +208,10 @@
       \item $ b $: bottom
       \item $ f $: far
       \item $ n $: near
+      \item Does not actually perform any projection
+      \item Some WebGL libraries assumes right-handed system cooridnates as
+      inputs, despite itself being left-handed, so its ortho matrix also
+      inverses the coordinates along z-axis
     \end{itemize}
 
   \subsection{Perspective Projection}
@@ -207,6 +232,8 @@
       \item $ t $: top
       \item $ n $: near
       \item $ f $: far
+      \item This gives the frustum matrix, which is asymmetrical
+      perspective matrix is symmetrical
     \end{itemize}
 
     \href{http://www.songho.ca/opengl/gl_projectionmatrix.html}{Deriving
