@@ -261,7 +261,14 @@
 
 \section{Stage - Window to Viewport}
 
-  This is the transformation used by WebGL and DirectX
+  This is the transformation used by systems where the
+  $ x \in \left[ -1, 1 \right], y \in \left[ -1, 1 \right] $; in essence,
+  the matrix (from right to left)
+
+  \begin{enumerate}
+    \item Translate the lower left corner to $ \left( 0, 0 \right) $
+    \item Scale the upper right corner to $ \left( w - 1, h - 1 \right) $
+  \end{enumerate}
 
   \begin{align}
     \text{W2V } &=
@@ -293,13 +300,10 @@
     \end{bmatrix}
   \end{align}
 
-  From right to left:
-
-  \begin{enumerate}
-    \item Translate lower left corner to $ \left( 0, 0 \right) $
-    \item Translate upper right corner from $ \left( 2, 2 \right) $ (after step
-    1) to $ \left( w - 1, h - 1 \right) $
-  \end{enumerate}
+  \begin{itemize}
+    \item $ w $: viewport width
+    \item $ h $: viewport height
+  \end{itemize}
 
   \subsection{Continuous Space}
 
