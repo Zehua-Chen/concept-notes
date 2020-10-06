@@ -84,6 +84,12 @@
     view volume (basically 2D)
     \begin{itemize}
       \item Gives us a clip volume that is a cube
+      \item Graphics API typically performs orthographic projection out of
+      the box, but \textbf{depth information is preserved} for hidden surface
+      removal
+      \begin{itemize}
+        \item Everything is projected onto $ z = 0 $
+      \end{itemize}
     \end{itemize}
 
     \item \textbf{Clipping}: only contents within the view volume needs to be
@@ -176,30 +182,46 @@
   modes of projection
 
   \begin{itemize}
-    \item \textbf{Ortho}: toss out the z component
-    \item \textbf{Perspective}: scale decreases as distance increases
-    \item Graphics API typically performs orthographic projection out of
-    the box, but depth information is preserved for hidden surface removal
+    \item \textbf{Ortho}: transform view volume
     \begin{itemize}
-      \item Everything is projected onto $ z = 0 $
+      \item The orthograhpic matrix only zero-out the z-axis; the ortho matrix
+      transform view volume;
+      \item Does not actually perform any projection
+      \item The actual orthograhpic projection is left for grahpics APIs
     \end{itemize}
 
+    \item \textbf{Perspective}: scale decreases as distance increases
     \item At this stage, everything is already in the context of the camera;
     the view coordinates
+    \item \textbf{Foreshortening}: an illusion that cause an object or distance
+    to appear shorter than it actually is
+    \begin{itemize}
+      \item Occur in both orthographic and perspective projection
+    \end{itemize}
   \end{itemize}
 
   \subsection{Ortho Projection}
 
     \paragraph{Matrix}
-    \begin{equation}
-      P =
+    \begin{align}
+      P_{orthographic} &=
+      \begin{bmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1
+      \end{bmatrix} \\
+      P_{ortho} &=
       \begin{bmatrix}
         \frac{2}{r - l} & 0 & 0 & -\frac{r + l}{r - l} \\
         0 & \frac{2}{t - b} & 0 & -\frac{t + b}{t - b} \\
         0 & 0 & \frac{-2}{f - n} & -\frac{f + n}{f - n} \\
         0 & 0 & 0 & 1 \\
       \end{bmatrix}
-    \end{equation}
+    \end{align}
+
+    This is a combination of a translation (\say{near} might not be at 0)
+    and scale matrix
 
     \begin{itemize}
       \item $ r $: right
@@ -208,7 +230,6 @@
       \item $ b $: bottom
       \item $ f $: far
       \item $ n $: near
-      \item Does not actually perform any projection
       \item Some WebGL libraries assumes right-handed system cooridnates as
       inputs, despite itself being left-handed, so its ortho matrix also
       inverses the coordinates along z-axis
