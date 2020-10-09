@@ -1,0 +1,84 @@
+\chapter{Defining Grammar}
+
+\section{Context Free Grammar}
+
+  A context free grammar has four components
+
+  \begin{itemize}
+    \item A set of \textbf{terminal symbols} representing individual tokens
+    \begin{equation*}
+      prep
+    \end{equation*}
+    \begin{itemize}
+      \item Lower case
+    \end{itemize}
+
+    \item A set of \textbf{non-terminal symbols} representing sytnax trees
+    \begin{equation*}
+      N
+    \end{equation*}
+    \begin{itemize}
+      \item Upper case
+    \end{itemize}
+
+    \item A set of \textbf{productions}, each mapping a non terminal symbol
+    to string of terminal and non-terminal symbols
+    \begin{align*}
+      N &\to prep \text{ } N \\
+      &\left| N \text{ } prep \right.
+    \end{align*}
+
+    \item A designated non terminal symbol called the \textbf{start symbol}
+    \begin{equation}
+      S \to N
+    \end{equation}
+  \end{itemize}
+
+\section{Properties of Grammar}
+
+  \begin{itemize}
+    \item \textbf{Epsilon Production}: a production of the form
+    \begin{equation*}
+      E \to \epsilon
+    \end{equation*}
+    where $ \epsilon $ represents the empty string
+
+    \begin{itemize}
+      \item A symbol \textbf{can be nothing, or optional (represented using
+      $ \epsilon $)}
+    \end{itemize}
+
+    \item \textbf{Right Linear}: grammars where all the productions have the
+    form
+    \begin{align}
+      E &\to x F \\
+      E &\to x
+    \end{align}
+
+    \begin{itemize}
+      \item Corresponds to \textbf{regular languages}
+    \end{itemize}
+
+    \item \textbf{Left Recursive}: a production like
+    \begin{equation*}
+      E \to E + X
+    \end{equation*}
+
+    \item \textbf{Ambiguous}: more than one parse tree is possible for a
+    specific sentence
+  \end{itemize}
+
+  \subsection{Dangling Else Problem}
+
+    \begin{align*}
+      E &\to \text{ if } E \text{ then } E \text{ else } E \\
+      E &\to \text{ if } E \text{ then } E \\
+      E &\to \text{ whatever}
+    \end{align*}
+
+    \paragraph{Solution}
+    \begin{enumerate}
+      \item Use recursion only one one side; ex. left-recursive
+      \item Divide the grammar into multiple rules, and then put highest
+      precedence rules lower in the new grammar
+    \end{enumerate}

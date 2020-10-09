@@ -1,0 +1,21 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{../../../shared/packages/import}
+\import{../../../shared/config/}{packages}
+\import{../../../shared/config/}{styles}
+\import{../../../shared/config/}{macros}
+
+\title{Syntax}
+\author{Zehua Chen}
+\date{Updated on \today}
+
+\DeclareMathOperator{\FIRST}{FIRST}
+\DeclareMathOperator{\FOLLOW}{FOLLOW}
+
+\begin{document}
+  \maketitle
+  \tableofcontents
+
+  \import{topics/}{define}
+  \import{topics/}{parse}
+\end{document}

@@ -1,0 +1,9 @@
+{
+  "latex": "pdflatex",
+  "bin": "bin",
+  "entry": "index.tex",
+  "bib": "none",
+  "includes": [
+    "topics/"
+  ]
+}
