@@ -57,3 +57,38 @@
       $ \epsilon \in \FIRST\left( \beta \right) $} then add
       $ \FOLLOW\left( X \right) $ to $ \FOLLOW\left( Y \right) $
     \end{enumerate}
+
+\section{LL (Top Down) Parsing}
+
+  \begin{definition}
+    \textbf{LL}: parse from \textbf{left} to right and produces the
+    \textbf{left} most derivation
+  \end{definition}
+
+  \paragraph{Implementation}
+  \begin{equation*}
+    A \to B a
+  \end{equation*}
+  \begin{itemize}
+    \item Left hand side is the function being defined
+    \item Terminals on right hande sides are commands to consume inputs
+    \item Non terminals on right hande sides are subroutine calls
+    \item For each production, make a function
+    \begin{equation*}
+      \left( \left[ tokens \right] \right) \to
+      \left( \Tree, \left[ tokens \right] \right)
+    \end{equation*}
+    Return token stream to keep track of where we are in the token stream
+  \end{itemize}
+
+  \paragraph{Drawbacks}
+  \begin{itemize}
+    \item Grammar with left recursions causes a infinite loop
+    \begin{itemize}
+      \item See \ref{section: grammar/eliminate left recursion}
+    \end{itemize}
+    \item Grammar with common prefixes would confuse the function
+    \begin{itemize}
+      \item See \ref{section: grammar/eliminate common prefix}
+    \end{itemize}
+  \end{itemize}

@@ -1,4 +1,4 @@
-\chapter{Defining Grammar}
+\chapter{Grammar}
 
 \section{Context Free Grammar}
 
@@ -82,3 +82,56 @@
       \item Divide the grammar into multiple rules, and then put highest
       precedence rules lower in the new grammar
     \end{enumerate}
+
+\section{Eliminate Left Recursion}
+\label{section: grammar/eliminate left recursion}
+
+  \begin{align*}
+    E &\to E+ \\
+    &\to i
+  \end{align*}
+
+  \begin{enumerate}
+    \item Production of the form $ S \to \beta $ becomes $ S \to \beta S' $
+    \item Production of the form $ S \to S \alpha $ becomes $ S' \to \alpha S' $
+    \item Add $ S' \to \epsilon $
+  \end{enumerate}
+
+  \subsection{Mutual Recursion}
+
+    \begin{align*}
+      A &\to Ax | Bx \\
+      B &\to Bx | Ax
+    \end{align*}
+
+    Inline either $ A $ or $ B $
+
+\section{Eliminate Common Prefix}
+\label{section: grammar/eliminate common prefix}
+
+  \begin{align*}
+    A &\to \alpha \beta_{1} | \alpha \beta_{2}
+  \end{align*}
+
+  Extract the common part to get a new production
+
+  \begin{align*}
+    A &\to \alpha A' \\
+    A' &\to \beta_{1} | \beta_{2}
+  \end{align*}
+
+\section{Epislon Productions}
+
+  \begin{align*}
+    A &\to Bc | x \\
+    B &\to c | \epsilon
+  \end{align*}
+
+  Solution, substitute certain productions
+
+  \begin{align*}
+    A &\to c A' | x \\
+    A' &\to c | \epsilon
+  \end{align*}
+
+  Make sure to not introduce common prefixes
