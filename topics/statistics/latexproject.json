@@ -1,0 +1,9 @@
+{
+  "bin": "bin",
+  "entry": "index.tex",
+  "includes": [
+    "chapters/",
+    "resources/",
+    "config/"
+  ]
+}
