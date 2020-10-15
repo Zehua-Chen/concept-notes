@@ -34,3 +34,55 @@
       \item See \ref{section: grammar/eliminate common prefix}
     \end{itemize}
   \end{itemize}
+
+\section{LR Parsing}
+
+  \begin{definition}
+    \textbf{LR}: \textbf{left} to right scan and produces a \textbf{rightmost}
+    derivation; aka. \textbf{bottom up parsing}
+  \end{definition}
+
+  \begin{itemize}
+    \item Uses a \textbf{push-down} automata
+    \item \textbf{Actions}:
+    \begin{itemize}
+      \item \textbf{Shift}: consumes token from input
+      \item \textbf{Reduce}: build trees from components
+      \item \textbf{Goto}: jump to a different state, after reduce
+      \item \textbf{Accept}: signal that we are done
+    \end{itemize}
+  \end{itemize}
+
+  \subsection{Shift}
+
+    \begin{enumerate}
+      \item Consume a token from input
+      \item Push the token and the current state
+      \item Go to the next state
+    \end{enumerate}
+
+  \subsection{Reduce}
+
+    \begin{enumerate}
+      \item Pop tokens and states from the stack
+      \item Return to the last state popped
+      \item Construct a new tree from the popped tokens
+    \end{enumerate}
+
+  \subsection{Representing the Automata}
+
+    Needs two table
+
+    \begin{enumerate}
+      \item \textbf{Action Table}: shift, reduce n, accept
+      \item \textbf{Goto Table}: destination state
+    \end{enumerate}
+
+    rows are state numbers, and columns are the symbols
+
+  \subsection{Constructing the Automata}
+
+    \begin{enumerate}
+      \item To create the start state, add the \textbf{transitive closure}
+      of the start symbol
+    \end{enumerate}
