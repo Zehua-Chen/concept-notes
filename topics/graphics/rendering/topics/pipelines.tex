@@ -237,48 +237,69 @@
 
   \subsection{Perspective Projection}
 
-    \paragraph{Matrix}
-    \begin{equation}
-      P =
-      \begin{bmatrix}
-        \frac{n}{2} & 0 & 0 & 0 \\
-        0 & \frac{n}{t} & 0 & 0 \\
-        0 & 0 & \frac{-f}{f - n} & \frac{-fn}{f - n} \\
-        0 & 0 & -1 & 0 \\
-      \end{bmatrix}
-    \end{equation}
+    \subsubsection{Equation}
 
-    \begin{itemize}
-      \item $ r $: right
-      \item $ t $: top
-      \item $ n $: near
-      \item $ f $: far
-      \item This gives the frustum matrix, which is asymmetrical
-      perspective matrix is symmetrical
-    \end{itemize}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\columnwidth]{images/pipelines/perspective-equation.png}
+      \end{figure}
 
-    \href{http://www.songho.ca/opengl/gl_projectionmatrix.html}{Deriving
-    the matrix}
+      \begin{align}
+        \frac{y_{\text{clip}}}{d}
+        &= \frac{y_{\text{view}}}{-z_{\text{view}}} \\
+        y_{\text{clip}}
+        &= d\frac{y_ {\text{view}}}{-z_{\text{view}}} \\
+        &= \frac{y_{\text{view}}}{\frac{-z_{\text{view}}}{d}} \\
+        \frac{x_{\text{clip}}}{d}
+        &= \frac{x_{\text{view}}}{\frac{-z_{\text{view}}}{d}} \\
+        z &= -d
+      \end{align}
 
-    \paragraph{Equation}
-    \begin{align}
-      \frac{y_{\text{clip}}}{d} &= \frac{y_{\text{view}}}{-z_{\text{view}}} \\
-      y_{\text{clip}}
-      &= d\frac{y_ {\text{view}}}{-z_{\text{view}}} \\
-      &= \frac{y_{\text{view}}}{-z_{\text{view}} / d}
-    \end{align}
-
-    \begin{itemize}
-      \item The equation applies in situations where
       \begin{itemize}
-        \item The \textbf{eyes} are \textbf{centered at the origin}
-        \item The \textbf{view} is in \textbf{negative z direction}
-        \item The clip is between the eyes and the view
+        \item The equation applies in situations where
+        \begin{itemize}
+          \item The \textbf{eyes} are \textbf{centered at the origin}
+          \item The \textbf{view} is in \textbf{negative z direction}
+          \item The clip is between the eyes and the view
+        \end{itemize}
+
+        \item $ d $: distance from eyes to the screen (clip)
+        \begin{itemize}
+          \item Increasing $ d $; would reduce the size of the image; changing
+          $ d $ distort the image
+        \end{itemize}
+        \item This equation also applies to $ x $ and $ y $
+        \item Not invertible
+        \item Not an affine transformation (does not preserve the ratio of
+        distances)
       \end{itemize}
 
-      \item $ d $: distance from eyes to the screen (clip)
-      \item This equation also applies to $ x $ and $ y $
-    \end{itemize}
+    \subsubsection{Matrix}
+
+      The perspective projection matrix also needs to do what the ortho matrix
+      does, scaling coordinates so that everything fits inside the clip space
+
+      \begin{equation}
+        P =
+        \begin{bmatrix}
+          \frac{n}{r} & 0 & 0 & 0 \\
+          0 & \frac{n}{t} & 0 & 0 \\
+          0 & 0 & \frac{-f}{f - n} & \frac{-fn}{f - n} \\
+          0 & 0 & -1 & 0 \\
+        \end{bmatrix}
+      \end{equation}
+
+      \begin{itemize}
+        \item $ r $: right
+        \item $ t $: top
+        \item $ n $: near
+        \item $ f $: far
+        \item This gives the frustum matrix, which is asymmetrical
+        perspective matrix is symmetrical
+      \end{itemize}
+
+      \href{http://www.songho.ca/opengl/gl_projectionmatrix.html}{Deriving
+      the matrix}
 
 \section{Stage - Window to Viewport}
 
