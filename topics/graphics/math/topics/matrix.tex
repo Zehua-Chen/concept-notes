@@ -29,7 +29,11 @@
   \begin{algorithm}[H]
     \Begin {
       \For{row, y in $ a $}{
+        \tcp{row is a vector composed of all the numbers on row y}
+
         \For{column, x in $ b $} {
+          \tcp{column is a vector composed of all the numbers on column x}
+
           output$ [x][y] $ = column $ \times $ row\;
         }
       }
@@ -38,10 +42,59 @@
 
 \section{Homogenous Coordinates}
 
-  All have an additional rows of 0s at the bottom, with the last element
-  being 1.
+  \begin{align}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      1
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+      wx \\
+      wy \\
+      wz \\
+      w
+    \end{bmatrix} \\
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      w
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+      \frac{x}{w} \\
+      \frac{y}{w} \\
+      \frac{z}{w} \\
+      1
+    \end{bmatrix}
+  \end{align}
 
-  \begin{itemize}
-    \item Used in computer graphics so that all transformation matrices
-    are 4x4
-  \end{itemize}
+  $ w = 0 $ denotes a point at infinity or a point (which does not have
+  positions); not affected by translation
+
+  \begin{align}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      0
+    \end{bmatrix}
+    &=
+    \begin{bmatrix}
+      1 & & & a \\
+      & 1 & & b \\
+      & & 1 & c \\
+      & & & 1
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\
+      y \\
+      z \\
+      0
+    \end{bmatrix}
+  \end{align}
+
+  Enables division in matrix
+
