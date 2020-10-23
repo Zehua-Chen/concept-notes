@@ -6,3 +6,8 @@
    - Hard to make
    - Likely to change
 2. Create modules that hide these decisions
+
+## Example
+
+- **Abstract Data Types** hide "decisions" on how datas are stored, how datas
+  are manipulated (which can be hard)
