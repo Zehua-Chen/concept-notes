@@ -143,6 +143,12 @@
   \end{align}
 
   \begin{itemize}
+    \item View matrix \textbf{only needs two vectors}, the third can be drived
+    \begin{itemize}
+      \item To get a transformed view matrix, \textbf{both input vectors} have
+      to be transformed
+    \end{itemize}
+
     \item $ \vec{u} $: right; assuming $ t $ is top
     \begin{equation}
       u = \frac{t \times w}{\left| t \times w \right|}
@@ -160,7 +166,7 @@
     $ - $ is needed when dealing with systems where negative is closer to the
     screen
 
-    \item $ \vec{e} $: position
+    \item $ \vec{e} $: the input position to view transformation
   \end{itemize}
 
   \subsection{Deriving View Matrix}
