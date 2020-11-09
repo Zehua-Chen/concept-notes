@@ -1,14 +1,33 @@
 \chapter{Overview}
 
-\paragraph{Limitations}
-\begin{itemize}
-  \item \textbf{Greedy}: match more than expected
-  \item \textbf{Does not count well}:
-  \begin{itemize}
-    \item Cannot handle unbounded number of items; ex. prime number of a
-    \item Cannot handle nested structures
-  \end{itemize}
-\end{itemize}
+\section{Limitations}
 
-\paragraph{To Right Linaer Grammar} regular languages can be converted to
-right linear grammar
+  \begin{itemize}
+    \item \textbf{Greedy}: match more than expected
+    \item \textbf{No unlimited numbers without pattern}: examples;
+    \begin{itemize}
+      \item Unbounded number of items; ex. prime number of $ a $
+      \item The prime numbers greater than 1000
+    \end{itemize}
+
+    These can be represented as regular expressions
+
+    \begin{itemize}
+      \item Multiples of 5
+    \end{itemize}
+
+    \item \textbf{Cannot count}: exmaples;
+    \begin{itemize}
+      \item Strings consisting of $ a $ and $ b $ with twice as many $ a $'s
+      as $ b $'s.
+    \end{itemize}
+
+    \item \textbf{No recursion}: cannot handle nested structures; examples
+    \begin{itemize}
+      \item Nested comments
+      \item Palindromes
+    \end{itemize}
+  \end{itemize}
+
+  \paragraph{To Right Linaer Grammar} regular languages can be converted to
+  right linear grammar
