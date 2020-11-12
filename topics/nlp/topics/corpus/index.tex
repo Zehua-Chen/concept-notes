@@ -1,0 +1,41 @@
+\chapter{Corpus Linguistics}
+
+\section{Inter-Annotator Agreement}
+
+  \begin{equation}
+    A = \frac{A_{o} - A_{e}}{1 - A_{e}}
+  \end{equation}
+
+  where $ A_{o} $ is the actual agreement, and $ A_{e} $ is the expected
+  agreement; different ways of calculating $ A_{e} $ gives you different
+  types of agreement
+
+  \begin{itemize}
+    \item S ($ s = A = ... $)
+    \item PI ($ \pi = A = ... $)
+    \item Kappa ($ k = A = ... $)
+  \end{itemize}
+
+  \subsection{Kappa}
+
+    \begin{align}
+      \Prob
+      \left(
+        \text{one annotator $ A_{x} $ picking a category $ q_{a} $}
+      \right) &= \frac{^{n} A_{x} q_{a}}{i} \\
+      \Prob
+      \left(
+        \text{both annotators picking a category $ q_{a} $}
+      \right) &= \frac{^{n} A_{1} q_{a}}{i} \times \frac{^{n} A_{2} q_{a}}{i}
+    \end{align}
+
+    \begin{align}
+      A_{e}^{k}
+        &= \sum_{q}^{q_{x}} \frac{^{n} A_{1} q_{x}}{i} \times \frac{^{n} A_{2} q_{x}}{i} \\
+        &= \frac{1}{i^{2}} \sum_{q}^{q_{x}} \left( ^{n} A_{1} q_{x} \right) \times \left( ^{n} A_{2} q_{x} \right)
+    \end{align}
+
+    \begin{itemize}
+      \item $ \Prob $ means probability
+      \item $ ^{n} A_{1} q_{x} $ number of times annotator $ 1 $ pick category $ q_{x} $
+    \end{itemize}
