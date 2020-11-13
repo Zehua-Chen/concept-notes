@@ -1,0 +1,44 @@
+\chapter{Euler Angle}
+
+\begin{itemize}
+  \item Orientation is not direction (roll does not change direction, but
+  does change orientation)
+  \item Three numbers each represent a rotation around an axis:
+  \begin{itemize}
+    \item Ex: $ x, y, z $
+    \item Don’t have to be $ x, y, z $
+  \end{itemize}
+
+  \item Rotations are applied in an order
+  \begin{itemize}
+    \item Common order: $ M = R_{z} R_{x} R_{y} $
+    \item Rotaitons in one axis would influence the rotation in another axis
+  \end{itemize}
+\end{itemize}
+
+\section{Gimbal Lock}
+
+  \begin{itemize}
+    \item Occurs when one axis collapse into another axis
+    \item Given z, x, y order, use x = 90 to collapse z and y
+    \item Important for VR applications
+  \end{itemize}
+
+\section{Issues with Eular Angle}
+
+  \begin{itemize}
+    \item \textbf{Pros of Eular Angle}:
+    \begin{enumerate}
+      \item Generate any possible orientation
+      \item Intuitive
+      \item Compact, only need three numbers
+    \end{enumerate}
+
+    \item \textbf{Cons of Eular Angle}:
+    \begin{enumerate}
+      \item Ambiguous, different triples can rpresent the same orientation
+      \item Do not interpolate in a natural way
+      \item Gimbal lock
+      \item Conversion between matrix require trig operations (expensive)
+    \end{enumerate}
+  \end{itemize}

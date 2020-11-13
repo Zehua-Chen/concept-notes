@@ -2,9 +2,10 @@
 
 Quaternions are made up of four numbers
 
-\begin{equation}
-  q = \left< a, b, c, d \right>
-\end{equation}
+\begin{align}
+  q &= q_{0} + i q_{1} + j q_{2} + k q_{e} \\
+  &= \left< s, v \right>
+\end{align}
 
 Given a rotation by angle $ \theta $ around an axis $ a $, the quaternion $ q $
 can be formed by
@@ -51,19 +52,10 @@ can be formed by
       \left| q \right| = \sqrt{a^{2} + b^{2} + c^{2} + d^{2}} = 1
     \end{equation}
 
-    \item \textbf{Multiplication}: $ q_{3} = q_{1} q_{2} $
-    \begin{equation}
-      \begin{split}
-        a_{3} &= a_{1} a_{2} - b_{1} b_{2} - c_{1} c_{2} - d_{1} d_{2} \\
-        b_{3} &= a_{1} b_{2} + a_{2} b_{1} + c_{1} d_{2} - c_{2} d_{1} \\
-        c_{3} &= a_{1} c_{2} + a_{2} c_{1} + b_{2} d_{1} - b_{1} d_{2} \\
-        d_{3} &= a_{1} d_{2} + a_{2} d_{1} + b_{1} c_{2} - b_{2} c_{2}
-      \end{split}
-    \end{equation}
-
-    \begin{itemize}
-      \item This means $ q_{1} $ rotated by $ q_{2} $
-    \end{itemize}
+    \item \textbf{Multiplication}: $ q q' $, $ q $ rotated by $ q' $
+    \begin{align}
+      qq' &= \left< s s' - v \cdot v', s v' + s' v + v \times v' \right>
+    \end{align}
 
     \item \textbf{Dot Product}
     \begin{equation}
@@ -77,9 +69,13 @@ can be formed by
     \end{itemize}
 
     \item \textbf{Inverse}
-    \begin{equation}
-      q^{-1} = \left< a, -b, -c, -d \right>
-    \end{equation}
+    \begin{align}
+      q^{-1}
+      &= \left( \cos\left( \theta / 2 \right) + \sin\left( \theta / 2 \right) u \right)^{-1} \\
+      &= \cos\left( - \theta / 2 \right) + \sin\left( - \theta / 2 \right) u \\
+      &= \cos\left( \theta / 2 \right) - \sin\left( \theta / 2 \right) u \\
+      &= \left< a, -b, -c, -d \right>
+    \end{align}
 
     \item \textbf{Rotating Point}: given a point $ p = \left< 0, x, y, z \right> $,
     and a quaternion $ q $, the rotated point $ p' $ is
@@ -113,18 +109,6 @@ can be formed by
 
   \end{itemize}
 
-\section{Gimbal Lock}
-
-  Quaternions are useful because it solves \textbf{gimbal lock}, aka.
-  \textbf{kinematic singularity}: one or more degrees of freedom are lost when
-  a specific orientation is achieved.
-
-  \begin{itemize}
-    \item Ex. when the user looks straight up, the camera would spin
-    uncontrollably
-  \end{itemize}
-
-
 \section{Game Engines}
 
   \subsection{Unity}
@@ -141,3 +125,7 @@ can be formed by
         \right>
       \end{equation}
     \end{itemize}
+
+\section{Quaternions in 4D Space}
+
+  The angle between quaternions in 4D space is half of that in 3D space
