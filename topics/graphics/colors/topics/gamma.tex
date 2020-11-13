@@ -1,0 +1,21 @@
+\chapter{Gamma Correction}
+
+  Due to the nature of display technology, the displayed brightness of a pixel
+  is different from that of the signal
+
+  \begin{equation}
+    V_{display} = V_{signal}^{\gamma}
+  \end{equation}
+
+  $ \gamma $ varied by display, typically $ 2.2 $;
+  $ V \in \left[ 0, 1 \right] $.  This means that the displayed
+  color is darker than the input color.
+
+  This can be fixed using gamma correction
+
+  \begin{align}
+    V_{signal}' &= V_{signal}^{\frac{1}{\gamma}} \\
+    V_{display}
+      &= \left( V_{signal}^{\frac{1}{\gamma}} \right)^{\gamma} \\
+      &= V_{signal}
+  \end{align}

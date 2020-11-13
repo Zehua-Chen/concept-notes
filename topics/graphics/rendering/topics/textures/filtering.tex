@@ -1,0 +1,21 @@
+\section{Texture Filtering}
+
+\begin{itemize}
+  \item \textbf{Magnification}: more fragments than texels
+  \begin{itemize}
+    \item Nearest neighbor interpolation
+    \item Bilinear interpolation
+  \end{itemize}
+  \item \textbf{Minification}: more texels than fragments
+\end{itemize}
+
+\subsection{Mipmapping}
+
+  A method of pre-filtering a texture for minification
+
+  \begin{itemize}
+    \item Generate a pyramid of textures: bottom level is the original
+    texture and each subsequent layer reduces the resolution
+    by $ \frac{1}{4} $
+    \item Computing filterings during runtime is too expensive
+  \end{itemize}
