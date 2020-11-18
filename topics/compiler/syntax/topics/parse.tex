@@ -8,9 +8,11 @@
   \end{definition}
 
   \paragraph{Implementation}
-  \begin{equation*}
-    A \to B a
-  \end{equation*}
+  \begin{align*}
+    A
+    &\to B a \\
+    &\to a A
+  \end{align*}
   \begin{itemize}
     \item Left hand side is the function being defined
     \item Terminals on right hande sides are commands to consume inputs
@@ -25,7 +27,7 @@
 
   \paragraph{Drawbacks}
   \begin{itemize}
-    \item Grammar with left recursions causes a infinite loop
+    \item Grammar with \textbf{left recursions} causes a infinite loop
     \begin{itemize}
       \item See \ref{section: grammar/eliminate left recursion}
     \end{itemize}

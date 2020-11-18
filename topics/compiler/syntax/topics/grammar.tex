@@ -50,14 +50,19 @@
 
     \item \textbf{Right Linear}: grammars where all the productions have the
     form
-    \begin{align}
+    \begin{align*}
       E &\to x F \\
       E &\to x
-    \end{align}
+    \end{align*}
 
     \begin{itemize}
       \item Corresponds to \textbf{regular languages}
     \end{itemize}
+
+    This is not a right linear grammar
+    \begin{align*}
+      S_{0} &\to c S_{1} c S_{2} c
+    \end{align*}
 
     \item \textbf{Left Recursive}: a production like
     \begin{equation*}
@@ -145,7 +150,7 @@
 \label{section: grammar/eliminate left recursion}
 
   \begin{align*}
-    E &\to E+ \\
+    E &\to Ea \\
     &\to i
   \end{align*}
 
