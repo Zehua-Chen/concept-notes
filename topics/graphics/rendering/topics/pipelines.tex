@@ -120,67 +120,69 @@
 
 \section{Stage - View}
 
+  View transformations translate and rotate all objects in the scene in such
+  a way that \textbf{the view of the camera would appear offset and rotated but
+  in face at origin (we can't rotate the viewport)}
+
+  \paragraph{Input}
+  \begin{itemize}
+    \item $ \vec{eye} $: eye position
+    \item $ \vec{at} $: look at position
+    \item $ \vec{up} $: up vector
+  \end{itemize}
+
+  \paragraph{Output}
+  \subparagraph{Deriving X, Y, Z Axis}
   \begin{align}
-    V &=
+    \vec{v} &= \vec{z} = \vec{at} - \vec{eye} \\
+    \vec{n} &= \vec{x} = \vec{z} \times \vec{up} \\
+    \vec{u} &= \vec{y} = \vec{x} \times \vec{z}
+  \end{align}
+
+  \subparagraph{Deriving Transformation Matrix}
+  $ M $ would place the camera on its intended transform. However, since
+  we can't transform the camera, we must move everything in the scene instead
+  with $ M^{-1} $. \textbf{This matrix is independent from different clip
+  spaces}.
+
+  \begin{align}
+    M &= T R \\
+    M^{-1} &= \left( T R \right)^{-1} \\
+    &= R^{-1} T^{-1} \\
+    &=
     \begin{bmatrix}
-      u & v & w & e \\
+      \vec{n}_{x} & \vec{u}_{x} & \vec{v}_{x} & 0 \\
+      \vec{n}_{y} & \vec{u}_{y} & \vec{v}_{y} & 0 \\
+      \vec{n}_{z} & \vec{u}_{z} & \vec{v}_{z} & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}^{-1}
+    \begin{bmatrix}
+      1 & 0 & 0 & \vec{eye}_{x} \\
+      0 & 1 & 0 & \vec{eye}_{y} \\
+      0 & 0 & 1 & \vec{eye}_{z} \\
       0 & 0 & 0 & 1
     \end{bmatrix}^{-1} \\
     &=
     \begin{bmatrix}
-      x_{u} & y_{u} & z_{u} & 0 \\
-      x_{v} & y_{v} & z_{v} & 0 \\
-      x_{w} & y_{w} & z_{w} & 0 \\
+      \vec{n}_{x} & \vec{n}_{y} & \vec{n}_{z} & 0 \\
+      \vec{u}_{x} & \vec{u}_{y} & \vec{u}_{z} & 0 \\
+      \vec{v}_{x} & \vec{v}_{y} & \vec{v}_{z} & 0 \\
       0 & 0 & 0 & 1
     \end{bmatrix}
     \begin{bmatrix}
-      1 & 0 & 0 & -x_{e} \\
-      0 & 1 & 0 & -y_{e} \\
-      0 & 0 & 1 & -z_{e} \\
+      1 & 0 & 0 & -\vec{eye}_{x} \\
+      0 & 1 & 0 & -\vec{eye}_{y} \\
+      0 & 0 & 1 & -\vec{eye}_{z} \\
       0 & 0 & 0 & 1
     \end{bmatrix} \\
-    l &= \text{look at point } - \text{ eye point}
+    &=
+    \begin{bmatrix}
+      \vec{n}_{x} & \vec{n}_{y} & \vec{n}_{z} & -\left( \vec{n} \cdot \vec{e} \right) \\
+      \vec{u}_{x} & \vec{u}_{y} & \vec{u}_{z} & -\left( \vec{u} \cdot \vec{e} \right) \\
+      \vec{v}_{x} & \vec{v}_{y} & \vec{v}_{z} & -\left( \vec{v} \cdot \vec{e} \right) \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
   \end{align}
-
-  \begin{itemize}
-    \item View matrix \textbf{only needs two vectors}, the third can be drived
-    \begin{itemize}
-      \item To get a transformed view matrix, \textbf{both input vectors} have
-      to be transformed
-    \end{itemize}
-
-    \item $ \vec{u} $: right; assuming $ t $ is top
-    \begin{equation}
-      u = \frac{t \times w}{\left| t \times w \right|}
-    \end{equation}
-
-    \item $ \vec{v} $: top
-    \begin{equation}
-      v = w \times u
-    \end{equation}
-
-    \item $ \vec{w} $: forward
-    \begin{equation}
-      w = - \frac{l}{\left| l \right|}
-    \end{equation}
-    $ - $ is needed when dealing with systems where negative is closer to the
-    screen
-
-    \item $ \vec{e} $: the input position to view transformation
-  \end{itemize}
-
-  \subsection{Deriving View Matrix}
-
-    \begin{enumerate}
-      \item Translate the eyepoint to the origin
-      \item Rotate so that:
-      \begin{itemize}
-        \item \say{lookat} vector aligns with $ –z $ axis (OpenGL/WebGL)
-        \item up aligns with y
-      \end{itemize}
-
-      \item We move all objects (the world) this way...
-    \end{enumerate}
 
 \section{Stage - Projection}
 
