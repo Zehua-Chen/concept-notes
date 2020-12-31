@@ -142,8 +142,9 @@
   \subparagraph{Deriving Transformation Matrix}
   $ M $ would place the camera on its intended transform. However, since
   we can't transform the camera, we must move everything in the scene instead
-  with $ M^{-1} $. \textbf{This matrix is independent from different clip
-  spaces}.
+  with $ M^{-1} $.
+
+  Left-handed:
 
   \begin{align}
     M &= T R \\
@@ -177,9 +178,21 @@
     \end{bmatrix} \\
     &=
     \begin{bmatrix}
-      \vec{n}_{x} & \vec{n}_{y} & \vec{n}_{z} & -\left( \vec{n} \cdot \vec{e} \right) \\
-      \vec{u}_{x} & \vec{u}_{y} & \vec{u}_{z} & -\left( \vec{u} \cdot \vec{e} \right) \\
-      \vec{v}_{x} & \vec{v}_{y} & \vec{v}_{z} & -\left( \vec{v} \cdot \vec{e} \right) \\
+      \vec{n}_{x} & \vec{n}_{y} & \vec{n}_{z} & -\left( \vec{n} \cdot \vec{eye} \right) \\
+      \vec{u}_{x} & \vec{u}_{y} & \vec{u}_{z} & -\left( \vec{u} \cdot \vec{eye} \right) \\
+      \vec{v}_{x} & \vec{v}_{y} & \vec{v}_{z} & -\left( \vec{v} \cdot \vec{eye} \right) \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}
+  \end{align}
+
+  Right-handed:
+
+  \begin{align}
+    M^{-1} =
+    \begin{bmatrix}
+      \vec{n}_{x} & \vec{n}_{y} & \vec{n}_{z} & \left( \vec{n} \cdot \vec{eye} \right) \\
+      \vec{u}_{x} & \vec{u}_{y} & \vec{u}_{z} & \left( \vec{u} \cdot \vec{eye} \right) \\
+      \vec{v}_{x} & \vec{v}_{y} & \vec{v}_{z} & \left( \vec{v} \cdot \vec{eye} \right) \\
       0 & 0 & 0 & 1
     \end{bmatrix}
   \end{align}
