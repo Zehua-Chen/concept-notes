@@ -25,8 +25,8 @@ better solutions to event dispatching than condition variables.
 Otherwise, signal/broadcast can be missed. Consider the following example
 
 - Thread A has unlocked the mutex, but has not blocked
-- Thread B has locked the mutex, and issues a signal/broadcast before thread
-  A blocked
+- Thread B has locked the mutex, and issues a signal/broadcast before thread A
+  blocked
 
 Thread A would misss the signal/broadcast because it has not blocked
 
