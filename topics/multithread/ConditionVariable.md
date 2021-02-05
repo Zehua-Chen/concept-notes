@@ -28,7 +28,11 @@ Otherwise, signal/broadcast can be missed. Consider the following example
 - Thread B has locked the mutex, and issues a signal/broadcast before thread A
   blocked
 
-Thread A would misss the signal/broadcast because it has not blocked
+Thread A would misss the signal/broadcast because it has not blocked.
+
+According to POSIX, the wait function being atomic means that, in this example
+thread B's signal/broadcast would be treated as if they occur after thread A has
+blocked.
 
 # Spurious Wakeups
 
