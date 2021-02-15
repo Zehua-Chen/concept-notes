@@ -1,1 +1,26 @@
 \chapter{Overview}
+
+\newglossaryentry{ray}
+{
+  name=ray,
+  description={an origin and a direction}
+}
+
+\newglossaryentry{ray-casting}
+{
+  name=ray casting,
+  description={if an ray intersects with an object}
+}
+
+\newacronym{bvh}{BVH}{Bounding Volume Hierarchy}
+
+\begin{itemize}
+  \item \textbf{\Gls{ray}}: \Glsdesc{ray}
+  \item \textbf{\Gls{ray-casting}}: \Glsdesc{ray-casting}
+  \item Camera shoots rays into the screen.
+  \item In naive ray tracing, if ray hits light, then a pixel is lit.
+  \item In more complex ray tracing, multiple rays, each is slightly different
+  from others, are shot. The result of all the rays lead to the values of one
+  pixel.
+  \item Using \acrfull{bvh} leads to $ O\left( \log n \right) $ runtime
+\end{itemize}
