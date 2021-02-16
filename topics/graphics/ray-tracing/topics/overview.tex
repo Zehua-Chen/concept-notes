@@ -24,3 +24,113 @@
   pixel.
   \item Using \acrfull{bvh} leads to $ O\left( \log n \right) $ runtime
 \end{itemize}
+
+\section{Rays}
+
+  \begin{equation}
+    P\left( t \right) = O + td
+  \end{equation}
+
+  $ P\left( t \right) $ is a point on the ray; $ t $ is the time; $ O $ is
+  the origin, and $ d $ is the direction
+
+  \begin{itemize}
+    \item Rays travel in straight lines
+    \item Rays do not interfere with other rays
+    \item Rays travel from light source to eyes; \textbf{physics is the same under
+    path reversal (reciprocity)}
+  \end{itemize}
+
+  \subsection{Types of Rays}
+
+    \begin{enumerate}
+      \item Primary rays: rays shot from pixels
+      \item Secondary rays
+      \item Shadow rays
+      \item Light rays
+    \end{enumerate}
+
+  \subsection{Screen Space, World Space Pixel Coordinates}
+
+\section{Basic Ray Tracing}
+
+  \begin{algorithm}[H]
+    \caption{Basic Ray Tracing}
+    define objects\;
+    define materials for objects\;
+    define light sources\;
+    define window\;
+    \ForEach{pixel}{
+      construct ray through the pixel\;
+      compute the intersection of the ray with each object\;
+      find the closest intersection\;
+      \If{there is an intersection} {
+        use lights and materials to compute pixel color\;
+      }
+      \Else{
+        pixel is set to background color\;
+      }
+    }
+  \end{algorithm}
+
+\section{Shooting Rays}
+
+  \subsection{Screen Space to World Space Pixel Coordinates}
+
+    \begin{align}
+      x_{w} &= s\left( c - \frac{h_{res}}{2} + 0.5 \right) \\
+      y_{w} &= s\left( r - \frac{v_{res}}{2} + 0.5 \right)
+    \end{align}
+
+    \begin{itemize}
+      \item $ c, r $: screen space coordinates of pixels; $ c $ is the column,
+      $ r $ is the row
+      \item $ s $: pixel extent
+      \item $ x_{w}, y_{w} $: coordinate in world space of the pixel center
+      \item $ z_{w} $ is typically $ 0 $
+    \end{itemize}
+
+  \subsection{Orthographic}
+
+    \begin{align}
+      O &= \left( x_{w}, y_{w}, z_{w} \right) \\
+      d &= \left( 0, 0, -1 \right)
+    \end{align}
+
+    Rays have the same direction as negative-z and use their world space
+    coordinates as origins
+
+  \subsection{Perspective}
+
+    \begin{align}
+      e &= \left( e_{w}, e_{w}, e_{w} \right) \\
+      O &= e  \\
+      d &= \left( x_{w}, y_{w}, z_{w} \right) - e
+    \end{align}
+
+\section{Intersection}
+
+  Given an implicit surface equation $ f\left( x, y, z \right) = 0 $, we
+  want to find a point $ p $ that is on the surface,
+  i.e. $ f\left( p \right) = 0 $. Since $ p = O + dt $, we are looking for
+  $ t $ in $ f\left( O + td \right) = 0 $.
+
+  If $ t < 0 $, then intersection is behind the screen
+
+  \subsection{Plane}
+
+    \begin{align}
+      Ax + By + Cz + D &= 0 \\
+      \left( p - a \right) \cdot n = 0
+    \end{align}
+
+    Given a ray $ O + td $ we can solve for a $ t $, which gives us the
+    point of intersection
+
+    \begin{align*}
+      \left( p - a \right) \cdot n &= 0 \\
+      \left( \left( O + td \right) - a \right) \cdot n &= 0 \\
+      \frac{\left( \left( a - O \right) \cdot n \right)}{d \cdot n} &= t
+    \end{align*}
+
+    If the ray and the plane is parallel, then $ d \cdot n = 0 $
