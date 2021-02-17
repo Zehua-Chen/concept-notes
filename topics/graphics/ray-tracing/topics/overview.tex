@@ -200,7 +200,18 @@
 
       \paragraph{Problem}
       \begin{itemize}
-        \item Occurs when substracting nearly equal numbers
+        \item Occurs when adding nearly equal numbers with opposite signs.
+        In sphere intersection, it occurs in
+        \begin{equation*}
+          -b \pm \sqrt{b^{2} - 4ac}
+        \end{equation*}
+
+        when
+
+        \begin{equation*}
+          b \approx \sqrt{b^{2} - 4ac}
+        \end{equation*}
+
         \item Many significant bits eliminate each other
         \item Few meaningful bits remain
       \end{itemize}
@@ -225,8 +236,6 @@
         \left| \frac{x \delta_{x} - y \delta_{y}}{x - y} \right|
       \end{equation}
 
-      This can happen when $ b \approx \sqrt{b^{2} - 4ac} $
-
       \paragraph{Solution} Catastrophic cancellation only happens to one of the
       two quadratic solutions. Can be fixed using $ t_{0} t_{1} = \frac{c}{a} $
 
@@ -239,6 +248,7 @@
 
       where $ q = \frac{1}{2}\left( b + \sign\left( b \right) \sqrt{b^{2} - 4ac} \right) $
       $ \sign $ function returns 1 if $ b > 0 $ and $ - 1 $ otherwise
+
 \section{Multi-Sampling}
 
   \newglossaryentry{aliasing}
