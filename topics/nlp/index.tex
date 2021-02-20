@@ -1,13 +1,17 @@
 \documentclass[letterpaper, 11pt]{report}
-\usepackage{../../shared/packages/import}
-\usepackage[utf8]{inputenc}
+\usepackage{import}
 \import{../../shared/config/}{packages}
+\usepackage[utf8]{inputenc}
+\usepackage{inconsolata}
+\usepackage{glossaries}
+
 \import{../../shared/config/}{styles}
 \import{../../shared/config/}{macros}
-\usepackage{inconsolata}
 
 \title{Natural Language Processing}
 \author{Zehua Chen}
+
+\makeglossaries
 
 \DeclareMathOperator{\Prob}{P}
 
@@ -20,4 +24,7 @@
   \import{topics/}{syntax}
   \import{topics/corpus}{index.tex}
   \import{topics/dsp}{index.tex}
+
+  \newpage
+  \printglossary
 \end{document}

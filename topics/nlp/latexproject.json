@@ -1,5 +1,6 @@
 {
   "entry": "index.tex",
+  "glossary": true,
   "includes": [
     "../../shared/config/",
     "topics/"

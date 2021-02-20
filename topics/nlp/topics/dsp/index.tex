@@ -1,9 +1,34 @@
 \chapter{Digital Signal Processing}
 
-\begin{itemize}
-  \item Signal is the stream of air pressure
-  \item Period: the time it takes a signal to repeat itself; reverse of
-  frequency
-  \item \textbf{Frequency}: how frequently a signal repeat itself in unit time
-\end{itemize}
+\section{Signal Basics}
 
+  \newglossaryentry{signal}
+  {
+    name=signal,
+    description={the stream of air pressure}
+  }
+
+  \newglossaryentry{period}
+  {
+    name=period,
+    description={the time it takes a signal to repeat itself; reverse of
+    frequency}
+  }
+
+  \newglossaryentry{frequency}
+  {
+    name=frequency,
+    description={how frequently a signal repeat itself in unit time}
+  }
+
+  \begin{itemize}
+    \item \textbf{\Gls{signal}}: \glsdesc{signal}
+    \item \textbf{\Gls{period}}: \glsdesc{period}
+    \item \textbf{\Gls{frequency}}: \glsdesc{frequency}
+  \end{itemize}
+
+  \subsection{Sampling Frequency Theory}
+
+    Guarantees that the details lost can be reconstructed.
+
+  \subsection{Quantization}
