@@ -1,0 +1,198 @@
+\chapter{Sampling}
+
+Properties of \textbf{well-distributed} sampling (assuming sampling on
+a unit square)
+\begin{enumerate}
+  \item Not structured, involves some kind of randomness
+  \item Uniform distribution; no gaps
+  \item Projections in 1D along x, y axis are uniform
+  \item There is a non-trivial minimum distance between all sample points
+\end{enumerate}
+
+\section{Discrepancy}
+
+  \begin{enumerate}
+    \item Take a region $ S $
+    \item Take a portion of $ S $, $ V $
+    \item \textbf{Disrepancy} is the different between volume ratio of $ V:S $
+    and the ratio of the number of points in $ V $ to the number of points in
+    $ S $
+  \end{enumerate}
+
+\section{Aliasing}
+
+  \newglossaryentry{aliasing}
+  {
+    name=aliasing,
+    description={when a function has been reconstructed as a
+    different function; especially when high frequency details are lost and
+    represented as low frequency}
+  }
+
+  \begin{itemize}
+    \item \textbf{\Gls{aliasing}}: \Glsdesc{aliasing};
+    \item In a ray tracer, we are dividing images into squares and reconstruct
+    a function that tells us how light is passing through the square
+    \item Pixels have both discrete ($ d $) and continuous ($ c $) locations
+    \begin{equation}
+      c = d + \frac{1}{2}
+    \end{equation}
+    $ \left( 3, 5 \right) $ is located at $ \left( 3.5, 5.5 \right) $
+  \end{itemize}
+
+\section{Regular Sampling}
+
+  \newglossaryentry{regular-sampling}
+  {
+    name=regular sampling,
+    description={shoot rays through a $ n $ by $ n $ grid of subpixels.
+    Color of a pixel is the average color of the subpixels}
+  }
+
+  \textbf{\Gls{regular-sampling}}: \glsdesc{regular-sampling}
+
+  \begin{itemize}
+    \item Expensive to perform
+    \item Does not solve moire pattern
+  \end{itemize}
+
+\section{Random Sampling}
+
+  \newglossaryentry{random-sampling}
+  {
+    name=random sampling,
+    description={rather than shooting rays through a grid, shoot rays from
+    random locations in the pixel}
+  }
+
+  \textbf{\Gls{random-sampling}}: \glsdesc{random-sampling}
+
+  \begin{itemize}
+    \item Reduce in noisy result
+    \item People alias noisy to aliasing visually
+  \end{itemize}
+
+\section{Jittered Sampling}
+
+  \newglossaryentry{jittered-sampling}
+  {
+    name=jittered sampling,
+    description={create a grid and randomly generate a sample in each cell}
+  }
+
+  \textbf{\Gls{jittered-sampling}}: \glsdesc{jittered-sampling}
+
+  \begin{itemize}
+    \item Better than random, but still poorly distributed
+  \end{itemize}
+
+\section{n-rooks Sampling}
+
+  \newglossaryentry{nrooks-sampling}
+  {
+    name=n-rooks sampling,
+    description={create a grid but make sure each row and column are sampled}
+  }
+
+  \textbf{\Gls{nrooks-sampling}}: \glsdesc{nrooks-sampling}
+
+  \begin{itemize}
+    \item Good 1D distribution
+    \item Poor 2D distribution
+  \end{itemize}
+
+\section{Multi-Jittered Sampling}
+
+  \newglossaryentry{multi-jittered-sampling}
+  {
+    name=multi-jittered sampling,
+    description={create a $ n \times n $ grid, known as \textbf{fine grid};
+    then create a $ \sqrt{n} \times \sqrt{n} $ coarse grid each
+    containing $ n $ fine grid's cells.
+    Make sure each coarse grid cell contains one sample
+    and the sample has unique fine grid row and column of the fine grid.}
+  }
+
+  \textbf{\Gls{multi-jittered-sampling}}: \glsdesc{multi-jittered-sampling}
+
+  \begin{itemize}
+    \item Good 1D projection from rock condition
+    \item Good 2D projection from stratification
+  \end{itemize}
+
+\section{Hammersley Sampling}
+
+  Deterministic quasi-random sequence
+
+  \paragraph{1D} For a number $ i $, convert $ i $ to binary format, the
+  $ \Phi_{x} \left( i \right) $ is the \textbf{radical inverse based $ x $ of $ i $}
+
+  \paragraph{2D} We want to have $ n $ samples
+  \begin{equation}
+    p_{i}
+      = \left( x_{i}, y_{i} \right)
+      = \left[ \frac{i}{n}, \Phi_{2}\left( i \right) \right]
+  \end{equation}
+
+  \begin{itemize}
+    \item Too structured; lead to artifacts in some applications
+    \item For a given $ n $, only one sequence exists
+  \end{itemize}
+
+\section{Halton Sampling}
+
+  \begin{equation}
+    p_{i} =
+    \left(
+      \Phi_{2} \left( i \right),
+      \Phi_{3} \left( i \right),
+      \Phi_{5} \left( i \right)
+    \right)
+  \end{equation}
+  Note that the bases are all prime numbers from small to big
+
+  \begin{itemize}
+    \item Generalizes well into n-d space
+    \item Number of samples is not known ahead of times
+  \end{itemize}
+
+\section{Poisson Disk Sampling}
+
+  $ r $ minimum distance between samples
+
+  \paragraph{Algorithm}
+  \begin{enumerate}
+    \item Create a $ n $ dimensional background grid with cells of size
+    $ \frac{r}{\sqrt{n}} $
+    \item Keep a list of samples that has been generated
+    \item Keep a list of indices of the samples that has been generated, aka.
+    the \say{active list}
+    \item Keep a list that represents the uniform grid; cells have two values
+    \begin{itemize}
+      \item $ -1 $: the cell have no samples
+      \item $ i $: the cell has a sample. The value is the index of the sample
+      in the samples list
+    \end{itemize}
+
+    \item Randomly, uniformly select a start sample and insert it into the
+    \say{active list}
+    \item While the \say{active list} is not empty
+    \begin{enumerate}
+      \item Select a random index $ i $ from the active list
+      \item Generate up to $ k $ samples within distances of $ r, 2r $,
+      around the sample; $ k = 30 $ is a popular choice
+      \item For each sample, make sure it is not within distance $ r $ of
+      existing samples (use the background grid)
+      \item If a point is far enough from other points (previous step), add
+      the point to the \say{active list}
+      \item If after $ k $ attempts no such point is found, then remove $ i $
+      from the active list
+    \end{enumerate}
+  \end{enumerate}
+
+  \paragraph{Properties}
+  \begin{itemize}
+    \item Not actually a low discrepancy sequence
+    \item Assure a minimum distance between samples
+    \item Fast and generalizes well into higher dimensions
+  \end{itemize}
