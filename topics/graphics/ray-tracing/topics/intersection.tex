@@ -1,0 +1,140 @@
+\chapter{Intersection}
+
+Given an implicit surface equation $ f\left( x, y, z \right) = 0 $, we
+want to find a point $ p $ that is on the surface,
+i.e. $ f\left( p \right) = 0 $. Since $ p = O + dt $, we are looking for
+$ t $ in $ f\left( O + td \right) = 0 $.
+
+If $ t < 0 $, then intersection is behind the screen
+
+\textbf{Robustly}: a solution is resistant to error and produces similar
+result for small changes in input
+
+\section{Plane}
+
+  \begin{align}
+    Ax + By + Cz + D &= 0 \\
+    \left( p - a \right) \cdot n = 0
+  \end{align}
+
+  $ a $ is a \textbf{point in space} and $ n $ is the \textbf{normal vector}
+  of the plane with its origin at $ a $
+
+  Given a ray $ O + td $ we can solve for a $ t $, which gives us the
+  point of intersection.
+
+  \begin{align*}
+    \left( p - a \right) \cdot n &= 0 \\
+    \left( \left( O + td \right) - a \right) \cdot n &= 0 \\
+    \frac{\left( \left( a - O \right) \cdot n \right)}{d \cdot n} &= t
+  \end{align*}
+
+  If the ray and the plane is parallel, then $ d \cdot n = 0 $
+
+\section{Sphere}
+
+  Spheres are defined by
+
+  \begin{equation}
+    \left( P - G \right) \cdot \left( P - G \right) = r^{2}
+  \end{equation}
+
+  $ P $ is a \textbf{point is space}, $ G $ is the \textbf{center of sphere},
+  and $ r $ is the \textbf{radius of sphere}
+
+  Replace $ P $ with $ O + td $ and let $ f = O - G  $
+
+  \begin{align}
+    \left( d \cdot d \right) t^{2}
+      + 2 \left( f \cdot d \right) t
+      + f \cdot f - r^{2}
+    &= 0 \\
+    a t^{2} + bt + c &= \\
+    \frac{-b \pm \sqrt{b^{2} - 4ac}}{2a} &= t_{0, 1} \\
+    \frac{P_{0} - G}{r} &= n
+  \end{align}
+
+  \begin{itemize}
+    \item $ t_{0, 1} $: rays will have two intersection points
+    \item $ b^{2} - 4ac < 0 $: ray does not intersect with sphere
+    \item $ b^{2} - 4ac > 0 $: ray intersects with sphere
+    \item $ b^{2} - 4ac = 0 $: ray touches sphere on the surface
+  \end{itemize}
+
+  \subsection{Diminished Significance}
+
+    \paragraph{Problem}
+    \begin{itemize}
+      \item 32 bit float point can result in error; caused by
+      \textbf{diminished} significance
+      \begin{itemize}
+        \item Ex. small spheres that are very far away
+      \end{itemize}
+
+      $ c = f \cdot f - r^{2}  $ is problematic, if $ f $ is big and $ r $ is
+      small, diminished significance would occur. If a sphere is more than
+      \begin{equation}
+        2^{12} r = 4096 r
+      \end{equation}
+      away from the ray origin, then radius has no impact on intersection
+      solution.
+    \end{itemize}
+
+    \paragraph{Solution} \textbf{Hearn Baker Method}
+    \begin{align}
+      b^{2} - 4ac &= 4a \left( \frac{b^{2}}{4a} - c \right) \\
+      &= 4d^{2} \left( r^{2} - \left( f - \left( f \cdot \hat{d} \right) \hat{d} \right)^{2} \right)
+    \end{align}
+
+  \subsection{Catastrophic Cancellation}
+
+    \paragraph{Problem}
+    \begin{itemize}
+      \item Occurs when adding nearly equal numbers with opposite signs.
+      In sphere intersection, it occurs in
+      \begin{equation*}
+        -b \pm \sqrt{b^{2} - 4ac}
+      \end{equation*}
+
+      when
+
+      \begin{equation*}
+        b \approx \sqrt{b^{2} - 4ac}
+      \end{equation*}
+
+      \item Many significant bits eliminate each other
+      \item Few meaningful bits remain
+    \end{itemize}
+
+    We have approximations
+
+    \begin{align}
+      \tilde{x} &= x \left( 1 + \delta_{x} \right) \\
+      \tilde{y} &= y \left( 1 + \delta_{y} \right)
+    \end{align}
+
+    Small relative errors
+
+    \begin{align}
+      \left| \delta_{x} \right| &= \frac{\left| x - \tilde{x} \right|}{\left| x \right|} \\
+      \left| \delta_{y} \right| &= \frac{\left| y - \tilde{y} \right|}{\left| y \right|}
+    \end{align}
+
+    Relative error of the difference can be arbitarrily large
+
+    \begin{equation}
+      \left| \frac{x \delta_{x} - y \delta_{y}}{x - y} \right|
+    \end{equation}
+
+    \paragraph{Solution} Catastrophic cancellation only happens to one of the
+    two quadratic solutions. Can be fixed using $ t_{0} t_{1} = \frac{c}{a} $
+
+    \begin{equation}
+      \begin{cases}
+        t_{0} = \frac{c}{q} \\
+        t_{1} = \frac{q}{a}
+      \end{cases}
+    \end{equation}
+
+    where $ q = \frac{1}{2}\left( b + \sign\left( b \right) \sqrt{b^{2} - 4ac} \right) $
+    $ \sign $ function returns 1 if $ b > 0 $ and $ - 1 $ otherwise
