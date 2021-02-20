@@ -127,6 +127,16 @@ a unit square)
   \paragraph{1D} For a number $ i $, convert $ i $ to binary format, the
   $ \Phi_{x} \left( i \right) $ is the \textbf{radical inverse based $ x $ of $ i $}
 
+  \begin{equation}
+    \Phi_{2}\left( i \right)
+      = \sum_{j = 0}^{n} a_{j} \left( i \right) 2^{-j - 1}
+      = a_{0} \left( i \right) \frac{1}{2}
+      + a_{1} \left( i \right) \frac{1}{4}
+      + a_{2} \left( i \right) \frac{1}{8}
+  \end{equation}
+
+  $ a $s are the binary representations of $ i $, in this case (based 2).
+
   \paragraph{2D} We want to have $ n $ samples
   \begin{equation}
     p_{i}
