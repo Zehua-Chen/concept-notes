@@ -4,6 +4,7 @@
   "includes": [
     "../../../shared/config/",
     "../../../shared/packages/",
-    "./topics"
+    "./topics",
+    "./glossaries"
   ]
 }

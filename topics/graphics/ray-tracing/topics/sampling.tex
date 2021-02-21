@@ -21,14 +21,6 @@ a unit square)
 
 \section{Aliasing}
 
-  \newglossaryentry{aliasing}
-  {
-    name=aliasing,
-    description={when a function has been reconstructed as a
-    different function; especially when high frequency details are lost and
-    represented as low frequency}
-  }
-
   \begin{itemize}
     \item \textbf{\Gls{aliasing}}: \Glsdesc{aliasing};
     \item In a ray tracer, we are dividing images into squares and reconstruct
@@ -42,13 +34,6 @@ a unit square)
 
 \section{Regular Sampling}
 
-  \newglossaryentry{regular-sampling}
-  {
-    name=regular sampling,
-    description={shoot rays through a $ n $ by $ n $ grid of subpixels.
-    Color of a pixel is the average color of the subpixels}
-  }
-
   \textbf{\Gls{regular-sampling}}: \glsdesc{regular-sampling}
 
   \begin{itemize}
@@ -57,13 +42,6 @@ a unit square)
   \end{itemize}
 
 \section{Random Sampling}
-
-  \newglossaryentry{random-sampling}
-  {
-    name=random sampling,
-    description={rather than shooting rays through a grid, shoot rays from
-    random locations in the pixel}
-  }
 
   \textbf{\Gls{random-sampling}}: \glsdesc{random-sampling}
 
@@ -74,12 +52,6 @@ a unit square)
 
 \section{Jittered Sampling}
 
-  \newglossaryentry{jittered-sampling}
-  {
-    name=jittered sampling,
-    description={create a grid and randomly generate a sample in each cell}
-  }
-
   \textbf{\Gls{jittered-sampling}}: \glsdesc{jittered-sampling}
 
   \begin{itemize}
@@ -87,12 +59,6 @@ a unit square)
   \end{itemize}
 
 \section{n-rooks Sampling}
-
-  \newglossaryentry{nrooks-sampling}
-  {
-    name=n-rooks sampling,
-    description={create a grid but make sure each row and column are sampled}
-  }
 
   \textbf{\Gls{nrooks-sampling}}: \glsdesc{nrooks-sampling}
 
@@ -102,16 +68,6 @@ a unit square)
   \end{itemize}
 
 \section{Multi-Jittered Sampling}
-
-  \newglossaryentry{multi-jittered-sampling}
-  {
-    name=multi-jittered sampling,
-    description={create a $ n \times n $ grid, known as \textbf{fine grid};
-    then create a $ \sqrt{n} \times \sqrt{n} $ coarse grid each
-    containing $ n $ fine grid's cells.
-    Make sure each coarse grid cell contains one sample
-    and the sample has unique fine grid row and column of the fine grid.}
-  }
 
   \textbf{\Gls{multi-jittered-sampling}}: \glsdesc{multi-jittered-sampling}
 
