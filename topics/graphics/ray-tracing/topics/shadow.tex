@@ -19,6 +19,37 @@
     \item Idealized lights have \textbf{hard-edge} shadows
     \item Real lgihts cast \textbf{soft} shadows
     \begin{itemize}
-      \item
+      \item \textbf{\Gls{umbra}}: \glsdesc{umbra}
+      \item \textbf{\Gls{penumbra}}: \glsdesc{penumbra}
     \end{itemize}
+  \end{itemize}
+
+\section{Implementation}
+
+  \begin{itemize}
+    \item Determine visibility of light using rays
+    \item Primary ray generates a shadow ray upon hitting an surface
+    \begin{itemize}
+      \item Shadow ray's origin is the hitpoint
+      \item Shadow ray's direction points to the light source
+      \begin{itemize}
+        \item Point light: light position - hit point
+      \end{itemize}
+    \end{itemize}
+
+    \item Shadow rays that hit lights should have $ t = 1 $; shadow light
+    that hit other objects behind light should have $ t > 1 $
+    \item Due to numerical error, primary ray's hit point might be below a
+    a surface. In this case, the shadow ray will hit the surface rather than
+    light, causing the images to appear to be covered by \textbf{black-pepper}.
+    \begin{itemize}
+      \item Solution: add an $ \epsilon $ that move the origin of shadow ray
+      up a bit along its direction. Start with $ \epsilon = 0.00001 $
+      \item Solution: ignore the surface from which the shadow ray is comming
+      from; \textbf{fails with concave shapes}, where shadow rays needs to
+      intersect the origin object
+    \end{itemize}
+
+    \item Shadows can be expensive; have to shoot a shadow ray for each light
+    light
   \end{itemize}
