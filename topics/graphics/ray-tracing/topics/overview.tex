@@ -58,38 +58,3 @@
       }
     }
   \end{algorithm}
-
-\section{Shooting Rays}
-
-  \subsection{Screen Space to World Space Pixel Coordinates}
-
-    \begin{align}
-      x_{w} &= s\left( c - \frac{h_{res}}{2} + 0.5 \right) \\
-      y_{w} &= s\left( r - \frac{v_{res}}{2} + 0.5 \right)
-    \end{align}
-
-    \begin{itemize}
-      \item $ c, r $: screen space coordinates of pixels; $ c $ is the column,
-      $ r $ is the row
-      \item $ s $: pixel extent
-      \item $ x_{w}, y_{w} $: coordinate in world space of the pixel center
-      \item $ z_{w} $ is typically $ 0 $
-    \end{itemize}
-
-  \subsection{Orthographic}
-
-    \begin{align}
-      O &= \left( x_{w}, y_{w}, z_{w} \right) \\
-      d &= \left( 0, 0, -1 \right)
-    \end{align}
-
-    Rays have the same direction as negative-z and use their world space
-    coordinates as origins
-
-  \subsection{Perspective}
-
-    \begin{align}
-      e &= \left( e_{w}, e_{w}, e_{w} \right) \\
-      O &= e  \\
-      d &= \left( x_{w}, y_{w}, z_{w} \right) - e
-    \end{align}
