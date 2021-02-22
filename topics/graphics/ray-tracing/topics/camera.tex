@@ -10,6 +10,9 @@
     \item Up vector $ up $
     \item View plane distance $ d $
     \item View direction: $ l - e $
+    \item This system will break when view direction and up vector are
+    \textbf{paralle} or \textbf{antiparallel}, i.e. the angle between them is
+    $ 0\deg $ or $ 180\deg $, i.e. a dot product of $ 0 $
   \end{enumerate}
 
   From which we construct the camera frame (world space)
@@ -17,8 +20,8 @@
     \item \textbf{Origin}: $ e $
     \item \textbf{Orthonormal basis (ONB)}: $ w, u, v $
     \begin{align}
-      w &= \frac{\left( e - l \right)}{\left| e - l \right|} \\
-      u &= \frac{\left( up \times w \right)}{\left| up \times w \right|} \\
+      w &= \frac{\left( e - l \right)}{\left\Vert e - l \right\Vert} \\
+      u &= \frac{\left( up \times w \right)}{\left\Vert up \times w \right\Vert} \\
       v &= w \times u
     \end{align}
 
@@ -67,7 +70,7 @@
 \section{Perspective}
 
   \begin{align}
-    e &= \left( e_{w}, e_{w}, e_{w} \right) \\
+    e &= \left( x_{w}, y_{w}, z_{w} \right) \\
     O &= e  \\
     d &= \left( x_{w}, y_{w}, z_{w} \right) - e
   \end{align}
@@ -75,5 +78,5 @@
   \begin{itemize}
     \item $ d $: distance between the eye point and the \say{window}
     \item Distortion is a feature not a bug. To reduce distortion, move
-    the camera away from objects
+    the eye point away from objects
   \end{itemize}
