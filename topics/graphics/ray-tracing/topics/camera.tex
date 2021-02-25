@@ -15,52 +15,6 @@
     $ 0\deg $ or $ 180\deg $, i.e. a dot product of $ 0 $
   \end{enumerate}
 
-  From which we construct the camera frame (world space)
-  \begin{itemize}
-    \item \textbf{Origin}: $ e $
-    \item \textbf{Orthonormal basis (ONB)}: $ w, u, v $
-    \begin{align}
-      w &= \frac{\left( e - l \right)}{\left\Vert e - l \right\Vert} \\
-      u &= \frac{\left( up \times w \right)}{\left\Vert up \times w \right\Vert} \\
-      v &= w \times u
-    \end{align}
-
-    \item $ u $ is parallel to pixel row;
-    \item $ v $ is parallel to pixel columns;
-  \end{itemize}
-
-  We construct convert pixel position to a
-  \textbf{screen space position}
-  \begin{align}
-    p_{v} &= \left( x_{v}, y_{v}, z_{v} \right) \\
-    p_{v} &=
-    \left(
-      s\left( c - \frac{h_{res}}{2} + \delta_{x} \right),
-      s\left( r - \frac{v_{res}}{2} + \delta_{y} \right),
-      -d
-    \right)
-  \end{align}
-
-  \begin{itemize}
-    \item $ c, r $: screen space coordinates of pixels; $ c $ is the column,
-    $ r $ is the row
-    \begin{itemize}
-      \item $ \left( 0, 0 \right) $ is at the bottom left of an image
-    \end{itemize}
-
-    \item $ s $: pixel extent; pixel length in world space
-    \item $ x_{v}, y_{v}, z_{v} $: coordinate in screen space of the pixel center
-    \item $ \delta_{x}, \delta_{y} $: subpixel offset from sampling
-  \end{itemize}
-
-  From which we can convert a screen-space position to a world-space position
-  \begin{equation}
-    p_{w} = u x_{v} + v y_{v} + w z_{v}
-  \end{equation}
-
-  Using the world-space pixel position and the world-space eye position,
-  we can construct rays.
-
 \section{Orthographic}
 
   \begin{align}
@@ -72,29 +26,77 @@
   coordinates as origins
 
   \subsection{Properties}
-  \begin{itemize}
-    \item All rays are parallel
-    \item It is possible to zoom
-    \item \Gls{foreshortening} can occur
-    \item Angles are \textbf{not preserved}
-  \end{itemize}
+
+    \begin{itemize}
+      \item All rays are parallel
+      \item It is possible to zoom
+      \item \Gls{foreshortening} can occur
+      \item Angles are \textbf{not preserved}
+    \end{itemize}
 
 \section{Perspective}
 
-  \begin{align}
-    e &= \left( x_{w}, y_{w}, z_{w} \right) \\
-    O &= e  \\
-    d &= \left( x_{w}, y_{w}, z_{w} \right) - e
-  \end{align}
+  Perspective rays use $ e $ as $ O $, but we need $ d $:
 
-  \begin{itemize}
-    \item $ d $: distance between the eye point and the \say{window}
-    \item Distortion is a feature not a bug. To reduce distortion, move
-    the eye point away from objects
-  \end{itemize}
+  \begin{enumerate}
+    \item Find $ d_{v} $, direction in view space
+    \item Translate $ d_{v} $ into $ w_{w} $, direction in world space
+  \end{enumerate}
+
+  \subsection{View Space Direction}
+
+    \begin{align}
+      d_{v} &= \left( x_{v}, y_{v}, z_{v} \right) - e \\
+      d_{v} &= \left( x_{v}, y_{v}, z_{v} \right) - \left( 0, 0, 0 \right) \\
+      d_{v} &= \left( x_{v}, y_{v}, z_{v} \right) \\
+      d_{v} &=
+      \left(
+        s\left( c - \frac{h_{res}}{2} + \delta_{x} \right),
+        s\left( r - \frac{v_{res}}{2} + \delta_{y} \right),
+        -d
+      \right)
+    \end{align}
+
+    \begin{itemize}
+      \item $ c, r $: screen space coordinates of pixels; $ c $ is the column,
+      $ r $ is the row
+      \begin{itemize}
+        \item $ \left( 0, 0 \right) $ is at the bottom left of an image
+      \end{itemize}
+
+      \item $ \delta_{x}, \delta_{y} $: subpixel offset from sampling
+      \item $ s $: pixel extent; pixel length in world space
+      \item $ x_{v}, y_{v}, z_{v} $: direction of ray in view space, where
+      $ e = \left( 0, 0, 0 \right) $
+    \end{itemize}
+
+  \subsection{World Space Direction}
+
+    To convert $ d_{v} $ to $ d_{w} $, we first need to construct a world
+    frame.
+
+    \begin{align}
+      w &= \frac{\left( e - l \right)}{\left\Vert e - l \right\Vert} \\
+      u &= \frac{\left( up \times w \right)}{\left\Vert up \times w \right\Vert} \\
+      v &= w \times u
+    \end{align}
+
+    \begin{itemize}
+      \item $ u $ is parallel to pixel row;
+      \item $ v $ is parallel to pixel columns;
+    \end{itemize}
+
+    From which we can convert a screen-space direction to a world-space direction
+
+    \begin{equation}
+      d_{w} = u x_{v} + v y_{v} + w z_{v}
+    \end{equation}
 
   \subsection{Properties}
+
   \begin{itemize}
+    \item Distortion is a feature not a bug. To reduce distortion, move
+    the eye point away from objects
     \item All lines of projection meet at a single point
     \item Geometry farther away from the central axis of projection will be
     more distorted, even if it is very close to the viewplane.

@@ -1,18 +1,29 @@
 \chapter{Frame Transformation}
 
-  Given a point $ p $ constructed in the source frame,
-  \begin{align*}
-    X &= \left( 1, 0, 0 \right) \\
-    Y &= \left( 0, 1, 0 \right) \\
-    Z &= \left( 0, 0, 1 \right)
-  \end{align*}
-  with origin
-  \begin{equation*}
-    o = \left( 0, 0, 0 \right)
-  \end{equation*}
-  to convert $ p $ into a point $ p' $ in the target frame $ X', Y' Z' $
-  with origin $ o' $
+  \subsection{Point Transformation}
 
-  \begin{equation}
-    p' = X' p_{x} + Y' p_{y} + Z' p_{z} + o'
-  \end{equation}
+    Given a point $ p $ constructed in the source frame,
+    \begin{align*}
+      X &= \left( 1, 0, 0 \right) \\
+      Y &= \left( 0, 1, 0 \right) \\
+      Z &= \left( 0, 0, 1 \right)
+    \end{align*}
+    with origin
+    \begin{equation*}
+      o = \left( 0, 0, 0 \right)
+    \end{equation*}
+    to convert $ p $ into a point $ p' $ in the target frame $ X', Y' Z' $
+    with origin $ o' $
+
+    \begin{equation}
+      p' = X' p_{x} + Y' p_{y} + Z' p_{z} + o
+    \end{equation}
+
+  \subsection{Vector Transformation}
+
+    Since vectors are not relative to any points. \textbf{A vector
+    transformation will not involve a \say{origin}}
+
+    \begin{equation}
+      v' = X' v_{x} + Y' v_{y} + Z' v_{z}
+    \end{equation}
