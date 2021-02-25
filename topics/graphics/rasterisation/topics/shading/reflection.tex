@@ -28,13 +28,15 @@
     \vec{R} = 2 \left( L \cdot N \right) N - L
   \end{equation}
   \item $ I_{p} $: the output RGB triple for a vertex
-  \item $ k $: material reflectivity; what kind of light reflects from a
-  surface; \textbf{material color}
+  \item $ k $: base color of non light objects
   \begin{itemize}
+    \item $ k_{a} $: ambient color
+    \item $ k_{d} $: diffuse color
+    \item $ k_{s} $: specular color
     \item Each term has its own material color for artistic reasons
   \end{itemize}
 
-  \item $ i_{m} $: $ \left( r, g, b \right) $ for a single light $ m $
+  \item $ i_{m} $: color for a single light $ m $
   \begin{itemize}
     \item Each term has its own light color for artistic reasons
   \end{itemize}
@@ -53,6 +55,8 @@
 
     \begin{itemize}
       \item $ k_{a}, i_{a} $: $ a $ stands for ambient
+      \item $ k_{a} $: ambient color; environment color
+      \item $ i_{a} $: ambient light color
       \item Ambient term \textbf{models indirect light}, aka. environment light
     \end{itemize}
 
@@ -64,10 +68,17 @@
 
     \begin{itemize}
       \item $ k_{d}, i_{m, d} $: $ d $ stands for diffuse
+      \item $ k_{d} $: diffuse color of the object
+      \item $ i_{m, d} $: diffuse color of the object
       \item $ \hat{L}_{m} \cdot \hat{N} $: the angle between $ L $ and $ N $
       (which are unit vectors)
-      \item \textbf{Diffuse reflection is strongest when $ L $ is
-      the same as $ N $, i.e. perpendicular to the surface}
+      \begin{itemize}
+        \item \textbf{Diffuse reflection is strongest when $ L $ is
+        the same as $ N $, i.e. perpendicular to the surface}
+        \item Parallel vectors have a dot product of $ 1 $
+        \item This value \textbf{must be clamped inside $ \left[0, 1 \right]$}
+      \end{itemize}
+
       \item Models an idealized\footnote{scatter light uniformly} surface
       (aka, \textbf{rough surfaces})
     \end{itemize}
@@ -80,10 +91,16 @@
 
     \begin{itemize}
       \item $ k_{s}, i_{m, s} $: $ s $ stands for specular
+      \item $ k_{s} $: specular color of the object
+      \item $ i_{m, s} $: specular color of the light
       \item $ \hat{R}_{m} \cdot \hat{V} $: the angle between reflection and
       the eye
-      \item \textbf{Specular reflection is the strongest when the eye aligns
-      with the reflection vector}
+      \begin{itemize}
+        \item \textbf{Specular reflection is the strongest when the eye aligns
+        with the reflection vector}
+        \item Parallel vectors have a dot product of $ 1 $
+      \end{itemize}
+
       \item Specular terms models shiny surfaces
       \item \textbf{Shinier}: a higher $ \alpha $; \textbf{rougher}:
       lower $ \alpha $

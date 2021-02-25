@@ -71,6 +71,14 @@
   Rays have the same direction as negative-z and use their world space
   coordinates as origins
 
+  \subsection{Properties}
+  \begin{itemize}
+    \item All rays are parallel
+    \item It is possible to zoom
+    \item \Gls{foreshortening} can occur
+    \item Angles are \textbf{not preserved}
+  \end{itemize}
+
 \section{Perspective}
 
   \begin{align}
@@ -83,4 +91,14 @@
     \item $ d $: distance between the eye point and the \say{window}
     \item Distortion is a feature not a bug. To reduce distortion, move
     the eye point away from objects
+  \end{itemize}
+
+  \subsection{Properties}
+  \begin{itemize}
+    \item All lines of projection meet at a single point
+    \item Geometry farther away from the central axis of projection will be
+    more distorted, even if it is very close to the viewplane.
+    \item \Gls{foreshortening} can occur
+    \item Increasing distance between the eye and the viewplane will zoom in
+    \item Angles are \textbf{not preserved}
   \end{itemize}

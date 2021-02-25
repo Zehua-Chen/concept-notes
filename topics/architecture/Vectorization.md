@@ -1,12 +1,28 @@
 # Vectorization
 
+## Non Loop
+
+```cpp
+struct vec4 {
+  float x;
+  float y;
+  float z;
+  float w;
+};
+```
+
+For a non-loop operation to be vectorizable, typically there needs to be at
+least 4 operations that can be performed in parallel
+
+## Loop
+
 For a loop to be vectorized, its semantics must not change, that is,
 
 - The data dependecy between loops must not be broken after vectorization.
 - There is no aliasing problem
 
-Whether or not compilers vectorize vectorizable code differs from language
-to language and from compilers to compilers
+Whether or not compilers vectorize vectorizable code differs from language to
+language and from compilers to compilers
 
 # Data Dependency
 
@@ -37,8 +53,8 @@ The address is written after it is read
 The address is written to twice
 
 - Can become undefined behavior if vectorized
-- **Not vectorizable** if the interval between the writings is smaller than
-  the size of SIMD operations
+- **Not vectorizable** if the interval between the writings is smaller than the
+  size of SIMD operations
 
 ## Read after Read
 
@@ -46,5 +62,5 @@ The address is written to twice
 
 ## Aliasing
 
-If the memory of two pointers overlap, then there is dependency issues that
-may or may not be solvable
+If the memory of two pointers overlap, then there is dependency issues that may
+or may not be solvable
