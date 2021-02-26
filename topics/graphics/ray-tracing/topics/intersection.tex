@@ -74,7 +74,7 @@ result for small changes in input
         \item Ex. small spheres that are very far away
       \end{itemize}
 
-      $ c = f \cdot f - r^{2}  $ is problematic, if $ f $ is big and $ r $ is
+      \item $ c = f \cdot f - r^{2}  $ is problematic, if $ f $ is big and $ r $ is
       small, diminished significance would occur. If a sphere is more than
       \begin{equation}
         2^{12} r = 4096 r
@@ -141,3 +141,29 @@ result for small changes in input
 
     where $ q = \frac{1}{2}\left( b + \sign\left( b \right) \sqrt{b^{2} - 4ac} \right) $
     $ \sign $ function returns 1 if $ b > 0 $ and $ - 1 $ otherwise
+
+\section{Parabolic Cylinder}
+
+  Parabolic cylinder is defined by
+
+  \begin{equation}
+    z = x^{2}
+  \end{equation}
+
+  Using
+
+  \begin{align*}
+    p_{x} &= O_{x} + t d_{x} \\
+    p_{z} &= O_{z} + t d_{z}
+  \end{align*}
+
+  Parabolic cylinder can be redefined as
+
+  \begin{align*}
+    O_{z} + t d_{z} &= O_{x}^{2} + 2 O_{x} t d_{x} + t^{2} d_{x}^{2} \\
+    0 &= d_{x}^{2} t^{2} + t \left( 2 O_{x} d_{x} - d_{z} \right)
+      + \left( O_{x}^{2} - O_{z} \right) \\
+      &= a t^{2} + bt + c
+  \end{align*}
+
+  Which is a quadratic equation

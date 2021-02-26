@@ -82,18 +82,27 @@ a unit square)
 
   Deterministic quasi-random sequence
 
-  \paragraph{1D} For a number $ i $, convert $ i $ to binary format, the
-  $ \Phi_{x} \left( i \right) $ is the \textbf{radical inverse based $ x $ of $ i $}
+  \paragraph{1D}
+  For a number $ i $, convert $ i $ to $ x $-nary format, the
+  $ \Phi_{x} \left( i \right) $ is the \textbf{radical inverse
+  of integer $ i $ to base $ x $}
 
-  \begin{equation}
+  \begin{align}
+    \Phi_{x}\left( i \right)
+      &= \sum_{j = 0}^{n} a_{j} \left( i \right) x^{-j - 1} \\
     \Phi_{2}\left( i \right)
-      = \sum_{j = 0}^{n} a_{j} \left( i \right) 2^{-j - 1}
-      = a_{0} \left( i \right) \frac{1}{2}
+      &= a_{0} \left( i \right) \frac{1}{2}
       + a_{1} \left( i \right) \frac{1}{4}
-      + a_{2} \left( i \right) \frac{1}{8}
-  \end{equation}
+      + a_{2} \left( i \right) \frac{1}{8} + ...
+  \end{align}
 
-  $ a $s are the binary representations of $ i $, in this case (based 2).
+  $ a_{b}\left( i \right) $ is the $ b $th (left to right) bit of the reversed
+  $ x $-nary representation of $ i $ counting from , $ n $ is how many binary
+  digits are there
+
+  \begin{displaymath}
+    a_{2}\left( 2 \right) = 1
+  \end{displaymath}
 
   \paragraph{2D} We want to have $ n $ samples
   \begin{equation}
