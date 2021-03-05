@@ -16,3 +16,7 @@ on disk**. This behavior results in the following side effects
   issues
 
 **Solution**: [relative pointers](https://www.youtube.com/watch?v=G3bpj-4tWVU)
+
+# Debug
+
+Dynamic libraries can still be debugged
