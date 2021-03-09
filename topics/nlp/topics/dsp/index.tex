@@ -2,25 +2,6 @@
 
 \section{Signal Basics}
 
-  \newglossaryentry{signal}
-  {
-    name=signal,
-    description={the stream of air pressure}
-  }
-
-  \newglossaryentry{period}
-  {
-    name=period,
-    description={the time it takes a signal to repeat itself; reverse of
-    frequency}
-  }
-
-  \newglossaryentry{frequency}
-  {
-    name=frequency,
-    description={how frequently a signal repeat itself in unit time}
-  }
-
   \begin{itemize}
     \item \textbf{\Gls{signal}}: \glsdesc{signal}
     \item \textbf{\Gls{period}}: \glsdesc{period}
@@ -32,3 +13,59 @@
     Guarantees that the details lost can be reconstructed.
 
   \subsection{Quantization}
+
+\section{SPL, SIL}
+
+  \begin{equation}
+    SIL\left( x \right) = 10 * \log_{10}
+    \left(
+      \frac
+      {
+        \frac
+        {
+          \rms\left( x \right)^{2}
+        }
+        {
+          \frac{P_{ref}^{2}}{I_{ref}}
+        }
+      }
+      {I_{ref}}
+    \right)
+  \end{equation}
+
+  Here $ x $ is a collection of data
+
+\section{Systems}
+
+  \subsection{Causality}
+
+    A system is causal if output at time $ n $ only depends on input and output
+    up to time $ n $
+
+  \subsection{Linear Systems}
+
+    \begin{equation}
+      y\left( t \right) =
+        \sum_{j = 0}^{M} b_{j} x\left( t - j \right)
+        + \sum_{i = 1}^{N} a_{i} y\left( t - ji \right)
+    \end{equation}
+
+    The output of a linear system is the sum of scaled inputs and
+    scaled previous outputs.
+
+    \begin{itemize}
+      \item $ b_{x} $ scale of inputs
+      \item $ a_{x} $ scale of outputs
+      \item $ i $ starts from $ 1 $ because $ y\left( t \right) $ is on the left
+      of the equation
+    \end{itemize}
+
+  \subsection{Convolution}
+
+    Calculate the output of a system, based on the input and IR of the system
+
+  \subsection{Fourier Transform}
+
+    \begin{itemize}
+      \item Fast Fourier Transform is an implementation of Fourier Transform
+    \end{itemize}
