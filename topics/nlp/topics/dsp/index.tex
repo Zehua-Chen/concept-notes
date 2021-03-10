@@ -1,9 +1,78 @@
 \chapter{Digital Signal Processing}
 
-\section{Signal Basics}
+\section{Basics}
+
+  \subsection{Signals}
 
   \begin{itemize}
     \item \textbf{\Gls{signal}}: \glsdesc{signal}
+      \begin{itemize}
+        \item Some signals can be described mathmetically
+        \item Some signals are too complicated to be described mathmetically
+        \item Signals can be 1D (audio), 2D (image), 3D (movie)
+      \end{itemize}
+
+      \item \textbf{\Gls{continuous-signal}}: \glsdesc{continuous-signal}
+      \begin{itemize}
+        \item We need to be able to convert analogue signals to continuous signals
+        for processing
+      \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Analogue vs Digital Signal}
+
+      \begin{itemize}
+        \item \textbf{Analogue Signal}
+        \begin{enumerate}
+          \item \textbf{Pro}: fast, well-behaved and degrades gracefully
+          \item \textbf{Con}: incompatible with computers
+          \item \textbf{Con}: needs special hardware
+          \item \textbf{Con}: practical limits to signal processing
+        \end{enumerate}
+
+        \item \textbf{Digital Signal}
+        \begin{enumerate}
+          \item \textbf{Pro}: unlimited processing without specialized hardware
+          \item \textbf{Pro}: can employ error correcting codes
+          \item \textbf{Con}: needs care in acquisition
+          \item \textbf{Con}: slow to process and potential loss of information
+        \end{enumerate}
+      \end{itemize}
+
+    \subsubsection{Workflow of DSP Systems}
+
+      \begin{enumerate}
+        \item \textbf{A/D Converter}: convert analogue signal to digital signal
+        \item \textbf{Disgital Signal Processor}: take in digital input and
+        produce digital output
+        \item \textbf{D/A Converter}: convert digital signal to analogue signal
+      \end{enumerate}
+
+    \subsubsection{Types of Operations}
+
+      \begin{enumerate}
+        \item \textbf{Time-domain}: scaling, shifting, addition
+        \item \textbf{Correlation}: comparing one reference signal with others
+        to determine similarity
+        \item \textbf{Digital filtering}: let certain band of specific frequencies
+        pass while blocking others
+        \item \textbf{Modulation and demodulation}: amplitude modulation,
+        frequency modulation, phase modulation
+        \item \textbf{Discrete transformation}: represent a discrete-time signal
+        in frequency domain
+      \end{enumerate}
+
+    \subsubsection{Three Fundemental Ideas of DSP}
+
+      \begin{enumerate}
+        \item Any signal can be represented using a finite number of discrete
+        data points over time
+        \item Any signal can be broken down into a stream of bits that can
+        be stored, generated and manipulated by a computer
+        \item Any practical signals can be represented as sums of sinusoids
+        (or complex exponentials)
+      \end{enumerate}
+
     \item \textbf{\Gls{period}}: \glsdesc{period}
     \item \textbf{\Gls{frequency}}: \glsdesc{frequency}
   \end{itemize}
