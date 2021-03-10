@@ -4,8 +4,8 @@
 
   \subsection{Signals}
 
-  \begin{itemize}
-    \item \textbf{\Gls{signal}}: \glsdesc{signal}
+    \begin{itemize}
+      \item \textbf{\Gls{signal}}: \glsdesc{signal}
       \begin{itemize}
         \item Some signals can be described mathmetically
         \item Some signals are too complicated to be described mathmetically
@@ -62,7 +62,7 @@
         in frequency domain
       \end{enumerate}
 
-    \subsubsection{Three Fundemental Ideas of DSP}
+    \subsubsection{Three Fundamental Ideas of DSP}
 
       \begin{enumerate}
         \item Any signal can be represented using a finite number of discrete
@@ -73,9 +73,80 @@
         (or complex exponentials)
       \end{enumerate}
 
-    \item \textbf{\Gls{period}}: \glsdesc{period}
-    \item \textbf{\Gls{frequency}}: \glsdesc{frequency}
-  \end{itemize}
+  \subsection{Properties of Signals}
+
+    \begin{itemize}
+      \item \textbf{\Gls{period}} ($ T $): \glsdesc{period}
+      \begin{itemize}
+        \item Speech waveforms are not periodic
+      \end{itemize}
+
+      \item \textbf{\Gls{frequency}} ($ f $): \glsdesc{frequency}
+      \begin{align}
+        f &= \frac{1}{T} \\
+        \omega &= 2 \pi f \\
+      \end{align}
+      \begin{align*}
+        y\left( t \right) &= A \sin\left( 2\pi f t + \phi \right) \\
+        y\left( t \right) &= A \sin\left( w t + \phi \right) \\
+      \end{align*}
+      \begin{itemize}
+        \item $ \omega $: angular frequency; (rad/s)
+        \item $ f $: linear frequency; (Hz)
+      \end{itemize}
+
+      \item \textbf{\Gls{phase}} ($ \phi $): \glsdesc{phase}
+      \begin{align}
+        d &= \frac{360 \phi}{2 \pi} \\
+        \phi &= \frac{2 \pi d}{360}
+      \end{align}
+      \begin{itemize}
+        \item $ \phi $: phase in radians
+        \item $ d $: phase in angle
+      \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Properties of Continuous Signal}
+
+      \begin{equation*}
+        x\left( t \right) = A \sin\left( 2\pi f t + \phi \right)
+      \end{equation*}
+
+      \begin{enumerate}
+        \item For every fixed value of $ f $, $ x\left( t \right) $ is periodic
+        with period being $ T = \frac{1}{f} $
+        \item Continuous signals with distinct equations are themselves distinct
+        \item Increasing $ f $ results in an increase in the rate of oscillation,
+        as $ t $ is continuous, we can increase $ f $ without limit
+      \end{enumerate}
+
+    \subsubsection{Properties of Discrete Signal}
+
+      \begin{equation*}
+        x\left( n \right) = A \sin\left( \omega' n + \phi \right)
+      \end{equation*}
+
+      \begin{align}
+        \omega' &= 2\pi f' \\
+        f' &= \frac{f}{f_{s}}
+      \end{align}
+
+      $ f' $ is cycles per sample and $ f_{s} $ is the sampling frequency
+
+      \begin{enumerate}
+        \item A discrete time signal is periodic if $ f' $ is a rational number
+        \begin{itemize}
+          \item Fundamental period $ N $
+        \end{itemize}
+
+        \item Discrete time signals whose frequencies are separated by an
+        integer multiple of $ 2 \pi $ are identical
+        \item The highest rate of oscillation is when $ \omega = \pi $ or
+        $ f = \frac{1}{2} $
+        \item \textbf{Aliasing}: if the angular frequency of a discrete time
+        signal increases from $ \pi $ to $ 2\pi $, its rate of oscillation
+        will decrease
+      \end{enumerate}
 
   \subsection{Sampling Frequency Theory}
 
