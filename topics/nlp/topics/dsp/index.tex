@@ -148,11 +148,81 @@
         will decrease
       \end{enumerate}
 
-  \subsection{Sampling Frequency Theory}
+  \subsection{Digitalisation}
 
-    Guarantees that the details lost can be reconstructed.
+    DSP requires a signal to be \textbf{sampled} in time and \textbf{quantised}
+    in amplitude.
 
-  \subsection{Quantization}
+    \begin{itemize}
+      \item \textbf{\Gls{sampling}}: \glsdesc{sampling}
+      \item \textbf{\Gls{quantisation}}: \glsdesc{quantisation}
+    \end{itemize}
+
+    \subsubsection{Sampling}
+
+      \begin{equation}
+        t = n \Delta_{s} = \frac{n}{f_{s}}
+      \end{equation}
+
+      \begin{itemize}
+        \item $ t $: continuous time in seconds
+        \item $ f_{s} $: sampling frequency
+        \item $ n $: number of seconds
+        \item $ \Delta_{s} $: the sampling period
+      \end{itemize}
+
+    \subsubsection{Quantisation}
+
+      \begin{itemize}
+        \item \textbf{\Gls{quantisation-level}}: \glsdesc{quantisation-level}
+        \begin{itemize}
+          \item The number of bits determines the number of levels; given $ n $
+          bits, there will be $ 2^{n} $ quantisation levels
+          \item 16 bits is typically used
+        \end{itemize}
+
+        \item \textbf{\Gls{quantisation-step}}: \glsdesc{quantisation-step}
+        \item \textbf{\Gls{quantisation-error}}: \glsdesc{quantisation-error}
+        \begin{equation}
+          e_{q}\left( n \right) = x_{q}\left( n \right) - x\left( n \right)
+        \end{equation}
+        \begin{itemize}
+          \item There will alwyas be \gls{quantisation-error}
+          \item It is always possible to talk about the signal to noise ratio
+          (SNR) of a clean digital signal
+          \item Distortion, i.e. clipping, makes \gls{quantisation-error}
+          difficult to handle
+        \end{itemize}
+      \end{itemize}
+
+      \begin{equation}
+        rms_{e} = \sqrt{\frac{\sum_{1}{N} e_{q}^{2}\left( n \right)}{N}}
+      \end{equation}
+
+  \subsection{Nyquist Frequency/Limit}
+
+    A signal can only be recovered from a sampled signal if the signal is
+    sampled at $ f_{s} $ where
+
+    \begin{align}
+      f_{s} &> 2 f \\
+      \frac{f_{s}}{2} &> 2
+    \end{align}
+
+    \paragraph{Example}
+    To sample a 100 Hz sine wave, an $ f_{s} > 200 $ is required
+
+    \subsubsection{Aliasing}
+
+      \begin{enumerate}
+        \item Given a $ f_{s} $ a sine wave at $ f $ is indistinguishable
+        from a sine wave at frequency $ f - f_{s} $
+        \item Given a $ f_{s} $ and an integer $ k $, a sine wave at
+        $ f $, where $ 0 < f < \frac{f_{s}}{2} $ is indistinguishable
+        from a sine wave at frequency $ f + k \times f_{s} $ after being sampled
+        by $ f_{s} $
+      \end{enumerate}
+
 
 \section{SPL, SIL}
 
