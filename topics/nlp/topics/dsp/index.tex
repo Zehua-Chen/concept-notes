@@ -1,6 +1,12 @@
 \chapter{Digital Signal Processing}
 
-\section{Basics}
+\section{Math Basics}
+
+  \begin{equation}
+    \rms = \sqrt{\frac{\sum_{i = 1}^{N} v_{i}^{2}}{N}}
+  \end{equation}
+
+\section{Signal Basics}
 
   \subsection{Signals}
 
@@ -196,7 +202,7 @@
       \end{itemize}
 
       \begin{equation}
-        rms_{e} = \sqrt{\frac{\sum_{1}{N} e_{q}^{2}\left( n \right)}{N}}
+        \rms_{e} = \sqrt{\frac{\sum_{1}{N} e_{q}^{2}\left( n \right)}{N}}
       \end{equation}
 
   \subsection{Nyquist Frequency/Limit}
@@ -223,27 +229,114 @@
         by $ f_{s} $
       \end{enumerate}
 
+\section{Sound Levels}
 
-\section{SPL, SIL}
+  \subsection{Sound Intensity}
 
-  \begin{equation}
-    SIL\left( x \right) = 10 * \log_{10}
-    \left(
-      \frac
-      {
-        \frac
-        {
-          \rms\left( x \right)^{2}
-        }
-        {
-          \frac{P_{ref}^{2}}{I_{ref}}
-        }
-      }
-      {I_{ref}}
-    \right)
-  \end{equation}
+    \begin{align}
+      I &= \frac{P}{A} = \frac{P}{4 \pi r^{2}} \\
+      I &\propto \frac{1}{r^{2}}
+    \end{align}
 
-  Here $ x $ is a collection of data
+    \textbf{\Gls{sound-intensity}}: \glsdesc{sound-intensity}
+
+    \begin{itemize}
+      \item $ P $: power in watts (W), the rate at which which energy is
+      transfered by the wave
+      \item $ A $: area in $ m^{2} $
+      \item \textbf{Unit}: $ \frac{W}{m^{2}} $
+      \item Sound intensity is inversely proportional to square of distance
+      \item Human ears can hear between $ 0.000000000001 \frac{W}{m^{2}} $ and
+      $ 50 \frac{W}{m^{2}} $
+    \end{itemize}
+
+  \subsection{Sound Pressure}
+
+    \begin{align}
+      p &= \frac{F}{A} \\
+      &= \frac{\sqrt{P \rho c \pi^{-1}}}{2r} \\
+      p &\propto \frac{1}{r}
+    \end{align}
+
+    \textbf{\Gls{sound-pressure}}: \glsdesc{sound-pressure}
+
+    \begin{itemize}
+      \item $ F $: force; interaction between wave and ambience that cause the
+      wave to accelerate
+      \item $ A $: area in $ m^{2} $
+    \end{itemize}
+
+  \subsection{Decibels}
+
+    \begin{align}
+      decibels &= 10 \log_{10}\left( \frac{I}{I_{\reference}} \right) \\
+      &= 10 \log_{10} \left( \frac{p}{p_{\reference}} \right)^{2} \\
+      &= 20 \log_{10} \left( \frac{p}{p_{\reference}} \right) \\
+      I_{\reference} &= 10^{-12} \frac{W}{m^{2}} \\
+      p_{\reference} &= 2 \times 10^{-15} \frac{N}{m^{2}}
+    \end{align}
+
+    \begin{align}
+      SPL &= 20 \log_{10}\left( \frac{p_{\rms}}{p_{\reference}} \right)
+    \end{align}
+
+    \subsubsection{Convert between SIL and SPL}
+
+      \begin{equation}
+        SIL\left( x \right) = 10 * \log_{10}
+        \left(
+          \frac
+          {
+            \frac
+            {
+              \rms\left( x \right)^{2}
+            }
+            {
+              \frac{P_{\reference}^{2}}{I_{\reference}}
+            }
+          }
+          {I_{\reference}}
+        \right)
+      \end{equation}
+
+      Here $ x $ is a collection of data
+
+  \subsection{Relationship Between Sound Intensity and Sound Pressure}
+
+    \begin{align}
+      I &= \frac{p^{2}}{\rho \cdot c} \\
+      I &\propto p^{2}
+    \end{align}
+
+    \begin{itemize}
+      \item $ \rho $: density of air, $ \frac{kg}{m^{3}} $
+      \item $ c $: sound speed in air, $ \frac{m}{s} $
+      \item $ \rho, c $ are functions of temperature, i.e. influenced by
+      temperature
+      \item \textbf{Acoustic impedance}: $ \rho \cdot c $;
+      unit is $ pa \cdot \frac{s}{m} $
+    \end{itemize}
+
+  \subsection{Signal Level}
+
+    Signal levels can be quantised using dB
+
+    \begin{itemize}
+      \item We are interested in the relative level of a signal compared to
+      other signals
+    \end{itemize}
+
+    Intensity of signal can be computed as an absolute value in dB
+
+    \begin{equation}
+      I_{\dB} = 10 \log_{10} \left( A_{\rms} \right)^{2}
+    \end{equation}
+
+    $ 60 \dB $ is different from $ 60 \dB \SPL $
+
+  \subsection{Loudness}
+
+    SPL and frequency both contributes to loudness
 
 \section{Systems}
 
