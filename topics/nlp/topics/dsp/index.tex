@@ -340,6 +340,14 @@
 
 \section{Systems}
 
+  \begin{itemize}
+    \item \textbf{\Gls{system}}: \glsdesc{system}
+    \item A system with no memory only needs to know its input at one time
+    $ t $ to produce the output of $ t $
+    \item A system with memory need inputs at more than one moment in the past
+    to produce its outputs
+  \end{itemize}
+
   \subsection{Causality}
 
     A system is causal if output at time $ n $ only depends on input and output
@@ -361,7 +369,43 @@
       \item $ a_{x} $ scale of outputs
       \item $ i $ starts from $ 1 $ because $ y\left( t \right) $ is on the left
       of the equation
+      \item A linear system may only be linear over a limited range of input;
+      ex. auditory system
+      \item Techniques developed for linear systems can help understand
+      non-linear system; ex. filter
     \end{itemize}
+
+    \subsubsection{Linearity}
+
+      Linearity is \gls{homogeneity} and \gls{additivity} combined
+
+      \begin{itemize}
+        \item \textbf{\Gls{homogeneity}}: \glsdesc{homogeneity}
+        \item \textbf{\Gls{additivity}}: \glsdesc{additivity}
+      \end{itemize}
+
+  \subsection{Linear Time Invariant}
+
+    \textbf{\Gls{linear-time-invariant}}: \glsdesc{linear-time-invariant}
+
+    \begin{itemize}
+      \item LTI system is an ideal model of a subset of systems; it is an
+      approximation to real situation
+      \item Some parts of a non-linear system can be modeled as a LTI system,
+      ex. vocal tract
+      \item A time-variant system may be treated as a LTI system in a short
+      period of time
+    \end{itemize}
+
+    \subsubsection{Pre-Emphasis}
+
+      \begin{equation}
+        y\left( t \right) = x\left( t \right) - \alpha x\left( t - 1\right)
+      \end{equation}
+
+      \begin{itemize}
+        \item Pre-emphasis is an example of a filter
+      \end{itemize}
 
   \subsection{Convolution}
 
