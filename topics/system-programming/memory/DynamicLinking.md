@@ -1,3 +1,8 @@
+# Writing to Data in Dynamic Libraries
+
+Any runtime writing to data in dynamic libraries will dirties the memory of the
+dynamic library and cause the system to make copies.
+
 # Global Pointers
 
 Dynamic libraries have no fixed location in memory, therefore the global
